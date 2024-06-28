@@ -15,6 +15,7 @@ use Timirey\XApi\Payloads\GetIbsHistoryPayload;
 use Timirey\XApi\Payloads\GetMarginLevelPayload;
 use Timirey\XApi\Payloads\GetMarginTradePayload;
 use Timirey\XApi\Payloads\GetNewsPayload;
+use Timirey\XApi\Payloads\GetProfitCalculationPayload;
 use Timirey\XApi\Payloads\GetSymbolPayload;
 use Timirey\XApi\Payloads\LoginPayload;
 use Timirey\XApi\Payloads\LogoutPayload;
@@ -35,6 +36,7 @@ use Timirey\XApi\Responses\GetIbsHistoryResponse;
 use Timirey\XApi\Responses\GetMarginLevelResponse;
 use Timirey\XApi\Responses\GetMarginTradeResponse;
 use Timirey\XApi\Responses\GetNewsResponse;
+use Timirey\XApi\Responses\GetProfitCalculationResponse;
 use Timirey\XApi\Responses\GetSymbolResponse;
 use Timirey\XApi\Responses\LogoutResponse;
 use Timirey\XApi\Responses\PingResponse;
@@ -757,4 +759,37 @@ test('getIbsHistory command', function () {
         ->and($getIbsHistoryResponse->ibRecords[0]->symbol)->toBe('EURUSD')
         ->and($getIbsHistoryResponse->ibRecords[0]->timestamp)->toBe(1395755870000)
         ->and($getIbsHistoryResponse->ibRecords[0]->volume)->toBe(1.0);
+});
+
+test('getProfitCalculation command', function () {
+    $closePrice = 1.3000;
+    $cmd = 0;
+    $openPrice = 1.2233;
+    $symbol = 'EURPLN';
+    $volume = 1.0;
+    $getProfitCalculationPayload = new GetProfitCalculationPayload($closePrice, $cmd, $openPrice, $symbol, $volume);
+
+    $this->webSocketClient->shouldReceive('text')
+        ->once()
+        ->with($getProfitCalculationPayload->toJson());
+
+    $mockGetProfitCalculationResponse = json_encode([
+        'status' => true,
+        'returnData' => [
+            'profit' => 714.303
+        ]
+    ]);
+
+    $this->webSocketClient->shouldReceive('receive')
+        ->once()
+        ->andReturn($this->message);
+
+    $this->message->shouldReceive('getContent')
+        ->once()
+        ->andReturn($mockGetProfitCalculationResponse);
+
+    $getProfitCalculationResponse = $this->client->getProfitCalculation($closePrice, $cmd, $openPrice, $symbol, $volume);
+
+    expect($getProfitCalculationResponse)->toBeInstanceOf(GetProfitCalculationResponse::class)
+        ->and($getProfitCalculationResponse->profit)->toBe(714.303);
 });

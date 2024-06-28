@@ -17,6 +17,7 @@ use Timirey\XApi\Payloads\GetIbsHistoryPayload;
 use Timirey\XApi\Payloads\GetMarginLevelPayload;
 use Timirey\XApi\Payloads\GetMarginTradePayload;
 use Timirey\XApi\Payloads\GetNewsPayload;
+use Timirey\XApi\Payloads\GetProfitCalculationPayload;
 use Timirey\XApi\Payloads\GetSymbolPayload;
 use Timirey\XApi\Payloads\LoginPayload;
 use Timirey\XApi\Payloads\LogoutPayload;
@@ -34,6 +35,7 @@ use Timirey\XApi\Responses\GetIbsHistoryResponse;
 use Timirey\XApi\Responses\GetMarginLevelResponse;
 use Timirey\XApi\Responses\GetMarginTradeResponse;
 use Timirey\XApi\Responses\GetNewsResponse;
+use Timirey\XApi\Responses\GetProfitCalculationResponse;
 use Timirey\XApi\Responses\GetSymbolResponse;
 use Timirey\XApi\Responses\LoginResponse;
 use Timirey\XApi\Responses\LogoutResponse;
@@ -243,6 +245,22 @@ class Client
     {
         return $this->sendRequest(new GetIbsHistoryPayload($start, $end), GetIbsHistoryResponse::class);
     }
+
+    /**
+     * Calculates estimated profit for given deal data.
+     *
+     * @param float $closePrice
+     * @param int $cmd
+     * @param float $openPrice
+     * @param string $symbol
+     * @param float $volume
+     * @return GetProfitCalculationResponse
+     */
+    public function getProfitCalculation(float $closePrice, int $cmd, float $openPrice, string $symbol, float $volume): GetProfitCalculationResponse
+    {
+        return $this->sendRequest(new GetProfitCalculationPayload($closePrice, $cmd, $openPrice, $symbol, $volume), GetProfitCalculationResponse::class);
+    }
+
 
     /**
      * Sends a request to the xStation5 API and returns the response.
