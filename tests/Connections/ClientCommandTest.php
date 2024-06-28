@@ -811,7 +811,13 @@ test('getProfitCalculation command', function () {
         ->once()
         ->andReturn($mockGetProfitCalculationResponse);
 
-    $getProfitCalculationResponse = $this->client->getProfitCalculation($closePrice, $cmd, $openPrice, $symbol, $volume);
+    $getProfitCalculationResponse = $this->client->getProfitCalculation(
+        $closePrice,
+        $cmd,
+        $openPrice,
+        $symbol,
+        $volume
+    );
 
     expect($getProfitCalculationResponse)->toBeInstanceOf(GetProfitCalculationResponse::class)
         ->and($getProfitCalculationResponse->profit)->toBe(714.303);
