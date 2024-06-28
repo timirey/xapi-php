@@ -16,10 +16,8 @@ class GetChartRangeRequestResponse extends AbstractResponse
      * @param int $digits
      * @param RateInfoRecord[] $rateInfoRecords
      */
-    public function __construct(
-        public int $digits,
-        public array $rateInfoRecords
-    ) {
+    public function __construct(public int $digits, public array $rateInfoRecords)
+    {
     }
 
     /**
@@ -28,8 +26,8 @@ class GetChartRangeRequestResponse extends AbstractResponse
     protected static function create(array $data): static
     {
         return new static(
-            digits: $data['returnData']['digits'],
-            rateInfoRecords: array_map(
+            $data['returnData']['digits'],
+            array_map(
                 static fn(array $rateInfoRecordData): RateInfoRecord => new RateInfoRecord(...$rateInfoRecordData),
                 $data['returnData']['rateInfos']
             )

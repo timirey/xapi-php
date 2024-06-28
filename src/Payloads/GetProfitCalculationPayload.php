@@ -16,13 +16,8 @@ class GetProfitCalculationPayload extends AbstractPayload
      * @param string $symbol Symbol.
      * @param float $volume Volume.
      */
-    public function __construct(
-        float $closePrice,
-        int $cmd,
-        float $openPrice,
-        string $symbol,
-        float $volume
-    ) {
+    public function __construct(float $closePrice, int $cmd, float $openPrice, string $symbol, float $volume)
+    {
         $this->arguments['closePrice'] = $closePrice;
         $this->arguments['cmd'] = $cmd;
         $this->arguments['openPrice'] = $openPrice;

@@ -14,9 +14,8 @@ class GetTradeRecordsResponse extends AbstractResponse
      *
      * @param TradeRecord[] $tradeRecords
      */
-    public function __construct(
-        public array $tradeRecords
-    ) {
+    public function __construct(public array $tradeRecords)
+    {
     }
 
     /**
@@ -24,11 +23,9 @@ class GetTradeRecordsResponse extends AbstractResponse
      */
     protected static function create(array $data): static
     {
-        $tradeRecords = array_map(
+        return new static(array_map(
             static fn(array $tradeData): TradeRecord => new TradeRecord(...$tradeData),
             $data['returnData']
-        );
-
-        return new static(tradeRecords: $tradeRecords);
+        ));
     }
 }

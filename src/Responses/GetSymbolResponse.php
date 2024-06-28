@@ -14,9 +14,8 @@ class GetSymbolResponse extends AbstractResponse
      *
      * @param SymbolRecord $symbolRecord
      */
-    public function __construct(
-        public SymbolRecord $symbolRecord
-    ) {
+    public function __construct(public SymbolRecord $symbolRecord)
+    {
     }
 
     /**
@@ -24,8 +23,6 @@ class GetSymbolResponse extends AbstractResponse
      */
     protected static function create(array $data): static
     {
-        return new static(
-            symbolRecord: new SymbolRecord(...$data['returnData'])
-        );
+        return new static(new SymbolRecord(...$data['returnData']));
     }
 }

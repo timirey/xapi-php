@@ -12,9 +12,8 @@ class GetTradeRecordsPayload extends AbstractPayload
      *
      * @param array $orders Array of orders (position numbers).
      */
-    public function __construct(
-        array $orders
-    ) {
+    public function __construct(array $orders)
+    {
         $this->arguments['orders'] = $orders;
     }
 

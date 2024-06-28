@@ -35,10 +35,7 @@ abstract class AbstractResponse
     protected static function validate(array &$data): void
     {
         if ($data['status'] === false) {
-            throw new ResponseException(
-                errorCode: $data['errorCode'],
-                errorDescr: $data['errorDescr']
-            );
+            throw new ResponseException($data['errorCode'], $data['errorDescr']);
         }
 
         unset($data['status']);

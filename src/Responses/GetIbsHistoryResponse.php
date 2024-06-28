@@ -14,9 +14,8 @@ class GetIbsHistoryResponse extends AbstractResponse
      *
      * @param IbRecord[] $ibRecords
      */
-    public function __construct(
-        public array $ibRecords
-    ) {
+    public function __construct(public array $ibRecords)
+    {
     }
 
     /**
@@ -24,11 +23,9 @@ class GetIbsHistoryResponse extends AbstractResponse
      */
     protected static function create(array $data): static
     {
-        return new static(
-            ibRecords: array_map(
-                static fn(array $ibRecordData): IbRecord => new IbRecord(...$ibRecordData),
-                $data['returnData']
-            )
-        );
+        return new static(array_map(
+            static fn(array $ibRecordData): IbRecord => new IbRecord(...$ibRecordData),
+            $data['returnData']
+        ));
     }
 }

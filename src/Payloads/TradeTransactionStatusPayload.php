@@ -12,9 +12,8 @@ class TradeTransactionStatusPayload extends AbstractPayload
      *
      * @param int $order Unique order number.
      */
-    public function __construct(
-        public int $order
-    ) {
+    public function __construct(public int $order)
+    {
         $this->arguments['order'] = $order;
     }
 

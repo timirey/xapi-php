@@ -12,8 +12,7 @@ class GetProfitCalculationResponse extends AbstractResponse
      *
      * @param float $profit Profit in account currency.
      */
-    public function __construct(
-        public float $profit
-    ) {
+    public function __construct(public float $profit)
+    {
     }
 }

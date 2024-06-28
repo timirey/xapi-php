@@ -13,9 +13,7 @@ class GetCommissionDefResponse extends AbstractResponse
      * @param float $commission Calculated commission in account currency, could be null if not applicable.
      * @param float|null $rateOfExchange Rate of exchange between account currency and instrument base currency, could be null if not applicable.
      */
-    public function __construct(
-        public float $commission,
-        public ?float $rateOfExchange
-    ) {
+    public function __construct(public float $commission, public ?float $rateOfExchange)
+    {
     }
 }

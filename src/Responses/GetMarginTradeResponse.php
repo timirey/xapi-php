@@ -12,8 +12,7 @@ class GetMarginTradeResponse extends AbstractResponse
      *
      * @param float $margin Calculated margin in account currency.
      */
-    public function __construct(
-        public float $margin
-    ) {
+    public function __construct(public float $margin)
+    {
     }
 }

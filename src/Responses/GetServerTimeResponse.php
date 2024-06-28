@@ -13,9 +13,7 @@ class GetServerTimeResponse extends AbstractResponse
      * @param int $time Time in milliseconds since epoch.
      * @param string $timeString Time described in form set on server (local time of server).
      */
-    public function __construct(
-        public int $time,
-        public string $timeString
-    ) {
+    public function __construct(public int $time, public string $timeString)
+    {
     }
 }

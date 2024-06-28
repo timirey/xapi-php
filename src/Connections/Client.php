@@ -73,11 +73,8 @@ class Client
      * @param string $password User password.
      * @param Host $host WebSocket host URL.
      */
-    public function __construct(
-        protected int $userId,
-        protected string $password,
-        protected Host $host
-    ) {
+    public function __construct(protected int $userId, protected string $password, protected Host $host)
+    {
         $this->client = new WebSocketClient($this->host->value);
     }
 
@@ -88,10 +85,7 @@ class Client
      */
     public function login(): LoginResponse
     {
-        return $this->sendRequest(
-            payload: new LoginPayload($this->userId, $this->password),
-            responseClass: LoginResponse::class
-        );
+        return $this->sendRequest(new LoginPayload($this->userId, $this->password), LoginResponse::class);
     }
 
     /**
@@ -101,10 +95,7 @@ class Client
      */
     public function logout(): LogoutResponse
     {
-        return $this->sendRequest(
-            payload: new LogoutPayload(),
-            responseClass: LogoutResponse::class
-        );
+        return $this->sendRequest(new LogoutPayload(), LogoutResponse::class);
     }
 
     /**
@@ -115,10 +106,7 @@ class Client
      */
     public function getSymbol(string $symbol): GetSymbolResponse
     {
-        return $this->sendRequest(
-            payload: new GetSymbolPayload($symbol),
-            responseClass: GetSymbolResponse::class
-        );
+        return $this->sendRequest(new GetSymbolPayload($symbol), GetSymbolResponse::class);
     }
 
     /**
@@ -128,10 +116,7 @@ class Client
      */
     public function getAllSymbols(): GetAllSymbolsResponse
     {
-        return $this->sendRequest(
-            payload: new GetAllSymbolsPayload(),
-            responseClass: GetAllSymbolsResponse::class
-        );
+        return $this->sendRequest(new GetAllSymbolsPayload(), GetAllSymbolsResponse::class);
     }
 
     /**
@@ -142,10 +127,7 @@ class Client
      */
     public function tradeTransaction(TradeTransInfo $tradeTransInfo): TradeTransactionResponse
     {
-        return $this->sendRequest(
-            payload: new TradeTransactionPayload($tradeTransInfo),
-            responseClass: TradeTransactionResponse::class
-        );
+        return $this->sendRequest(new TradeTransactionPayload($tradeTransInfo), TradeTransactionResponse::class);
     }
 
     /**
@@ -156,10 +138,7 @@ class Client
      */
     public function tradeTransactionStatus(int $order): TradeTransactionStatusResponse
     {
-        return $this->sendRequest(
-            payload: new TradeTransactionStatusPayload($order),
-            responseClass: TradeTransactionStatusResponse::class
-        );
+        return $this->sendRequest(new TradeTransactionStatusPayload($order), TradeTransactionStatusResponse::class);
     }
 
     /**
@@ -169,10 +148,7 @@ class Client
      */
     public function ping(): PingResponse
     {
-        return $this->sendRequest(
-            payload: new PingPayload(),
-            responseClass: PingResponse::class
-        );
+        return $this->sendRequest(new PingPayload(), PingResponse::class);
     }
 
     /**
@@ -182,10 +158,7 @@ class Client
      */
     public function getCalendar(): GetCalendarResponse
     {
-        return $this->sendRequest(
-            payload: new GetCalendarPayload(),
-            responseClass: GetCalendarResponse::class
-        );
+        return $this->sendRequest(new GetCalendarPayload(), GetCalendarResponse::class);
     }
 
     /**
@@ -196,10 +169,7 @@ class Client
      */
     public function getChartLastRequest(ChartLastInfoRecord $chartLastInfoRecord): GetChartLastRequestResponse
     {
-        return $this->sendRequest(
-            payload: new GetChartLastRequestPayload($chartLastInfoRecord),
-            responseClass: GetChartLastRequestResponse::class
-        );
+        return $this->sendRequest(new GetChartLastRequestPayload($chartLastInfoRecord), GetChartLastRequestResponse::class);
     }
 
     /**
@@ -210,10 +180,7 @@ class Client
      */
     public function getChartRangeRequest(ChartRangeInfoRecord $chartRangeInfoRecord): GetChartRangeRequestResponse
     {
-        return $this->sendRequest(
-            payload: new GetChartRangeRequestPayload($chartRangeInfoRecord),
-            responseClass: GetChartRangeRequestResponse::class
-        );
+        return $this->sendRequest(new GetChartRangeRequestPayload($chartRangeInfoRecord), GetChartRangeRequestResponse::class);
     }
 
     /**
@@ -225,10 +192,7 @@ class Client
      */
     public function getCommissionDef(string $symbol, float $volume): GetCommissionDefResponse
     {
-        return $this->sendRequest(
-            payload: new GetCommissionDefPayload($symbol, $volume),
-            responseClass: GetCommissionDefResponse::class
-        );
+        return $this->sendRequest(new GetCommissionDefPayload($symbol, $volume), GetCommissionDefResponse::class);
     }
 
     /**
@@ -238,10 +202,7 @@ class Client
      */
     public function getCurrentUserData(): GetCurrentUserDataResponse
     {
-        return $this->sendRequest(
-            payload: new GetCurrentUserDataPayload(),
-            responseClass: GetCurrentUserDataResponse::class
-        );
+        return $this->sendRequest(new GetCurrentUserDataPayload(), GetCurrentUserDataResponse::class);
     }
 
     /**
@@ -251,10 +212,7 @@ class Client
      */
     public function getMarginLevel(): GetMarginLevelResponse
     {
-        return $this->sendRequest(
-            payload: new GetMarginLevelPayload(),
-            responseClass: GetMarginLevelResponse::class
-        );
+        return $this->sendRequest(new GetMarginLevelPayload(), GetMarginLevelResponse::class);
     }
 
     /**
@@ -266,10 +224,7 @@ class Client
      */
     public function getMarginTrade(string $symbol, float $volume): GetMarginTradeResponse
     {
-        return $this->sendRequest(
-            payload: new GetMarginTradePayload($symbol, $volume),
-            responseClass: GetMarginTradeResponse::class
-        );
+        return $this->sendRequest(new GetMarginTradePayload($symbol, $volume), GetMarginTradeResponse::class);
     }
 
     /**
@@ -281,10 +236,7 @@ class Client
      */
     public function getNews(int $start, int $end): GetNewsResponse
     {
-        return $this->sendRequest(
-            payload: new GetNewsPayload($start, $end),
-            responseClass: GetNewsResponse::class
-        );
+        return $this->sendRequest(new GetNewsPayload($start, $end), GetNewsResponse::class);
     }
 
     /**
@@ -296,10 +248,7 @@ class Client
      */
     public function getIbsHistory(int $start, int $end): GetIbsHistoryResponse
     {
-        return $this->sendRequest(
-            payload: new GetIbsHistoryPayload($start, $end),
-            responseClass: GetIbsHistoryResponse::class
-        );
+        return $this->sendRequest(new GetIbsHistoryPayload($start, $end), GetIbsHistoryResponse::class);
     }
 
     /**
@@ -314,10 +263,7 @@ class Client
      */
     public function getProfitCalculation(float $closePrice, int $cmd, float $openPrice, string $symbol, float $volume): GetProfitCalculationResponse
     {
-        return $this->sendRequest(
-            payload: new GetProfitCalculationPayload($closePrice, $cmd, $openPrice, $symbol, $volume),
-            responseClass: GetProfitCalculationResponse::class
-        );
+        return $this->sendRequest(new GetProfitCalculationPayload($closePrice, $cmd, $openPrice, $symbol, $volume), GetProfitCalculationResponse::class);
     }
 
     /**
@@ -327,10 +273,7 @@ class Client
      */
     public function getServerTime(): GetServerTimeResponse
     {
-        return $this->sendRequest(
-            payload: new GetServerTimePayload(),
-            responseClass: GetServerTimeResponse::class
-        );
+        return $this->sendRequest(new GetServerTimePayload(), GetServerTimeResponse::class);
     }
 
     /**
@@ -340,10 +283,7 @@ class Client
      */
     public function getStepRules(): GetStepRulesResponse
     {
-        return $this->sendRequest(
-            payload: new GetStepRulesPayload(),
-            responseClass: GetStepRulesResponse::class
-        );
+        return $this->sendRequest(new GetStepRulesPayload(), GetStepRulesResponse::class);
     }
 
     /**
@@ -356,10 +296,7 @@ class Client
      */
     public function getTickPrices(int $level, array $symbols, int $timestamp): GetTickPricesResponse
     {
-        return $this->sendRequest(
-            payload: new GetTickPricesPayload($level, $symbols, $timestamp),
-            responseClass: GetTickPricesResponse::class
-        );
+        return $this->sendRequest(new GetTickPricesPayload($level, $symbols, $timestamp), GetTickPricesResponse::class);
     }
 
     /**
@@ -370,10 +307,7 @@ class Client
      */
     public function getTradeRecords(array $orders): GetTradeRecordsResponse
     {
-        return $this->sendRequest(
-            payload: new GetTradeRecordsPayload($orders),
-            responseClass: GetTradeRecordsResponse::class
-        );
+        return $this->sendRequest(new GetTradeRecordsPayload($orders), GetTradeRecordsResponse::class);
     }
 
 

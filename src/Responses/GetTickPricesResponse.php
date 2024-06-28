@@ -14,9 +14,8 @@ class GetTickPricesResponse extends AbstractResponse
      *
      * @param TickRecord[] $quotations
      */
-    public function __construct(
-        public array $quotations
-    ) {
+    public function __construct(public array $quotations)
+    {
     }
 
     /**
@@ -24,11 +23,9 @@ class GetTickPricesResponse extends AbstractResponse
      */
     protected static function create(array $data): static
     {
-        return new static(
-            quotations: array_map(
-                static fn(array $tickRecordData): TickRecord => new TickRecord(...$tickRecordData),
-                $data['returnData']['quotations']
-            )
-        );
+        return new static(array_map(
+            static fn(array $tickRecordData): TickRecord => new TickRecord(...$tickRecordData),
+            $data['returnData']['quotations']
+        ));
     }
 }

@@ -17,10 +17,7 @@ class ChartLastInfoRecord
      * @param int $start Start of chart block.
      * @param string $symbol Symbol.
      */
-    public function __construct(
-        public int $period,
-        public int $start,
-        public string $symbol
-    ) {
+    public function __construct(public int $period, public int $start, public string $symbol)
+    {
     }
 }

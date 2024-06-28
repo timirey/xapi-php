@@ -13,10 +13,8 @@ class LoginPayload extends AbstractPayload
      * @param string $userId User ID.
      * @param string $password User password.
      */
-    public function __construct(
-        string $userId,
-        string $password
-    ) {
+    public function __construct(string $userId, string $password)
+    {
         $this->arguments['userId'] = $userId;
         $this->arguments['password'] = $password;
     }
