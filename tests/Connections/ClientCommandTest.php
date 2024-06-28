@@ -11,6 +11,7 @@ use Timirey\XApi\Payloads\GetChartLastRequestPayload;
 use Timirey\XApi\Payloads\GetChartRangeRequestPayload;
 use Timirey\XApi\Payloads\GetCommissionDefPayload;
 use Timirey\XApi\Payloads\GetCurrentUserDataPayload;
+use Timirey\XApi\Payloads\GetIbsHistoryPayload;
 use Timirey\XApi\Payloads\GetMarginLevelPayload;
 use Timirey\XApi\Payloads\GetMarginTradePayload;
 use Timirey\XApi\Payloads\GetNewsPayload;
@@ -21,6 +22,7 @@ use Timirey\XApi\Payloads\PingPayload;
 use Timirey\XApi\Payloads\TradeTransactionPayload;
 use Timirey\XApi\Payloads\TradeTransactionStatusPayload;
 use Timirey\XApi\Responses\Data\CalendarRecord;
+use Timirey\XApi\Responses\Data\IbRecord;
 use Timirey\XApi\Responses\Data\NewsTopicRecord;
 use Timirey\XApi\Responses\Data\RateInfoRecord;
 use Timirey\XApi\Responses\GetAllSymbolsResponse;
@@ -29,6 +31,7 @@ use Timirey\XApi\Responses\GetChartLastRequestResponse;
 use Timirey\XApi\Responses\GetChartRangeRequestResponse;
 use Timirey\XApi\Responses\GetCommissionDefResponse;
 use Timirey\XApi\Responses\GetCurrentUserDataResponse;
+use Timirey\XApi\Responses\GetIbsHistoryResponse;
 use Timirey\XApi\Responses\GetMarginLevelResponse;
 use Timirey\XApi\Responses\GetMarginTradeResponse;
 use Timirey\XApi\Responses\GetNewsResponse;
@@ -696,12 +699,62 @@ test('getNews command', function () {
     $getNewsResponse = $this->client->getNews($start, $end);
 
     expect($getNewsResponse)->toBeInstanceOf(GetNewsResponse::class)
-        ->and($getNewsResponse->news)->toHaveCount(1)
-        ->and($getNewsResponse->news[0])->toBeInstanceOf(NewsTopicRecord::class)
-        ->and($getNewsResponse->news[0]->body)->toBe('<html lang="">...</html>')
-        ->and($getNewsResponse->news[0]->bodylen)->toBe(110)
-        ->and($getNewsResponse->news[0]->key)->toBe('1f6da766abd29927aa854823f0105c23')
-        ->and($getNewsResponse->news[0]->time)->toBe(1262944112000)
-        ->and($getNewsResponse->news[0]->timeString)->toBe('May 17, 2013 4:30:00 PM')
-        ->and($getNewsResponse->news[0]->title)->toBe('Breaking trend');
+        ->and($getNewsResponse->newsTopicRecords)->toHaveCount(1)
+        ->and($getNewsResponse->newsTopicRecords[0])->toBeInstanceOf(NewsTopicRecord::class)
+        ->and($getNewsResponse->newsTopicRecords[0]->body)->toBe('<html lang="">...</html>')
+        ->and($getNewsResponse->newsTopicRecords[0]->bodylen)->toBe(110)
+        ->and($getNewsResponse->newsTopicRecords[0]->key)->toBe('1f6da766abd29927aa854823f0105c23')
+        ->and($getNewsResponse->newsTopicRecords[0]->time)->toBe(1262944112000)
+        ->and($getNewsResponse->newsTopicRecords[0]->timeString)->toBe('May 17, 2013 4:30:00 PM')
+        ->and($getNewsResponse->newsTopicRecords[0]->title)->toBe('Breaking trend');
+});
+
+test('getIbsHistory command', function () {
+    $start = 1394449010991;
+    $end = 1395053810991;
+    $getIbsHistoryPayload = new GetIbsHistoryPayload($start, $end);
+
+    $this->webSocketClient->shouldReceive('text')
+        ->once()
+        ->with($getIbsHistoryPayload->toJson());
+
+    $mockGetIbsHistoryResponse = json_encode([
+        'status' => true,
+        'returnData' => [
+            [
+                'closePrice' => 1.39302,
+                'login' => '12345',
+                'nominal' => 6.00,
+                'openPrice' => 1.39376,
+                'side' => 0,
+                'surname' => 'IB_Client_1',
+                'symbol' => 'EURUSD',
+                'timestamp' => 1395755870000,
+                'volume' => 1.0
+            ],
+        ]
+    ]);
+
+    $this->webSocketClient->shouldReceive('receive')
+        ->once()
+        ->andReturn($this->message);
+
+    $this->message->shouldReceive('getContent')
+        ->once()
+        ->andReturn($mockGetIbsHistoryResponse);
+
+    $getIbsHistoryResponse = $this->client->getIbsHistory($start, $end);
+
+    expect($getIbsHistoryResponse)->toBeInstanceOf(GetIbsHistoryResponse::class)
+        ->and($getIbsHistoryResponse->ibRecords)->toHaveCount(1)
+        ->and($getIbsHistoryResponse->ibRecords[0])->toBeInstanceOf(IbRecord::class)
+        ->and($getIbsHistoryResponse->ibRecords[0]->closePrice)->toBe(1.39302)
+        ->and($getIbsHistoryResponse->ibRecords[0]->login)->toBe('12345')
+        ->and($getIbsHistoryResponse->ibRecords[0]->nominal)->toBe(6.00)
+        ->and($getIbsHistoryResponse->ibRecords[0]->openPrice)->toBe(1.39376)
+        ->and($getIbsHistoryResponse->ibRecords[0]->side)->toBe(0)
+        ->and($getIbsHistoryResponse->ibRecords[0]->surname)->toBe('IB_Client_1')
+        ->and($getIbsHistoryResponse->ibRecords[0]->symbol)->toBe('EURUSD')
+        ->and($getIbsHistoryResponse->ibRecords[0]->timestamp)->toBe(1395755870000)
+        ->and($getIbsHistoryResponse->ibRecords[0]->volume)->toBe(1.0);
 });

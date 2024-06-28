@@ -13,9 +13,9 @@ class GetNewsResponse extends AbstractResponse
     /**
      * Constructor for GetNewsResponse.
      *
-     * @param NewsTopicRecord[] $news
+     * @param NewsTopicRecord[] $newsTopicRecords
      */
-    public function __construct(public array $news)
+    public function __construct(public array $newsTopicRecords)
     {
     }
 

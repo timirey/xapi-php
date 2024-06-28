@@ -13,6 +13,7 @@ use Timirey\XApi\Payloads\GetChartLastRequestPayload;
 use Timirey\XApi\Payloads\GetChartRangeRequestPayload;
 use Timirey\XApi\Payloads\GetCommissionDefPayload;
 use Timirey\XApi\Payloads\GetCurrentUserDataPayload;
+use Timirey\XApi\Payloads\GetIbsHistoryPayload;
 use Timirey\XApi\Payloads\GetMarginLevelPayload;
 use Timirey\XApi\Payloads\GetMarginTradePayload;
 use Timirey\XApi\Payloads\GetNewsPayload;
@@ -29,6 +30,7 @@ use Timirey\XApi\Responses\GetChartLastRequestResponse;
 use Timirey\XApi\Responses\GetChartRangeRequestResponse;
 use Timirey\XApi\Responses\GetCommissionDefResponse;
 use Timirey\XApi\Responses\GetCurrentUserDataResponse;
+use Timirey\XApi\Responses\GetIbsHistoryResponse;
 use Timirey\XApi\Responses\GetMarginLevelResponse;
 use Timirey\XApi\Responses\GetMarginTradeResponse;
 use Timirey\XApi\Responses\GetNewsResponse;
@@ -228,6 +230,18 @@ class Client
     public function getNews(int $start, int $end): GetNewsResponse
     {
         return $this->sendRequest(new GetNewsPayload($start, $end), GetNewsResponse::class);
+    }
+
+    /**
+     * Returns IBs data from the given time range.
+     *
+     * @param int $start
+     * @param int $end
+     * @return GetIbsHistoryResponse
+     */
+    public function getIbsHistory(int $start, int $end): GetIbsHistoryResponse
+    {
+        return $this->sendRequest(new GetIbsHistoryPayload($start, $end), GetIbsHistoryResponse::class);
     }
 
     /**
