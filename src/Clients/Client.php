@@ -6,6 +6,7 @@ use Timirey\XApi\Clients\Enums\Host;
 use Timirey\XApi\Payloads\AbstractPayload;
 use Timirey\XApi\Payloads\Data\TradeTransInfo;
 use Timirey\XApi\Payloads\GetAllSymbolsPayload;
+use Timirey\XApi\Payloads\GetCalendarPayload;
 use Timirey\XApi\Payloads\GetSymbolPayload;
 use Timirey\XApi\Payloads\LoginPayload;
 use Timirey\XApi\Payloads\LogoutPayload;
@@ -14,6 +15,7 @@ use Timirey\XApi\Payloads\TradeTransactionPayload;
 use Timirey\XApi\Payloads\TradeTransactionStatusPayload;
 use Timirey\XApi\Responses\AbstractResponse;
 use Timirey\XApi\Responses\GetAllSymbolsResponse;
+use Timirey\XApi\Responses\GetCalendarResponse;
 use Timirey\XApi\Responses\GetSymbolResponse;
 use Timirey\XApi\Responses\LoginResponse;
 use Timirey\XApi\Responses\LogoutResponse;
@@ -24,6 +26,8 @@ use WebSocket\Client as WebSocketClient;
 
 /**
  * Client class for interacting with the xStation5 API.
+ *
+ * todo: rename this class and think of better folder structure.
  */
 class Client
 {
@@ -120,6 +124,16 @@ class Client
     public function ping(): PingResponse
     {
         return $this->sendRequest(new PingPayload(), PingResponse::class);
+    }
+
+    /**
+     * Returns calendar with market events.
+     *
+     * @return GetCalendarResponse
+     */
+    public function getCalendar(): GetCalendarResponse
+    {
+        return $this->sendRequest(new GetCalendarPayload(), GetCalendarResponse::class);
     }
 
     /**

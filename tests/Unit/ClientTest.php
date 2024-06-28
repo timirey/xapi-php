@@ -4,13 +4,16 @@ use Timirey\XApi\Clients\Client;
 use Timirey\XApi\Clients\Enums\Host;
 use Timirey\XApi\Payloads\Data\TradeTransInfo;
 use Timirey\XApi\Payloads\GetAllSymbolsPayload;
+use Timirey\XApi\Payloads\GetCalendarPayload;
 use Timirey\XApi\Payloads\GetSymbolPayload;
 use Timirey\XApi\Payloads\LoginPayload;
 use Timirey\XApi\Payloads\LogoutPayload;
 use Timirey\XApi\Payloads\PingPayload;
 use Timirey\XApi\Payloads\TradeTransactionPayload;
 use Timirey\XApi\Payloads\TradeTransactionStatusPayload;
+use Timirey\XApi\Responses\Data\CalendarRecord;
 use Timirey\XApi\Responses\GetAllSymbolsResponse;
+use Timirey\XApi\Responses\GetCalendarResponse;
 use Timirey\XApi\Responses\GetSymbolResponse;
 use Timirey\XApi\Responses\LogoutResponse;
 use Timirey\XApi\Responses\PingResponse;
@@ -344,4 +347,44 @@ test('ping command', function () {
     $pingResponse = $this->client->ping();
 
     expect($pingResponse)->toBeInstanceOf(PingResponse::class);
+});
+
+test('getCalendar command', function () {
+    $getCalendarPayload = new GetCalendarPayload();
+
+    $this->webSocketClient->shouldReceive('text')
+        ->once()
+        ->with($getCalendarPayload->toJson());
+
+    $mockGetCalendarResponse = json_encode([
+        'status' => true,
+        'returnData' => [
+            [
+                'country' => 'US',
+                'current' => '',
+                'forecast' => '3.5%',
+                'impact' => 'High',
+                'period' => 'Q1 2021',
+                'previous' => '3.2%',
+                'time' => 1720170000000,
+                'title' => 'GDP Growth Rate'
+            ],
+        ]
+    ]);
+
+    $this->webSocketClient->shouldReceive('receive')
+        ->once()
+        ->andReturn($this->message);
+
+    $this->message->shouldReceive('getContent')
+        ->once()
+        ->andReturn($mockGetCalendarResponse);
+
+    $getCalendarResponse = $this->client->getCalendar();
+
+    expect($getCalendarResponse)->toBeInstanceOf(GetCalendarResponse::class)
+        ->and($getCalendarResponse->calendarRecords)->toHaveCount(1)
+        ->and($getCalendarResponse->calendarRecords[0])->toBeInstanceOf(CalendarRecord::class)
+        ->and($getCalendarResponse->calendarRecords[0]->country)->toBe('US')
+        ->and($getCalendarResponse->calendarRecords[0]->title)->toBe('GDP Growth Rate');
 });
