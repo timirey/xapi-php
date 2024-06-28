@@ -26,9 +26,10 @@ class GetNewsResponse extends AbstractResponse
     protected static function create(array $data): static
     {
         return new static(
-            newsTopicRecords: array_map(static function (array $newsTopicRecordData): NewsTopicRecord {
-                return new NewsTopicRecord(...$newsTopicRecordData);
-            }, $data['returnData'])
+            newsTopicRecords: array_map(
+                static fn(array $newsTopicRecordData): NewsTopicRecord => new NewsTopicRecord(...$newsTopicRecordData),
+                $data['returnData']
+            )
         );
     }
 }

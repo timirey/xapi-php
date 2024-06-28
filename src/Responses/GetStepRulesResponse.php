@@ -26,15 +26,17 @@ class GetStepRulesResponse extends AbstractResponse
     protected static function create(array $data): static
     {
         return new static(
-            stepRuleRecords: array_map(static function (array $stepRuleRecordData): StepRuleRecord {
-                return new StepRuleRecord(
+            stepRuleRecords: array_map(
+                static fn(array $stepRuleRecordData): StepRuleRecord => new StepRuleRecord(
                     $stepRuleRecordData['id'],
                     $stepRuleRecordData['name'],
-                    array_map(static function (array $stepRecordData): StepRecord {
-                        return new StepRecord(...$stepRecordData);
-                    }, $stepRuleRecordData['steps'])
-                );
-            }, $data['returnData'])
+                    array_map(
+                        static fn(array $stepRecordData): StepRecord => new StepRecord(...$stepRecordData),
+                        $stepRuleRecordData['steps']
+                    )
+                ),
+                $data['returnData']
+            )
         );
     }
 }

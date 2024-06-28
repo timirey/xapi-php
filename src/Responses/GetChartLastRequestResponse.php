@@ -28,9 +28,10 @@ class GetChartLastRequestResponse extends AbstractResponse
     {
         return new static(
             digits: $data['returnData']['digits'],
-            rateInfoRecords: array_map(static function (array $rateInfoRecordData): RateInfoRecord {
-                return new RateInfoRecord(...$rateInfoRecordData);
-            }, $data['returnData']['rateInfos'])
+            rateInfoRecords: array_map(
+                static fn(array $rateInfoRecordData): RateInfoRecord => new RateInfoRecord(...$rateInfoRecordData),
+                $data['returnData']['rateInfos']
+            )
         );
     }
 }

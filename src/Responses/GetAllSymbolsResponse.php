@@ -25,9 +25,10 @@ class GetAllSymbolsResponse extends AbstractResponse
     protected static function create(array $data): static
     {
         return new static(
-            symbolRecords: array_map(static function (array $symbolRecordData): SymbolRecord {
-                return new SymbolRecord(...$symbolRecordData);
-            }, $data['returnData'])
+            symbolRecords: array_map(
+                static fn(array $symbolRecordData): SymbolRecord => new SymbolRecord(...$symbolRecordData),
+                $data['returnData']
+            )
         );
     }
 }

@@ -25,9 +25,10 @@ class GetIbsHistoryResponse extends AbstractResponse
     protected static function create(array $data): static
     {
         return new static(
-            ibRecords: array_map(static function (array $ibRecordData): IbRecord {
-                return new IbRecord(...$ibRecordData);
-            }, $data['returnData'])
+            ibRecords: array_map(
+                static fn(array $ibRecordData): IbRecord => new IbRecord(...$ibRecordData),
+                $data['returnData']
+            )
         );
     }
 }
