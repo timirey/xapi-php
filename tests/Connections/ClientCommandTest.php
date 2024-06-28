@@ -17,6 +17,7 @@ use Timirey\XApi\Payloads\GetMarginTradePayload;
 use Timirey\XApi\Payloads\GetNewsPayload;
 use Timirey\XApi\Payloads\GetProfitCalculationPayload;
 use Timirey\XApi\Payloads\GetServerTimePayload;
+use Timirey\XApi\Payloads\GetStepRulesPayload;
 use Timirey\XApi\Payloads\GetSymbolPayload;
 use Timirey\XApi\Payloads\LoginPayload;
 use Timirey\XApi\Payloads\LogoutPayload;
@@ -27,6 +28,8 @@ use Timirey\XApi\Responses\Data\CalendarRecord;
 use Timirey\XApi\Responses\Data\IbRecord;
 use Timirey\XApi\Responses\Data\NewsTopicRecord;
 use Timirey\XApi\Responses\Data\RateInfoRecord;
+use Timirey\XApi\Responses\Data\StepRecord;
+use Timirey\XApi\Responses\Data\StepRuleRecord;
 use Timirey\XApi\Responses\GetAllSymbolsResponse;
 use Timirey\XApi\Responses\GetCalendarResponse;
 use Timirey\XApi\Responses\GetChartLastRequestResponse;
@@ -39,6 +42,7 @@ use Timirey\XApi\Responses\GetMarginTradeResponse;
 use Timirey\XApi\Responses\GetNewsResponse;
 use Timirey\XApi\Responses\GetProfitCalculationResponse;
 use Timirey\XApi\Responses\GetServerTimeResponse;
+use Timirey\XApi\Responses\GetStepRulesResponse;
 use Timirey\XApi\Responses\GetSymbolResponse;
 use Timirey\XApi\Responses\LogoutResponse;
 use Timirey\XApi\Responses\PingResponse;
@@ -824,4 +828,54 @@ test('getServerTime command', function () {
     expect($getServerTimeResponse)->toBeInstanceOf(GetServerTimeResponse::class)
         ->and($getServerTimeResponse->time)->toBe(1392211379731)
         ->and($getServerTimeResponse->timeString)->toBe('Feb 12, 2014 2:22:59 PM');
+});
+
+test('getStepRules command', function () {
+    $getStepRulesPayload = new GetStepRulesPayload();
+
+    $this->webSocketClient->shouldReceive('text')
+        ->once()
+        ->with($getStepRulesPayload->toJson());
+
+    $mockGetStepRulesResponse = json_encode([
+        'status' => true,
+        'returnData' => [
+            [
+                'id' => 1,
+                'name' => 'Forex',
+                'steps' => [
+                    [
+                        'fromValue' => 0.1,
+                        'step' => 0.0025
+                    ],
+                    [
+                        'fromValue' => 1.0,
+                        'step' => 0.001
+                    ]
+                ]
+            ],
+        ]
+    ]);
+
+    $this->webSocketClient->shouldReceive('receive')
+        ->once()
+        ->andReturn($this->message);
+
+    $this->message->shouldReceive('getContent')
+        ->once()
+        ->andReturn($mockGetStepRulesResponse);
+
+    $getStepRulesResponse = $this->client->getStepRules();
+
+    expect($getStepRulesResponse)->toBeInstanceOf(GetStepRulesResponse::class)
+        ->and($getStepRulesResponse->stepRules)->toHaveCount(1)
+        ->and($getStepRulesResponse->stepRules[0])->toBeInstanceOf(StepRuleRecord::class)
+        ->and($getStepRulesResponse->stepRules[0]->id)->toBe(1)
+        ->and($getStepRulesResponse->stepRules[0]->name)->toBe('Forex')
+        ->and($getStepRulesResponse->stepRules[0]->steps)->toHaveCount(2)
+        ->and($getStepRulesResponse->stepRules[0]->steps[0])->toBeInstanceOf(StepRecord::class)
+        ->and($getStepRulesResponse->stepRules[0]->steps[0]->fromValue)->toBe(0.1)
+        ->and($getStepRulesResponse->stepRules[0]->steps[0]->step)->toBe(0.0025)
+        ->and($getStepRulesResponse->stepRules[0]->steps[1]->fromValue)->toBe(1.0)
+        ->and($getStepRulesResponse->stepRules[0]->steps[1]->step)->toBe(0.001);
 });

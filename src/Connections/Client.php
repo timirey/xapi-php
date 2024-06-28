@@ -19,6 +19,7 @@ use Timirey\XApi\Payloads\GetMarginTradePayload;
 use Timirey\XApi\Payloads\GetNewsPayload;
 use Timirey\XApi\Payloads\GetProfitCalculationPayload;
 use Timirey\XApi\Payloads\GetServerTimePayload;
+use Timirey\XApi\Payloads\GetStepRulesPayload;
 use Timirey\XApi\Payloads\GetSymbolPayload;
 use Timirey\XApi\Payloads\LoginPayload;
 use Timirey\XApi\Payloads\LogoutPayload;
@@ -38,6 +39,7 @@ use Timirey\XApi\Responses\GetMarginTradeResponse;
 use Timirey\XApi\Responses\GetNewsResponse;
 use Timirey\XApi\Responses\GetProfitCalculationResponse;
 use Timirey\XApi\Responses\GetServerTimeResponse;
+use Timirey\XApi\Responses\GetStepRulesResponse;
 use Timirey\XApi\Responses\GetSymbolResponse;
 use Timirey\XApi\Responses\LoginResponse;
 use Timirey\XApi\Responses\LogoutResponse;
@@ -271,6 +273,16 @@ class Client
     public function getServerTime(): GetServerTimeResponse
     {
         return $this->sendRequest(new GetServerTimePayload(), GetServerTimeResponse::class);
+    }
+
+    /**
+     * Returns a list of step rules for DMAs.
+     *
+     * @return GetStepRulesResponse
+     */
+    public function getStepRules(): GetStepRulesResponse
+    {
+        return $this->sendRequest(new GetStepRulesPayload(), GetStepRulesResponse::class);
     }
 
     /**
