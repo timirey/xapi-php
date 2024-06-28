@@ -11,6 +11,7 @@ use Timirey\XApi\Payloads\GetAllSymbolsPayload;
 use Timirey\XApi\Payloads\GetCalendarPayload;
 use Timirey\XApi\Payloads\GetChartLastRequestPayload;
 use Timirey\XApi\Payloads\GetChartRangeRequestPayload;
+use Timirey\XApi\Payloads\GetCommissionDefPayload;
 use Timirey\XApi\Payloads\GetSymbolPayload;
 use Timirey\XApi\Payloads\LoginPayload;
 use Timirey\XApi\Payloads\LogoutPayload;
@@ -22,6 +23,7 @@ use Timirey\XApi\Responses\GetAllSymbolsResponse;
 use Timirey\XApi\Responses\GetCalendarResponse;
 use Timirey\XApi\Responses\GetChartLastRequestResponse;
 use Timirey\XApi\Responses\GetChartRangeRequestResponse;
+use Timirey\XApi\Responses\GetCommissionDefResponse;
 use Timirey\XApi\Responses\GetSymbolResponse;
 use Timirey\XApi\Responses\LoginResponse;
 use Timirey\XApi\Responses\LogoutResponse;
@@ -162,6 +164,18 @@ class Client
     public function getChartRangeRequest(ChartRangeInfoRecord $chartRangeInfoRecord): GetChartRangeRequestResponse
     {
         return $this->sendRequest(new GetChartRangeRequestPayload($chartRangeInfoRecord), GetChartRangeRequestResponse::class);
+    }
+
+    /**
+     * Returns calculation of commission and rate of exchange.
+     *
+     * @param string $symbol
+     * @param float $volume
+     * @return GetCommissionDefResponse
+     */
+    public function getCommissionDef(string $symbol, float $volume): GetCommissionDefResponse
+    {
+        return $this->sendRequest(new GetCommissionDefPayload($symbol, $volume), GetCommissionDefResponse::class);
     }
 
     /**

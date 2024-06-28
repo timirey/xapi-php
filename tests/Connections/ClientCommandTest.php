@@ -9,6 +9,7 @@ use Timirey\XApi\Payloads\GetAllSymbolsPayload;
 use Timirey\XApi\Payloads\GetCalendarPayload;
 use Timirey\XApi\Payloads\GetChartLastRequestPayload;
 use Timirey\XApi\Payloads\GetChartRangeRequestPayload;
+use Timirey\XApi\Payloads\GetCommissionDefPayload;
 use Timirey\XApi\Payloads\GetSymbolPayload;
 use Timirey\XApi\Payloads\LoginPayload;
 use Timirey\XApi\Payloads\LogoutPayload;
@@ -21,6 +22,7 @@ use Timirey\XApi\Responses\GetAllSymbolsResponse;
 use Timirey\XApi\Responses\GetCalendarResponse;
 use Timirey\XApi\Responses\GetChartLastRequestResponse;
 use Timirey\XApi\Responses\GetChartRangeRequestResponse;
+use Timirey\XApi\Responses\GetCommissionDefResponse;
 use Timirey\XApi\Responses\GetSymbolResponse;
 use Timirey\XApi\Responses\LogoutResponse;
 use Timirey\XApi\Responses\PingResponse;
@@ -505,4 +507,36 @@ test('getChartRangeRequest command', function () {
         ->and($getChartRangeRequestResponse->rateInfoRecords[0]->low)->toBe(1.120)
         ->and($getChartRangeRequestResponse->rateInfoRecords[0]->open)->toBe(1.122)
         ->and($getChartRangeRequestResponse->rateInfoRecords[0]->vol)->toBe(100.0);
+});
+
+test('getCommissionDef command', function () {
+    $symbol = 'EURUSD';
+    $volume = 1.0;
+    $getCommissionDefPayload = new GetCommissionDefPayload($symbol, $volume);
+
+    $this->webSocketClient->shouldReceive('text')
+        ->once()
+        ->with($getCommissionDefPayload->toJson());
+
+    $mockGetCommissionDefResponse = json_encode([
+        'status' => true,
+        'returnData' => [
+            'commission' => 5.0,
+            'rateOfExchange' => 1.2
+        ]
+    ]);
+
+    $this->webSocketClient->shouldReceive('receive')
+        ->once()
+        ->andReturn($this->message);
+
+    $this->message->shouldReceive('getContent')
+        ->once()
+        ->andReturn($mockGetCommissionDefResponse);
+
+    $getCommissionDefResponse = $this->client->getCommissionDef($symbol, $volume);
+
+    expect($getCommissionDefResponse)->toBeInstanceOf(GetCommissionDefResponse::class)
+        ->and($getCommissionDefResponse->commission)->toBe(5.0)
+        ->and($getCommissionDefResponse->rateOfExchange)->toBe(1.2);
 });
