@@ -11,7 +11,7 @@
 |
 */
 
-uses(Timirey\XApi\Tests\TestCase::class)->in('Clients');
+uses(Timirey\XApi\Tests\TestCase::class)->in('Connections');
 
 /*
 |--------------------------------------------------------------------------

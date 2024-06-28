@@ -10,9 +10,9 @@ use Timirey\XApi\Payloads\Data\ChartLastInfoRecord;
 class GetChartLastRequestPayload extends AbstractPayload
 {
     /**
-     * Constructor for getChartLastRequestPayload.
+     * Constructor for GetChartLastRequestPayload.
      *
-     * @param ChartLastInfoRecord $chartLastInfoRecord Chart info parameters.
+     * @param ChartLastInfoRecord $chartLastInfoRecord Chart last info parameters.
      */
     public function __construct(ChartLastInfoRecord $chartLastInfoRecord)
     {

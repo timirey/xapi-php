@@ -1,12 +1,14 @@
 <?php
 
-use Timirey\XApi\Clients\Client;
-use Timirey\XApi\Clients\Enums\Host;
+use Timirey\XApi\Connections\Client;
+use Timirey\XApi\Connections\Enums\Host;
 use Timirey\XApi\Payloads\Data\ChartLastInfoRecord;
+use Timirey\XApi\Payloads\Data\ChartRangeInfoRecord;
 use Timirey\XApi\Payloads\Data\TradeTransInfo;
 use Timirey\XApi\Payloads\GetAllSymbolsPayload;
 use Timirey\XApi\Payloads\GetCalendarPayload;
 use Timirey\XApi\Payloads\GetChartLastRequestPayload;
+use Timirey\XApi\Payloads\GetChartRangeRequestPayload;
 use Timirey\XApi\Payloads\GetSymbolPayload;
 use Timirey\XApi\Payloads\LoginPayload;
 use Timirey\XApi\Payloads\LogoutPayload;
@@ -18,6 +20,7 @@ use Timirey\XApi\Responses\Data\RateInfoRecord;
 use Timirey\XApi\Responses\GetAllSymbolsResponse;
 use Timirey\XApi\Responses\GetCalendarResponse;
 use Timirey\XApi\Responses\GetChartLastRequestResponse;
+use Timirey\XApi\Responses\GetChartRangeRequestResponse;
 use Timirey\XApi\Responses\GetSymbolResponse;
 use Timirey\XApi\Responses\LogoutResponse;
 use Timirey\XApi\Responses\PingResponse;
@@ -445,4 +448,61 @@ test('getChartLastRequest command', function () {
         ->and($getChartLastRequestResponse->rateInfoRecords[0]->low)->toBe(1.120)
         ->and($getChartLastRequestResponse->rateInfoRecords[0]->open)->toBe(1.122)
         ->and($getChartLastRequestResponse->rateInfoRecords[0]->vol)->toBe(100.0);
+});
+
+test('getChartRangeRequest command', function () {
+    $chartRangeInfoRecord = new ChartRangeInfoRecord(
+        period: 60,
+        start: 1389374640000, // Example start timestamp in milliseconds (Jan 10, 2014 3:04:00 PM)
+        end: 1389378240000,   // Example end timestamp in milliseconds
+        symbol: 'EURUSD',
+        ticks: 1000
+    );
+
+    $getChartRangeRequestPayload = new GetChartRangeRequestPayload($chartRangeInfoRecord);
+
+    $this->webSocketClient->shouldReceive('text')
+        ->once()
+        ->with($getChartRangeRequestPayload->toJson());
+
+    $mockGetChartRangeRequestResponse = json_encode([
+        'status' => true,
+        'returnData' => [
+            'digits' => 5,
+            'rateInfos' => [
+                [
+                    'close' => 1.12345,
+                    'ctm' => 1389374640000,
+                    'ctmString' => 'Jan 10, 2014 3:04:00 PM',
+                    'high' => 1.125,
+                    'low' => 1.120,
+                    'open' => 1.122,
+                    'vol' => 100
+                ],
+                // Add more rate info records if needed
+            ]
+        ]
+    ]);
+
+    $this->webSocketClient->shouldReceive('receive')
+        ->once()
+        ->andReturn($this->message);
+
+    $this->message->shouldReceive('getContent')
+        ->once()
+        ->andReturn($mockGetChartRangeRequestResponse);
+
+    $getChartRangeRequestResponse = $this->client->getChartRangeRequest($chartRangeInfoRecord);
+
+    expect($getChartRangeRequestResponse)->toBeInstanceOf(GetChartRangeRequestResponse::class)
+        ->and($getChartRangeRequestResponse->digits)->toBe(5)
+        ->and($getChartRangeRequestResponse->rateInfoRecords)->toHaveCount(1)
+        ->and($getChartRangeRequestResponse->rateInfoRecords[0])->toBeInstanceOf(RateInfoRecord::class)
+        ->and($getChartRangeRequestResponse->rateInfoRecords[0]->close)->toBe(1.12345)
+        ->and($getChartRangeRequestResponse->rateInfoRecords[0]->ctmString)->toBe('Jan 10, 2014 3:04:00 PM')
+        ->and($getChartRangeRequestResponse->rateInfoRecords[0]->ctm)->toBe(1389374640000)
+        ->and($getChartRangeRequestResponse->rateInfoRecords[0]->high)->toBe(1.125)
+        ->and($getChartRangeRequestResponse->rateInfoRecords[0]->low)->toBe(1.120)
+        ->and($getChartRangeRequestResponse->rateInfoRecords[0]->open)->toBe(1.122)
+        ->and($getChartRangeRequestResponse->rateInfoRecords[0]->vol)->toBe(100.0);
 });
