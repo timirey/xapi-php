@@ -21,6 +21,7 @@ use Timirey\XApi\Payloads\GetStepRulesPayload;
 use Timirey\XApi\Payloads\GetSymbolPayload;
 use Timirey\XApi\Payloads\GetTickPricesPayload;
 use Timirey\XApi\Payloads\GetTradeRecordsPayload;
+use Timirey\XApi\Payloads\GetTradesHistoryPayload;
 use Timirey\XApi\Payloads\GetTradesPayload;
 use Timirey\XApi\Payloads\LoginPayload;
 use Timirey\XApi\Payloads\LogoutPayload;
@@ -51,6 +52,7 @@ use Timirey\XApi\Responses\GetStepRulesResponse;
 use Timirey\XApi\Responses\GetSymbolResponse;
 use Timirey\XApi\Responses\GetTickPricesResponse;
 use Timirey\XApi\Responses\GetTradeRecordsResponse;
+use Timirey\XApi\Responses\GetTradesHistoryResponse;
 use Timirey\XApi\Responses\GetTradesResponse;
 use Timirey\XApi\Responses\LogoutResponse;
 use Timirey\XApi\Responses\PingResponse;
@@ -1110,4 +1112,88 @@ test('getTrades command', function () {
         ->and($getTradesResponse->tradeRecords[0]->timestamp)->toBe(1272540251000)
         ->and($getTradesResponse->tradeRecords[0]->tp)->toBe(0.0)
         ->and($getTradesResponse->tradeRecords[0]->volume)->toBe(0.10);
+});
+
+test('getTradesHistory command', function () {
+    $start = 1275993488000;
+    $end = 0;
+    $getTradesHistoryPayload = new GetTradesHistoryPayload($start, $end);
+
+    $this->webSocketClient->shouldReceive('text')
+        ->once()
+        ->with($getTradesHistoryPayload->toJson());
+
+    $mockGetTradesHistoryResponse = json_encode([
+        'status' => true,
+        'returnData' => [
+            [
+                'close_price' => 1.3256,
+                'close_time' => null,
+                'close_timeString' => null,
+                'closed' => false,
+                'cmd' => 0,
+                'comment' => 'Web Trader',
+                'commission' => 0.0,
+                'customComment' => 'Some text',
+                'digits' => 4,
+                'expiration' => null,
+                'expirationString' => null,
+                'margin_rate' => 0.0,
+                'offset' => 0,
+                'open_price' => 1.4,
+                'open_time' => 1272380927000,
+                'open_timeString' => 'Fri Jan 11 10:03:36 CET 2013',
+                'order' => 7497776,
+                'order2' => 1234567,
+                'position' => 1234567,
+                'profit' => -2196.44,
+                'sl' => 0.0,
+                'storage' => -4.46,
+                'symbol' => 'EURUSD',
+                'timestamp' => 1272540251000,
+                'tp' => 0.0,
+                'volume' => 0.10
+            ],
+        ]
+    ]);
+
+    $this->webSocketClient->shouldReceive('receive')
+        ->once()
+        ->andReturn($this->message);
+
+    $this->message->shouldReceive('getContent')
+        ->once()
+        ->andReturn($mockGetTradesHistoryResponse);
+
+    $getTradesHistoryResponse = $this->client->getTradesHistory($start, $end);
+
+    expect($getTradesHistoryResponse)->toBeInstanceOf(GetTradesHistoryResponse::class)
+        ->and($getTradesHistoryResponse->tradeRecords)->toHaveCount(1)
+        ->and($getTradesHistoryResponse->tradeRecords[0])->toBeInstanceOf(TradeRecord::class)
+        ->and($getTradesHistoryResponse->tradeRecords[0]->close_price)->toBe(1.3256)
+        ->and($getTradesHistoryResponse->tradeRecords[0]->close_time)->toBeNull()
+        ->and($getTradesHistoryResponse->tradeRecords[0]->close_timeString)->toBeNull()
+        ->and($getTradesHistoryResponse->tradeRecords[0]->closed)->toBeFalse()
+        ->and($getTradesHistoryResponse->tradeRecords[0]->cmd)->toBe(0)
+        ->and($getTradesHistoryResponse->tradeRecords[0]->comment)->toBe('Web Trader')
+        ->and($getTradesHistoryResponse->tradeRecords[0]->commission)->toBe(0.0)
+        ->and($getTradesHistoryResponse->tradeRecords[0]->customComment)->toBe('Some text')
+        ->and($getTradesHistoryResponse->tradeRecords[0]->digits)->toBe(4)
+        ->and($getTradesHistoryResponse->tradeRecords[0]->expiration)->toBeNull()
+        ->and($getTradesHistoryResponse->tradeRecords[0]->expirationString)->toBeNull()
+        ->and($getTradesHistoryResponse->tradeRecords[0]->margin_rate)->toBe(0.0)
+        ->and($getTradesHistoryResponse->tradeRecords[0]->offset)->toBe(0)
+        ->and($getTradesHistoryResponse->tradeRecords[0]->open_price)->toBe(1.4)
+        ->and($getTradesHistoryResponse->tradeRecords[0]->open_time)->toBe(1272380927000)
+        ->and($getTradesHistoryResponse->tradeRecords[0]->open_timeString)->toBe('Fri Jan 11 10:03:36 CET 2013')
+        ->and($getTradesHistoryResponse->tradeRecords[0]->order)->toBe(7497776)
+        ->and($getTradesHistoryResponse->tradeRecords[0]->order2)->toBe(1234567)
+        ->and($getTradesHistoryResponse->tradeRecords[0]->position)->toBe(1234567)
+        ->and($getTradesHistoryResponse->tradeRecords[0]->profit)->toBe(-2196.44)
+        ->and($getTradesHistoryResponse->tradeRecords[0]->sl)->toBe(0.0)
+        ->and($getTradesHistoryResponse->tradeRecords[0]->storage)->toBe(-4.46)
+        ->and($getTradesHistoryResponse->tradeRecords[0]->symbol)->toBe('EURUSD')
+        ->and($getTradesHistoryResponse->tradeRecords[0]->timestamp)->toBe(1272540251000)
+        ->and($getTradesHistoryResponse->tradeRecords[0]->tp)->toBe(0.0)
+        ->and($getTradesHistoryResponse->tradeRecords[0]->volume)->toBe(0.10);
 });

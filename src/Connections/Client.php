@@ -23,6 +23,7 @@ use Timirey\XApi\Payloads\GetStepRulesPayload;
 use Timirey\XApi\Payloads\GetSymbolPayload;
 use Timirey\XApi\Payloads\GetTickPricesPayload;
 use Timirey\XApi\Payloads\GetTradeRecordsPayload;
+use Timirey\XApi\Payloads\GetTradesHistoryPayload;
 use Timirey\XApi\Payloads\GetTradesPayload;
 use Timirey\XApi\Payloads\LoginPayload;
 use Timirey\XApi\Payloads\LogoutPayload;
@@ -46,6 +47,7 @@ use Timirey\XApi\Responses\GetStepRulesResponse;
 use Timirey\XApi\Responses\GetSymbolResponse;
 use Timirey\XApi\Responses\GetTickPricesResponse;
 use Timirey\XApi\Responses\GetTradeRecordsResponse;
+use Timirey\XApi\Responses\GetTradesHistoryResponse;
 use Timirey\XApi\Responses\GetTradesResponse;
 use Timirey\XApi\Responses\LoginResponse;
 use Timirey\XApi\Responses\LogoutResponse;
@@ -347,6 +349,18 @@ class Client
     public function getTrades(bool $openedOnly): GetTradesResponse
     {
         return $this->sendRequest(new GetTradesPayload($openedOnly), GetTradesResponse::class);
+    }
+
+    /**
+     * Returns array of user's trades which were closed within specified period of time.
+     *
+     * @param int $start Start time for trade history retrieval (milliseconds since epoch).
+     * @param int $end End time for trade history retrieval (milliseconds since epoch).
+     * @return GetTradesHistoryResponse
+     */
+    public function getTradesHistory(int $start, int $end): GetTradesHistoryResponse
+    {
+        return $this->sendRequest(new GetTradesHistoryPayload($start, $end), GetTradesHistoryResponse::class);
     }
 
     /**
