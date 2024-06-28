@@ -22,6 +22,7 @@ use Timirey\XApi\Payloads\GetServerTimePayload;
 use Timirey\XApi\Payloads\GetStepRulesPayload;
 use Timirey\XApi\Payloads\GetSymbolPayload;
 use Timirey\XApi\Payloads\GetTickPricesPayload;
+use Timirey\XApi\Payloads\GetTradeRecordsPayload;
 use Timirey\XApi\Payloads\LoginPayload;
 use Timirey\XApi\Payloads\LogoutPayload;
 use Timirey\XApi\Payloads\PingPayload;
@@ -43,6 +44,7 @@ use Timirey\XApi\Responses\GetServerTimeResponse;
 use Timirey\XApi\Responses\GetStepRulesResponse;
 use Timirey\XApi\Responses\GetSymbolResponse;
 use Timirey\XApi\Responses\GetTickPricesResponse;
+use Timirey\XApi\Responses\GetTradeRecordsResponse;
 use Timirey\XApi\Responses\LoginResponse;
 use Timirey\XApi\Responses\LogoutResponse;
 use Timirey\XApi\Responses\PingResponse;
@@ -76,9 +78,7 @@ class Client
         protected string $password,
         protected Host $host
     ) {
-        $this->client = new WebSocketClient(
-            uri: $this->host->value
-        );
+        $this->client = new WebSocketClient($this->host->value);
     }
 
     /**
@@ -363,6 +363,21 @@ class Client
     }
 
     /**
+     * Returns array of trades listed in orders argument.
+     *
+     * @param array $orders
+     * @return GetTradeRecordsResponse
+     */
+    public function getTradeRecords(array $orders): GetTradeRecordsResponse
+    {
+        return $this->sendRequest(
+            payload: new GetTradeRecordsPayload($orders),
+            responseClass: GetTradeRecordsResponse::class
+        );
+    }
+
+
+    /**
      * Sends a request to the xStation5 API and returns the response.
      *
      * @template T of AbstractResponse
@@ -373,12 +388,8 @@ class Client
      */
     protected function sendRequest(AbstractPayload $payload, string $responseClass): AbstractResponse
     {
-        $this->client->text(
-            message: $payload
-        );
+        $this->client->text($payload);
 
-        return $responseClass::instantiate(
-            json: $this->client->receive()->getContent()
-        );
+        return $responseClass::instantiate($this->client->receive()->getContent());
     }
 }
