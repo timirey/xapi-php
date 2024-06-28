@@ -12,6 +12,8 @@ use Timirey\XApi\Payloads\GetCalendarPayload;
 use Timirey\XApi\Payloads\GetChartLastRequestPayload;
 use Timirey\XApi\Payloads\GetChartRangeRequestPayload;
 use Timirey\XApi\Payloads\GetCommissionDefPayload;
+use Timirey\XApi\Payloads\GetCurrentUserDataPayload;
+use Timirey\XApi\Payloads\GetMarginLevelPayload;
 use Timirey\XApi\Payloads\GetSymbolPayload;
 use Timirey\XApi\Payloads\LoginPayload;
 use Timirey\XApi\Payloads\LogoutPayload;
@@ -24,6 +26,8 @@ use Timirey\XApi\Responses\GetCalendarResponse;
 use Timirey\XApi\Responses\GetChartLastRequestResponse;
 use Timirey\XApi\Responses\GetChartRangeRequestResponse;
 use Timirey\XApi\Responses\GetCommissionDefResponse;
+use Timirey\XApi\Responses\GetCurrentUserDataResponse;
+use Timirey\XApi\Responses\GetMarginLevelResponse;
 use Timirey\XApi\Responses\GetSymbolResponse;
 use Timirey\XApi\Responses\LoginResponse;
 use Timirey\XApi\Responses\LogoutResponse;
@@ -176,6 +180,26 @@ class Client
     public function getCommissionDef(string $symbol, float $volume): GetCommissionDefResponse
     {
         return $this->sendRequest(new GetCommissionDefPayload($symbol, $volume), GetCommissionDefResponse::class);
+    }
+
+    /**
+     * Returns information about account currency, and account leverage.
+     *
+     * @return GetCurrentUserDataResponse
+     */
+    public function getCurrentUserData(): GetCurrentUserDataResponse
+    {
+        return $this->sendRequest(new GetCurrentUserDataPayload(), GetCurrentUserDataResponse::class);
+    }
+
+    /**
+     * Returns various account indicators.
+     *
+     * @return GetMarginLevelResponse
+     */
+    public function getMarginLevel(): GetMarginLevelResponse
+    {
+        return $this->sendRequest(new GetMarginLevelPayload(), GetMarginLevelResponse::class);
     }
 
     /**

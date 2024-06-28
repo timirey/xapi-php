@@ -10,6 +10,8 @@ use Timirey\XApi\Payloads\GetCalendarPayload;
 use Timirey\XApi\Payloads\GetChartLastRequestPayload;
 use Timirey\XApi\Payloads\GetChartRangeRequestPayload;
 use Timirey\XApi\Payloads\GetCommissionDefPayload;
+use Timirey\XApi\Payloads\GetCurrentUserDataPayload;
+use Timirey\XApi\Payloads\GetMarginLevelPayload;
 use Timirey\XApi\Payloads\GetSymbolPayload;
 use Timirey\XApi\Payloads\LoginPayload;
 use Timirey\XApi\Payloads\LogoutPayload;
@@ -23,6 +25,8 @@ use Timirey\XApi\Responses\GetCalendarResponse;
 use Timirey\XApi\Responses\GetChartLastRequestResponse;
 use Timirey\XApi\Responses\GetChartRangeRequestResponse;
 use Timirey\XApi\Responses\GetCommissionDefResponse;
+use Timirey\XApi\Responses\GetCurrentUserDataResponse;
+use Timirey\XApi\Responses\GetMarginLevelResponse;
 use Timirey\XApi\Responses\GetSymbolResponse;
 use Timirey\XApi\Responses\LogoutResponse;
 use Timirey\XApi\Responses\PingResponse;
@@ -539,4 +543,86 @@ test('getCommissionDef command', function () {
     expect($getCommissionDefResponse)->toBeInstanceOf(GetCommissionDefResponse::class)
         ->and($getCommissionDefResponse->commission)->toBe(5.0)
         ->and($getCommissionDefResponse->rateOfExchange)->toBe(1.2);
+});
+
+test('getCurrentUserData command', function () {
+    $getCurrentUserDataPayload = new GetCurrentUserDataPayload();
+
+    $this->webSocketClient->shouldReceive('text')
+        ->once()
+        ->with($getCurrentUserDataPayload->toJson());
+
+    $mockGetCurrentUserDataResponse = json_encode([
+        'status' => true,
+        'returnData' => [
+            'companyUnit' => 8,
+            'currency' => 'PLN',
+            'group' => 'demoPLeurSTANDARD200',
+            'ibAccount' => false,
+            'leverage' => 1,
+            'leverageMultiplier' => 0.25,
+            'spreadType' => 'FLOAT',
+            'trailingStop' => false
+        ]
+    ]);
+
+    $this->webSocketClient->shouldReceive('receive')
+        ->once()
+        ->andReturn($this->message);
+
+    $this->message->shouldReceive('getContent')
+        ->once()
+        ->andReturn($mockGetCurrentUserDataResponse);
+
+    $getCurrentUserDataResponse = $this->client->getCurrentUserData();
+
+    expect($getCurrentUserDataResponse)->toBeInstanceOf(GetCurrentUserDataResponse::class)
+        ->and($getCurrentUserDataResponse->companyUnit)->toBe(8)
+        ->and($getCurrentUserDataResponse->currency)->toBe('PLN')
+        ->and($getCurrentUserDataResponse->group)->toBe('demoPLeurSTANDARD200')
+        ->and($getCurrentUserDataResponse->ibAccount)->toBe(false)
+        ->and($getCurrentUserDataResponse->leverage)->toBe(1)
+        ->and($getCurrentUserDataResponse->leverageMultiplier)->toBe(0.25)
+        ->and($getCurrentUserDataResponse->spreadType)->toBe('FLOAT')
+        ->and($getCurrentUserDataResponse->trailingStop)->toBe(false);
+});
+
+test('getMarginLevel command', function () {
+    $getMarginLevelPayload = new GetMarginLevelPayload();
+
+    $this->webSocketClient->shouldReceive('text')
+        ->once()
+        ->with($getMarginLevelPayload->toJson());
+
+    $mockGetMarginLevelResponse = json_encode([
+        'status' => true,
+        'returnData' => [
+            'balance' => 995800269.43,
+            'credit' => 1000.00,
+            'currency' => 'PLN',
+            'equity' => 995985397.56,
+            'margin' => 572634.43,
+            'marginFree' => 995227635.00,
+            'marginLevel' => 173930.41
+        ]
+    ]);
+
+    $this->webSocketClient->shouldReceive('receive')
+        ->once()
+        ->andReturn($this->message);
+
+    $this->message->shouldReceive('getContent')
+        ->once()
+        ->andReturn($mockGetMarginLevelResponse);
+
+    $getMarginLevelResponse = $this->client->getMarginLevel();
+
+    expect($getMarginLevelResponse)->toBeInstanceOf(GetMarginLevelResponse::class)
+        ->and($getMarginLevelResponse->balance)->toBe(995800269.43)
+        ->and($getMarginLevelResponse->credit)->toBe(1000.00)
+        ->and($getMarginLevelResponse->currency)->toBe('PLN')
+        ->and($getMarginLevelResponse->equity)->toBe(995985397.56)
+        ->and($getMarginLevelResponse->margin)->toBe(572634.43)
+        ->and($getMarginLevelResponse->marginFree)->toBe(995227635.00)
+        ->and($getMarginLevelResponse->marginLevel)->toBe(173930.41);
 });
