@@ -14,6 +14,7 @@ use Timirey\XApi\Payloads\GetChartRangeRequestPayload;
 use Timirey\XApi\Payloads\GetCommissionDefPayload;
 use Timirey\XApi\Payloads\GetCurrentUserDataPayload;
 use Timirey\XApi\Payloads\GetMarginLevelPayload;
+use Timirey\XApi\Payloads\GetMarginTradePayload;
 use Timirey\XApi\Payloads\GetSymbolPayload;
 use Timirey\XApi\Payloads\LoginPayload;
 use Timirey\XApi\Payloads\LogoutPayload;
@@ -28,6 +29,7 @@ use Timirey\XApi\Responses\GetChartRangeRequestResponse;
 use Timirey\XApi\Responses\GetCommissionDefResponse;
 use Timirey\XApi\Responses\GetCurrentUserDataResponse;
 use Timirey\XApi\Responses\GetMarginLevelResponse;
+use Timirey\XApi\Responses\GetMarginTradeResponse;
 use Timirey\XApi\Responses\GetSymbolResponse;
 use Timirey\XApi\Responses\LoginResponse;
 use Timirey\XApi\Responses\LogoutResponse;
@@ -200,6 +202,18 @@ class Client
     public function getMarginLevel(): GetMarginLevelResponse
     {
         return $this->sendRequest(new GetMarginLevelPayload(), GetMarginLevelResponse::class);
+    }
+
+    /**
+     * Returns expected margin for given instrument and volume.
+     *
+     * @param string $symbol
+     * @param float $volume
+     * @return GetMarginTradeResponse
+     */
+    public function getMarginTrade(string $symbol, float $volume): GetMarginTradeResponse
+    {
+        return $this->sendRequest(new GetMarginTradePayload($symbol, $volume), GetMarginTradeResponse::class);
     }
 
     /**

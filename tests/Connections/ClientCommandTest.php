@@ -12,6 +12,7 @@ use Timirey\XApi\Payloads\GetChartRangeRequestPayload;
 use Timirey\XApi\Payloads\GetCommissionDefPayload;
 use Timirey\XApi\Payloads\GetCurrentUserDataPayload;
 use Timirey\XApi\Payloads\GetMarginLevelPayload;
+use Timirey\XApi\Payloads\GetMarginTradePayload;
 use Timirey\XApi\Payloads\GetSymbolPayload;
 use Timirey\XApi\Payloads\LoginPayload;
 use Timirey\XApi\Payloads\LogoutPayload;
@@ -27,6 +28,7 @@ use Timirey\XApi\Responses\GetChartRangeRequestResponse;
 use Timirey\XApi\Responses\GetCommissionDefResponse;
 use Timirey\XApi\Responses\GetCurrentUserDataResponse;
 use Timirey\XApi\Responses\GetMarginLevelResponse;
+use Timirey\XApi\Responses\GetMarginTradeResponse;
 use Timirey\XApi\Responses\GetSymbolResponse;
 use Timirey\XApi\Responses\LogoutResponse;
 use Timirey\XApi\Responses\PingResponse;
@@ -625,4 +627,34 @@ test('getMarginLevel command', function () {
         ->and($getMarginLevelResponse->margin)->toBe(572634.43)
         ->and($getMarginLevelResponse->marginFree)->toBe(995227635.00)
         ->and($getMarginLevelResponse->marginLevel)->toBe(173930.41);
+});
+
+test('getMarginTrade command', function () {
+    $symbol = 'EURPLN';
+    $volume = 1.0;
+    $getMarginTradePayload = new GetMarginTradePayload($symbol, $volume);
+
+    $this->webSocketClient->shouldReceive('text')
+        ->once()
+        ->with($getMarginTradePayload->toJson());
+
+    $mockGetMarginTradeResponse = json_encode([
+        'status' => true,
+        'returnData' => [
+            'margin' => 4399.350
+        ]
+    ]);
+
+    $this->webSocketClient->shouldReceive('receive')
+        ->once()
+        ->andReturn($this->message);
+
+    $this->message->shouldReceive('getContent')
+        ->once()
+        ->andReturn($mockGetMarginTradeResponse);
+
+    $getMarginTradeResponse = $this->client->getMarginTrade($symbol, $volume);
+
+    expect($getMarginTradeResponse)->toBeInstanceOf(GetMarginTradeResponse::class)
+        ->and($getMarginTradeResponse->margin)->toBe(4399.350);
 });
