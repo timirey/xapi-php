@@ -49,8 +49,6 @@ abstract class AbstractResponse
      */
     protected static function create(array $data): static
     {
-        $returnData = $data['returnData'] ?? $data;
-
-        return new static(...$returnData);
+        return new static(...($data['returnData'] ?? $data));
     }
 }

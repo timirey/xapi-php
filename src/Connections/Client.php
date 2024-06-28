@@ -21,6 +21,7 @@ use Timirey\XApi\Payloads\GetProfitCalculationPayload;
 use Timirey\XApi\Payloads\GetServerTimePayload;
 use Timirey\XApi\Payloads\GetStepRulesPayload;
 use Timirey\XApi\Payloads\GetSymbolPayload;
+use Timirey\XApi\Payloads\GetTickPricesPayload;
 use Timirey\XApi\Payloads\LoginPayload;
 use Timirey\XApi\Payloads\LogoutPayload;
 use Timirey\XApi\Payloads\PingPayload;
@@ -41,6 +42,7 @@ use Timirey\XApi\Responses\GetProfitCalculationResponse;
 use Timirey\XApi\Responses\GetServerTimeResponse;
 use Timirey\XApi\Responses\GetStepRulesResponse;
 use Timirey\XApi\Responses\GetSymbolResponse;
+use Timirey\XApi\Responses\GetTickPricesResponse;
 use Timirey\XApi\Responses\LoginResponse;
 use Timirey\XApi\Responses\LogoutResponse;
 use Timirey\XApi\Responses\PingResponse;
@@ -283,6 +285,19 @@ class Client
     public function getStepRules(): GetStepRulesResponse
     {
         return $this->sendRequest(new GetStepRulesPayload(), GetStepRulesResponse::class);
+    }
+
+    /**
+     * Returns array of current quotations for given symbols.
+     *
+     * @param int $level
+     * @param array $symbols
+     * @param int $timestamp
+     * @return GetTickPricesResponse
+     */
+    public function getTickPrices(int $level, array $symbols, int $timestamp): GetTickPricesResponse
+    {
+        return $this->sendRequest(new GetTickPricesPayload($level, $symbols, $timestamp), GetTickPricesResponse::class);
     }
 
     /**

@@ -19,6 +19,7 @@ use Timirey\XApi\Payloads\GetProfitCalculationPayload;
 use Timirey\XApi\Payloads\GetServerTimePayload;
 use Timirey\XApi\Payloads\GetStepRulesPayload;
 use Timirey\XApi\Payloads\GetSymbolPayload;
+use Timirey\XApi\Payloads\GetTickPricesPayload;
 use Timirey\XApi\Payloads\LoginPayload;
 use Timirey\XApi\Payloads\LogoutPayload;
 use Timirey\XApi\Payloads\PingPayload;
@@ -30,6 +31,7 @@ use Timirey\XApi\Responses\Data\NewsTopicRecord;
 use Timirey\XApi\Responses\Data\RateInfoRecord;
 use Timirey\XApi\Responses\Data\StepRecord;
 use Timirey\XApi\Responses\Data\StepRuleRecord;
+use Timirey\XApi\Responses\Data\TickRecord;
 use Timirey\XApi\Responses\GetAllSymbolsResponse;
 use Timirey\XApi\Responses\GetCalendarResponse;
 use Timirey\XApi\Responses\GetChartLastRequestResponse;
@@ -44,6 +46,7 @@ use Timirey\XApi\Responses\GetProfitCalculationResponse;
 use Timirey\XApi\Responses\GetServerTimeResponse;
 use Timirey\XApi\Responses\GetStepRulesResponse;
 use Timirey\XApi\Responses\GetSymbolResponse;
+use Timirey\XApi\Responses\GetTickPricesResponse;
 use Timirey\XApi\Responses\LogoutResponse;
 use Timirey\XApi\Responses\PingResponse;
 use Timirey\XApi\Responses\TradeTransactionResponse;
@@ -868,14 +871,72 @@ test('getStepRules command', function () {
     $getStepRulesResponse = $this->client->getStepRules();
 
     expect($getStepRulesResponse)->toBeInstanceOf(GetStepRulesResponse::class)
-        ->and($getStepRulesResponse->stepRules)->toHaveCount(1)
-        ->and($getStepRulesResponse->stepRules[0])->toBeInstanceOf(StepRuleRecord::class)
-        ->and($getStepRulesResponse->stepRules[0]->id)->toBe(1)
-        ->and($getStepRulesResponse->stepRules[0]->name)->toBe('Forex')
-        ->and($getStepRulesResponse->stepRules[0]->steps)->toHaveCount(2)
-        ->and($getStepRulesResponse->stepRules[0]->steps[0])->toBeInstanceOf(StepRecord::class)
-        ->and($getStepRulesResponse->stepRules[0]->steps[0]->fromValue)->toBe(0.1)
-        ->and($getStepRulesResponse->stepRules[0]->steps[0]->step)->toBe(0.0025)
-        ->and($getStepRulesResponse->stepRules[0]->steps[1]->fromValue)->toBe(1.0)
-        ->and($getStepRulesResponse->stepRules[0]->steps[1]->step)->toBe(0.001);
+        ->and($getStepRulesResponse->stepRuleRecords)->toHaveCount(1)
+        ->and($getStepRulesResponse->stepRuleRecords[0])->toBeInstanceOf(StepRuleRecord::class)
+        ->and($getStepRulesResponse->stepRuleRecords[0]->id)->toBe(1)
+        ->and($getStepRulesResponse->stepRuleRecords[0]->name)->toBe('Forex')
+        ->and($getStepRulesResponse->stepRuleRecords[0]->stepRecords)->toHaveCount(2)
+        ->and($getStepRulesResponse->stepRuleRecords[0]->stepRecords[0])->toBeInstanceOf(StepRecord::class)
+        ->and($getStepRulesResponse->stepRuleRecords[0]->stepRecords[0]->fromValue)->toBe(0.1)
+        ->and($getStepRulesResponse->stepRuleRecords[0]->stepRecords[0]->step)->toBe(0.0025)
+        ->and($getStepRulesResponse->stepRuleRecords[0]->stepRecords[1]->fromValue)->toBe(1.0)
+        ->and($getStepRulesResponse->stepRuleRecords[0]->stepRecords[1]->step)->toBe(0.001);
+});
+
+test('getTickPrices command', function () {
+    $level = 0;
+    $symbols = ['EURPLN', 'AGO.PL'];
+    $timestamp = 1262944112000;
+    $getTickPricesPayload = new GetTickPricesPayload($level, $symbols, $timestamp);
+
+    $this->webSocketClient->shouldReceive('text')
+        ->once()
+        ->with($getTickPricesPayload->toJson());
+
+    $mockGetTickPricesResponse = json_encode([
+        'status' => true,
+        'returnData' => [
+            'quotations' => [
+                [
+                    'ask' => 4000.0,
+                    'askVolume' => 15000,
+                    'bid' => 4000.0,
+                    'bidVolume' => 16000,
+                    'high' => 4000.0,
+                    'level' => 0,
+                    'exemode' => 1,
+                    'low' => 3500.0,
+                    'spreadRaw' => 0.000003,
+                    'spreadTable' => 0.00042,
+                    'symbol' => 'KOMB.CZ',
+                    'timestamp' => 1272529161605
+                ]
+            ]
+        ]
+    ]);
+
+    $this->webSocketClient->shouldReceive('receive')
+        ->once()
+        ->andReturn($this->message);
+
+    $this->message->shouldReceive('getContent')
+        ->once()
+        ->andReturn($mockGetTickPricesResponse);
+
+    $getTickPricesResponse = $this->client->getTickPrices($level, $symbols, $timestamp);
+
+    expect($getTickPricesResponse)->toBeInstanceOf(GetTickPricesResponse::class)
+        ->and($getTickPricesResponse->quotations)->toHaveCount(1)
+        ->and($getTickPricesResponse->quotations[0])->toBeInstanceOf(TickRecord::class)
+        ->and($getTickPricesResponse->quotations[0]->ask)->toBe(4000.0)
+        ->and($getTickPricesResponse->quotations[0]->askVolume)->toBe(15000)
+        ->and($getTickPricesResponse->quotations[0]->bid)->toBe(4000.0)
+        ->and($getTickPricesResponse->quotations[0]->bidVolume)->toBe(16000)
+        ->and($getTickPricesResponse->quotations[0]->high)->toBe(4000.0)
+        ->and($getTickPricesResponse->quotations[0]->level)->toBe(0)
+        ->and($getTickPricesResponse->quotations[0]->low)->toBe(3500.0)
+        ->and($getTickPricesResponse->quotations[0]->spreadRaw)->toBe(0.000003)
+        ->and($getTickPricesResponse->quotations[0]->spreadTable)->toBe(0.00042)
+        ->and($getTickPricesResponse->quotations[0]->symbol)->toBe('KOMB.CZ')
+        ->and($getTickPricesResponse->quotations[0]->timestamp)->toBe(1272529161605);
 });

@@ -12,12 +12,12 @@ class StepRuleRecord
      *
      * @param int $id Step rule ID.
      * @param string $name Step rule name.
-     * @param StepRecord[] $steps Array of STEP_RECORD.
+     * @param StepRecord[] $stepRecords Array of STEP_RECORD.
      */
     public function __construct(
         public int $id,
         public string $name,
-        public array $steps
+        public array $stepRecords
     ) {
     }
 }

@@ -24,13 +24,9 @@ class GetCalendarResponse extends AbstractResponse
      */
     protected static function create(array $data): static
     {
-        $returnData = $data['returnData'];
-
-        $calendarRecords = [];
-
-        foreach ($returnData as $calendarRecordData) {
-            $calendarRecords[] = new CalendarRecord(...$calendarRecordData);
-        }
+        $calendarRecords = array_map(function ($calendarRecordData) {
+            return new CalendarRecord(...$calendarRecordData);
+        }, $data['returnData']);
 
         return new static($calendarRecords);
     }
