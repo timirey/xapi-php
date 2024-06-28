@@ -13,6 +13,7 @@ use Timirey\XApi\Payloads\GetCommissionDefPayload;
 use Timirey\XApi\Payloads\GetCurrentUserDataPayload;
 use Timirey\XApi\Payloads\GetMarginLevelPayload;
 use Timirey\XApi\Payloads\GetMarginTradePayload;
+use Timirey\XApi\Payloads\GetNewsPayload;
 use Timirey\XApi\Payloads\GetSymbolPayload;
 use Timirey\XApi\Payloads\LoginPayload;
 use Timirey\XApi\Payloads\LogoutPayload;
@@ -20,6 +21,7 @@ use Timirey\XApi\Payloads\PingPayload;
 use Timirey\XApi\Payloads\TradeTransactionPayload;
 use Timirey\XApi\Payloads\TradeTransactionStatusPayload;
 use Timirey\XApi\Responses\Data\CalendarRecord;
+use Timirey\XApi\Responses\Data\NewsTopicRecord;
 use Timirey\XApi\Responses\Data\RateInfoRecord;
 use Timirey\XApi\Responses\GetAllSymbolsResponse;
 use Timirey\XApi\Responses\GetCalendarResponse;
@@ -29,6 +31,7 @@ use Timirey\XApi\Responses\GetCommissionDefResponse;
 use Timirey\XApi\Responses\GetCurrentUserDataResponse;
 use Timirey\XApi\Responses\GetMarginLevelResponse;
 use Timirey\XApi\Responses\GetMarginTradeResponse;
+use Timirey\XApi\Responses\GetNewsResponse;
 use Timirey\XApi\Responses\GetSymbolResponse;
 use Timirey\XApi\Responses\LogoutResponse;
 use Timirey\XApi\Responses\PingResponse;
@@ -657,4 +660,48 @@ test('getMarginTrade command', function () {
 
     expect($getMarginTradeResponse)->toBeInstanceOf(GetMarginTradeResponse::class)
         ->and($getMarginTradeResponse->margin)->toBe(4399.350);
+});
+
+test('getNews command', function () {
+    $start = 1275993488000;
+    $end = 0;
+    $getNewsPayload = new GetNewsPayload($start, $end);
+
+    $this->webSocketClient->shouldReceive('text')
+        ->once()
+        ->with($getNewsPayload->toJson());
+
+    $mockGetNewsResponse = json_encode([
+        'status' => true,
+        'returnData' => [
+            [
+                'body' => '<html lang="">...</html>',
+                'bodylen' => 110,
+                'key' => '1f6da766abd29927aa854823f0105c23',
+                'time' => 1262944112000,
+                'timeString' => 'May 17, 2013 4:30:00 PM',
+                'title' => 'Breaking trend'
+            ],
+        ]
+    ]);
+
+    $this->webSocketClient->shouldReceive('receive')
+        ->once()
+        ->andReturn($this->message);
+
+    $this->message->shouldReceive('getContent')
+        ->once()
+        ->andReturn($mockGetNewsResponse);
+
+    $getNewsResponse = $this->client->getNews($start, $end);
+
+    expect($getNewsResponse)->toBeInstanceOf(GetNewsResponse::class)
+        ->and($getNewsResponse->news)->toHaveCount(1)
+        ->and($getNewsResponse->news[0])->toBeInstanceOf(NewsTopicRecord::class)
+        ->and($getNewsResponse->news[0]->body)->toBe('<html lang="">...</html>')
+        ->and($getNewsResponse->news[0]->bodylen)->toBe(110)
+        ->and($getNewsResponse->news[0]->key)->toBe('1f6da766abd29927aa854823f0105c23')
+        ->and($getNewsResponse->news[0]->time)->toBe(1262944112000)
+        ->and($getNewsResponse->news[0]->timeString)->toBe('May 17, 2013 4:30:00 PM')
+        ->and($getNewsResponse->news[0]->title)->toBe('Breaking trend');
 });

@@ -15,6 +15,7 @@ use Timirey\XApi\Payloads\GetCommissionDefPayload;
 use Timirey\XApi\Payloads\GetCurrentUserDataPayload;
 use Timirey\XApi\Payloads\GetMarginLevelPayload;
 use Timirey\XApi\Payloads\GetMarginTradePayload;
+use Timirey\XApi\Payloads\GetNewsPayload;
 use Timirey\XApi\Payloads\GetSymbolPayload;
 use Timirey\XApi\Payloads\LoginPayload;
 use Timirey\XApi\Payloads\LogoutPayload;
@@ -30,6 +31,7 @@ use Timirey\XApi\Responses\GetCommissionDefResponse;
 use Timirey\XApi\Responses\GetCurrentUserDataResponse;
 use Timirey\XApi\Responses\GetMarginLevelResponse;
 use Timirey\XApi\Responses\GetMarginTradeResponse;
+use Timirey\XApi\Responses\GetNewsResponse;
 use Timirey\XApi\Responses\GetSymbolResponse;
 use Timirey\XApi\Responses\LoginResponse;
 use Timirey\XApi\Responses\LogoutResponse;
@@ -214,6 +216,18 @@ class Client
     public function getMarginTrade(string $symbol, float $volume): GetMarginTradeResponse
     {
         return $this->sendRequest(new GetMarginTradePayload($symbol, $volume), GetMarginTradeResponse::class);
+    }
+
+    /**
+     * Returns news from the trading server which were sent within a specified period of time.
+     *
+     * @param int $start
+     * @param int $end
+     * @return GetNewsResponse
+     */
+    public function getNews(int $start, int $end): GetNewsResponse
+    {
+        return $this->sendRequest(new GetNewsPayload($start, $end), GetNewsResponse::class);
     }
 
     /**

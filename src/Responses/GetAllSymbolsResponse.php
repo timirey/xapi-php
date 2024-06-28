@@ -23,13 +23,9 @@ class GetAllSymbolsResponse extends AbstractResponse
      */
     protected static function create(array $data): static
     {
-        $returnData = $data['returnData'];
-
-        $symbolRecords = [];
-
-        foreach ($returnData as $symbolRecordData) {
-            $symbolRecords[] = new SymbolRecord(...$symbolRecordData);
-        }
+        $symbolRecords = array_map(function ($symbolRecordData) {
+            return new SymbolRecord(...$symbolRecordData);
+        }, $data['returnData']);
 
         return new static($symbolRecords);
     }
