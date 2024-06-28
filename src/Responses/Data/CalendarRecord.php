@@ -2,18 +2,14 @@
 
 namespace Timirey\XApi\Responses\Data;
 
-use DateTime;
-use Timirey\XApi\Helpers\DateTimeHelper;
-
 /**
  * Class representing a calendar record.
  *
  * todo: make impact act as enum.
+ * todo: time should be DateTime?
  */
 class CalendarRecord
 {
-    public DateTime $time;
-
     /**
      * Constructor for CalendarRecord.
      *
@@ -33,9 +29,8 @@ class CalendarRecord
         public string $impact,
         public string $period,
         public string $previous,
-        int $time,
+        public int $time,
         public string $title
     ) {
-        $this->time = DateTimeHelper::createFromMilliseconds($time);
     }
 }

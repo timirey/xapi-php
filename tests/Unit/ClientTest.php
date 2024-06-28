@@ -2,9 +2,11 @@
 
 use Timirey\XApi\Clients\Client;
 use Timirey\XApi\Clients\Enums\Host;
+use Timirey\XApi\Payloads\Data\ChartLastInfoRecord;
 use Timirey\XApi\Payloads\Data\TradeTransInfo;
 use Timirey\XApi\Payloads\GetAllSymbolsPayload;
 use Timirey\XApi\Payloads\GetCalendarPayload;
+use Timirey\XApi\Payloads\GetChartLastRequestPayload;
 use Timirey\XApi\Payloads\GetSymbolPayload;
 use Timirey\XApi\Payloads\LoginPayload;
 use Timirey\XApi\Payloads\LogoutPayload;
@@ -12,8 +14,10 @@ use Timirey\XApi\Payloads\PingPayload;
 use Timirey\XApi\Payloads\TradeTransactionPayload;
 use Timirey\XApi\Payloads\TradeTransactionStatusPayload;
 use Timirey\XApi\Responses\Data\CalendarRecord;
+use Timirey\XApi\Responses\Data\RateInfoRecord;
 use Timirey\XApi\Responses\GetAllSymbolsResponse;
 use Timirey\XApi\Responses\GetCalendarResponse;
+use Timirey\XApi\Responses\GetChartLastRequestResponse;
 use Timirey\XApi\Responses\GetSymbolResponse;
 use Timirey\XApi\Responses\LogoutResponse;
 use Timirey\XApi\Responses\PingResponse;
@@ -387,4 +391,58 @@ test('getCalendar command', function () {
         ->and($getCalendarResponse->calendarRecords[0])->toBeInstanceOf(CalendarRecord::class)
         ->and($getCalendarResponse->calendarRecords[0]->country)->toBe('US')
         ->and($getCalendarResponse->calendarRecords[0]->title)->toBe('GDP Growth Rate');
+});
+
+test('getChartLastRequest command', function () {
+    $chartLastInfoRecord = new ChartLastInfoRecord(
+        period: 1,
+        start: 1389374640000,
+        symbol: 'EURUSD'
+    );
+
+    $getChartLastRequestPayload = new GetChartLastRequestPayload($chartLastInfoRecord);
+
+    $this->webSocketClient->shouldReceive('text')
+        ->once()
+        ->with($getChartLastRequestPayload->toJson());
+
+    $mockGetChartLastRequestResponse = json_encode([
+        'status' => true,
+        'returnData' => [
+            'digits' => 5,
+            'rateInfos' => [
+                [
+                    'close' => 1.12345,
+                    'ctm' => 1389374640000,
+                    'ctmString' => 'Jan 10, 2014 3:04:00 PM',
+                    'high' => 1.125,
+                    'low' => 1.120,
+                    'open' => 1.122,
+                    'vol' => 100
+                ],
+            ]
+        ]
+    ]);
+
+    $this->webSocketClient->shouldReceive('receive')
+        ->once()
+        ->andReturn($this->message);
+
+    $this->message->shouldReceive('getContent')
+        ->once()
+        ->andReturn($mockGetChartLastRequestResponse);
+
+    $getChartLastRequestResponse = $this->client->getChartLastRequest($chartLastInfoRecord);
+
+    expect($getChartLastRequestResponse)->toBeInstanceOf(GetChartLastRequestResponse::class)
+        ->and($getChartLastRequestResponse->digits)->toBe(5)
+        ->and($getChartLastRequestResponse->rateInfoRecords)->toHaveCount(1)
+        ->and($getChartLastRequestResponse->rateInfoRecords[0])->toBeInstanceOf(RateInfoRecord::class)
+        ->and($getChartLastRequestResponse->rateInfoRecords[0]->close)->toBe(1.12345)
+        ->and($getChartLastRequestResponse->rateInfoRecords[0]->ctmString)->toBe('Jan 10, 2014 3:04:00 PM')
+        ->and($getChartLastRequestResponse->rateInfoRecords[0]->ctm)->toBe(1389374640000)
+        ->and($getChartLastRequestResponse->rateInfoRecords[0]->high)->toBe(1.125)
+        ->and($getChartLastRequestResponse->rateInfoRecords[0]->low)->toBe(1.120)
+        ->and($getChartLastRequestResponse->rateInfoRecords[0]->open)->toBe(1.122)
+        ->and($getChartLastRequestResponse->rateInfoRecords[0]->vol)->toBe(100.0);
 });
