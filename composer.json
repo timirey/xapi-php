@@ -1,0 +1,51 @@
+{
+    "name": "timirey/xapi-php",
+    "description": "PHP wrapper for the X-Trade Brokers (XTB) xStation5 Trading API.",
+    "keywords": [
+        "php",
+        "xtb",
+        "xstation",
+        "trading",
+        "api",
+        "wrapper",
+        "xapi"
+    ],
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Timirey\\XApi\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Timirey\\XApi\\Tests\\": "tests/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Artiom Misiru",
+            "email": "misiru.artiom@gmail.com",
+            "role": "Certified Web Developer"
+        }
+    ],
+    "require": {
+        "php": "^8.1",
+        "phrity/websocket": "^3.0"
+    },
+    "require-dev": {
+        "pestphp/pest": "^2.0",
+        "mockery/mockery": "^1.0",
+        "squizlabs/php_codesniffer": "^3.0"
+    },
+    "scripts": {
+        "test": "pest",
+        "lint": "phpcs",
+        "lint-fix": "phpcbf"
+    },
+    "config": {
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
+        }
+    }
+}

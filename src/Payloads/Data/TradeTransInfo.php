@@ -1,0 +1,42 @@
+<?php
+
+namespace Timirey\XApi\Payloads\Data;
+
+/**
+ * Class representing trade transaction information.
+ *
+ * todo: find out which properties are optional.
+ * todo: make cmd and type behave as enum.
+ */
+class TradeTransInfo
+{
+    /**
+     * Constructor for TradeTransInfo.
+     *
+     * @param int $cmd Operation code.
+     * @param string|null $customComment The value the customer may provide in order to retrieve it later.
+     * @param int $expiration Pending order expiration time.
+     * @param int $offset Trailing offset.
+     * @param int $order 0 or position number for closing/modifications.
+     * @param float $price Trade price.
+     * @param float $sl Stop loss.
+     * @param string $symbol Trade symbol.
+     * @param float $tp Take profit.
+     * @param int $type Trade transaction type.
+     * @param float $volume Trade volume.
+     */
+    public function __construct(
+        public int $cmd,
+        public ?string $customComment,
+        public int $expiration,
+        public int $offset,
+        public int $order,
+        public float $price,
+        public float $sl,
+        public string $symbol,
+        public float $tp,
+        public int $type,
+        public float $volume
+    ) {
+    }
+}
