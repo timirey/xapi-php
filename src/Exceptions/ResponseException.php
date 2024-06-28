@@ -18,8 +18,10 @@ class ResponseException extends Exception
      * @param string $errorCode Error code.
      * @param string $errorDescr Error description.
      */
-    public function __construct(protected string $errorCode, protected string $errorDescr)
-    {
+    public function __construct(
+        protected string $errorCode,
+        protected string $errorDescr
+    ) {
         parent::__construct("$errorCode: $errorDescr");
     }
 

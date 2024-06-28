@@ -15,8 +15,9 @@ class GetCalendarResponse extends AbstractResponse
      *
      * @param CalendarRecord[] $calendarRecords
      */
-    public function __construct(public array $calendarRecords)
-    {
+    public function __construct(
+        public array $calendarRecords
+    ) {
     }
 
     /**
@@ -24,10 +25,10 @@ class GetCalendarResponse extends AbstractResponse
      */
     protected static function create(array $data): static
     {
-        $calendarRecords = array_map(function ($calendarRecordData) {
-            return new CalendarRecord(...$calendarRecordData);
-        }, $data['returnData']);
-
-        return new static($calendarRecords);
+        return new static(
+            calendarRecords: array_map(static function (array $calendarRecordData): CalendarRecord {
+                return new CalendarRecord(...$calendarRecordData);
+            }, $data['returnData'])
+        );
     }
 }

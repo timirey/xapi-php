@@ -14,8 +14,11 @@ class GetTickPricesPayload extends AbstractPayload
      * @param array $symbols Array of symbol names.
      * @param int $timestamp The time from which the most recent tick should be looked for.
      */
-    public function __construct(int $level, array $symbols, int $timestamp)
-    {
+    public function __construct(
+        int $level,
+        array $symbols,
+        int $timestamp
+    ) {
         $this->arguments['level'] = $level;
         $this->arguments['symbols'] = $symbols;
         $this->arguments['timestamp'] = $timestamp;

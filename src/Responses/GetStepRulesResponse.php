@@ -15,8 +15,9 @@ class GetStepRulesResponse extends AbstractResponse
      *
      * @param StepRuleRecord[] $stepRuleRecords
      */
-    public function __construct(public array $stepRuleRecords)
-    {
+    public function __construct(
+        public array $stepRuleRecords
+    ) {
     }
 
     /**
@@ -24,16 +25,16 @@ class GetStepRulesResponse extends AbstractResponse
      */
     protected static function create(array $data): static
     {
-        $stepRulesRecords = array_map(function ($stepRuleRecordData) {
-            return new StepRuleRecord(
-                $stepRuleRecordData['id'],
-                $stepRuleRecordData['name'],
-                array_map(function ($stepRecordData) {
-                    return new StepRecord(...$stepRecordData);
-                }, $stepRuleRecordData['steps'])
-            );
-        }, $data['returnData']);
-
-        return new static($stepRulesRecords);
+        return new static(
+            stepRuleRecords: array_map(static function (array $stepRuleRecordData): StepRuleRecord {
+                return new StepRuleRecord(
+                    $stepRuleRecordData['id'],
+                    $stepRuleRecordData['name'],
+                    array_map(static function (array $stepRecordData): StepRecord {
+                        return new StepRecord(...$stepRecordData);
+                    }, $stepRuleRecordData['steps'])
+                );
+            }, $data['returnData'])
+        );
     }
 }

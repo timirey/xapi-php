@@ -14,8 +14,9 @@ class GetAllSymbolsResponse extends AbstractResponse
      *
      * @param SymbolRecord[] $symbolRecords
      */
-    public function __construct(public array $symbolRecords)
-    {
+    public function __construct(
+        public array $symbolRecords
+    ) {
     }
 
     /**
@@ -23,10 +24,10 @@ class GetAllSymbolsResponse extends AbstractResponse
      */
     protected static function create(array $data): static
     {
-        $symbolRecords = array_map(function ($symbolRecordData) {
-            return new SymbolRecord(...$symbolRecordData);
-        }, $data['returnData']);
-
-        return new static($symbolRecords);
+        return new static(
+            symbolRecords: array_map(static function (array $symbolRecordData): SymbolRecord {
+                return new SymbolRecord(...$symbolRecordData);
+            }, $data['returnData'])
+        );
     }
 }

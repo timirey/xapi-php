@@ -35,7 +35,10 @@ abstract class AbstractResponse
     protected static function validate(array &$data): void
     {
         if ($data['status'] === false) {
-            throw new ResponseException($data['errorCode'], $data['errorDescr']);
+            throw new ResponseException(
+                errorCode: $data['errorCode'],
+                errorDescr: $data['errorDescr']
+            );
         }
 
         unset($data['status']);
@@ -49,6 +52,8 @@ abstract class AbstractResponse
      */
     protected static function create(array $data): static
     {
-        return new static(...($data['returnData'] ?? $data));
+        return new static(
+            ...($data['returnData'] ?? $data)
+        );
     }
 }

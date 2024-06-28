@@ -15,8 +15,9 @@ class GetNewsResponse extends AbstractResponse
      *
      * @param NewsTopicRecord[] $newsTopicRecords
      */
-    public function __construct(public array $newsTopicRecords)
-    {
+    public function __construct(
+        public array $newsTopicRecords
+    ) {
     }
 
     /**
@@ -24,10 +25,10 @@ class GetNewsResponse extends AbstractResponse
      */
     protected static function create(array $data): static
     {
-        $newsTopicRecords = array_map(function ($newsTopicRecordData) {
-            return new NewsTopicRecord(...$newsTopicRecordData);
-        }, $data['returnData']);
-
-        return new static($newsTopicRecords);
+        return new static(
+            newsTopicRecords: array_map(static function (array $newsTopicRecordData): NewsTopicRecord {
+                return new NewsTopicRecord(...$newsTopicRecordData);
+            }, $data['returnData'])
+        );
     }
 }

@@ -13,8 +13,10 @@ class GetIbsHistoryPayload extends AbstractPayload
      * @param int $start Start time in milliseconds since epoch.
      * @param int $end End time in milliseconds since epoch.
      */
-    public function __construct(int $start, int $end)
-    {
+    public function __construct(
+        int $start,
+        int $end
+    ) {
         $this->arguments['start'] = $start;
         $this->arguments['end'] = $end;
     }
