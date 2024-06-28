@@ -23,6 +23,8 @@ use Timirey\XApi\Payloads\GetTickPricesPayload;
 use Timirey\XApi\Payloads\GetTradeRecordsPayload;
 use Timirey\XApi\Payloads\GetTradesHistoryPayload;
 use Timirey\XApi\Payloads\GetTradesPayload;
+use Timirey\XApi\Payloads\GetTradingHoursPayload;
+use Timirey\XApi\Payloads\GetVersionPayload;
 use Timirey\XApi\Payloads\LoginPayload;
 use Timirey\XApi\Payloads\LogoutPayload;
 use Timirey\XApi\Payloads\PingPayload;
@@ -31,11 +33,14 @@ use Timirey\XApi\Payloads\TradeTransactionStatusPayload;
 use Timirey\XApi\Responses\Data\CalendarRecord;
 use Timirey\XApi\Responses\Data\IbRecord;
 use Timirey\XApi\Responses\Data\NewsTopicRecord;
+use Timirey\XApi\Responses\Data\QuotesRecord;
 use Timirey\XApi\Responses\Data\RateInfoRecord;
 use Timirey\XApi\Responses\Data\StepRecord;
 use Timirey\XApi\Responses\Data\StepRuleRecord;
 use Timirey\XApi\Responses\Data\TickRecord;
 use Timirey\XApi\Responses\Data\TradeRecord;
+use Timirey\XApi\Responses\Data\TradingHoursRecord;
+use Timirey\XApi\Responses\Data\TradingRecord;
 use Timirey\XApi\Responses\GetAllSymbolsResponse;
 use Timirey\XApi\Responses\GetCalendarResponse;
 use Timirey\XApi\Responses\GetChartLastRequestResponse;
@@ -54,6 +59,8 @@ use Timirey\XApi\Responses\GetTickPricesResponse;
 use Timirey\XApi\Responses\GetTradeRecordsResponse;
 use Timirey\XApi\Responses\GetTradesHistoryResponse;
 use Timirey\XApi\Responses\GetTradesResponse;
+use Timirey\XApi\Responses\GetTradingHoursResponse;
+use Timirey\XApi\Responses\GetVersionResponse;
 use Timirey\XApi\Responses\LogoutResponse;
 use Timirey\XApi\Responses\PingResponse;
 use Timirey\XApi\Responses\TradeTransactionResponse;
@@ -1196,4 +1203,79 @@ test('getTradesHistory command', function () {
         ->and($getTradesHistoryResponse->tradeRecords[0]->timestamp)->toBe(1272540251000)
         ->and($getTradesHistoryResponse->tradeRecords[0]->tp)->toBe(0.0)
         ->and($getTradesHistoryResponse->tradeRecords[0]->volume)->toBe(0.10);
+});
+
+test('getTradingHours command', function () {
+    $symbols = ['EURPLN', 'AGO.PL'];
+    $getTradingHoursPayload = new GetTradingHoursPayload($symbols);
+
+    $this->webSocketClient->shouldReceive('text')
+        ->once()
+        ->with($getTradingHoursPayload->toJson());
+
+    $mockGetTradingHoursResponse = json_encode([
+        'status' => true,
+        'returnData' => [
+            [
+                'quotes' => [
+                    ['day' => 2, 'fromT' => 63000000, 'toT' => 63300000],
+                ],
+                'symbol' => 'USDPLN',
+                'trading' => [
+                    ['day' => 2, 'fromT' => 63000000, 'toT' => 63300000],
+                ]
+            ],
+        ]
+    ]);
+
+    $this->webSocketClient->shouldReceive('receive')
+        ->once()
+        ->andReturn($this->message);
+
+    $this->message->shouldReceive('getContent')
+        ->once()
+        ->andReturn($mockGetTradingHoursResponse);
+
+    $getTradingHoursResponse = $this->client->getTradingHours($symbols);
+
+    expect($getTradingHoursResponse)->toBeInstanceOf(GetTradingHoursResponse::class)
+        ->and($getTradingHoursResponse->tradingHoursRecords)->toHaveCount(1)
+        ->and($getTradingHoursResponse->tradingHoursRecords[0])->toBeInstanceOf(TradingHoursRecord::class)
+        ->and($getTradingHoursResponse->tradingHoursRecords[0]->symbol)->toBe('USDPLN')
+        ->and($getTradingHoursResponse->tradingHoursRecords[0]->quotes[0])->toBeInstanceOf(QuotesRecord::class)
+        ->and($getTradingHoursResponse->tradingHoursRecords[0]->quotes[0]->day)->toBe(2)
+        ->and($getTradingHoursResponse->tradingHoursRecords[0]->quotes[0]->fromT)->toBe(63000000)
+        ->and($getTradingHoursResponse->tradingHoursRecords[0]->quotes[0]->toT)->toBe(63300000)
+        ->and($getTradingHoursResponse->tradingHoursRecords[0]->trading[0])->toBeInstanceOf(TradingRecord::class)
+        ->and($getTradingHoursResponse->tradingHoursRecords[0]->trading[0]->day)->toBe(2)
+        ->and($getTradingHoursResponse->tradingHoursRecords[0]->trading[0]->fromT)->toBe(63000000)
+        ->and($getTradingHoursResponse->tradingHoursRecords[0]->trading[0]->toT)->toBe(63300000);
+});
+
+test('getVersion command', function () {
+    $getVersionPayload = new GetVersionPayload();
+
+    $this->webSocketClient->shouldReceive('text')
+        ->once()
+        ->with($getVersionPayload->toJson());
+
+    $mockGetVersionResponse = json_encode([
+        'status' => true,
+        'returnData' => [
+            'version' => '2.4.15'
+        ]
+    ]);
+
+    $this->webSocketClient->shouldReceive('receive')
+        ->once()
+        ->andReturn($this->message);
+
+    $this->message->shouldReceive('getContent')
+        ->once()
+        ->andReturn($mockGetVersionResponse);
+
+    $getVersionResponse = $this->client->getVersion();
+
+    expect($getVersionResponse)->toBeInstanceOf(GetVersionResponse::class)
+        ->and($getVersionResponse->version)->toBe('2.4.15');
 });

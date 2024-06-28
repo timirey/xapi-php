@@ -25,6 +25,8 @@ use Timirey\XApi\Payloads\GetTickPricesPayload;
 use Timirey\XApi\Payloads\GetTradeRecordsPayload;
 use Timirey\XApi\Payloads\GetTradesHistoryPayload;
 use Timirey\XApi\Payloads\GetTradesPayload;
+use Timirey\XApi\Payloads\GetTradingHoursPayload;
+use Timirey\XApi\Payloads\GetVersionPayload;
 use Timirey\XApi\Payloads\LoginPayload;
 use Timirey\XApi\Payloads\LogoutPayload;
 use Timirey\XApi\Payloads\PingPayload;
@@ -49,6 +51,8 @@ use Timirey\XApi\Responses\GetTickPricesResponse;
 use Timirey\XApi\Responses\GetTradeRecordsResponse;
 use Timirey\XApi\Responses\GetTradesHistoryResponse;
 use Timirey\XApi\Responses\GetTradesResponse;
+use Timirey\XApi\Responses\GetTradingHoursResponse;
+use Timirey\XApi\Responses\GetVersionResponse;
 use Timirey\XApi\Responses\LoginResponse;
 use Timirey\XApi\Responses\LogoutResponse;
 use Timirey\XApi\Responses\PingResponse;
@@ -361,6 +365,27 @@ class Client
     public function getTradesHistory(int $start, int $end): GetTradesHistoryResponse
     {
         return $this->sendRequest(new GetTradesHistoryPayload($start, $end), GetTradesHistoryResponse::class);
+    }
+
+    /**
+     * Returns quotes and trading times.
+     *
+     * @param array $symbols Array of symbol names (Strings).
+     * @return GetTradingHoursResponse
+     */
+    public function getTradingHours(array $symbols): GetTradingHoursResponse
+    {
+        return $this->sendRequest(new GetTradingHoursPayload($symbols), GetTradingHoursResponse::class);
+    }
+
+    /**
+     * Returns the current API version.
+     *
+     * @return GetVersionResponse
+     */
+    public function getVersion(): GetVersionResponse
+    {
+        return $this->sendRequest(new GetVersionPayload(), GetVersionResponse::class);
     }
 
     /**
