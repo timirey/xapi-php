@@ -18,6 +18,7 @@ use Timirey\XApi\Payloads\GetMarginLevelPayload;
 use Timirey\XApi\Payloads\GetMarginTradePayload;
 use Timirey\XApi\Payloads\GetNewsPayload;
 use Timirey\XApi\Payloads\GetProfitCalculationPayload;
+use Timirey\XApi\Payloads\GetServerTimePayload;
 use Timirey\XApi\Payloads\GetSymbolPayload;
 use Timirey\XApi\Payloads\LoginPayload;
 use Timirey\XApi\Payloads\LogoutPayload;
@@ -36,6 +37,7 @@ use Timirey\XApi\Responses\GetMarginLevelResponse;
 use Timirey\XApi\Responses\GetMarginTradeResponse;
 use Timirey\XApi\Responses\GetNewsResponse;
 use Timirey\XApi\Responses\GetProfitCalculationResponse;
+use Timirey\XApi\Responses\GetServerTimeResponse;
 use Timirey\XApi\Responses\GetSymbolResponse;
 use Timirey\XApi\Responses\LoginResponse;
 use Timirey\XApi\Responses\LogoutResponse;
@@ -261,6 +263,15 @@ class Client
         return $this->sendRequest(new GetProfitCalculationPayload($closePrice, $cmd, $openPrice, $symbol, $volume), GetProfitCalculationResponse::class);
     }
 
+    /**
+     * Returns current time on trading server.
+     *
+     * @return GetServerTimeResponse
+     */
+    public function getServerTime(): GetServerTimeResponse
+    {
+        return $this->sendRequest(new GetServerTimePayload(), GetServerTimeResponse::class);
+    }
 
     /**
      * Sends a request to the xStation5 API and returns the response.

@@ -16,6 +16,7 @@ use Timirey\XApi\Payloads\GetMarginLevelPayload;
 use Timirey\XApi\Payloads\GetMarginTradePayload;
 use Timirey\XApi\Payloads\GetNewsPayload;
 use Timirey\XApi\Payloads\GetProfitCalculationPayload;
+use Timirey\XApi\Payloads\GetServerTimePayload;
 use Timirey\XApi\Payloads\GetSymbolPayload;
 use Timirey\XApi\Payloads\LoginPayload;
 use Timirey\XApi\Payloads\LogoutPayload;
@@ -37,6 +38,7 @@ use Timirey\XApi\Responses\GetMarginLevelResponse;
 use Timirey\XApi\Responses\GetMarginTradeResponse;
 use Timirey\XApi\Responses\GetNewsResponse;
 use Timirey\XApi\Responses\GetProfitCalculationResponse;
+use Timirey\XApi\Responses\GetServerTimeResponse;
 use Timirey\XApi\Responses\GetSymbolResponse;
 use Timirey\XApi\Responses\LogoutResponse;
 use Timirey\XApi\Responses\PingResponse;
@@ -792,4 +794,34 @@ test('getProfitCalculation command', function () {
 
     expect($getProfitCalculationResponse)->toBeInstanceOf(GetProfitCalculationResponse::class)
         ->and($getProfitCalculationResponse->profit)->toBe(714.303);
+});
+
+test('getServerTime command', function () {
+    $getServerTimePayload = new GetServerTimePayload();
+
+    $this->webSocketClient->shouldReceive('text')
+        ->once()
+        ->with($getServerTimePayload->toJson());
+
+    $mockGetServerTimeResponse = json_encode([
+        'status' => true,
+        'returnData' => [
+            'time' => 1392211379731,
+            'timeString' => 'Feb 12, 2014 2:22:59 PM'
+        ]
+    ]);
+
+    $this->webSocketClient->shouldReceive('receive')
+        ->once()
+        ->andReturn($this->message);
+
+    $this->message->shouldReceive('getContent')
+        ->once()
+        ->andReturn($mockGetServerTimeResponse);
+
+    $getServerTimeResponse = $this->client->getServerTime();
+
+    expect($getServerTimeResponse)->toBeInstanceOf(GetServerTimeResponse::class)
+        ->and($getServerTimeResponse->time)->toBe(1392211379731)
+        ->and($getServerTimeResponse->timeString)->toBe('Feb 12, 2014 2:22:59 PM');
 });
