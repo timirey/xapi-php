@@ -23,6 +23,7 @@ use Timirey\XApi\Payloads\GetStepRulesPayload;
 use Timirey\XApi\Payloads\GetSymbolPayload;
 use Timirey\XApi\Payloads\GetTickPricesPayload;
 use Timirey\XApi\Payloads\GetTradeRecordsPayload;
+use Timirey\XApi\Payloads\GetTradesPayload;
 use Timirey\XApi\Payloads\LoginPayload;
 use Timirey\XApi\Payloads\LogoutPayload;
 use Timirey\XApi\Payloads\PingPayload;
@@ -45,6 +46,7 @@ use Timirey\XApi\Responses\GetStepRulesResponse;
 use Timirey\XApi\Responses\GetSymbolResponse;
 use Timirey\XApi\Responses\GetTickPricesResponse;
 use Timirey\XApi\Responses\GetTradeRecordsResponse;
+use Timirey\XApi\Responses\GetTradesResponse;
 use Timirey\XApi\Responses\LoginResponse;
 use Timirey\XApi\Responses\LogoutResponse;
 use Timirey\XApi\Responses\PingResponse;
@@ -138,7 +140,10 @@ class Client
      */
     public function tradeTransactionStatus(int $order): TradeTransactionStatusResponse
     {
-        return $this->sendRequest(new TradeTransactionStatusPayload($order), TradeTransactionStatusResponse::class);
+        return $this->sendRequest(
+            new TradeTransactionStatusPayload($order),
+            TradeTransactionStatusResponse::class
+        );
     }
 
     /**
@@ -169,7 +174,10 @@ class Client
      */
     public function getChartLastRequest(ChartLastInfoRecord $chartLastInfoRecord): GetChartLastRequestResponse
     {
-        return $this->sendRequest(new GetChartLastRequestPayload($chartLastInfoRecord), GetChartLastRequestResponse::class);
+        return $this->sendRequest(
+            new GetChartLastRequestPayload($chartLastInfoRecord),
+            GetChartLastRequestResponse::class
+        );
     }
 
     /**
@@ -180,7 +188,10 @@ class Client
      */
     public function getChartRangeRequest(ChartRangeInfoRecord $chartRangeInfoRecord): GetChartRangeRequestResponse
     {
-        return $this->sendRequest(new GetChartRangeRequestPayload($chartRangeInfoRecord), GetChartRangeRequestResponse::class);
+        return $this->sendRequest(
+            new GetChartRangeRequestPayload($chartRangeInfoRecord),
+            GetChartRangeRequestResponse::class
+        );
     }
 
     /**
@@ -192,7 +203,10 @@ class Client
      */
     public function getCommissionDef(string $symbol, float $volume): GetCommissionDefResponse
     {
-        return $this->sendRequest(new GetCommissionDefPayload($symbol, $volume), GetCommissionDefResponse::class);
+        return $this->sendRequest(
+            new GetCommissionDefPayload($symbol, $volume),
+            GetCommissionDefResponse::class
+        );
     }
 
     /**
@@ -224,7 +238,10 @@ class Client
      */
     public function getMarginTrade(string $symbol, float $volume): GetMarginTradeResponse
     {
-        return $this->sendRequest(new GetMarginTradePayload($symbol, $volume), GetMarginTradeResponse::class);
+        return $this->sendRequest(
+            new GetMarginTradePayload($symbol, $volume),
+            GetMarginTradeResponse::class
+        );
     }
 
     /**
@@ -261,9 +278,17 @@ class Client
      * @param float $volume
      * @return GetProfitCalculationResponse
      */
-    public function getProfitCalculation(float $closePrice, int $cmd, float $openPrice, string $symbol, float $volume): GetProfitCalculationResponse
-    {
-        return $this->sendRequest(new GetProfitCalculationPayload($closePrice, $cmd, $openPrice, $symbol, $volume), GetProfitCalculationResponse::class);
+    public function getProfitCalculation(
+        float $closePrice,
+        int $cmd,
+        float $openPrice,
+        string $symbol,
+        float $volume
+    ): GetProfitCalculationResponse {
+        return $this->sendRequest(
+            new GetProfitCalculationPayload($closePrice, $cmd, $openPrice, $symbol, $volume),
+            GetProfitCalculationResponse::class
+        );
     }
 
     /**
@@ -296,7 +321,10 @@ class Client
      */
     public function getTickPrices(int $level, array $symbols, int $timestamp): GetTickPricesResponse
     {
-        return $this->sendRequest(new GetTickPricesPayload($level, $symbols, $timestamp), GetTickPricesResponse::class);
+        return $this->sendRequest(
+            new GetTickPricesPayload($level, $symbols, $timestamp),
+            GetTickPricesResponse::class
+        );
     }
 
     /**
@@ -310,6 +338,16 @@ class Client
         return $this->sendRequest(new GetTradeRecordsPayload($orders), GetTradeRecordsResponse::class);
     }
 
+    /**
+     * Returns array of user's trades.
+     *
+     * @param bool $openedOnly
+     * @return GetTradesResponse
+     */
+    public function getTrades(bool $openedOnly): GetTradesResponse
+    {
+        return $this->sendRequest(new GetTradesPayload($openedOnly), GetTradesResponse::class);
+    }
 
     /**
      * Sends a request to the xStation5 API and returns the response.

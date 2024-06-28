@@ -5,12 +5,12 @@ namespace Timirey\XApi\Responses;
 use Timirey\XApi\Responses\Data\TradeRecord;
 
 /**
- * Class that contains the response of the getTradeRecords command.
+ * Class that contains the response of the getTrades command.
  */
-class GetTradeRecordsResponse extends AbstractResponse
+class GetTradesResponse extends AbstractResponse
 {
     /**
-     * Constructor for GetTradeRecordsResponse.
+     * Constructor for GetTradesResponse.
      *
      * @param TradeRecord[] $tradeRecords
      */
@@ -24,7 +24,7 @@ class GetTradeRecordsResponse extends AbstractResponse
     protected static function create(array $data): static
     {
         return new static(array_map(
-            static fn(array $tradeRecordData): TradeRecord => new TradeRecord(...$tradeRecordData),
+            static fn($tradeRecordData): TradeRecord => new TradeRecord(...$tradeRecordData),
             $data['returnData']
         ));
     }

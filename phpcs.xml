@@ -7,7 +7,6 @@
     <!-- Define the coding standard you want to follow, e.g., PSR12 -->
     <rule ref="PSR12">
         <!-- Exclude specific rules -->
-        <exclude name="Generic.Files.LineLength"/>
     </rule>
 
     <!-- Exclude specific files from being checked -->
