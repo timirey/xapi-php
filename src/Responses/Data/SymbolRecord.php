@@ -26,7 +26,7 @@ class SymbolRecord
      * @param int $exemode Execution mode.
      * @param int $time Ask & bid tick time.
      * @param int|null $expiration Expiration time, null if not applicable.
-     * @param int $stopsLevel Minimal distance (in pips) from the current price where the stopLoss/takeProfit can be set.
+     * @param int $stopsLevel Min distance (in pips) from the current price where the stopLoss/takeProfit can be set.
      * @param int $precision Number of symbol's price decimal places.
      * @param int $swapType Type of swap calculated.
      * @param int $stepRuleId Appropriate step rule ID from getStepRules command response.
@@ -45,9 +45,9 @@ class SymbolRecord
      * @param float $low The lowest price of the day in base currency.
      * @param float $lotMin Minimum size of trade.
      * @param float $lotMax Maximum size of trade.
-     * @param float $lotStep A value of minimum step by which the size of trade can be changed (within lotMin - lotMax range).
+     * @param float $lotStep Min step by which the size of trade can be changed (within lotMin - lotMax range).
      * @param float $tickSize Smallest possible price change, used for profit/margin calculation.
-     * @param float $tickValue Value of smallest possible price change (in base currency), used for profit/margin calculation.
+     * @param float $tickValue Smallest possible price change (in base currency), used for profit/margin calculation.
      * @param float $swapLong Swap value for long positions in pips.
      * @param float $swapShort Swap value for short positions in pips.
      * @param float $leverage Symbol leverage.
