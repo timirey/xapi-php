@@ -23,10 +23,6 @@ class GetSymbolResponse extends AbstractResponse
      */
     protected static function create(array $data): static
     {
-        $symbolRecordData = $data['returnData'];
-
-        $symbolRecord = new SymbolRecord(...$symbolRecordData);
-
-        return new static($symbolRecord);
+        return new static(new SymbolRecord(...$data['returnData']));
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace Timirey\XApi\Clients\Enums;
+namespace Timirey\XApi\Connections\Enums;
 
 /**
  * Enum representing the WebSocket host URLs for xStation5 API.

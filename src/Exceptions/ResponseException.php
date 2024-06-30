@@ -10,7 +10,7 @@ use WebSocket\Exception\Exception;
  * @property string $errorCode Error code of the response.
  * @property string $errorDescr Error description of the response.
  */
-class ClientResponseException extends Exception
+class ResponseException extends Exception
 {
     /**
      * Constructor for ResponseException.
