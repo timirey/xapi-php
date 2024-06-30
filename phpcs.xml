@@ -1,10 +1,13 @@
 <?xml version="1.0"?>
 <ruleset>
+    <!-- Specify the files to be included in the check -->
     <file>src</file>
     <file>tests</file>
 
     <!-- Define the coding standard you want to follow, e.g., PSR12 -->
-    <rule ref="PSR12"/>
+    <rule ref="PSR12">
+        <!-- Exclude specific rules -->
+    </rule>
 
     <!-- Exclude specific files from being checked -->
     <exclude-pattern>tests/Pest.php</exclude-pattern>

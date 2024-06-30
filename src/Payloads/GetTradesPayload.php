@@ -1,0 +1,27 @@
+<?php
+
+namespace Timirey\XApi\Payloads;
+
+/**
+ * Class that contains payload for the getTrades command.
+ */
+class GetTradesPayload extends AbstractPayload
+{
+    /**
+     * Constructor for GetTradesPayload.
+     *
+     * @param bool $openedOnly If true then only opened trades will be returned.
+     */
+    public function __construct(bool $openedOnly)
+    {
+        $this->arguments['openedOnly'] = $openedOnly;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getCommand(): string
+    {
+        return 'getTrades';
+    }
+}

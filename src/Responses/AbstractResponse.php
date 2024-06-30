@@ -2,7 +2,7 @@
 
 namespace Timirey\XApi\Responses;
 
-use Timirey\XApi\Exceptions\ClientResponseException;
+use Timirey\XApi\Exceptions\ResponseException;
 
 /**
  * Abstract class for responses.
@@ -14,7 +14,7 @@ abstract class AbstractResponse
      *
      * @param string $json JSON string.
      * @return static Instance of the response.
-     * @throws ClientResponseException If the response indicates an error.
+     * @throws ResponseException If the response indicates an error.
      */
     public static function instantiate(string $json): static
     {
@@ -30,12 +30,12 @@ abstract class AbstractResponse
      *
      * @param array $data Response data.
      * @return void
-     * @throws ClientResponseException If the response indicates an error.
+     * @throws ResponseException If the response indicates an error.
      */
     protected static function validate(array &$data): void
     {
         if ($data['status'] === false) {
-            throw new ClientResponseException($data['errorCode'], $data['errorDescr']);
+            throw new ResponseException($data['errorCode'], $data['errorDescr']);
         }
 
         unset($data['status']);
@@ -49,8 +49,6 @@ abstract class AbstractResponse
      */
     protected static function create(array $data): static
     {
-        $returnData = $data['returnData'] ?? $data;
-
-        return new static(...$returnData);
+        return new static(...($data['returnData'] ?? $data));
     }
 }
