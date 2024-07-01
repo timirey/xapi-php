@@ -2,6 +2,8 @@
 
 namespace Timirey\XApi\Payloads;
 
+use Timirey\XApi\Enums\Cmd;
+
 /**
  * Class that contains payload for the getProfitCalculation command.
  */
@@ -19,7 +21,7 @@ class GetProfitCalculationPayload extends AbstractPayload
     public function __construct(float $closePrice, int $cmd, float $openPrice, string $symbol, float $volume)
     {
         $this->arguments['closePrice'] = $closePrice;
-        $this->arguments['cmd'] = $cmd;
+        $this->arguments['cmd'] = Cmd::from($cmd);
         $this->arguments['openPrice'] = $openPrice;
         $this->arguments['symbol'] = $symbol;
         $this->arguments['volume'] = $volume;

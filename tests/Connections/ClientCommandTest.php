@@ -2,6 +2,7 @@
 
 use Timirey\XApi\Connections\Client;
 use Timirey\XApi\Enums\Host;
+use Timirey\XApi\Enums\Level;
 use Timirey\XApi\Enums\Side;
 use Timirey\XApi\Payloads\Data\ChartLastInfoRecord;
 use Timirey\XApi\Payloads\Data\ChartRangeInfoRecord;
@@ -924,7 +925,7 @@ test('getTickPrices command', function () {
                     'bid' => 4000.0,
                     'bidVolume' => 16000,
                     'high' => 4000.0,
-                    'level' => 0,
+                    'level' => Level::BASE,
                     'exemode' => 1,
                     'low' => 3500.0,
                     'spreadRaw' => 0.000003,
@@ -954,7 +955,7 @@ test('getTickPrices command', function () {
         ->and($getTickPricesResponse->quotations[0]->bid)->toBe(4000.0)
         ->and($getTickPricesResponse->quotations[0]->bidVolume)->toBe(16000)
         ->and($getTickPricesResponse->quotations[0]->high)->toBe(4000.0)
-        ->and($getTickPricesResponse->quotations[0]->level)->toBe(0)
+        ->and($getTickPricesResponse->quotations[0]->level)->toBe(Level::BASE)
         ->and($getTickPricesResponse->quotations[0]->low)->toBe(3500.0)
         ->and($getTickPricesResponse->quotations[0]->spreadRaw)->toBe(0.000003)
         ->and($getTickPricesResponse->quotations[0]->spreadTable)->toBe(0.00042)

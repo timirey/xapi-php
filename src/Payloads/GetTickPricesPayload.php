@@ -2,6 +2,8 @@
 
 namespace Timirey\XApi\Payloads;
 
+use Timirey\XApi\Enums\Level;
+
 /**
  * Class that contains payload for the getTickPrices command.
  */
@@ -16,7 +18,7 @@ class GetTickPricesPayload extends AbstractPayload
      */
     public function __construct(int $level, array $symbols, int $timestamp)
     {
-        $this->arguments['level'] = $level;
+        $this->arguments['level'] = Level::from($level);
         $this->arguments['symbols'] = $symbols;
         $this->arguments['timestamp'] = $timestamp;
     }
