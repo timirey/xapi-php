@@ -10,8 +10,6 @@ use Timirey\XApi\Helpers\DateTimeHelper;
 
 /**
  * Class representing a symbol record.
- *
- * todo: find out which properties are nullable.
  */
 class SymbolRecord
 {

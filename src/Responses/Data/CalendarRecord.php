@@ -8,8 +8,6 @@ use Timirey\XApi\Helpers\DateTimeHelper;
 
 /**
  * Class representing a calendar record.
- *
- * todo: time should be DateTime?
  */
 class CalendarRecord
 {

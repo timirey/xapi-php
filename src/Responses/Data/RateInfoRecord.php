@@ -7,8 +7,6 @@ use Timirey\XApi\Helpers\DateTimeHelper;
 
 /**
  * Class representing a rate information record.
- *
- * todo: ctm should be DateTime?
  */
 class RateInfoRecord
 {

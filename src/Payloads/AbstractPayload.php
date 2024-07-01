@@ -4,8 +4,6 @@ namespace Timirey\XApi\Payloads;
 
 /**
  * Abstract class for payloads.
- *
- * todo: add setArgument(s) method, to avoid direct array modification.
  */
 abstract class AbstractPayload
 {
