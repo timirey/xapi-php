@@ -2,11 +2,18 @@
 
 namespace Timirey\XApi\Responses\Data;
 
+use Timirey\XApi\Enums\Cmd;
+
 /**
  * Class representing a trade record.
  */
 class TradeRecord
 {
+    /**
+     * @var Cmd Operation code.
+     */
+    public Cmd $cmd;
+
     /**
      * Constructor for TradeRecord.
      *
@@ -42,7 +49,7 @@ class TradeRecord
         public ?int $close_time,
         public ?string $close_timeString,
         public bool $closed,
-        public int $cmd,
+        int $cmd,
         public string $comment,
         public ?float $commission,
         public ?string $customComment,
@@ -65,5 +72,6 @@ class TradeRecord
         public float $tp,
         public float $volume
     ) {
+        $this->cmd = Cmd::from($cmd);
     }
 }

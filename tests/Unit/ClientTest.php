@@ -1,7 +1,14 @@
 <?php
 
-use Timirey\XApi\Connections\Client;
-use Timirey\XApi\Connections\Enums\Host;
+use Timirey\XApi\Client;
+use Timirey\XApi\Enums\Cmd;
+use Timirey\XApi\Enums\Day;
+use Timirey\XApi\Enums\Host;
+use Timirey\XApi\Enums\Level;
+use Timirey\XApi\Enums\Period;
+use Timirey\XApi\Enums\RequestStatus;
+use Timirey\XApi\Enums\Side;
+use Timirey\XApi\Enums\Type;
 use Timirey\XApi\Payloads\Data\ChartLastInfoRecord;
 use Timirey\XApi\Payloads\Data\ChartRangeInfoRecord;
 use Timirey\XApi\Payloads\Data\TradeTransInfo;
@@ -152,8 +159,8 @@ test('getSymbol command', function () {
             'currencyProfit' => 'USD',
             'quoteId' => 1,
             'quoteIdCross' => 1,
-            'marginMode' => 1,
-            'profitMode' => 1,
+            'marginMode' => 101,
+            'profitMode' => 5,
             'pipsPrecision' => 5,
             'contractSize' => 100000,
             'exemode' => 1,
@@ -229,8 +236,8 @@ test('getAllSymbols command', function () {
                 'currencyProfit' => 'USD',
                 'quoteId' => 1,
                 'quoteIdCross' => 1,
-                'marginMode' => 1,
-                'profitMode' => 1,
+                'marginMode' => 101,
+                'profitMode' => 6,
                 'pipsPrecision' => 5,
                 'contractSize' => 100000,
                 'exemode' => 1,
@@ -293,7 +300,7 @@ test('getAllSymbols command', function () {
 
 test('tradeTransaction command', function () {
     $tradeTransInfo = new TradeTransInfo(
-        cmd: 0,
+        cmd: Cmd::BUY,
         customComment: 'Test trade',
         expiration: time() + 3600,
         offset: 0,
@@ -302,7 +309,7 @@ test('tradeTransaction command', function () {
         sl: 1.12000,
         symbol: 'EURUSD',
         tp: 1.12500,
-        type: 0,
+        type: Type::OPEN,
         volume: 1.0
     );
 
@@ -368,7 +375,7 @@ test('tradeTransactionStatus command', function () {
         ->and($tradeTransactionStatusResponse->bid)->toBe(1.12345)
         ->and($tradeTransactionStatusResponse->customComment)->toBe('Test trade')
         ->and($tradeTransactionStatusResponse->message)->toBe('Success')
-        ->and($tradeTransactionStatusResponse->requestStatus)->toBe(1);
+        ->and($tradeTransactionStatusResponse->requestStatus)->toBe(RequestStatus::PENDING);
 });
 
 test('ping command', function () {
@@ -409,7 +416,7 @@ test('getCalendar command', function () {
                 'country' => 'US',
                 'current' => '',
                 'forecast' => '3.5%',
-                'impact' => 'High',
+                'impact' => '2',
                 'period' => 'Q1 2021',
                 'previous' => '3.2%',
                 'time' => 1720170000000,
@@ -437,7 +444,7 @@ test('getCalendar command', function () {
 
 test('getChartLastRequest command', function () {
     $chartLastInfoRecord = new ChartLastInfoRecord(
-        period: 1,
+        period: Period::PERIOD_M1,
         start: 1389374640000,
         symbol: 'EURUSD'
     );
@@ -491,7 +498,7 @@ test('getChartLastRequest command', function () {
 
 test('getChartRangeRequest command', function () {
     $chartRangeInfoRecord = new ChartRangeInfoRecord(
-        period: 60,
+        period: Period::PERIOD_H1,
         start: 1389374640000, // Example start timestamp in milliseconds (Jan 10, 2014 3:04:00 PM)
         end: 1389378240000,   // Example end timestamp in milliseconds
         symbol: 'EURUSD',
@@ -777,7 +784,7 @@ test('getIbsHistory command', function () {
         ->and($getIbsHistoryResponse->ibRecords[0]->login)->toBe('12345')
         ->and($getIbsHistoryResponse->ibRecords[0]->nominal)->toBe(6.00)
         ->and($getIbsHistoryResponse->ibRecords[0]->openPrice)->toBe(1.39376)
-        ->and($getIbsHistoryResponse->ibRecords[0]->side)->toBe(0)
+        ->and($getIbsHistoryResponse->ibRecords[0]->side)->toBe(Side::BUY)
         ->and($getIbsHistoryResponse->ibRecords[0]->surname)->toBe('IB_Client_1')
         ->and($getIbsHistoryResponse->ibRecords[0]->symbol)->toBe('EURUSD')
         ->and($getIbsHistoryResponse->ibRecords[0]->timestamp)->toBe(1395755870000)
@@ -786,7 +793,7 @@ test('getIbsHistory command', function () {
 
 test('getProfitCalculation command', function () {
     $closePrice = 1.3000;
-    $cmd = 0;
+    $cmd = Cmd::BUY;
     $openPrice = 1.2233;
     $symbol = 'EURPLN';
     $volume = 1.0;
@@ -904,7 +911,7 @@ test('getStepRules command', function () {
 });
 
 test('getTickPrices command', function () {
-    $level = 0;
+    $level = Level::BASE;
     $symbols = ['EURPLN', 'AGO.PL'];
     $timestamp = 1262944112000;
     $getTickPricesPayload = new GetTickPricesPayload($level, $symbols, $timestamp);
@@ -923,7 +930,7 @@ test('getTickPrices command', function () {
                     'bid' => 4000.0,
                     'bidVolume' => 16000,
                     'high' => 4000.0,
-                    'level' => 0,
+                    'level' => Level::BASE,
                     'exemode' => 1,
                     'low' => 3500.0,
                     'spreadRaw' => 0.000003,
@@ -953,7 +960,7 @@ test('getTickPrices command', function () {
         ->and($getTickPricesResponse->quotations[0]->bid)->toBe(4000.0)
         ->and($getTickPricesResponse->quotations[0]->bidVolume)->toBe(16000)
         ->and($getTickPricesResponse->quotations[0]->high)->toBe(4000.0)
-        ->and($getTickPricesResponse->quotations[0]->level)->toBe(0)
+        ->and($getTickPricesResponse->quotations[0]->level)->toBe(Level::BASE)
         ->and($getTickPricesResponse->quotations[0]->low)->toBe(3500.0)
         ->and($getTickPricesResponse->quotations[0]->spreadRaw)->toBe(0.000003)
         ->and($getTickPricesResponse->quotations[0]->spreadTable)->toBe(0.00042)
@@ -1020,7 +1027,7 @@ test('getTradeRecords command', function () {
         ->and($getTradeRecordsResponse->tradeRecords[0]->close_time)->toBeNull()
         ->and($getTradeRecordsResponse->tradeRecords[0]->close_timeString)->toBeNull()
         ->and($getTradeRecordsResponse->tradeRecords[0]->closed)->toBeFalse()
-        ->and($getTradeRecordsResponse->tradeRecords[0]->cmd)->toBe(0)
+        ->and($getTradeRecordsResponse->tradeRecords[0]->cmd)->toBe(Cmd::BUY)
         ->and($getTradeRecordsResponse->tradeRecords[0]->comment)->toBe('Web Trader')
         ->and($getTradeRecordsResponse->tradeRecords[0]->commission)->toBe(0.0)
         ->and($getTradeRecordsResponse->tradeRecords[0]->customComment)->toBe('Some text')
@@ -1103,7 +1110,7 @@ test('getTrades command', function () {
         ->and($getTradesResponse->tradeRecords[0]->close_time)->toBeNull()
         ->and($getTradesResponse->tradeRecords[0]->close_timeString)->toBeNull()
         ->and($getTradesResponse->tradeRecords[0]->closed)->toBeFalse()
-        ->and($getTradesResponse->tradeRecords[0]->cmd)->toBe(0)
+        ->and($getTradesResponse->tradeRecords[0]->cmd)->toBe(Cmd::BUY)
         ->and($getTradesResponse->tradeRecords[0]->comment)->toBe('Web Trader')
         ->and($getTradesResponse->tradeRecords[0]->commission)->toBe(0.0)
         ->and($getTradesResponse->tradeRecords[0]->customComment)->toBe('Some text')
@@ -1187,7 +1194,7 @@ test('getTradesHistory command', function () {
         ->and($getTradesHistoryResponse->tradeRecords[0]->close_time)->toBeNull()
         ->and($getTradesHistoryResponse->tradeRecords[0]->close_timeString)->toBeNull()
         ->and($getTradesHistoryResponse->tradeRecords[0]->closed)->toBeFalse()
-        ->and($getTradesHistoryResponse->tradeRecords[0]->cmd)->toBe(0)
+        ->and($getTradesHistoryResponse->tradeRecords[0]->cmd)->toBe(Cmd::BUY)
         ->and($getTradesHistoryResponse->tradeRecords[0]->comment)->toBe('Web Trader')
         ->and($getTradesHistoryResponse->tradeRecords[0]->commission)->toBe(0.0)
         ->and($getTradesHistoryResponse->tradeRecords[0]->customComment)->toBe('Some text')
@@ -1249,11 +1256,11 @@ test('getTradingHours command', function () {
         ->and($getTradingHoursResponse->tradingHoursRecords[0])->toBeInstanceOf(TradingHoursRecord::class)
         ->and($getTradingHoursResponse->tradingHoursRecords[0]->symbol)->toBe('USDPLN')
         ->and($getTradingHoursResponse->tradingHoursRecords[0]->quotes[0])->toBeInstanceOf(QuotesRecord::class)
-        ->and($getTradingHoursResponse->tradingHoursRecords[0]->quotes[0]->day)->toBe(2)
+        ->and($getTradingHoursResponse->tradingHoursRecords[0]->quotes[0]->day)->toBe(Day::TUESDAY)
         ->and($getTradingHoursResponse->tradingHoursRecords[0]->quotes[0]->fromT)->toBe(63000000)
         ->and($getTradingHoursResponse->tradingHoursRecords[0]->quotes[0]->toT)->toBe(63300000)
         ->and($getTradingHoursResponse->tradingHoursRecords[0]->trading[0])->toBeInstanceOf(TradingRecord::class)
-        ->and($getTradingHoursResponse->tradingHoursRecords[0]->trading[0]->day)->toBe(2)
+        ->and($getTradingHoursResponse->tradingHoursRecords[0]->trading[0]->day)->toBe(Day::TUESDAY)
         ->and($getTradingHoursResponse->tradingHoursRecords[0]->trading[0]->fromT)->toBe(63000000)
         ->and($getTradingHoursResponse->tradingHoursRecords[0]->trading[0]->toT)->toBe(63300000);
 });
