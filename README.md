@@ -45,6 +45,15 @@ use Timirey\XApi\Responses\GetAllSymbolsResponse;
 $response = $client->getAllSymbols();
 ```
 
+And logout if necessary.
+
+```PHP
+use Timirey\XApi\Responses\LogoutResponse;
+
+/** @var LogoutResponse $response */
+$response = $client->logout();
+```
+
 ## Available Commands
 
 Request-Reply commands are performed on main connection socket. The reply is sent by main connection socket.
