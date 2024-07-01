@@ -409,7 +409,7 @@ test('getCalendar command', function () {
                 'country' => 'US',
                 'current' => '',
                 'forecast' => '3.5%',
-                'impact' => 'High',
+                'impact' => '2',
                 'period' => 'Q1 2021',
                 'previous' => '3.2%',
                 'time' => 1720170000000,

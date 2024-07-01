@@ -2,6 +2,8 @@
 
 namespace Timirey\XApi\Responses\Data;
 
+use Timirey\XApi\Enums\Impact;
+
 /**
  * Class representing a calendar record.
  *
@@ -10,6 +12,11 @@ namespace Timirey\XApi\Responses\Data;
  */
 class CalendarRecord
 {
+    /**
+     * @var Impact Impact on market.
+     */
+    public Impact $impact;
+
     /**
      * Constructor for CalendarRecord.
      *
@@ -26,11 +33,12 @@ class CalendarRecord
         public string $country,
         public string $current,
         public string $forecast,
-        public string $impact,
+        string $impact,
         public string $period,
         public string $previous,
         public int $time,
         public string $title
     ) {
+        $this->impact = Impact::from($impact);
     }
 }
