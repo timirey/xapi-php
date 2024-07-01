@@ -293,6 +293,8 @@ test('getAllSymbols command', function () {
 
     $getAllSymbolsResponse = $this->client->getAllSymbols();
 
+    var_dump($getAllSymbolsResponse);
+
     expect($getAllSymbolsResponse)->toBeInstanceOf(GetAllSymbolsResponse::class)
         ->and($getAllSymbolsResponse->symbolRecords)->toHaveCount(1)
         ->and($getAllSymbolsResponse->symbolRecords[0]->symbol)->toBe('EURUSD')
