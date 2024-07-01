@@ -2,7 +2,7 @@
 
 namespace Timirey\XApi\Connections;
 
-use Timirey\XApi\Connections\Enums\Host;
+use Timirey\XApi\Enums\Host;
 use Timirey\XApi\Payloads\AbstractPayload;
 use Timirey\XApi\Payloads\Data\ChartLastInfoRecord;
 use Timirey\XApi\Payloads\Data\ChartRangeInfoRecord;

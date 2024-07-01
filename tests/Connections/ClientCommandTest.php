@@ -1,7 +1,7 @@
 <?php
 
 use Timirey\XApi\Connections\Client;
-use Timirey\XApi\Connections\Enums\Host;
+use Timirey\XApi\Enums\Host;
 use Timirey\XApi\Payloads\Data\ChartLastInfoRecord;
 use Timirey\XApi\Payloads\Data\ChartRangeInfoRecord;
 use Timirey\XApi\Payloads\Data\TradeTransInfo;
@@ -152,8 +152,8 @@ test('getSymbol command', function () {
             'currencyProfit' => 'USD',
             'quoteId' => 1,
             'quoteIdCross' => 1,
-            'marginMode' => 1,
-            'profitMode' => 1,
+            'marginMode' => 101,
+            'profitMode' => 5,
             'pipsPrecision' => 5,
             'contractSize' => 100000,
             'exemode' => 1,
@@ -229,8 +229,8 @@ test('getAllSymbols command', function () {
                 'currencyProfit' => 'USD',
                 'quoteId' => 1,
                 'quoteIdCross' => 1,
-                'marginMode' => 1,
-                'profitMode' => 1,
+                'marginMode' => 101,
+                'profitMode' => 6,
                 'pipsPrecision' => 5,
                 'contractSize' => 100000,
                 'exemode' => 1,
