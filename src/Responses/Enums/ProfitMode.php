@@ -1,6 +1,6 @@
 <?php
 
-namespace Timirey\XApi\Enums;
+namespace Timirey\XApi\Responses\Enums;
 
 /**
  * Enum representing the profit mode.

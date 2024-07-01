@@ -2,9 +2,9 @@
 
 namespace Timirey\XApi\Responses\Data;
 
-use Timirey\XApi\Enums\MarginMode;
-use Timirey\XApi\Enums\ProfitMode;
-use Timirey\XApi\Enums\QuoteId;
+use Timirey\XApi\Responses\Enums\MarginMode;
+use Timirey\XApi\Responses\Enums\ProfitMode;
+use Timirey\XApi\Responses\Enums\QuoteId;
 
 /**
  * Class representing a symbol record.

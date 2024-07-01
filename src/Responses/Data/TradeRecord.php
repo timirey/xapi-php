@@ -2,8 +2,7 @@
 
 namespace Timirey\XApi\Responses\Data;
 
-use Timirey\XApi\Enums\Cmd;
-use Timirey\XApi\Enums\Level;
+use Timirey\XApi\Responses\Enums\Cmd;
 
 /**
  * Class representing a trade record.

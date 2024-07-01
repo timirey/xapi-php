@@ -2,6 +2,8 @@
 
 namespace Timirey\XApi\Responses;
 
+use Timirey\XApi\Responses\Enums\RequestStatus;
+
 /**
  * Class that contains response of the tradeTransactionStatus command.
  *
@@ -9,6 +11,11 @@ namespace Timirey\XApi\Responses;
  */
 class TradeTransactionStatusResponse extends AbstractResponse
 {
+    /**
+     * @var RequestStatus Request status code.
+     */
+    public RequestStatus $requestStatus;
+
     /**
      * Constructor for TradeTransactionStatusResponse.
      *
@@ -25,7 +32,8 @@ class TradeTransactionStatusResponse extends AbstractResponse
         public ?string $customComment,
         public string $message,
         public int $order,
-        public int $requestStatus,
+        int $requestStatus,
     ) {
+        $this->requestStatus = RequestStatus::from($requestStatus);
     }
 }

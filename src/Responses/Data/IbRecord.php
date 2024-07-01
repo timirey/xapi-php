@@ -2,7 +2,7 @@
 
 namespace Timirey\XApi\Responses\Data;
 
-use Timirey\XApi\Enums\Side;
+use Timirey\XApi\Responses\Enums\Side;
 
 /**
  * Class representing an IB record.

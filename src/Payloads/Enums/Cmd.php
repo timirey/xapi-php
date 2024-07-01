@@ -1,6 +1,6 @@
 <?php
 
-namespace Timirey\XApi\Enums;
+namespace Timirey\XApi\Payloads\Enums;
 
 /**
  * Enum representing the command type for a trade.

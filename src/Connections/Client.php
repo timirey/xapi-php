@@ -2,11 +2,13 @@
 
 namespace Timirey\XApi\Connections;
 
-use Timirey\XApi\Enums\Host;
+use Timirey\XApi\Connections\Enums\Host;
 use Timirey\XApi\Payloads\AbstractPayload;
 use Timirey\XApi\Payloads\Data\ChartLastInfoRecord;
 use Timirey\XApi\Payloads\Data\ChartRangeInfoRecord;
 use Timirey\XApi\Payloads\Data\TradeTransInfo;
+use Timirey\XApi\Payloads\Enums\Cmd;
+use Timirey\XApi\Payloads\Enums\Level;
 use Timirey\XApi\Payloads\GetAllSymbolsPayload;
 use Timirey\XApi\Payloads\GetCalendarPayload;
 use Timirey\XApi\Payloads\GetChartLastRequestPayload;
@@ -278,7 +280,7 @@ class Client
      * Calculates estimated profit for given deal data.
      *
      * @param float $closePrice
-     * @param int $cmd
+     * @param Cmd $cmd
      * @param float $openPrice
      * @param string $symbol
      * @param float $volume
@@ -286,7 +288,7 @@ class Client
      */
     public function getProfitCalculation(
         float $closePrice,
-        int $cmd,
+        Cmd $cmd,
         float $openPrice,
         string $symbol,
         float $volume
@@ -320,12 +322,12 @@ class Client
     /**
      * Returns array of current quotations for given symbols.
      *
-     * @param int $level
+     * @param Level $level
      * @param array $symbols
      * @param int $timestamp
      * @return GetTickPricesResponse
      */
-    public function getTickPrices(int $level, array $symbols, int $timestamp): GetTickPricesResponse
+    public function getTickPrices(Level $level, array $symbols, int $timestamp): GetTickPricesResponse
     {
         return $this->sendRequest(
             new GetTickPricesPayload($level, $symbols, $timestamp),

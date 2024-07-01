@@ -2,7 +2,7 @@
 
 namespace Timirey\XApi\Responses\Data;
 
-use Timirey\XApi\Enums\Level;
+use Timirey\XApi\Responses\Enums\Level;
 
 /**
  * Class representing a tick record.

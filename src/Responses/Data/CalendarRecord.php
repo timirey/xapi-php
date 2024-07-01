@@ -2,7 +2,7 @@
 
 namespace Timirey\XApi\Responses\Data;
 
-use Timirey\XApi\Enums\Impact;
+use Timirey\XApi\Responses\Enums\Impact;
 
 /**
  * Class representing a calendar record.

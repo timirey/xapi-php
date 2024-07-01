@@ -2,6 +2,9 @@
 
 namespace Timirey\XApi\Payloads\Data;
 
+use Timirey\XApi\Payloads\Enums\Cmd;
+use Timirey\XApi\Payloads\Enums\Type;
+
 /**
  * Class representing trade transaction information.
  *
@@ -13,7 +16,7 @@ class TradeTransInfo
     /**
      * Constructor for TradeTransInfo.
      *
-     * @param int $cmd Operation code.
+     * @param Cmd $cmd Operation code.
      * @param string|null $customComment The value the customer may provide in order to retrieve it later.
      * @param int $expiration Pending order expiration time.
      * @param int $offset Trailing offset.
@@ -22,11 +25,11 @@ class TradeTransInfo
      * @param float $sl Stop loss.
      * @param string $symbol Trade symbol.
      * @param float $tp Take profit.
-     * @param int $type Trade transaction type.
+     * @param Type $type Trade transaction type.
      * @param float $volume Trade volume.
      */
     public function __construct(
-        public int $cmd,
+        public Cmd $cmd,
         public ?string $customComment,
         public int $expiration,
         public int $offset,
@@ -35,7 +38,7 @@ class TradeTransInfo
         public float $sl,
         public string $symbol,
         public float $tp,
-        public int $type,
+        public Type $type,
         public float $volume
     ) {
     }
