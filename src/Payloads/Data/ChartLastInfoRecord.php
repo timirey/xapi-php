@@ -2,6 +2,8 @@
 
 namespace Timirey\XApi\Payloads\Data;
 
+use Timirey\XApi\Enums\Period;
+
 /**
  * Class representing the last chart information record.
  *
@@ -11,13 +13,19 @@ namespace Timirey\XApi\Payloads\Data;
 class ChartLastInfoRecord
 {
     /**
+     * Period code.
+     */
+    public Period $period;
+
+    /**
      * Constructor for ChartLastInfoRecord.
      *
      * @param int $period Period code.
      * @param int $start Start of chart block.
      * @param string $symbol Symbol.
      */
-    public function __construct(public int $period, public int $start, public string $symbol)
+    public function __construct(int $period, public int $start, public string $symbol)
     {
+        $this->period = Period::from($period);
     }
 }
