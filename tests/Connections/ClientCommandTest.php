@@ -1,6 +1,8 @@
 <?php
 
 use Timirey\XApi\Connections\Client;
+use Timirey\XApi\Enums\Cmd;
+use Timirey\XApi\Enums\Day;
 use Timirey\XApi\Enums\Host;
 use Timirey\XApi\Enums\Level;
 use Timirey\XApi\Enums\Side;
@@ -1022,7 +1024,7 @@ test('getTradeRecords command', function () {
         ->and($getTradeRecordsResponse->tradeRecords[0]->close_time)->toBeNull()
         ->and($getTradeRecordsResponse->tradeRecords[0]->close_timeString)->toBeNull()
         ->and($getTradeRecordsResponse->tradeRecords[0]->closed)->toBeFalse()
-        ->and($getTradeRecordsResponse->tradeRecords[0]->cmd)->toBe(0)
+        ->and($getTradeRecordsResponse->tradeRecords[0]->cmd)->toBe(Cmd::BUY)
         ->and($getTradeRecordsResponse->tradeRecords[0]->comment)->toBe('Web Trader')
         ->and($getTradeRecordsResponse->tradeRecords[0]->commission)->toBe(0.0)
         ->and($getTradeRecordsResponse->tradeRecords[0]->customComment)->toBe('Some text')
@@ -1105,7 +1107,7 @@ test('getTrades command', function () {
         ->and($getTradesResponse->tradeRecords[0]->close_time)->toBeNull()
         ->and($getTradesResponse->tradeRecords[0]->close_timeString)->toBeNull()
         ->and($getTradesResponse->tradeRecords[0]->closed)->toBeFalse()
-        ->and($getTradesResponse->tradeRecords[0]->cmd)->toBe(0)
+        ->and($getTradesResponse->tradeRecords[0]->cmd)->toBe(Cmd::BUY)
         ->and($getTradesResponse->tradeRecords[0]->comment)->toBe('Web Trader')
         ->and($getTradesResponse->tradeRecords[0]->commission)->toBe(0.0)
         ->and($getTradesResponse->tradeRecords[0]->customComment)->toBe('Some text')
@@ -1189,7 +1191,7 @@ test('getTradesHistory command', function () {
         ->and($getTradesHistoryResponse->tradeRecords[0]->close_time)->toBeNull()
         ->and($getTradesHistoryResponse->tradeRecords[0]->close_timeString)->toBeNull()
         ->and($getTradesHistoryResponse->tradeRecords[0]->closed)->toBeFalse()
-        ->and($getTradesHistoryResponse->tradeRecords[0]->cmd)->toBe(0)
+        ->and($getTradesHistoryResponse->tradeRecords[0]->cmd)->toBe(Cmd::BUY)
         ->and($getTradesHistoryResponse->tradeRecords[0]->comment)->toBe('Web Trader')
         ->and($getTradesHistoryResponse->tradeRecords[0]->commission)->toBe(0.0)
         ->and($getTradesHistoryResponse->tradeRecords[0]->customComment)->toBe('Some text')
@@ -1251,7 +1253,7 @@ test('getTradingHours command', function () {
         ->and($getTradingHoursResponse->tradingHoursRecords[0])->toBeInstanceOf(TradingHoursRecord::class)
         ->and($getTradingHoursResponse->tradingHoursRecords[0]->symbol)->toBe('USDPLN')
         ->and($getTradingHoursResponse->tradingHoursRecords[0]->quotes[0])->toBeInstanceOf(QuotesRecord::class)
-        ->and($getTradingHoursResponse->tradingHoursRecords[0]->quotes[0]->day)->toBe(2)
+        ->and($getTradingHoursResponse->tradingHoursRecords[0]->quotes[0]->day)->toBe(Day::TUESDAY)
         ->and($getTradingHoursResponse->tradingHoursRecords[0]->quotes[0]->fromT)->toBe(63000000)
         ->and($getTradingHoursResponse->tradingHoursRecords[0]->quotes[0]->toT)->toBe(63300000)
         ->and($getTradingHoursResponse->tradingHoursRecords[0]->trading[0])->toBeInstanceOf(TradingRecord::class)
