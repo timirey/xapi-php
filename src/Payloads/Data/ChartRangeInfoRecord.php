@@ -2,6 +2,8 @@
 
 namespace Timirey\XApi\Payloads\Data;
 
+use Timirey\XApi\Enums\Period;
+
 /**
  * Class representing the range chart information record.
  *
@@ -9,6 +11,11 @@ namespace Timirey\XApi\Payloads\Data;
  */
 class ChartRangeInfoRecord
 {
+    /**
+     * @var Period Period code.
+     */
+    public Period $period;
+
     /**
      * Constructor for ChartRangeInfoRecord.
      *
@@ -19,11 +26,12 @@ class ChartRangeInfoRecord
      * @param int|null $ticks Number of ticks needed (optional).
      */
     public function __construct(
-        public int $period,
+        int $period,
         public int $start,
         public int $end,
         public string $symbol,
         public ?int $ticks = null
     ) {
+        $this->period = Period::from($period);
     }
 }

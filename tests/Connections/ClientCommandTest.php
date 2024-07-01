@@ -2,6 +2,7 @@
 
 use Timirey\XApi\Connections\Client;
 use Timirey\XApi\Enums\Host;
+use Timirey\XApi\Enums\Side;
 use Timirey\XApi\Payloads\Data\ChartLastInfoRecord;
 use Timirey\XApi\Payloads\Data\ChartRangeInfoRecord;
 use Timirey\XApi\Payloads\Data\TradeTransInfo;
@@ -777,7 +778,7 @@ test('getIbsHistory command', function () {
         ->and($getIbsHistoryResponse->ibRecords[0]->login)->toBe('12345')
         ->and($getIbsHistoryResponse->ibRecords[0]->nominal)->toBe(6.00)
         ->and($getIbsHistoryResponse->ibRecords[0]->openPrice)->toBe(1.39376)
-        ->and($getIbsHistoryResponse->ibRecords[0]->side)->toBe(0)
+        ->and($getIbsHistoryResponse->ibRecords[0]->side)->toBe(Side::BUY)
         ->and($getIbsHistoryResponse->ibRecords[0]->surname)->toBe('IB_Client_1')
         ->and($getIbsHistoryResponse->ibRecords[0]->symbol)->toBe('EURUSD')
         ->and($getIbsHistoryResponse->ibRecords[0]->timestamp)->toBe(1395755870000)
