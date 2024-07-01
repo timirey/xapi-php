@@ -2,7 +2,7 @@
 
 namespace Timirey\XApi\Payloads;
 
-use Timirey\XApi\Payloads\Enums\Cmd;
+use Timirey\XApi\Enums\Cmd;
 
 /**
  * Class that contains payload for the getProfitCalculation command.

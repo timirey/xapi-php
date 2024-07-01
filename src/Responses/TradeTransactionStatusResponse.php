@@ -2,12 +2,10 @@
 
 namespace Timirey\XApi\Responses;
 
-use Timirey\XApi\Responses\Enums\RequestStatus;
+use Timirey\XApi\Enums\RequestStatus;
 
 /**
  * Class that contains response of the tradeTransactionStatus command.
- *
- * todo: make requestStatus behave as enum.
  */
 class TradeTransactionStatusResponse extends AbstractResponse
 {

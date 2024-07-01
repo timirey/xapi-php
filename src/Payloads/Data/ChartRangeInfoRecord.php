@@ -2,12 +2,10 @@
 
 namespace Timirey\XApi\Payloads\Data;
 
-use Timirey\XApi\Payloads\Enums\Period;
+use Timirey\XApi\Enums\Period;
 
 /**
  * Class representing the range chart information record.
- *
- * todo: make period behave as an enum.
  */
 class ChartRangeInfoRecord
 {

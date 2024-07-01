@@ -2,14 +2,13 @@
 
 namespace Timirey\XApi\Payloads\Data;
 
-use Timirey\XApi\Payloads\Enums\Cmd;
-use Timirey\XApi\Payloads\Enums\Type;
+use Timirey\XApi\Enums\Cmd;
+use Timirey\XApi\Enums\Type;
 
 /**
  * Class representing trade transaction information.
  *
  * todo: find out which properties are optional.
- * todo: make cmd and type behave as enum.
  */
 class TradeTransInfo
 {

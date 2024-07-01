@@ -2,7 +2,7 @@
 
 namespace Timirey\XApi\Payloads;
 
-use Timirey\XApi\Payloads\Enums\Level;
+use Timirey\XApi\Enums\Level;
 
 /**
  * Class that contains payload for the getTickPrices command.

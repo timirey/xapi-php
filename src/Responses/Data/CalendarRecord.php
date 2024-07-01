@@ -2,12 +2,11 @@
 
 namespace Timirey\XApi\Responses\Data;
 
-use Timirey\XApi\Responses\Enums\Impact;
+use Timirey\XApi\Enums\Impact;
 
 /**
  * Class representing a calendar record.
  *
- * todo: make impact act as enum.
  * todo: time should be DateTime?
  */
 class CalendarRecord

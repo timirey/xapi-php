@@ -1,6 +1,6 @@
 <?php
 
-namespace Timirey\XApi\Responses\Enums;
+namespace Timirey\XApi\Enums;
 
 /**
  * Enum representing the request status.

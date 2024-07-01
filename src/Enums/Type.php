@@ -1,6 +1,6 @@
 <?php
 
-namespace Timirey\XApi\Payloads\Enums;
+namespace Timirey\XApi\Enums;
 
 /**
  * Enum representing the order type.

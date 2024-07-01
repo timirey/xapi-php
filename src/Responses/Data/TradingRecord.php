@@ -2,7 +2,7 @@
 
 namespace Timirey\XApi\Responses\Data;
 
-use Timirey\XApi\Responses\Enums\Day;
+use Timirey\XApi\Enums\Day;
 
 /**
  * Class representing a trading record.

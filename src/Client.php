@@ -1,14 +1,14 @@
 <?php
 
-namespace Timirey\XApi\Connections;
+namespace Timirey\XApi;
 
-use Timirey\XApi\Connections\Enums\Host;
+use Timirey\XApi\Enums\Cmd;
+use Timirey\XApi\Enums\Host;
+use Timirey\XApi\Enums\Level;
 use Timirey\XApi\Payloads\AbstractPayload;
 use Timirey\XApi\Payloads\Data\ChartLastInfoRecord;
 use Timirey\XApi\Payloads\Data\ChartRangeInfoRecord;
 use Timirey\XApi\Payloads\Data\TradeTransInfo;
-use Timirey\XApi\Payloads\Enums\Cmd;
-use Timirey\XApi\Payloads\Enums\Level;
 use Timirey\XApi\Payloads\GetAllSymbolsPayload;
 use Timirey\XApi\Payloads\GetCalendarPayload;
 use Timirey\XApi\Payloads\GetChartLastRequestPayload;
@@ -64,8 +64,6 @@ use WebSocket\Client as WebSocketClient;
 
 /**
  * Client class for interacting with the xStation5 API.
- *
- * todo: rename this class and think of better folder structure.
  */
 class Client
 {
@@ -397,7 +395,7 @@ class Client
      * @param AbstractPayload $payload The payload to send.
      * @param class-string<T> $responseClass The response class to instantiate.
      * @return AbstractResponse The response instance.
-     * @return T
+     * @return AbstractResponse
      */
     protected function sendRequest(AbstractPayload $payload, string $responseClass): AbstractResponse
     {
