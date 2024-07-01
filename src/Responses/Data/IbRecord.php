@@ -2,11 +2,18 @@
 
 namespace Timirey\XApi\Responses\Data;
 
+use Timirey\XApi\Enums\Side;
+
 /**
  * Class representing an IB record.
  */
 class IbRecord
 {
+    /**
+     * @var Side Operation code or null if not allowed to view.
+     */
+    public Side|null $side;
+
     /**
      * Constructor for IbRecord.
      *
@@ -25,11 +32,12 @@ class IbRecord
         public ?string $login,
         public ?float $nominal,
         public ?float $openPrice,
-        public ?int $side,
+        ?int $side,
         public ?string $surname,
         public ?string $symbol,
         public ?int $timestamp,
         public ?float $volume
     ) {
+        $this->side = Side::tryFrom($side);
     }
 }

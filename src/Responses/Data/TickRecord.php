@@ -2,11 +2,18 @@
 
 namespace Timirey\XApi\Responses\Data;
 
+use Timirey\XApi\Enums\Level;
+
 /**
  * Class representing a tick record.
  */
 class TickRecord
 {
+    /**
+     * @var Level Price level.
+     */
+    public Level $level;
+
     /**
      * Constructor for TickRecord.
      *
@@ -29,7 +36,7 @@ class TickRecord
         public float $bid,
         public ?int $bidVolume,
         public float $high,
-        public int $level,
+        int $level,
         public int $exemode,
         public float $low,
         public float $spreadRaw,
@@ -37,5 +44,6 @@ class TickRecord
         public string $symbol,
         public int $timestamp
     ) {
+        $this->level = Level::from($level);
     }
 }

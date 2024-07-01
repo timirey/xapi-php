@@ -2,14 +2,32 @@
 
 namespace Timirey\XApi\Responses\Data;
 
+use Timirey\XApi\Enums\MarginMode;
+use Timirey\XApi\Enums\ProfitMode;
+use Timirey\XApi\Enums\QuoteId;
+
 /**
  * Class representing a symbol record.
  *
  * todo: find out which properties are nullable.
- * todo: make quoteId, marginMode and profitMode behave as enum.
  */
 class SymbolRecord
 {
+    /**
+     * @var QuoteId Source of price.
+     */
+    public QuoteId $quoteId;
+
+    /**
+     * @var MarginMode For margin calculation.
+     */
+    public MarginMode $marginMode;
+
+    /**
+     * @var ProfitMode For profit calculation.
+     */
+    public ProfitMode $profitMode;
+
     /**
      * Constructor for SymbolRecord.
      *
@@ -67,10 +85,10 @@ class SymbolRecord
         public string $currency,
         public string $categoryName,
         public string $currencyProfit,
-        public int $quoteId,
+        int $quoteId,
         public int $quoteIdCross,
-        public int $marginMode,
-        public int $profitMode,
+        int $marginMode,
+        int $profitMode,
         public int $pipsPrecision,
         public int $contractSize,
         public int $exemode,
@@ -112,5 +130,8 @@ class SymbolRecord
         public bool $shortSelling,
         public bool $currencyPair
     ) {
+        $this->quoteId = QuoteId::from($quoteId);
+        $this->marginMode = MarginMode::from($marginMode);
+        $this->profitMode = ProfitMode::from($profitMode);
     }
 }
