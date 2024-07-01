@@ -1,6 +1,6 @@
 ![xStore Developers](http://developers.xstore.pro/public/img/logo.png)
 
-## About PHP xAPI
+## About xAPI PHP
 
 This PHP library provides a comprehensive and easy-to-use interface for interacting with the X-Trade Brokers (XTB) xStation5 Trading API. It supports various functionalities including account management, trade execution, and market data retrieval.
 
@@ -9,7 +9,7 @@ This PHP library provides a comprehensive and easy-to-use interface for interact
 Install the package via Composer:
 
 ```sh
-composer require timirey/xtb-api
+composer require timirey/xapi-php
 ```
 
 ## Usage
@@ -20,27 +20,28 @@ Before you can access the endpoints, you should init a client.
 use Timirey\XApi\Clients\Client;
 use Timirey\XApi\Clients\Enums\Host;
 
-/**
- * @var Timirey\XApi\Clients\Client $client
- */
+$userId = 123456789;
+$password = 'password';
+
+/** @var Client $client */
 $client = new Client($userId, $password, Host::DEMO);
 ```
 
 And authenticate.
 
 ```PHP
-/**
- * @var Timirey\XApi\Responses\LoginResponse $response
- */
+use Timirey\XApi\Responses\LoginResponse;
+
+/** @var LoginResponse $response */
 $response = $client->login();
 ```
 
 Now you can send commands.
 
 ```PHP
-/**
- * @var Timirey\XApi\Responses\GetAllSymbolsResponse $response
- */
+use Timirey\XApi\Responses\GetAllSymbolsResponse;
+
+/** @var GetAllSymbolsResponse $response */
 $response = $client->getAllSymbols();
 ```
 
@@ -54,9 +55,9 @@ Request-Reply commands are performed on main connection socket. The reply is sen
 Logs in to the xStation5 API.
 
 ```PHP
-/**
- * @var Timirey\XApi\Responses\LoginResponse $response
- */
+use Timirey\XApi\Responses\LoginResponse;
+
+/** @var LoginResponse $response */
 $response = $client->login();
 ```
 ___
@@ -66,9 +67,9 @@ ___
 Logs out from the xStation5 API.
 
 ```PHP
-/**
- * @var Timirey\XApi\Responses\LogoutResponse $response
- */
+use Timirey\XApi\Responses\LogoutResponse;
+
+/** @var LogoutResponse $response */
 $response = $client->logout();
 ```
 
@@ -81,9 +82,9 @@ Currently it supports only non streaming commands. Streamming commands will be r
 Returns a list of step rules for DMAs.
 
 ```PHP
-/**
- * @var Timirey\XApi\Responses\GetStepRulesResponse $response
- */
+use Timirey\XApi\Responses\GetStepRulesResponse;
+
+/** @var GetStepRulesResponse $response */
 $response = $client->getStepRules();
 ```
 ___
@@ -93,13 +94,15 @@ ___
 Returns an array of current quotations for given symbols.
 
 ```PHP
+use Timirey\XApi\Responses\GetTickPricesResponse;
+use Timirey\XApi\Enums\Level;
+use DateTime;
+
 $level = Level::BASE;
 $symbols = ['EURPLN', 'AGO.PL'];
 $timestamp = new DateTime();
 
-/**
- * @var Timirey\XApi\Responses\GetTickPricesResponse $response
- */
+/** @var GetTickPricesResponse $response */
 $response = $client->getTickPrices($level, $symbols, $timestamp);
 ```
 ___
@@ -109,11 +112,11 @@ ___
 Returns an array of user's trades.
 
 ```PHP
+use Timirey\XApi\Responses\GetTradesResponse;
+
 $openedOnly = true;
 
-/**
- * @var Timirey\XApi\Responses\GetTradesResponse $response
- */
+/** @var GetTradesResponse $response */
 $response = $client->getTrades($openedOnly);
 ```
 ___
@@ -123,12 +126,13 @@ ___
 Returns an array of user's trades which were closed within a specified period.
 
 ```PHP
+use Timirey\XApi\Responses\GetTradesHistoryResponse;
+use DateTime;
+
 $start = new DateTime('last month');
 $end = new DateTime();
 
-/**
- * @var Timirey\XApi\Responses\GetTradesHistoryResponse $response
- */
+/** @var GetTradesHistoryResponse $response */
 $response = $client->getTradesHistory($start, $end);
 ```
 ___
@@ -138,11 +142,11 @@ ___
 Returns quotes and trading times.
 
 ```PHP
+use Timirey\XApi\Responses\GetTradingHoursResponse;
+
 $symbols = ['EURPLN', 'AGO.PL'];
 
-/**
- * @var Timirey\XApi\Responses\GetTradingHoursResponse $response
- */
+/** @var GetTradingHoursResponse $response */
 $response = $client->getTradingHours($symbols);
 ```
 ___
@@ -152,9 +156,9 @@ ___
 Returns the current API version.
 
 ```PHP
-/**
- * @var Timirey\XApi\Responses\GetVersionResponse $response
- */
+use Timirey\XApi\Responses\GetVersionResponse;
+
+/** @var GetVersionResponse $response */
 $response = $client->getVersion();
 ```
 ___
@@ -164,15 +168,16 @@ ___
 Calculates estimated profit for given deal data.
 
 ```PHP
+use Timirey\XApi\Responses\GetProfitCalculationResponse;
+use Timirey\XApi\Enums\Cmd;
+
 $closePrice = 1.3000;
 $cmd = Cmd::BUY;
 $openPrice = 1.2233;
 $symbol = 'EURPLN';
 $volume = 1.0;
 
-/**
- * @var Timirey\XApi\Responses\GetProfitCalculationResponse $response
- */
+/** @var GetProfitCalculationResponse $response */
 $response = $client->getProfitCalculation($closePrice, $cmd, $openPrice, $symbol, $volume);
 ```
 ___
@@ -182,9 +187,9 @@ ___
 Returns the current time on the trading server.
 
 ```PHP
-/**
- * @var Timirey\XApi\Responses\GetServerTimeResponse $response
- */
+use Timirey\XApi\Responses\GetServerTimeResponse;
+
+/** @var GetServerTimeResponse $response */
 $response = $client->getServerTime();
 ```
 ___
@@ -194,12 +199,12 @@ ___
 Returns expected margin for a given instrument and volume.
 
 ```PHP
+use Timirey\XApi\Responses\GetMarginTradeResponse;
+
 $symbol = 'EURPLN';
 $volume = 1.0;
 
-/**
- * @var Timirey\XApi\Responses\GetMarginTradeResponse $response
- */
+/** @var GetMarginTradeResponse $response */
 $response = $client->getMarginTrade($symbol, $volume);
 ```
 ___
@@ -209,12 +214,13 @@ ___
 Returns IBs data from the given time range.
 
 ```PHP
+use Timirey\XApi\Responses\GetIbsHistoryResponse;
+use DateTime;
+
 $start = new DateTime('-1 month');
 $end = new DateTime();
 
-/**
- * @var Timirey\XApi\Responses\GetIbsHistoryResponse $response
- */
+/** @var GetIbsHistoryResponse $response */
 $response = $client->getIbsHistory($start, $end);
 ```
 ___
@@ -224,12 +230,13 @@ ___
 Returns news from the trading server which were sent within a specified period.
 
 ```PHP
+use Timirey\XApi\Responses\GetNewsResponse;
+use DateTime;
+
 $start = new DateTime('-1 month');
 $end = new DateTime();
 
-/**
- * @var Timirey\XApi\Responses\GetNewsResponse $response
- */
+/** @var GetNewsResponse $response */
 $response = $client->getNews($start, $end);
 ```
 ___
@@ -239,9 +246,9 @@ ___
 Returns information about account currency and leverage.
 
 ```PHP
-/**
- * @var Timirey\XApi\Responses\GetCurrentUserDataResponse $response
- */
+use Timirey\XApi\Responses\GetCurrentUserDataResponse;
+
+/** @var GetCurrentUserDataResponse $response */
 $response = $client->getCurrentUserData();
 ```
 ___
@@ -251,9 +258,9 @@ ___
 Returns various account indicators.
 
 ```PHP
-/**
- * @var Timirey\XApi\Responses\GetMarginLevelResponse $response
- */
+use Timirey\XApi\Responses\GetMarginLevelResponse;
+
+/** @var GetMarginLevelResponse $response */
 $response = $client->getMarginLevel();
 ```
 ___
@@ -263,11 +270,11 @@ ___
 Retrieves information about a specific symbol.
 
 ```PHP
+use Timirey\XApi\Responses\GetSymbolResponse;
+
 $symbol = 'EURUSD';
 
-/**
- * @var Timirey\XApi\Responses\GetSymbolResponse $response
- */
+/** @var GetSymbolResponse $response */
 $response = $client->getSymbol($symbol);
 ```
 ___
@@ -277,9 +284,9 @@ ___
 Retrieves information about all symbols.
 
 ```PHP
-/**
- * @var Timirey\XApi\Responses\GetAllSymbolsResponse $response
- */
+use Timirey\XApi\Responses\GetAllSymbolsResponse;
+
+/** @var GetAllSymbolsResponse $response */
 $response = $client->getAllSymbols();
 ```
 ___
@@ -289,11 +296,12 @@ ___
 Starts a trade transaction.
 
 ```PHP
+use Timirey\XApi\Payloads\Data\TradeTransInfo;
+use Timirey\XApi\Responses\TradeTransactionResponse;
+
 $tradeTransInfo = new TradeTransInfo(/* parameters */);
 
-/**
- * @var Timirey\XApi\Responses\TradeTransactionResponse $response
- */
+/** @var TradeTransactionResponse $response */
 $response = $client->tradeTransaction($tradeTransInfo);
 ```
 ___
@@ -303,11 +311,11 @@ ___
 Returns the current transaction status.
 
 ```PHP
+use Timirey\XApi\Responses\TradeTransactionStatusResponse;
+
 $order = 123456;
 
-/**
- * @var Timirey\XApi\Responses\TradeTransactionStatusResponse $response
- */
+/** @var TradeTransactionStatusResponse $response */
 $response = $client->tradeTransactionStatus($order);
 ```
 ___
@@ -317,9 +325,9 @@ ___
 Regularly calling this function is enough to refresh the internal state of all the components in the system.
 
 ```PHP
-/**
- * @var Timirey\XApi\Responses\PingResponse $response
- */
+use Timirey\XApi\Responses\PingResponse;
+
+/** @var PingResponse $response */
 $response = $client->ping();
 ```
 ___
@@ -329,9 +337,9 @@ ___
 Returns a calendar with market events.
 
 ```PHP
-/**
- * @var Timirey\XApi\Responses\GetCalendarResponse $response
- */
+use Timirey\XApi\Responses\GetCalendarResponse;
+
+/** @var GetCalendarResponse $response */
 $response = $client->getCalendar();
 ```
 ___
@@ -341,11 +349,12 @@ ___
 Returns chart info from the start date to the current time.
 
 ```PHP
+use Timirey\XApi\Responses\GetChartLastRequestResponse;
+use Timirey\XApi\Payloads\Data\ChartLastInfoRecord;
+
 $chartLastInfoRecord = new ChartLastInfoRecord(/* parameters */);
 
-/**
- * @var Timirey\XApi\Responses\GetChartLastRequestResponse $response
- */
+/** @var GetChartLastRequestResponse $response */
 $response = $client->getChartLastRequest($chartLastInfoRecord);
 ```
 ___
@@ -355,11 +364,12 @@ ___
 Returns chart info from the start date to the current time.
 
 ```PHP
+use Timirey\XApi\Responses\GetChartRangeRequestResponse;
+use Timirey\XApi\Payloads\Data\ChartRangeInfoRecord;
+
 $chartRangeInfoRecord = new ChartRangeInfoRecord(/* parameters */);
 
-/**
- * @var Timirey\XApi\Responses\GetChartRangeRequestResponse $response
- */
+/** @var GetChartRangeRequestResponse $response */
 $response = $client->getChartRangeRequest($chartRangeInfoRecord);
 ```
 ___
@@ -369,12 +379,12 @@ ___
 Returns the calculation of commission and rate of exchange.
 
 ```PHP
+use Timirey\XApi\Responses\GetCommissionDefResponse;
+
 $symbol = 'EURUSD';
 $volume = 1.0;
 
-/**
- * @var Timirey\XApi\Responses\GetCommissionDefResponse $response
- */
+/** @var GetCommissionDefResponse $response */
 $response = $client->getCommissionDef($symbol, $volume);
 ```
 ___
@@ -384,10 +394,13 @@ ___
 Returns an array of trades listed in orders argument.
 
 ```PHP
+use Timirey\XApi\Responses\GetTradeRecordsResponse;
+
 $orders = [7489839, 7489841];
 
-/**
- * @var Timirey\XApi\Responses\GetTradeRecordsResponse $response
- */
+/** @var GetTradeRecordsResponse $response */
 $response = $client->getTradeRecords($orders);
 ```
+
+
+Table of contents, error handling
