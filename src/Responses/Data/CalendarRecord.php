@@ -2,7 +2,9 @@
 
 namespace Timirey\XApi\Responses\Data;
 
+use DateTime;
 use Timirey\XApi\Enums\Impact;
+use Timirey\XApi\Helpers\DateTimeHelper;
 
 /**
  * Class representing a calendar record.
@@ -15,6 +17,11 @@ class CalendarRecord
      * @var Impact Impact on market.
      */
     public Impact $impact;
+
+    /**
+     * @var DateTime Time when the information will be released.
+     */
+    public DateTime $time;
 
     /**
      * Constructor for CalendarRecord.
@@ -35,9 +42,10 @@ class CalendarRecord
         string $impact,
         public string $period,
         public string $previous,
-        public int $time,
+        int $time,
         public string $title
     ) {
         $this->impact = Impact::from($impact);
+        $this->time = DateTimeHelper::createFromMilliseconds($time);
     }
 }

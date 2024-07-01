@@ -2,7 +2,9 @@
 
 namespace Timirey\XApi\Payloads\Data;
 
+use DateTime;
 use Timirey\XApi\Enums\Period;
+use Timirey\XApi\Helpers\DateTimeHelper;
 
 /**
  * Class representing the range chart information record.
@@ -10,20 +12,32 @@ use Timirey\XApi\Enums\Period;
 class ChartRangeInfoRecord
 {
     /**
+     * @var int Start of chart block (milliseconds since epoch).
+     */
+    public int $start;
+
+    /**
+     * @var int End of chart block (milliseconds since epoch).
+     */
+    public int $end;
+
+    /**
      * Constructor for ChartRangeInfoRecord.
      *
      * @param Period $period Period code.
-     * @param int $start Start of chart block (milliseconds since epoch).
-     * @param int $end End of chart block (milliseconds since epoch).
+     * @param DateTime $start Start of chart block.
+     * @param DateTime $end End of chart block.
      * @param string $symbol Symbol.
      * @param int|null $ticks Number of ticks needed (optional).
      */
     public function __construct(
         public Period $period,
-        public int $start,
-        public int $end,
+        DateTime $start,
+        DateTime $end,
         public string $symbol,
         public ?int $ticks = null
     ) {
+        $this->start = DateTimeHelper::toMilliseconds($start);
+        $this->end = DateTimeHelper::toMilliseconds($end);
     }
 }
