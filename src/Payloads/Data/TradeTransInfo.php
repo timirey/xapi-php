@@ -9,8 +9,6 @@ use Timirey\XApi\Helpers\DateTimeHelper;
 
 /**
  * Class representing trade transaction information.
- *
- * todo: find out which properties are optional.
  */
 class TradeTransInfo
 {

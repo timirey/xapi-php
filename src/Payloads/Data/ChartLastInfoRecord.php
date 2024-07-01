@@ -8,8 +8,6 @@ use Timirey\XApi\Helpers\DateTimeHelper;
 
 /**
  * Class representing the last chart information record.
- *
- * todo: start should be DateTime?
  */
 class ChartLastInfoRecord
 {
