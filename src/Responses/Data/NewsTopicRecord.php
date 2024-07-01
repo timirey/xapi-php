@@ -2,11 +2,19 @@
 
 namespace Timirey\XApi\Responses\Data;
 
+use DateTime;
+use Timirey\XApi\Helpers\DateTimeHelper;
+
 /**
  * Class representing a news topic record.
  */
 class NewsTopicRecord
 {
+    /**
+     * @var DateTime Time in date time.
+     */
+    public DateTime $time;
+
     /**
      * Constructor for NewsTopicRecord.
      *
@@ -21,9 +29,10 @@ class NewsTopicRecord
         public string $body,
         public int $bodylen,
         public string $key,
-        public int $time,
+        int $time,
         public string $timeString,
         public string $title
     ) {
+        $this->time = DateTimeHelper::createFromMilliseconds($time);
     }
 }

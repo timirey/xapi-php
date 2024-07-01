@@ -2,9 +2,11 @@
 
 namespace Timirey\XApi\Responses\Data;
 
+use DateTime;
 use Timirey\XApi\Enums\MarginMode;
 use Timirey\XApi\Enums\ProfitMode;
 use Timirey\XApi\Enums\QuoteId;
+use Timirey\XApi\Helpers\DateTimeHelper;
 
 /**
  * Class representing a symbol record.
@@ -27,6 +29,21 @@ class SymbolRecord
      * @var ProfitMode For profit calculation.
      */
     public ProfitMode $profitMode;
+
+    /**
+     * @var DateTime|null Expiration time, null if not applicable.
+     */
+    public ?DateTime $expiration = null;
+
+    /**
+     * @var DateTime|null Starting time, null if not applicable.
+     */
+    public ?DateTime $starting = null;
+
+    /**
+     * @var DateTime Ask & bid tick time.
+     */
+    public DateTime $time;
 
     /**
      * Constructor for SymbolRecord.
@@ -92,8 +109,8 @@ class SymbolRecord
         public int $pipsPrecision,
         public int $contractSize,
         public int $exemode,
-        public int $time,
-        public ?int $expiration,
+        int $time,
+        ?int $expiration,
         public int $stopsLevel,
         public int $precision,
         public int $swapType,
@@ -121,7 +138,7 @@ class SymbolRecord
         public float $leverage,
         public float $spreadRaw,
         public float $spreadTable,
-        public ?int $starting,
+        ?int $starting,
         public int $swap_rollover3days,
         public ?int $marginMaintenance,
         public int $marginHedged,
@@ -133,5 +150,15 @@ class SymbolRecord
         $this->quoteId = QuoteId::from($quoteId);
         $this->marginMode = MarginMode::from($marginMode);
         $this->profitMode = ProfitMode::from($profitMode);
+
+        $this->time = DateTimeHelper::createFromMilliseconds($time);
+
+        if ($expiration !== null) {
+            $this->expiration = DateTimeHelper::createFromMilliseconds($expiration);
+        }
+
+        if ($starting !== null) {
+            $this->starting = DateTimeHelper::createFromMilliseconds($starting);
+        }
     }
 }

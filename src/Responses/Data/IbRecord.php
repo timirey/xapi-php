@@ -2,7 +2,9 @@
 
 namespace Timirey\XApi\Responses\Data;
 
+use DateTime;
 use Timirey\XApi\Enums\Side;
+use Timirey\XApi\Helpers\DateTimeHelper;
 
 /**
  * Class representing an IB record.
@@ -10,9 +12,14 @@ use Timirey\XApi\Enums\Side;
 class IbRecord
 {
     /**
-     * @var Side Operation code or null if not allowed to view.
+     * @var Side|null Operation code or null if not allowed to view.
      */
-    public Side|null $side;
+    public ?Side $side = null;
+
+    /**
+     * @var DateTime|null Time the record was created or null if not allowed to view.
+     */
+    public ?DateTime $timestamp = null;
 
     /**
      * Constructor for IbRecord.
@@ -35,9 +42,15 @@ class IbRecord
         ?int $side,
         public ?string $surname,
         public ?string $symbol,
-        public ?int $timestamp,
+        ?int $timestamp,
         public ?float $volume
     ) {
-        $this->side = Side::tryFrom($side);
+        if ($side !== null) {
+            $this->side = Side::from($side);
+        }
+
+        if ($timestamp !== null) {
+            $this->timestamp = DateTimeHelper::createFromMilliseconds($timestamp);
+        }
     }
 }

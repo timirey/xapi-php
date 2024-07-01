@@ -9,6 +9,7 @@ use Timirey\XApi\Enums\Period;
 use Timirey\XApi\Enums\RequestStatus;
 use Timirey\XApi\Enums\Side;
 use Timirey\XApi\Enums\Type;
+use Timirey\XApi\Helpers\DateTimeHelper;
 use Timirey\XApi\Payloads\Data\ChartLastInfoRecord;
 use Timirey\XApi\Payloads\Data\ChartRangeInfoRecord;
 use Timirey\XApi\Payloads\Data\TradeTransInfo;
@@ -302,7 +303,7 @@ test('tradeTransaction command', function () {
     $tradeTransInfo = new TradeTransInfo(
         cmd: Cmd::BUY,
         customComment: 'Test trade',
-        expiration: time() + 3600,
+        expiration: new DateTime(),
         offset: 0,
         order: 0,
         price: 1.12345,
@@ -443,9 +444,11 @@ test('getCalendar command', function () {
 });
 
 test('getChartLastRequest command', function () {
+    $dateTime = DateTime::createFromFormat('M d, Y g:i:s A', 'Jan 10, 2014 3:04:00 PM');
+
     $chartLastInfoRecord = new ChartLastInfoRecord(
         period: Period::PERIOD_M1,
-        start: 1389374640000,
+        start: $dateTime,
         symbol: 'EURUSD'
     );
 
@@ -462,7 +465,7 @@ test('getChartLastRequest command', function () {
             'rateInfos' => [
                 [
                     'close' => 1.12345,
-                    'ctm' => 1389374640000,
+                    'ctm' => DateTimeHelper::toMilliseconds($dateTime),
                     'ctmString' => 'Jan 10, 2014 3:04:00 PM',
                     'high' => 1.125,
                     'low' => 1.120,
@@ -489,7 +492,7 @@ test('getChartLastRequest command', function () {
         ->and($getChartLastRequestResponse->rateInfoRecords[0])->toBeInstanceOf(RateInfoRecord::class)
         ->and($getChartLastRequestResponse->rateInfoRecords[0]->close)->toBe(1.12345)
         ->and($getChartLastRequestResponse->rateInfoRecords[0]->ctmString)->toBe('Jan 10, 2014 3:04:00 PM')
-        ->and($getChartLastRequestResponse->rateInfoRecords[0]->ctm)->toBe(1389374640000)
+        ->and($getChartLastRequestResponse->rateInfoRecords[0]->ctm)->toBeInstanceOf(DateTime::class)
         ->and($getChartLastRequestResponse->rateInfoRecords[0]->high)->toBe(1.125)
         ->and($getChartLastRequestResponse->rateInfoRecords[0]->low)->toBe(1.120)
         ->and($getChartLastRequestResponse->rateInfoRecords[0]->open)->toBe(1.122)
@@ -497,10 +500,13 @@ test('getChartLastRequest command', function () {
 });
 
 test('getChartRangeRequest command', function () {
+    $start = DateTimeHelper::createFromMilliseconds(1);
+    $end = DateTimeHelper::createFromMilliseconds(2);
+
     $chartRangeInfoRecord = new ChartRangeInfoRecord(
         period: Period::PERIOD_H1,
-        start: 1389374640000, // Example start timestamp in milliseconds (Jan 10, 2014 3:04:00 PM)
-        end: 1389378240000,   // Example end timestamp in milliseconds
+        start: $start,
+        end: $end,
         symbol: 'EURUSD',
         ticks: 1000
     );
@@ -525,7 +531,6 @@ test('getChartRangeRequest command', function () {
                     'open' => 1.122,
                     'vol' => 100
                 ],
-                // Add more rate info records if needed
             ]
         ]
     ]);
@@ -546,7 +551,7 @@ test('getChartRangeRequest command', function () {
         ->and($getChartRangeRequestResponse->rateInfoRecords[0])->toBeInstanceOf(RateInfoRecord::class)
         ->and($getChartRangeRequestResponse->rateInfoRecords[0]->close)->toBe(1.12345)
         ->and($getChartRangeRequestResponse->rateInfoRecords[0]->ctmString)->toBe('Jan 10, 2014 3:04:00 PM')
-        ->and($getChartRangeRequestResponse->rateInfoRecords[0]->ctm)->toBe(1389374640000)
+        ->and($getChartRangeRequestResponse->rateInfoRecords[0]->ctm)->toBeInstanceOf(DateTime::class)
         ->and($getChartRangeRequestResponse->rateInfoRecords[0]->high)->toBe(1.125)
         ->and($getChartRangeRequestResponse->rateInfoRecords[0]->low)->toBe(1.120)
         ->and($getChartRangeRequestResponse->rateInfoRecords[0]->open)->toBe(1.122)
@@ -698,8 +703,8 @@ test('getMarginTrade command', function () {
 });
 
 test('getNews command', function () {
-    $start = 1275993488000;
-    $end = 0;
+    $start = new DateTime();
+    $end = new DateTime();
     $getNewsPayload = new GetNewsPayload($start, $end);
 
     $this->webSocketClient->shouldReceive('text')
@@ -736,14 +741,14 @@ test('getNews command', function () {
         ->and($getNewsResponse->newsTopicRecords[0]->body)->toBe('<html lang="">...</html>')
         ->and($getNewsResponse->newsTopicRecords[0]->bodylen)->toBe(110)
         ->and($getNewsResponse->newsTopicRecords[0]->key)->toBe('1f6da766abd29927aa854823f0105c23')
-        ->and($getNewsResponse->newsTopicRecords[0]->time)->toBe(1262944112000)
+        ->and($getNewsResponse->newsTopicRecords[0]->time)->toBeInstanceOf(DateTime::class)
         ->and($getNewsResponse->newsTopicRecords[0]->timeString)->toBe('May 17, 2013 4:30:00 PM')
         ->and($getNewsResponse->newsTopicRecords[0]->title)->toBe('Breaking trend');
 });
 
 test('getIbsHistory command', function () {
-    $start = 1394449010991;
-    $end = 1395053810991;
+    $start = DateTimeHelper::createFromMilliseconds(1394449010991);
+    $end = DateTimeHelper::createFromMilliseconds(1395053810991);
     $getIbsHistoryPayload = new GetIbsHistoryPayload($start, $end);
 
     $this->webSocketClient->shouldReceive('text')
@@ -787,7 +792,7 @@ test('getIbsHistory command', function () {
         ->and($getIbsHistoryResponse->ibRecords[0]->side)->toBe(Side::BUY)
         ->and($getIbsHistoryResponse->ibRecords[0]->surname)->toBe('IB_Client_1')
         ->and($getIbsHistoryResponse->ibRecords[0]->symbol)->toBe('EURUSD')
-        ->and($getIbsHistoryResponse->ibRecords[0]->timestamp)->toBe(1395755870000)
+        ->and($getIbsHistoryResponse->ibRecords[0]->timestamp)->toBeInstanceOf(DateTime::class)
         ->and($getIbsHistoryResponse->ibRecords[0]->volume)->toBe(1.0);
 });
 
@@ -856,7 +861,7 @@ test('getServerTime command', function () {
     $getServerTimeResponse = $this->client->getServerTime();
 
     expect($getServerTimeResponse)->toBeInstanceOf(GetServerTimeResponse::class)
-        ->and($getServerTimeResponse->time)->toBe(1392211379731)
+        ->and($getServerTimeResponse->time)->toBeInstanceOf(DateTime::class)
         ->and($getServerTimeResponse->timeString)->toBe('Feb 12, 2014 2:22:59 PM');
 });
 
@@ -913,7 +918,7 @@ test('getStepRules command', function () {
 test('getTickPrices command', function () {
     $level = Level::BASE;
     $symbols = ['EURPLN', 'AGO.PL'];
-    $timestamp = 1262944112000;
+    $timestamp = DateTimeHelper::createFromMilliseconds(1262944112000);
     $getTickPricesPayload = new GetTickPricesPayload($level, $symbols, $timestamp);
 
     $this->webSocketClient->shouldReceive('text')
@@ -965,7 +970,7 @@ test('getTickPrices command', function () {
         ->and($getTickPricesResponse->quotations[0]->spreadRaw)->toBe(0.000003)
         ->and($getTickPricesResponse->quotations[0]->spreadTable)->toBe(0.00042)
         ->and($getTickPricesResponse->quotations[0]->symbol)->toBe('KOMB.CZ')
-        ->and($getTickPricesResponse->quotations[0]->timestamp)->toBe(1272529161605);
+        ->and($getTickPricesResponse->quotations[0]->timestamp)->toBeInstanceOf(DateTime::class);
 });
 
 test('getTradeRecords command', function () {
@@ -1037,7 +1042,7 @@ test('getTradeRecords command', function () {
         ->and($getTradeRecordsResponse->tradeRecords[0]->margin_rate)->toBe(0.0)
         ->and($getTradeRecordsResponse->tradeRecords[0]->offset)->toBe(0)
         ->and($getTradeRecordsResponse->tradeRecords[0]->open_price)->toBe(1.4)
-        ->and($getTradeRecordsResponse->tradeRecords[0]->open_time)->toBe(1272380927000)
+        ->and($getTradeRecordsResponse->tradeRecords[0]->open_time)->toBeInstanceOf(DateTime::class)
         ->and($getTradeRecordsResponse->tradeRecords[0]->open_timeString)->toBe('Fri Jan 11 10:03:36 CET 2013')
         ->and($getTradeRecordsResponse->tradeRecords[0]->order)->toBe(7497776)
         ->and($getTradeRecordsResponse->tradeRecords[0]->order2)->toBe(1234567)
@@ -1046,7 +1051,7 @@ test('getTradeRecords command', function () {
         ->and($getTradeRecordsResponse->tradeRecords[0]->sl)->toBe(0.0)
         ->and($getTradeRecordsResponse->tradeRecords[0]->storage)->toBe(-4.46)
         ->and($getTradeRecordsResponse->tradeRecords[0]->symbol)->toBe('EURUSD')
-        ->and($getTradeRecordsResponse->tradeRecords[0]->timestamp)->toBe(1272540251000)
+        ->and($getTradeRecordsResponse->tradeRecords[0]->timestamp)->toBeInstanceOf(DateTime::class)
         ->and($getTradeRecordsResponse->tradeRecords[0]->tp)->toBe(0.0)
         ->and($getTradeRecordsResponse->tradeRecords[0]->volume)->toBe(0.10);
 });
@@ -1120,7 +1125,7 @@ test('getTrades command', function () {
         ->and($getTradesResponse->tradeRecords[0]->margin_rate)->toBe(0.0)
         ->and($getTradesResponse->tradeRecords[0]->offset)->toBe(0)
         ->and($getTradesResponse->tradeRecords[0]->open_price)->toBe(1.4)
-        ->and($getTradesResponse->tradeRecords[0]->open_time)->toBe(1272380927000)
+        ->and($getTradesResponse->tradeRecords[0]->open_time)->toBeInstanceOf(DateTime::class)
         ->and($getTradesResponse->tradeRecords[0]->open_timeString)->toBe('Fri Jan 11 10:03:36 CET 2013')
         ->and($getTradesResponse->tradeRecords[0]->order)->toBe(7497776)
         ->and($getTradesResponse->tradeRecords[0]->order2)->toBe(1234567)
@@ -1129,14 +1134,14 @@ test('getTrades command', function () {
         ->and($getTradesResponse->tradeRecords[0]->sl)->toBe(0.0)
         ->and($getTradesResponse->tradeRecords[0]->storage)->toBe(-4.46)
         ->and($getTradesResponse->tradeRecords[0]->symbol)->toBe('EURUSD')
-        ->and($getTradesResponse->tradeRecords[0]->timestamp)->toBe(1272540251000)
+        ->and($getTradesResponse->tradeRecords[0]->timestamp)->toBeInstanceOf(DateTime::class)
         ->and($getTradesResponse->tradeRecords[0]->tp)->toBe(0.0)
         ->and($getTradesResponse->tradeRecords[0]->volume)->toBe(0.10);
 });
 
 test('getTradesHistory command', function () {
-    $start = 1275993488000;
-    $end = 0;
+    $start = DateTimeHelper::createFromMilliseconds(1275993488000);
+    $end = DateTimeHelper::createFromMilliseconds(0);
     $getTradesHistoryPayload = new GetTradesHistoryPayload($start, $end);
 
     $this->webSocketClient->shouldReceive('text')
@@ -1204,7 +1209,7 @@ test('getTradesHistory command', function () {
         ->and($getTradesHistoryResponse->tradeRecords[0]->margin_rate)->toBe(0.0)
         ->and($getTradesHistoryResponse->tradeRecords[0]->offset)->toBe(0)
         ->and($getTradesHistoryResponse->tradeRecords[0]->open_price)->toBe(1.4)
-        ->and($getTradesHistoryResponse->tradeRecords[0]->open_time)->toBe(1272380927000)
+        ->and($getTradesHistoryResponse->tradeRecords[0]->open_time)->toBeInstanceOf(DateTime::class)
         ->and($getTradesHistoryResponse->tradeRecords[0]->open_timeString)->toBe('Fri Jan 11 10:03:36 CET 2013')
         ->and($getTradesHistoryResponse->tradeRecords[0]->order)->toBe(7497776)
         ->and($getTradesHistoryResponse->tradeRecords[0]->order2)->toBe(1234567)
@@ -1213,7 +1218,7 @@ test('getTradesHistory command', function () {
         ->and($getTradesHistoryResponse->tradeRecords[0]->sl)->toBe(0.0)
         ->and($getTradesHistoryResponse->tradeRecords[0]->storage)->toBe(-4.46)
         ->and($getTradesHistoryResponse->tradeRecords[0]->symbol)->toBe('EURUSD')
-        ->and($getTradesHistoryResponse->tradeRecords[0]->timestamp)->toBe(1272540251000)
+        ->and($getTradesHistoryResponse->tradeRecords[0]->timestamp)->toBeInstanceOf(DateTime::class)
         ->and($getTradesHistoryResponse->tradeRecords[0]->tp)->toBe(0.0)
         ->and($getTradesHistoryResponse->tradeRecords[0]->volume)->toBe(0.10);
 });
@@ -1257,12 +1262,12 @@ test('getTradingHours command', function () {
         ->and($getTradingHoursResponse->tradingHoursRecords[0]->symbol)->toBe('USDPLN')
         ->and($getTradingHoursResponse->tradingHoursRecords[0]->quotes[0])->toBeInstanceOf(QuotesRecord::class)
         ->and($getTradingHoursResponse->tradingHoursRecords[0]->quotes[0]->day)->toBe(Day::TUESDAY)
-        ->and($getTradingHoursResponse->tradingHoursRecords[0]->quotes[0]->fromT)->toBe(63000000)
-        ->and($getTradingHoursResponse->tradingHoursRecords[0]->quotes[0]->toT)->toBe(63300000)
+        ->and($getTradingHoursResponse->tradingHoursRecords[0]->quotes[0]->fromT)->toBeInstanceOf(DateTime::class)
+        ->and($getTradingHoursResponse->tradingHoursRecords[0]->quotes[0]->toT)->toBeInstanceOf(DateTime::class)
         ->and($getTradingHoursResponse->tradingHoursRecords[0]->trading[0])->toBeInstanceOf(TradingRecord::class)
         ->and($getTradingHoursResponse->tradingHoursRecords[0]->trading[0]->day)->toBe(Day::TUESDAY)
-        ->and($getTradingHoursResponse->tradingHoursRecords[0]->trading[0]->fromT)->toBe(63000000)
-        ->and($getTradingHoursResponse->tradingHoursRecords[0]->trading[0]->toT)->toBe(63300000);
+        ->and($getTradingHoursResponse->tradingHoursRecords[0]->trading[0]->fromT)->toBeInstanceOf(DateTime::class)
+        ->and($getTradingHoursResponse->tradingHoursRecords[0]->trading[0]->toT)->toBeInstanceOf(DateTime::class);
 });
 
 test('getVersion command', function () {

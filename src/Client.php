@@ -2,6 +2,7 @@
 
 namespace Timirey\XApi;
 
+use DateTime;
 use Timirey\XApi\Enums\Cmd;
 use Timirey\XApi\Enums\Host;
 use Timirey\XApi\Enums\Level;
@@ -253,11 +254,11 @@ class Client
     /**
      * Returns news from the trading server which were sent within a specified period of time.
      *
-     * @param int $start
-     * @param int $end
+     * @param DateTime $start
+     * @param DateTime $end
      * @return GetNewsResponse
      */
-    public function getNews(int $start, int $end): GetNewsResponse
+    public function getNews(DateTime $start, DateTime $end): GetNewsResponse
     {
         return $this->sendRequest(new GetNewsPayload($start, $end), GetNewsResponse::class);
     }
@@ -265,11 +266,11 @@ class Client
     /**
      * Returns IBs data from the given time range.
      *
-     * @param int $start
-     * @param int $end
+     * @param DateTime $start
+     * @param DateTime $end
      * @return GetIbsHistoryResponse
      */
-    public function getIbsHistory(int $start, int $end): GetIbsHistoryResponse
+    public function getIbsHistory(DateTime $start, DateTime $end): GetIbsHistoryResponse
     {
         return $this->sendRequest(new GetIbsHistoryPayload($start, $end), GetIbsHistoryResponse::class);
     }
@@ -322,10 +323,10 @@ class Client
      *
      * @param Level $level
      * @param array $symbols
-     * @param int $timestamp
+     * @param DateTime $timestamp
      * @return GetTickPricesResponse
      */
-    public function getTickPrices(Level $level, array $symbols, int $timestamp): GetTickPricesResponse
+    public function getTickPrices(Level $level, array $symbols, DateTime $timestamp): GetTickPricesResponse
     {
         return $this->sendRequest(
             new GetTickPricesPayload($level, $symbols, $timestamp),
@@ -358,11 +359,11 @@ class Client
     /**
      * Returns array of user's trades which were closed within specified period of time.
      *
-     * @param int $start Start time for trade history retrieval (milliseconds since epoch).
-     * @param int $end End time for trade history retrieval (milliseconds since epoch).
+     * @param DateTime $start Start time for trade history retrieval.
+     * @param DateTime $end End time for trade history retrieval.
      * @return GetTradesHistoryResponse
      */
-    public function getTradesHistory(int $start, int $end): GetTradesHistoryResponse
+    public function getTradesHistory(DateTime $start, DateTime $end): GetTradesHistoryResponse
     {
         return $this->sendRequest(new GetTradesHistoryPayload($start, $end), GetTradesHistoryResponse::class);
     }
@@ -395,7 +396,7 @@ class Client
      * @param AbstractPayload $payload The payload to send.
      * @param class-string<T> $responseClass The response class to instantiate.
      * @return AbstractResponse The response instance.
-     * @return AbstractResponse
+     * @return T
      */
     protected function sendRequest(AbstractPayload $payload, string $responseClass): AbstractResponse
     {
