@@ -2,7 +2,9 @@
 
 namespace Timirey\XApi\Responses\Data;
 
+use DateTime;
 use Timirey\XApi\Enums\Level;
+use Timirey\XApi\Helpers\DateTimeHelper;
 
 /**
  * Class representing a tick record.
@@ -13,6 +15,11 @@ class TickRecord
      * @var Level Price level.
      */
     public Level $level;
+
+    /**
+     * @var DateTime Timestamp.
+     */
+    public DateTime $timestamp;
 
     /**
      * Constructor for TickRecord.
@@ -42,8 +49,10 @@ class TickRecord
         public float $spreadRaw,
         public float $spreadTable,
         public string $symbol,
-        public int $timestamp
+        int $timestamp
     ) {
         $this->level = Level::from($level);
+
+        $this->timestamp = DateTimeHelper::createFromMilliseconds($timestamp);
     }
 }

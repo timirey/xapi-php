@@ -2,7 +2,9 @@
 
 namespace Timirey\XApi\Responses\Data;
 
+use DateTime;
 use Timirey\XApi\Enums\Cmd;
+use Timirey\XApi\Helpers\DateTimeHelper;
 
 /**
  * Class representing a trade record.
@@ -13,6 +15,26 @@ class TradeRecord
      * @var Cmd Operation code.
      */
     public Cmd $cmd;
+
+    /**
+     * @var DateTime|null Null if order is not closed.
+     */
+    public ?DateTime $close_time = null;
+
+    /**
+     * @var DateTime Open time.
+     */
+    public DateTime $open_time;
+
+    /**
+     * @var DateTime|null Null if order is not closed.
+     */
+    public ?DateTime $expiration = null;
+
+    /**
+     * @var DateTime Timestamp.
+     */
+    public DateTime $timestamp;
 
     /**
      * Constructor for TradeRecord.
@@ -46,7 +68,7 @@ class TradeRecord
      */
     public function __construct(
         public float $close_price,
-        public ?int $close_time,
+        ?int $close_time,
         public ?string $close_timeString,
         public bool $closed,
         int $cmd,
@@ -54,12 +76,12 @@ class TradeRecord
         public ?float $commission,
         public ?string $customComment,
         public int $digits,
-        public ?int $expiration,
+        ?int $expiration,
         public ?string $expirationString,
         public float $margin_rate,
         public int $offset,
         public float $open_price,
-        public int $open_time,
+        int $open_time,
         public string $open_timeString,
         public int $order,
         public ?int $order2,
@@ -68,10 +90,21 @@ class TradeRecord
         public float $sl,
         public float $storage,
         public ?string $symbol,
-        public int $timestamp,
+        int $timestamp,
         public float $tp,
         public float $volume
     ) {
         $this->cmd = Cmd::from($cmd);
+
+        $this->open_time = DateTimeHelper::createFromMilliseconds($open_time);
+        $this->timestamp = DateTimeHelper::createFromMilliseconds($timestamp);
+
+        if ($close_time !== null) {
+            $this->close_time = DateTimeHelper::createFromMilliseconds($close_time);
+        }
+
+        if ($expiration !== null) {
+            $this->expiration = DateTimeHelper::createFromMilliseconds($expiration);
+        }
     }
 }

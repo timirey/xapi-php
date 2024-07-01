@@ -2,6 +2,9 @@
 
 namespace Timirey\XApi\Responses\Data;
 
+use DateTime;
+use Timirey\XApi\Helpers\DateTimeHelper;
+
 /**
  * Class representing a rate information record.
  *
@@ -9,6 +12,11 @@ namespace Timirey\XApi\Responses\Data;
  */
 class RateInfoRecord
 {
+    /**
+     * @var DateTime Candle start time in CET / CEST time zone.
+     */
+    public DateTime $ctm;
+
     /**
      * Constructor for RateInfoRecord.
      *
@@ -22,12 +30,13 @@ class RateInfoRecord
      */
     public function __construct(
         public float $close,
-        public int $ctm,
+        int $ctm,
         public string $ctmString,
         public float $high,
         public float $low,
         public float $open,
         public float $vol
     ) {
+        $this->ctm = DateTimeHelper::createFromMilliseconds($ctm);
     }
 }
