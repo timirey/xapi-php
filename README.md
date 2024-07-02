@@ -1,5 +1,5 @@
 <p align="center">
-<img src="https://github.com/timirey/xapi-php/assets/15349915/8f2f6b27-29d6-487d-bbcc-bea2befebd5b" alt="xStore Developers">
+<img src="https://raw.githubusercontent.com/timirey/xapi-php/master/.github/logo.png" alt="xStore Developers">
 </p>
 
 <p align="center">
