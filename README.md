@@ -6,7 +6,7 @@ This PHP library provides a comprehensive and user-friendly interface for intera
 
 - [Installation](#installation)
 - [Usage](#usage)
-- [Available Commands](#available-commands)
+- [Available commands](#available-commands)
   - [login](#login)
   - [logout](#logout)
 - [Retrieving trading data](#retrieving-trading-data)
@@ -33,7 +33,9 @@ This PHP library provides a comprehensive and user-friendly interface for intera
   - [getChartRangeRequest](#getchartrangerequest)
   - [getCommissionDef](#getcommissiondef)
   - [getTradeRecords](#gettraderecords)
+- [Error handling][#error-handling]
 - [License](#license)
+- [Reference](#reference)
 
 ## Installation
 
