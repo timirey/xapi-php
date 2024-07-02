@@ -33,7 +33,7 @@ This PHP library provides a comprehensive and user-friendly interface for intera
   - [getChartRangeRequest](#getchartrangerequest)
   - [getCommissionDef](#getcommissiondef)
   - [getTradeRecords](#gettraderecords)
-- [Error handling][#error-handling]
+- [Error handling](#error-handling)
 - [License](#license)
 - [Reference](#reference)
 
@@ -297,6 +297,10 @@ Returns an array of trades listed in orders argument.
 $orders = [7489839, 7489841];
 $response = $client->getTradeRecords($orders);
 ```
+
+## Error handling
+
+Todo
 
 ## License
 
