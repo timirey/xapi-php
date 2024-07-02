@@ -40,7 +40,7 @@ This PHP library provides a comprehensive and user-friendly interface for intera
 Install the package via Composer:
 
 ```SH
-composer require timirey/xtb-api
+composer require timirey/xapi-php
 ```
 
 ## Usage
