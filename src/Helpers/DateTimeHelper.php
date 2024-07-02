@@ -14,8 +14,10 @@ class DateTimeHelper
      *
      * @param int $timestamp The timestamp in milliseconds.
      * @return DateTime The created DateTime object.
+     *
+     * todo: rename this function.
      */
-    public static function createFromMilliseconds(int $timestamp): DateTime
+    public static function fromMilliseconds(int $timestamp): DateTime
     {
         return DateTime::createFromFormat('U.u', sprintf('%d.%03d', $timestamp / 1000, $timestamp % 1000));
     }
@@ -25,6 +27,8 @@ class DateTimeHelper
      *
      * @param DateTime $dateTime The DateTime object to convert.
      * @return int The timestamp in milliseconds.
+     *
+     * todo: rename this function.
      */
     public static function toMilliseconds(DateTime $dateTime): int
     {

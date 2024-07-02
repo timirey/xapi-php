@@ -35,6 +35,6 @@ class RateInfoRecord
         public float $open,
         public float $vol
     ) {
-        $this->ctm = DateTimeHelper::createFromMilliseconds($ctm);
+        $this->ctm = DateTimeHelper::fromMilliseconds($ctm);
     }
 }

@@ -149,14 +149,14 @@ class SymbolRecord
         $this->marginMode = MarginMode::from($marginMode);
         $this->profitMode = ProfitMode::from($profitMode);
 
-        $this->time = DateTimeHelper::createFromMilliseconds($time);
+        $this->time = DateTimeHelper::fromMilliseconds($time);
 
         if ($expiration !== null) {
-            $this->expiration = DateTimeHelper::createFromMilliseconds($expiration);
+            $this->expiration = DateTimeHelper::fromMilliseconds($expiration);
         }
 
         if ($starting !== null) {
-            $this->starting = DateTimeHelper::createFromMilliseconds($starting);
+            $this->starting = DateTimeHelper::fromMilliseconds($starting);
         }
     }
 }

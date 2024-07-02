@@ -33,6 +33,6 @@ class NewsTopicRecord
         public string $timeString,
         public string $title
     ) {
-        $this->time = DateTimeHelper::createFromMilliseconds($time);
+        $this->time = DateTimeHelper::fromMilliseconds($time);
     }
 }

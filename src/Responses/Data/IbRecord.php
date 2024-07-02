@@ -50,7 +50,7 @@ class IbRecord
         }
 
         if ($timestamp !== null) {
-            $this->timestamp = DateTimeHelper::createFromMilliseconds($timestamp);
+            $this->timestamp = DateTimeHelper::fromMilliseconds($timestamp);
         }
     }
 }

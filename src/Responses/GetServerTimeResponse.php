@@ -23,6 +23,6 @@ class GetServerTimeResponse extends AbstractResponse
      */
     public function __construct(int $time, public string $timeString)
     {
-        $this->time = DateTimeHelper::createFromMilliseconds($time);
+        $this->time = DateTimeHelper::fromMilliseconds($time);
     }
 }
