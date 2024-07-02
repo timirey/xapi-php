@@ -13,15 +13,18 @@ class GetChartRangeRequestResponse extends AbstractResponse
     /**
      * Constructor for GetChartRangeRequestResponse.
      *
-     * @param int $digits
-     * @param RateInfoRecord[] $rateInfoRecords
+     * @param integer          $digits          The number of decimal places for price values.
+     * @param RateInfoRecord[] $rateInfoRecords An array of rate information records.
      */
     public function __construct(public int $digits, public array $rateInfoRecords)
     {
     }
 
     /**
-     * @inheritdoc
+     * Create a response instance from the validated data.
+     *
+     * @param array $data Validated response data.
+     * @return static Instance of the response.
      */
     protected static function create(array $data): static
     {

@@ -12,14 +12,17 @@ class GetTickPricesResponse extends AbstractResponse
     /**
      * Constructor for GetTickPricesResponse.
      *
-     * @param TickRecord[] $quotations
+     * @param TickRecord[] $quotations TickRecord instances, aka Quotations.
      */
     public function __construct(public array $quotations)
     {
     }
 
     /**
-     * @inheritdoc
+     * Create a response instance from the validated data.
+     *
+     * @param array $data Validated response data.
+     * @return static Instance of the response.
      */
     protected static function create(array $data): static
     {

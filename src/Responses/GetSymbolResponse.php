@@ -12,14 +12,17 @@ class GetSymbolResponse extends AbstractResponse
     /**
      * Constructor for GetSymbolResponse.
      *
-     * @param SymbolRecord $symbolRecord
+     * @param SymbolRecord $symbolRecord SymbolRecord instance.
      */
     public function __construct(public SymbolRecord $symbolRecord)
     {
     }
 
     /**
-     * @inheritdoc
+     * Create a response instance from the validated data.
+     *
+     * @param array $data Validated response data.
+     * @return static Instance of the response.
      */
     protected static function create(array $data): static
     {

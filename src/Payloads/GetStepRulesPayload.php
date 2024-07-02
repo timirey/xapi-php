@@ -8,7 +8,9 @@ namespace Timirey\XApi\Payloads;
 class GetStepRulesPayload extends AbstractPayload
 {
     /**
-     * @inheritdoc
+     * {@inheritdoc}
+     *
+     * @return string
      */
     public function getCommand(): string
     {

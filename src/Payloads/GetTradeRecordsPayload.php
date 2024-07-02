@@ -18,7 +18,9 @@ class GetTradeRecordsPayload extends AbstractPayload
     }
 
     /**
-     * @inheritdoc
+     * Get the command.
+     *
+     * @return string Command name.
      */
     public function getCommand(): string
     {
