@@ -1,5 +1,9 @@
 # Release Notes
 
+## [1.0.0-rc.2](https://github.com/timirey/xapi-php/compare/1.0.0-rc...1.0.0-rc.2) - 2024-07-02
+
+* Adjusted README.md with documentation.
+
 ## [1.0.0-rc](https://github.com/timirey/xapi-php/compare/1.0.0-beta...1.0.0-rc) - 2024-07-01
 
 * Prepare for release.
