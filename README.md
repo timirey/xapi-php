@@ -1,38 +1,40 @@
 ![xStore Developers](https://github.com/timirey/xapi-php/assets/15349915/8f2f6b27-29d6-487d-bbcc-bea2befebd5b)
 
-This PHP library provides a comprehensive and user-friendly interface for interacting with the X-Trade Brokers (XTB) xStation5 Trading API. It supports various functionalities including account management, trade execution, and market data retrieval.
+This PHP library provides a comprehensive and user-friendly interface for interacting with the X-Trade Brokers (XTB)
+xStation5 Trading API. It supports various functionalities including account management, trade execution, and market
+data retrieval.
 
 ## Table of Contents
 
 - [Installation](#installation)
 - [Usage](#usage)
 - [Available commands](#available-commands)
-  - [login](#login)
-  - [logout](#logout)
+    - [login](#login)
+    - [logout](#logout)
 - [Retrieving trading data](#retrieving-trading-data)
-  - [getStepRules](#getsteprules)
-  - [getTickPrices](#gettickprices)
-  - [getTrades](#gettrades)
-  - [getTradesHistory](#gettradeshistory)
-  - [getTradingHours](#gettradinghours)
-  - [getVersion](#getversion)
-  - [getProfitCalculation](#getprofitcalculation)
-  - [getServerTime](#getservertime)
-  - [getMarginTrade](#getmargintrade)
-  - [getIbsHistory](#getibshistory)
-  - [getNews](#getnews)
-  - [getCurrentUserData](#getcurrentuserdata)
-  - [getMarginLevel](#getmarginlevel)
-  - [getSymbol](#getsymbol)
-  - [getAllSymbols](#getallsymbols)
-  - [tradeTransaction](#tradetransaction)
-  - [tradeTransactionStatus](#tradetransactionstatus)
-  - [ping](#ping)
-  - [getCalendar](#getcalendar)
-  - [getChartLastRequest](#getchartlastrequest)
-  - [getChartRangeRequest](#getchartrangerequest)
-  - [getCommissionDef](#getcommissiondef)
-  - [getTradeRecords](#gettraderecords)
+    - [getAllSymbols](#getallsymbols)
+    - [getCalendar](#getcalendar)
+    - [getChartLastRequest](#getchartlastrequest)
+    - [getChartRangeRequest](#getchartrangerequest)
+    - [getCommissionDef](#getcommissiondef)
+    - [getCurrentUserData](#getcurrentuserdata)
+    - [getIbsHistory](#getibshistory)
+    - [getMarginLevel](#getmarginlevel)
+    - [getMarginTrade](#getmargintrade)
+    - [getNews](#getnews)
+    - [getProfitCalculation](#getprofitcalculation)
+    - [getServerTime](#getservertime)
+    - [getStepRules](#getsteprules)
+    - [getSymbol](#getsymbol)
+    - [getTickPrices](#gettickprices)
+    - [getTradeRecords](#gettraderecords)
+    - [getTrades](#gettrades)
+    - [getTradesHistory](#gettradeshistory)
+    - [getTradingHours](#gettradinghours)
+    - [getVersion](#getversion)
+    - [ping](#ping)
+    - [tradeTransaction](#tradetransaction)
+    - [tradeTransactionStatus](#tradetransactionstatus)
 - [Error handling](#error-handling)
 - [License](#license)
 - [Reference](#reference)
@@ -50,22 +52,29 @@ composer require timirey/xapi-php
 Before you can access the endpoints, you should initialize a client.
 
 ```PHP
-use Timirey\XApi\Clients\Client;
-use Timirey\XApi\Clients\Enums\Host;
+use Timirey\XApi\Client;
+use Timirey\XApi\Enums\Host;
 
-$userId = 123456789;
-$password = 'password';
-
-/** @var Client $client */
-$client = new Client($userId, $password, Host::DEMO);
+/** 
+ * @var Client $client 
+ */
+$client = new Client(
+    userId: 123456789, 
+    password: 'password', 
+    host: Host::DEMO
+);
 ```
 
 And authenticate.
 
 ```PHP
 use Timirey\XApi\Responses\LoginResponse;
+use Timirey\XApi\Client;
 
-/** @var LoginResponse $response */
+/** 
+ * @var LoginResponse $response 
+ * @var Client $client
+ */
 $response = $client->login();
 ```
 
@@ -73,8 +82,12 @@ Now you can send commands.
 
 ```PHP
 use Timirey\XApi\Responses\GetAllSymbolsResponse;
+use Timirey\XApi\Client;
 
-/** @var GetAllSymbolsResponse $response */
+/** 
+ * @var GetAllSymbolsResponse $response 
+ * @var Client $client
+ */
 $response = $client->getAllSymbols();
 ```
 
@@ -82,8 +95,12 @@ And logout, if necessary.
 
 ```PHP
 use Timirey\XApi\Responses\LogoutResponse;
+use Timirey\XApi\Client;
 
-/** @var LogoutResponse $response */
+/** 
+ * @var LogoutResponse $response 
+ * @var Client $client
+ */
 $response = $client->logout();
 ```
 
@@ -97,8 +114,12 @@ Logs in to the xStation5 API.
 
 ```PHP
 use Timirey\XApi\Responses\LoginResponse;
+use Timirey\XApi\Client;
 
-/** @var LoginResponse */
+/** 
+ * @var LoginResponse $response 
+ * @var Client $client
+ */
 $response = $client->login();
 ```
 
@@ -108,8 +129,12 @@ Logs out from the xStation5 API.
 
 ```PHP
 use Timirey\XApi\Responses\LogoutResponse;
+use Timirey\XApi\Client;
 
-/** @var LogoutResponse */
+/** 
+ * @var LogoutResponse $response
+ * @var Client $client
+ */
 $response = $client->logout();
 ```
 
@@ -117,235 +142,19 @@ $response = $client->logout();
 
 Currently, it supports only non-streaming commands. Streaming commands will be released later.
 
-### [getStepRules](http://developers.xstore.pro/documentation/current#getStepRules)
-
-Returns a list of step rules for DMAs.
-
-```PHP
-use Timirey\XApi\Responses\GetStepRulesResponse;
-
-/** @var GetStepRulesResponse $response */
-$response = $client->getStepRules();
-```
-
-### [getTickPrices](http://developers.xstore.pro/documentation/current#getTickPrices)
-
-Returns an array of current quotations for given symbols.
-
-```PHP
-$level = Level::BASE;
-$symbols = ['EURPLN', 'AGO.PL'];
-$timestamp = new DateTime();
-$response = $client->getTickPrices($level, $symbols, $timestamp);
-```
-
-### [getTrades](http://developers.xstore.pro/documentation/current#getTrades)
-
-Returns an array of user's trades.
-
-```PHP
-use Timirey\XApi\Responses\GetTradesResponse;
-
-$openedOnly = true;
-
-/** @var GetTradesResponse $response */
-$response = $client->getTrades($openedOnly);
-```
-
-### [getTradesHistory](http://developers.xstore.pro/documentation/current#getTradesHistory)
-
-Returns an array of user's trades which were closed within a specified period.
-
-```PHP
-use Timirey\XApi\Responses\GetTradesHistoryResponse;
-use DateTime;
-
-$start = new DateTime('last month');
-$end = new DateTime();
-
-/** @var GetTradesHistoryResponse $response */
-$response = $client->getTradesHistory($start, $end);
-```
-
-### [getTradingHours](http://developers.xstore.pro/documentation/current#getTradingHours)
-
-Returns quotes and trading times.
-
-```PHP
-use Timirey\XApi\Responses\GetTradingHoursResponse;
-
-$symbols = ['EURPLN', 'AGO.PL'];
-
-/** @var GetTradingHoursResponse $response */
-$response = $client->getTradingHours($symbols);
-```
-
-### [getVersion](http://developers.xstore.pro/documentation/current#getVersion)
-
-Returns the current API version.
-
-```PHP
-use Timirey\XApi\Responses\GetVersionResponse;
-
-/** @var GetVersionResponse $response */
-$response = $client->getVersion();
-```
-
-### [getProfitCalculation](http://developers.xstore.pro/documentation/current#getProfitCalculation)
-
-Calculates estimated profit for given deal data.
-
-```PHP
-use Timirey\XApi\Responses\GetProfitCalculationResponse;
-use Timirey\XApi\Enums\Cmd;
-
-$closePrice = 1.3000;
-$cmd = Cmd::BUY;
-$openPrice = 1.2233;
-$symbol = 'EURPLN';
-$volume = 1.0;
-
-/** @var GetProfitCalculationResponse $response */
-$response = $client->getProfitCalculation($closePrice, $cmd, $openPrice, $symbol, $volume);
-```
-
-### [getServerTime](http://developers.xstore.pro/documentation/current#getServerTime)
-
-Returns the current time on the trading server.
-
-```PHP
-use Timirey\XApi\Responses\GetServerTimeResponse;
-
-/** @var GetServerTimeResponse $response */
-$response = $client->getServerTime();
-```
-
-### [getMarginTrade](http://developers.xstore.pro/documentation/current#getMarginTrade)
-
-Returns expected margin for a given instrument and volume.
-
-```PHP
-use Timirey\XApi\Responses\GetMarginTradeResponse;
-
-$symbol = 'EURPLN';
-$volume = 1.0;
-
-/** @var GetMarginTradeResponse $response */
-$response = $client->getMarginTrade($symbol, $volume);
-```
-
-### [getIbsHistory](http://developers.xstore.pro/documentation/current#getIbsHistory)
-
-Returns IBs data from the given time range.
-
-```PHP
-use Timirey\XApi\Responses\GetIbsHistoryResponse;
-use DateTime;
-
-$start = new DateTime('-1 month');
-$end = new DateTime();
-
-/** @var GetIbsHistoryResponse $response */
-$response = $client->getIbsHistory($start, $end);
-```
-
-### [getNews](http://developers.xstore.pro/documentation/current#getNews)
-
-Returns news from the trading server which were sent within a specified period.
-
-```PHP
-use Timirey\XApi\Responses\GetNewsResponse;
-use DateTime;
-
-$start = new DateTime('-1 month');
-$end = new DateTime();
-
-/** @var GetNewsResponse $response */
-$response = $client->getNews($start, $end);
-```
-
-### [getCurrentUserData](http://developers.xstore.pro/documentation/current#getCurrentUserData)
-
-Returns information about account currency and leverage.
-
-```PHP
-use Timirey\XApi\Responses\GetCurrentUserDataResponse;
-
-/** @var GetCurrentUserDataResponse $response */
-$response = $client->getCurrentUserData();
-```
-
-### [getMarginLevel](http://developers.xstore.pro/documentation/current#getMarginLevel)
-
-Returns various account indicators.
-
-```PHP
-use Timirey\XApi\Responses\GetMarginLevelResponse;
-
-/** @var GetMarginLevelResponse $response */
-$response = $client->getMarginLevel();
-```
-
-### [getSymbol](http://developers.xstore.pro/documentation/current#getSymbol)
-
-Retrieves information about a specific symbol.
-
-```PHP
-use Timirey\XApi\Responses\GetSymbolResponse;
-
-$symbol = 'EURUSD';
-
-/** @var GetSymbolResponse $response */
-$response = $client->getSymbol($symbol);
-```
-
 ### [getAllSymbols](http://developers.xstore.pro/documentation/current#getAllSymbols)
 
 Retrieves information about all symbols.
 
 ```PHP
 use Timirey\XApi\Responses\GetAllSymbolsResponse;
+use Timirey\XApi\Client;
 
-/** @var GetAllSymbolsResponse $response */
+/** 
+ * @var GetAllSymbolsResponse $response 
+ * @var Client $client
+ */
 $response = $client->getAllSymbols();
-```
-
-### [tradeTransaction](http://developers.xstore.pro/documentation/current#tradeTransaction)
-
-Starts a trade transaction.
-
-```PHP
-use Timirey\XApi\Payloads\Data\TradeTransInfo;
-use Timirey\XApi\Responses\TradeTransactionResponse;
-
-$tradeTransInfo = new TradeTransInfo(/* parameters */);
-
-/** @var TradeTransactionResponse $response */
-$response = $client->tradeTransaction($tradeTransInfo);
-```
-
-### [tradeTransactionStatus](http://developers.xstore.pro/documentation/current#tradeTransactionStatus)
-
-Returns the current transaction status.
-
-```PHP
-use Timirey\XApi\Responses\TradeTransactionStatusResponse;
-
-$order = 123456;
-
-/** @var TradeTransactionStatusResponse $response */
-$response = $client->tradeTransactionStatus($order);
-```
-
-### [ping](http://developers.xstore.pro/documentation/current#ping)
-
-Regularly calling this function is enough to refresh the internal state of all the components in the system.
-
-```PHP
-use Timirey\XApi\Responses\PingResponse;
-
-/** @var PingResponse $response */
-$response = $client->ping();
 ```
 
 ### [getCalendar](http://developers.xstore.pro/documentation/current#getCalendar)
@@ -354,8 +163,12 @@ Returns a calendar with market events.
 
 ```PHP
 use Timirey\XApi\Responses\GetCalendarResponse;
+use Timirey\XApi\Client;
 
-/** @var GetCalendarResponse $response */
+/** 
+ * @var GetCalendarResponse $response 
+ * @var Client $client
+ */
 $response = $client->getCalendar();
 ```
 
@@ -365,12 +178,24 @@ Returns chart info from the start date to the current time.
 
 ```PHP
 use Timirey\XApi\Responses\GetChartLastRequestResponse;
+use Timirey\XApi\Client;
 use Timirey\XApi\Payloads\Data\ChartLastInfoRecord;
+use Timirey\XApi\Enums\Period;
+use DateTime;
 
-$chartLastInfoRecord = new ChartLastInfoRecord(/* parameters */);
+$chartLastInfoRecord = new ChartLastInfoRecord(
+    period: Period::PERIOD_M1,
+    start: new DateTime('-1 week'),
+    symbol: 'EURUSD'
+);
 
-/** @var GetChartLastRequestResponse $response */
-$response = $client->getChartLastRequest($chartLastInfoRecord);
+/** 
+ * @var GetChartLastRequestResponse $response 
+ * @var Client $client
+ */
+$response = $client->getChartLastRequest(
+    chartLastInfoRecord: $chartLastInfoRecord
+);
 ```
 
 ### [getChartRangeRequest](http://developers.xstore.pro/documentation/current#getChartRangeRequest)
@@ -379,12 +204,26 @@ Returns chart info from the start date to the current time.
 
 ```PHP
 use Timirey\XApi\Responses\GetChartRangeRequestResponse;
+use Timirey\XApi\Client;
 use Timirey\XApi\Payloads\Data\ChartRangeInfoRecord;
+use Timirey\XApi\Enums\Period;
+use DateTime;
 
-$chartRangeInfoRecord = new ChartRangeInfoRecord(/* parameters */);
+$chartRangeInfoRecord = new ChartRangeInfoRecord(
+    period: Period::PERIOD_H1,
+    start: new DateTime('-1 month'),
+    end: new DateTime(),
+    symbol: 'EURUSD',
+    ticks: 1000
+);
 
-/** @var GetChartRangeRequestResponse $response */
-$response = $client->getChartRangeRequest($chartRangeInfoRecord);
+/** 
+ * @var GetChartRangeRequestResponse $response 
+ * @var Client $client
+ */
+$response = $client->getChartRangeRequest(
+    chartRangeInfoRecord: $chartRangeInfoRecord
+);
 ```
 
 ### [getCommissionDef](http://developers.xstore.pro/documentation/current#getCommissionDef)
@@ -393,12 +232,192 @@ Returns the calculation of commission and rate of exchange.
 
 ```PHP
 use Timirey\XApi\Responses\GetCommissionDefResponse;
+use Timirey\XApi\Client;
 
-$symbol = 'EURUSD';
-$volume = 1.0;
+/** 
+ * @var GetCommissionDefResponse $response 
+ * @var Client $client
+ */
+$response = $client->getCommissionDef(
+    symbol: 'EURUSD',
+    volume: 1.0
+);
+```
 
-/** @var GetCommissionDefResponse $response */
-$response = $client->getCommissionDef($symbol, $volume);
+### [getCurrentUserData](http://developers.xstore.pro/documentation/current#getCurrentUserData)
+
+Returns information about account currency and leverage.
+
+```PHP
+use Timirey\XApi\Responses\GetCurrentUserDataResponse;
+use Timirey\XApi\Client;
+
+/** 
+ * @var GetCurrentUserDataResponse $response 
+ * @var Client $client
+ */
+$response = $client->getCurrentUserData();
+```
+
+### [getIbsHistory](http://developers.xstore.pro/documentation/current#getIbsHistory)
+
+Returns IBs data from the given time range.
+
+```PHP
+use Timirey\XApi\Responses\GetIbsHistoryResponse;
+use Timirey\XApi\Client;
+use DateTime;
+
+/** 
+ * @var GetIbsHistoryResponse $response 
+ * @var Client $client
+ */
+$response = $client->getIbsHistory(
+    start: new DateTime('-1 month'),
+    end: new DateTime()
+);
+```
+
+### [getMarginLevel](http://developers.xstore.pro/documentation/current#getMarginLevel)
+
+Returns various account indicators.
+
+```PHP
+use Timirey\XApi\Responses\GetMarginLevelResponse;
+use Timirey\XApi\Client;
+
+/** 
+ * @var GetMarginLevelResponse $response 
+ * @var Client $client
+ */
+$response = $client->getMarginLevel();
+```
+
+### [getMarginTrade](http://developers.xstore.pro/documentation/current#getMarginTrade)
+
+Returns expected margin for a given instrument and volume.
+
+```PHP
+use Timirey\XApi\Responses\GetMarginTradeResponse;
+use Timirey\XApi\Client;
+
+/** 
+ * @var GetMarginTradeResponse $response 
+ * @var Client $client
+ */
+$response = $client->getMarginTrade(
+    symbol: 'EURPLN', 
+    volume: 1.0
+);
+```
+
+### [getNews](http://developers.xstore.pro/documentation/current#getNews)
+
+Returns news from the trading server which were sent within a specified period.
+
+```PHP
+use Timirey\XApi\Responses\GetNewsResponse;
+use Timirey\XApi\Client;
+use DateTime;
+
+/** 
+ * @var GetNewsResponse $response 
+ * @var Client $client
+ */
+$response = $client->getNews(
+    start: new DateTime('-1 month'), 
+    end: new DateTime()
+);
+```
+
+### [getProfitCalculation](http://developers.xstore.pro/documentation/current#getProfitCalculation)
+
+Calculates estimated profit for given deal data.
+
+```PHP
+use Timirey\XApi\Responses\GetProfitCalculationResponse;
+use Timirey\XApi\Client;
+use Timirey\XApi\Enums\Cmd;
+
+/** 
+ * @var GetProfitCalculationResponse $response 
+ * @var Client $client
+ */
+$response = $client->getProfitCalculation(
+  closePrice: 1.3000, 
+  cmd: Cmd::BUY, 
+  openPrice: 1.2233, 
+  symbol: 'EURPLN', 
+  volume: 1.0
+);
+```
+
+### [getServerTime](http://developers.xstore.pro/documentation/current#getServerTime)
+
+Returns the current time on the trading server.
+
+```PHP
+use Timirey\XApi\Responses\GetServerTimeResponse;
+use Timirey\XApi\Client;
+
+/** 
+ * @var GetServerTimeResponse $response 
+ * @var Client $client
+ */
+$response = $client->getServerTime();
+```
+
+### [getStepRules](http://developers.xstore.pro/documentation/current#getStepRules)
+
+Returns a list of step rules for DMAs.
+
+```PHP
+use Timirey\XApi\Responses\GetStepRulesResponse;
+use Timirey\XApi\Client;
+
+/** 
+ * @var GetStepRulesResponse $response 
+ * @var Client $client
+ */
+$response = $client->getStepRules();
+```
+
+### [getSymbol](http://developers.xstore.pro/documentation/current#getSymbol)
+
+Retrieves information about a specific symbol.
+
+```PHP
+use Timirey\XApi\Responses\GetSymbolResponse;
+use Timirey\XApi\Client;
+
+/** 
+ * @var GetSymbolResponse $response 
+ * @var Client $client
+ */
+$response = $client->getSymbol(
+    symbol: EURUSD
+);
+```
+
+### [getTickPrices](http://developers.xstore.pro/documentation/current#getTickPrices)
+
+Returns an array of current quotations for given symbols.
+
+```PHP
+use Timirey\XApi\Responses\GetTickPricesResponse;
+use Timirey\XApi\Enums\Level;
+use Timirey\XApi\Client;
+use DateTime;
+
+/**
+ * @var GetTickPricesResponse $response
+ * @var Client $client
+ */
+$response = $client->getTickPrices(
+    level: Level::BASE, 
+    symbols: ['EURPLN', 'AGO.PL'], 
+    timestamp: new DateTime()
+);
 ```
 
 ### [getTradeRecords](http://developers.xstore.pro/documentation/current#getTradeRecords)
@@ -407,11 +426,147 @@ Returns an array of trades listed in orders argument.
 
 ```PHP
 use Timirey\XApi\Responses\GetTradeRecordsResponse;
+use Timirey\XApi\Client;
 
-$orders = [7489839, 7489841];
+/** 
+ * @var GetTradeRecordsResponse $response 
+ * @var Client $client
+ */
+$response = $client->getTradeRecords(
+    orders: [7489839, 7489841]
+);
+```
 
-/** @var GetTradeRecordsResponse $response */
-$response = $client->getTradeRecords($orders);
+### [getTrades](http://developers.xstore.pro/documentation/current#getTrades)
+
+Returns an array of user's trades.
+
+```PHP
+use Timirey\XApi\Responses\GetTradesResponse;
+use Timirey\XApi\Client;
+
+/** 
+ * @var GetTradesResponse $response 
+ * @var Client $client
+ */
+$response = $client->getTrades(
+    openedOnly: true
+);
+```
+
+### [getTradesHistory](http://developers.xstore.pro/documentation/current#getTradesHistory)
+
+Returns an array of user's trades which were closed within a specified period.
+
+```PHP
+use Timirey\XApi\Responses\GetTradesHistoryResponse;
+use Timirey\XApi\Client;
+use DateTime;
+
+/** 
+ * @var GetTradesHistoryResponse $response 
+ * @var Client $client
+ */
+$response = $client->getTradesHistory(
+    start: new DateTime('last month'), 
+    end: new DateTime()
+);
+```
+
+### [getTradingHours](http://developers.xstore.pro/documentation/current#getTradingHours)
+
+Returns quotes and trading times.
+
+```PHP
+use Timirey\XApi\Responses\GetTradingHoursResponse;
+use Timirey\XApi\Client;
+
+/** 
+ * @var GetTradingHoursResponse $response 
+ * @var Client $client
+ */
+$response = $client->getTradingHours(
+    symbols: ['EURPLN', 'AGO.PL']
+);
+```
+
+### [getVersion](http://developers.xstore.pro/documentation/current#getVersion)
+
+Returns the current API version.
+
+```PHP
+use Timirey\XApi\Responses\GetVersionResponse;
+use Timirey\XApi\Client;
+
+/** 
+ * @var GetVersionResponse $response 
+ * @var Client $client
+ */
+$response = $client->getVersion();
+```
+
+### [ping](http://developers.xstore.pro/documentation/current#ping)
+
+Regularly calling this function is enough to refresh the internal state of all the components in the system.
+
+```PHP
+use Timirey\XApi\Responses\PingResponse;
+use Timirey\XApi\Client;
+
+/** 
+ * @var PingResponse $response 
+ * @var Client $client
+ */
+$response = $client->ping();
+```
+
+### [tradeTransaction](http://developers.xstore.pro/documentation/current#tradeTransaction)
+
+Starts a trade transaction.
+
+```PHP
+use Timirey\XApi\Responses\TradeTransactionResponse;
+use Timirey\XApi\Payloads\Data\TradeTransInfo;
+use Timirey\XApi\Client;
+
+$tradeTransInfo = new TradeTransInfo(
+    cmd: Cmd::BUY,
+    customComment: 'Test trade',
+    expiration: new DateTime(),
+    offset: 0,
+    order: 0,
+    price: 1.12345,
+    sl: 1.12000,
+    symbol: 'EURUSD',
+    tp: 1.12500,
+    type: Type::OPEN,
+    volume: 1.0
+);
+
+/** 
+ * @var TradeTransactionResponse $response 
+ * @var Client $client
+ */
+$response = $client->tradeTransaction(
+    tradeTransInfo: $tradeTransInfo
+);
+```
+
+### [tradeTransactionStatus](http://developers.xstore.pro/documentation/current#tradeTransactionStatus)
+
+Returns the current transaction status.
+
+```PHP
+use Timirey\XApi\Responses\TradeTransactionStatusResponse;
+use Timirey\XApi\Client;
+
+/** 
+ * @var TradeTransactionStatusResponse $response 
+ * @var Client $client
+ */
+$response = $client->tradeTransactionStatus(
+    order: 123456
+);
 ```
 
 ## Error handling
@@ -424,4 +579,5 @@ This library is open-sourced software licensed under the [MIT license](LICENSE).
 
 ## Reference
 
-For more detailed documentation, please refer to the [XTB xStation5 Trading API Documentation](http://developers.xstore.pro/documentation).
+For more detailed documentation, please refer to
+the [XTB xStation5 Trading API Documentation](http://developers.xstore.pro/documentation).
