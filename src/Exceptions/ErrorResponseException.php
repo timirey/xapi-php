@@ -5,12 +5,12 @@ namespace Timirey\XApi\Exceptions;
 use WebSocket\Exception\Exception;
 
 /**
- * Custom response exception.
+ * Custom error response exception.
  */
-class ResponseException extends Exception
+class ErrorResponseException extends Exception
 {
     /**
-     * Constructor for ResponseException.
+     * Constructor for ErrorResponseException.
      *
      * @param string $errorCode  Error code.
      * @param string $errorDescr Error description.
