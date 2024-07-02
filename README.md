@@ -1,4 +1,12 @@
-![xStore Developers](https://github.com/timirey/xapi-php/assets/15349915/8f2f6b27-29d6-487d-bbcc-bea2befebd5b)
+<p align="center">
+<img src="https://github.com/timirey/xapi-php/assets/15349915/8f2f6b27-29d6-487d-bbcc-bea2befebd5b">
+</p>
+
+<p align="center">
+<a href="https://github.com/timirey/xapi-php/actions"><img src="https://github.com/timirey/xapi-php/actions/workflows/tests.yml/badge.svg" alt="Tests"></a>
+<a href="https://packagist.org/packages/timirey/xapi-php"><img src="https://img.shields.io/packagist/v/timirey/xapi-php" alt="Latest Stable Version"></a>
+<a href="https://packagist.org/packages/timirey/xapi-php"><img src="https://img.shields.io/packagist/l/timirey/xapi-php" alt="License"></a>
+</p>
 
 This PHP library provides a comprehensive and user-friendly interface for interacting with the X-Trade Brokers (XTB)
 xStation5 Trading API. It supports various functionalities including account management, trade execution, and market
