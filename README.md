@@ -44,6 +44,7 @@ data retrieval.
     - [tradeTransaction](#tradetransaction)
     - [tradeTransactionStatus](#tradetransactionstatus)
 - [Error messages](#error-messages)
+- [Testing](#testing)
 - [License](#license)
 - [Reference](#reference)
 
@@ -604,6 +605,14 @@ try {
 ```
 
 All error codes and descriptions can be found in the [official documentation](http://developers.xstore.pro/documentation#error-messages).
+
+## Testing
+
+This package uses the PestPHP framework for testing.
+
+```SH
+./vendor/bin/pest
+```
 
 ## License
 
