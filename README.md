@@ -112,7 +112,7 @@ use Timirey\XApi\Client;
 $response = $client->logout();
 ```
 
-## Available Commands
+## Available commands
 
 Request-Reply commands are performed on main connection socket. The reply is sent by main connection socket.
 
