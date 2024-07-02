@@ -96,15 +96,15 @@ class TradeRecord
     ) {
         $this->cmd = Cmd::from($cmd);
 
-        $this->open_time = DateTimeHelper::createFromMilliseconds($open_time);
-        $this->timestamp = DateTimeHelper::createFromMilliseconds($timestamp);
+        $this->open_time = DateTimeHelper::fromMilliseconds($open_time);
+        $this->timestamp = DateTimeHelper::fromMilliseconds($timestamp);
 
         if ($close_time !== null) {
-            $this->close_time = DateTimeHelper::createFromMilliseconds($close_time);
+            $this->close_time = DateTimeHelper::fromMilliseconds($close_time);
         }
 
         if ($expiration !== null) {
-            $this->expiration = DateTimeHelper::createFromMilliseconds($expiration);
+            $this->expiration = DateTimeHelper::fromMilliseconds($expiration);
         }
     }
 }

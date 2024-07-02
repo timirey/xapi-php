@@ -293,6 +293,8 @@ test('getAllSymbols command', function () {
 
     $getAllSymbolsResponse = $this->client->getAllSymbols();
 
+    var_dump($getAllSymbolsResponse);
+
     expect($getAllSymbolsResponse)->toBeInstanceOf(GetAllSymbolsResponse::class)
         ->and($getAllSymbolsResponse->symbolRecords)->toHaveCount(1)
         ->and($getAllSymbolsResponse->symbolRecords[0]->symbol)->toBe('EURUSD')
@@ -500,8 +502,8 @@ test('getChartLastRequest command', function () {
 });
 
 test('getChartRangeRequest command', function () {
-    $start = DateTimeHelper::createFromMilliseconds(1);
-    $end = DateTimeHelper::createFromMilliseconds(2);
+    $start = DateTimeHelper::fromMilliseconds(1);
+    $end = DateTimeHelper::fromMilliseconds(2);
 
     $chartRangeInfoRecord = new ChartRangeInfoRecord(
         period: Period::PERIOD_H1,
@@ -747,8 +749,8 @@ test('getNews command', function () {
 });
 
 test('getIbsHistory command', function () {
-    $start = DateTimeHelper::createFromMilliseconds(1394449010991);
-    $end = DateTimeHelper::createFromMilliseconds(1395053810991);
+    $start = DateTimeHelper::fromMilliseconds(1394449010991);
+    $end = DateTimeHelper::fromMilliseconds(1395053810991);
     $getIbsHistoryPayload = new GetIbsHistoryPayload($start, $end);
 
     $this->webSocketClient->shouldReceive('text')
@@ -918,7 +920,7 @@ test('getStepRules command', function () {
 test('getTickPrices command', function () {
     $level = Level::BASE;
     $symbols = ['EURPLN', 'AGO.PL'];
-    $timestamp = DateTimeHelper::createFromMilliseconds(1262944112000);
+    $timestamp = DateTimeHelper::fromMilliseconds(1262944112000);
     $getTickPricesPayload = new GetTickPricesPayload($level, $symbols, $timestamp);
 
     $this->webSocketClient->shouldReceive('text')
@@ -1140,8 +1142,8 @@ test('getTrades command', function () {
 });
 
 test('getTradesHistory command', function () {
-    $start = DateTimeHelper::createFromMilliseconds(1275993488000);
-    $end = DateTimeHelper::createFromMilliseconds(0);
+    $start = DateTimeHelper::fromMilliseconds(1275993488000);
+    $end = DateTimeHelper::fromMilliseconds(0);
     $getTradesHistoryPayload = new GetTradesHistoryPayload($start, $end);
 
     $this->webSocketClient->shouldReceive('text')

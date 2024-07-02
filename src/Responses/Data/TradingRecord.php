@@ -36,7 +36,7 @@ class TradingRecord
     public function __construct(int $day, int $fromT, int $toT)
     {
         $this->day = Day::from($day);
-        $this->fromT = DateTimeHelper::createFromMilliseconds($fromT);
-        $this->toT = DateTimeHelper::createFromMilliseconds($toT);
+        $this->fromT = DateTimeHelper::fromMilliseconds($fromT);
+        $this->toT = DateTimeHelper::fromMilliseconds($toT);
     }
 }

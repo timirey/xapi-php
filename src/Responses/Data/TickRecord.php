@@ -53,6 +53,6 @@ class TickRecord
     ) {
         $this->level = Level::from($level);
 
-        $this->timestamp = DateTimeHelper::createFromMilliseconds($timestamp);
+        $this->timestamp = DateTimeHelper::fromMilliseconds($timestamp);
     }
 }

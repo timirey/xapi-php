@@ -44,6 +44,6 @@ class CalendarRecord
         public string $title
     ) {
         $this->impact = Impact::from($impact);
-        $this->time = DateTimeHelper::createFromMilliseconds($time);
+        $this->time = DateTimeHelper::fromMilliseconds($time);
     }
 }
