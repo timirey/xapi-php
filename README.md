@@ -12,7 +12,7 @@ This PHP library provides a comprehensive and user-friendly interface for intera
 xStation5 Trading API. It supports various functionalities including account management, trade execution, and market
 data retrieval.
 
-## Table of Contents
+## Table of contents
 
 - [Installation](#installation)
 - [Usage](#usage)
