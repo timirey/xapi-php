@@ -12,14 +12,17 @@ class GetIbsHistoryResponse extends AbstractResponse
     /**
      * Constructor for GetIbsHistoryResponse.
      *
-     * @param IbRecord[] $ibRecords
+     * @param IbRecord[] $ibRecords IbRecord instances.
      */
     public function __construct(public array $ibRecords)
     {
     }
 
     /**
-     * @inheritdoc
+     * Create a response instance from the validated data.
+     *
+     * @param array $data Validated response data.
+     * @return static Instance of the response.
      */
     protected static function create(array $data): static
     {

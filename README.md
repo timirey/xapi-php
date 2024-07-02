@@ -57,7 +57,7 @@ composer require timirey/xapi-php
 
 ## Usage
 
-Before you can access the endpoints, you should initialize a client.
+Initialize the client.
 
 ```PHP
 use Timirey\XApi\Client;
@@ -73,7 +73,7 @@ $client = new Client(
 );
 ```
 
-And authenticate.
+Authenticate.
 
 ```PHP
 use Timirey\XApi\Responses\LoginResponse;
@@ -86,7 +86,7 @@ use Timirey\XApi\Client;
 $response = $client->login();
 ```
 
-Now you can send commands.
+Send commands.
 
 ```PHP
 use Timirey\XApi\Responses\GetAllSymbolsResponse;
@@ -99,7 +99,7 @@ use Timirey\XApi\Client;
 $response = $client->getAllSymbols();
 ```
 
-And logout, if necessary.
+Logout when done.
 
 ```PHP
 use Timirey\XApi\Responses\LogoutResponse;
@@ -148,7 +148,7 @@ $response = $client->logout();
 
 ## Retrieving trading data
 
-Currently, it supports only non-streaming commands. Streaming commands will be released later.
+Only non-streaming commands are supported at this time. Streaming commands will be introduced in a future update.
 
 ### [getAllSymbols](http://developers.xstore.pro/documentation/current#getAllSymbols)
 
@@ -579,7 +579,7 @@ $response = $client->tradeTransactionStatus(
 
 ## Error messages
 
-If any of the request fails, it will throw an instance of `ResponseException`.
+If any request fails, it will throw an instance of ResponseException.
 
 ```PHP
 use Timirey\XApi\Exceptions\ResponseException;
@@ -603,7 +603,7 @@ try {
 }
 ```
 
-All errors code and description can be checked on the [official documentation](http://developers.xstore.pro/documentation#error-messages).
+All error codes and descriptions can be found in the [official documentation](http://developers.xstore.pro/documentation#error-messages).
 
 ## License
 

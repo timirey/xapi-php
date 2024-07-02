@@ -8,7 +8,9 @@ namespace Timirey\XApi\Payloads;
 class GetCalendarPayload extends AbstractPayload
 {
     /**
-     * @inheritdoc
+     * Get the command.
+     *
+     * @return string Command name.
      */
     public function getCommand(): string
     {

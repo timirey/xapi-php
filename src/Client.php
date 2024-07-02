@@ -78,9 +78,9 @@ class Client
     /**
      * Constructor for the Client class.
      *
-     * @param int $userId User ID.
-     * @param string $password User password.
-     * @param Host $host WebSocket host URL.
+     * @param integer $userId   User ID.
+     * @param string  $password User password.
+     * @param Host    $host     WebSocket host URL.
      */
     public function __construct(protected int $userId, protected string $password, protected Host $host)
     {
@@ -129,9 +129,9 @@ class Client
     }
 
     /**
-     * Starts trade transaction.
+     * Initiates a trade transaction.
      *
-     * @param TradeTransInfo $tradeTransInfo
+     * @param TradeTransInfo $tradeTransInfo Trade transaction details.
      * @return TradeTransactionResponse
      */
     public function tradeTransaction(TradeTransInfo $tradeTransInfo): TradeTransactionResponse
@@ -140,9 +140,9 @@ class Client
     }
 
     /**
-     * Returns current transaction status.
+     * Gets the current status of a trade transaction.
      *
-     * @param int $order
+     * @param integer $order Order ID.
      * @return TradeTransactionStatusResponse
      */
     public function tradeTransactionStatus(int $order): TradeTransactionStatusResponse
@@ -154,7 +154,7 @@ class Client
     }
 
     /**
-     * Regularly calling this function is enough to refresh the internal state of all the components in the system.
+     * Refreshes the internal state of all system components.
      *
      * @return PingResponse
      */
@@ -176,7 +176,7 @@ class Client
     /**
      * Returns chart info, from start date to the current time.
      *
-     * @param ChartLastInfoRecord $chartLastInfoRecord
+     * @param ChartLastInfoRecord $chartLastInfoRecord Details of the chart request.
      * @return GetChartLastRequestResponse
      */
     public function getChartLastRequest(ChartLastInfoRecord $chartLastInfoRecord): GetChartLastRequestResponse
@@ -190,7 +190,7 @@ class Client
     /**
      * Returns chart info, from start date to the current time.
      *
-     * @param ChartRangeInfoRecord $chartRangeInfoRecord
+     * @param ChartRangeInfoRecord $chartRangeInfoRecord Details of the chart range request.
      * @return GetChartRangeRequestResponse
      */
     public function getChartRangeRequest(ChartRangeInfoRecord $chartRangeInfoRecord): GetChartRangeRequestResponse
@@ -202,10 +202,10 @@ class Client
     }
 
     /**
-     * Returns calculation of commission and rate of exchange.
+     * Calculates the commission and rate of exchange for a given symbol and volume.
      *
-     * @param string $symbol
-     * @param float $volume
+     * @param string $symbol The trading symbol.
+     * @param float  $volume The trading volume.
      * @return GetCommissionDefResponse
      */
     public function getCommissionDef(string $symbol, float $volume): GetCommissionDefResponse
@@ -237,10 +237,10 @@ class Client
     }
 
     /**
-     * Returns expected margin for given instrument and volume.
+     * Retrieves the expected margin for a given instrument and volume.
      *
-     * @param string $symbol
-     * @param float $volume
+     * @param string $symbol The trading symbol.
+     * @param float  $volume The trading volume.
      * @return GetMarginTradeResponse
      */
     public function getMarginTrade(string $symbol, float $volume): GetMarginTradeResponse
@@ -252,11 +252,11 @@ class Client
     }
 
     /**
-     * Returns news from the trading server which were sent within a specified period of time.
+     * Retrieves news from the trading server sent within a specified period.
      *
-     * @param DateTime $start
-     * @param DateTime $end
-     * @return GetNewsResponse
+     * @param DateTime $start Start time for news retrieval.
+     * @param DateTime $end   End time for news retrieval.
+     * @return GetNewsResponse Response containing the news.
      */
     public function getNews(DateTime $start, DateTime $end): GetNewsResponse
     {
@@ -264,10 +264,10 @@ class Client
     }
 
     /**
-     * Returns IBs data from the given time range.
+     * Retrieves IBs data from the given time range.
      *
-     * @param DateTime $start
-     * @param DateTime $end
+     * @param DateTime $start Start time for IBs history retrieval.
+     * @param DateTime $end   End time for IBs history retrieval.
      * @return GetIbsHistoryResponse
      */
     public function getIbsHistory(DateTime $start, DateTime $end): GetIbsHistoryResponse
@@ -276,13 +276,13 @@ class Client
     }
 
     /**
-     * Calculates estimated profit for given deal data.
+     * Calculates estimated profit for the given deal data.
      *
-     * @param float $closePrice
-     * @param Cmd $cmd
-     * @param float $openPrice
-     * @param string $symbol
-     * @param float $volume
+     * @param float  $closePrice Theoretical close price of the order.
+     * @param Cmd    $cmd        Operation code.
+     * @param float  $openPrice  Theoretical open price of the order.
+     * @param string $symbol     Trading symbol.
+     * @param float  $volume     Trading volume.
      * @return GetProfitCalculationResponse
      */
     public function getProfitCalculation(
@@ -319,11 +319,11 @@ class Client
     }
 
     /**
-     * Returns array of current quotations for given symbols.
+     * Retrieves an array of current quotations for given symbols.
      *
-     * @param Level $level
-     * @param array $symbols
-     * @param DateTime $timestamp
+     * @param Level    $level     The price level.
+     * @param array    $symbols   Array of symbol names.
+     * @param DateTime $timestamp The time from which the most recent tick should be looked for.
      * @return GetTickPricesResponse
      */
     public function getTickPrices(Level $level, array $symbols, DateTime $timestamp): GetTickPricesResponse
@@ -335,9 +335,9 @@ class Client
     }
 
     /**
-     * Returns array of trades listed in orders argument.
+     * Retrieves an array of trades listed in the orders argument.
      *
-     * @param array $orders
+     * @param array $orders Array of order IDs.
      * @return GetTradeRecordsResponse
      */
     public function getTradeRecords(array $orders): GetTradeRecordsResponse
@@ -346,9 +346,9 @@ class Client
     }
 
     /**
-     * Returns array of user's trades.
+     * Retrieves an array of user's trades.
      *
-     * @param bool $openedOnly
+     * @param boolean $openedOnly If true, only opened trades will be returned.
      * @return GetTradesResponse
      */
     public function getTrades(bool $openedOnly): GetTradesResponse
@@ -360,7 +360,7 @@ class Client
      * Returns array of user's trades which were closed within specified period of time.
      *
      * @param DateTime $start Start time for trade history retrieval.
-     * @param DateTime $end End time for trade history retrieval.
+     * @param DateTime $end   End time for trade history retrieval.
      * @return GetTradesHistoryResponse
      */
     public function getTradesHistory(DateTime $start, DateTime $end): GetTradesHistoryResponse
@@ -393,10 +393,9 @@ class Client
      * Sends a request to the xStation5 API and returns the response.
      *
      * @template T of AbstractResponse
-     * @param AbstractPayload $payload The payload to send.
-     * @param class-string<T> $responseClass The response class to instantiate.
-     * @return AbstractResponse The response instance.
-     * @return T
+     * @param AbstractPayload        $payload       The payload to send.
+     * @param class-string<T>|string $responseClass The response class to instantiate.
+     * @return AbstractResponse|T The response instance.
      */
     protected function sendRequest(AbstractPayload $payload, string $responseClass): AbstractResponse
     {

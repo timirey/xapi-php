@@ -11,7 +11,7 @@ class GetMarginTradePayload extends AbstractPayload
      * Constructor for GetMarginTradePayload.
      *
      * @param string $symbol Symbol.
-     * @param float $volume Volume.
+     * @param float  $volume Volume.
      */
     public function __construct(string $symbol, float $volume)
     {
@@ -20,7 +20,9 @@ class GetMarginTradePayload extends AbstractPayload
     }
 
     /**
-     * @inheritdoc
+     * Get the command.
+     *
+     * @return string Command name.
      */
     public function getCommand(): string
     {

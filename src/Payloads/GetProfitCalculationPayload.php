@@ -12,11 +12,11 @@ class GetProfitCalculationPayload extends AbstractPayload
     /**
      * Constructor for GetProfitCalculationPayload.
      *
-     * @param float $closePrice Theoretical close price of order.
-     * @param Cmd $cmd Operation code.
-     * @param float $openPrice Theoretical open price of order.
-     * @param string $symbol Symbol.
-     * @param float $volume Volume.
+     * @param float  $closePrice Theoretical close price of order.
+     * @param Cmd    $cmd        Operation code.
+     * @param float  $openPrice  Theoretical open price of order.
+     * @param string $symbol     Symbol.
+     * @param float  $volume     Volume.
      */
     public function __construct(float $closePrice, Cmd $cmd, float $openPrice, string $symbol, float $volume)
     {
@@ -28,7 +28,9 @@ class GetProfitCalculationPayload extends AbstractPayload
     }
 
     /**
-     * @inheritdoc
+     * Get the command.
+     *
+     * @return string Command name.
      */
     public function getCommand(): string
     {

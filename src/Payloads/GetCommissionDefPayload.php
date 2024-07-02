@@ -11,7 +11,7 @@ class GetCommissionDefPayload extends AbstractPayload
      * Constructor for GetCommissionDefPayload.
      *
      * @param string $symbol Symbol.
-     * @param float $volume Volume.
+     * @param float  $volume Volume.
      */
     public function __construct(string $symbol, float $volume)
     {
@@ -20,7 +20,9 @@ class GetCommissionDefPayload extends AbstractPayload
     }
 
     /**
-     * @inheritdoc
+     * Get the command.
+     *
+     * @return string Command name.
      */
     public function getCommand(): string
     {

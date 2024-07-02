@@ -10,7 +10,7 @@ class LoginPayload extends AbstractPayload
     /**
      * Constructor for LoginPayload.
      *
-     * @param string $userId User ID.
+     * @param string $userId   User ID.
      * @param string $password User password.
      */
     public function __construct(string $userId, string $password)
@@ -20,7 +20,9 @@ class LoginPayload extends AbstractPayload
     }
 
     /**
-     * @inheritdoc
+     * Get the command.
+     *
+     * @return string Command name.
      */
     public function getCommand(): string
     {

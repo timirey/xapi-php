@@ -12,16 +12,16 @@ use Timirey\XApi\Helpers\DateTimeHelper;
 class ChartLastInfoRecord
 {
     /**
-     * @var int Start of chart block (milliseconds since epoch).
+     * @var integer Start of chart block (milliseconds since epoch).
      */
     public int $start;
 
     /**
      * Constructor for ChartLastInfoRecord.
      *
-     * @param Period $period Period code.
-     * @param DateTime $start Start of chart block.
-     * @param string $symbol Symbol.
+     * @param Period   $period Period code.
+     * @param DateTime $start  Start of chart block.
+     * @param string   $symbol Symbol.
      */
     public function __construct(public Period $period, DateTime $start, public string $symbol)
     {

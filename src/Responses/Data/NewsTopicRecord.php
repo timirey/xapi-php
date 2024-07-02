@@ -18,12 +18,12 @@ class NewsTopicRecord
     /**
      * Constructor for NewsTopicRecord.
      *
-     * @param string $body Body.
-     * @param int $bodylen Body length.
-     * @param string $key News key.
-     * @param int $time Time in milliseconds since epoch.
-     * @param string $timeString Time string.
-     * @param string $title News title.
+     * @param string  $body       Body.
+     * @param integer $bodylen    Body length.
+     * @param string  $key        News key.
+     * @param integer $time       Time in milliseconds since epoch.
+     * @param string  $timeString Time string.
+     * @param string  $title      News title.
      */
     public function __construct(
         public string $body,

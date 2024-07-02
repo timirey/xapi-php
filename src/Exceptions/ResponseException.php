@@ -6,16 +6,13 @@ use WebSocket\Exception\Exception;
 
 /**
  * Custom response exception.
- *
- * @property string $errorCode Error code of the response.
- * @property string $errorDescr Error description of the response.
  */
 class ResponseException extends Exception
 {
     /**
      * Constructor for ResponseException.
      *
-     * @param string $errorCode Error code.
+     * @param string $errorCode  Error code.
      * @param string $errorDescr Error description.
      */
     public function __construct(protected string $errorCode, protected string $errorDescr)

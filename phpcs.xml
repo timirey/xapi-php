@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<ruleset>
+<ruleset name="CustomRuleset">
     <!-- Specify the files to be included in the check -->
     <file>src</file>
     <file>tests</file>
@@ -12,4 +12,9 @@
     <!-- Exclude specific files from being checked -->
     <exclude-pattern>tests/Pest.php</exclude-pattern>
     <exclude-pattern>tests/TestCase.php</exclude-pattern>
+
+    <!-- Add custom rules for PHPDoc -->
+    <rule ref="Squiz.Commenting.ClassComment"/>
+    <rule ref="Squiz.Commenting.FunctionComment"/>
+    <rule ref="Squiz.Commenting.VariableComment"/>
 </ruleset>

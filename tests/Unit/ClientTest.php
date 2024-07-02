@@ -82,6 +82,12 @@ beforeEach(function () {
     $this->message = Mockery::mock(Message::class);
 
     $this->client = new class (12345, 'password', Host::DEMO) extends Client {
+        /**
+         * Accesses client property attribute.
+         *
+         * @param WebSocketClient $client WebSocket client.
+         * @return void
+         */
         public function setWebSocketClient(WebSocketClient $client): void
         {
             $this->client = $client;
