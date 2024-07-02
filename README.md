@@ -64,7 +64,7 @@ Now you can send commands.
 
 Currently, it supports only non-streaming commands. Streaming commands will be released later.
 
-### # [getStepRules](http://developers.xstore.pro/documentation/current#getStepRules)
+### [getStepRules](http://developers.xstore.pro/documentation/current#getStepRules)
 
 Returns a list of step rules for DMAs.
 
@@ -72,7 +72,7 @@ Returns a list of step rules for DMAs.
 $response = $client->getStepRules();
 ```
 
-### # [getTickPrices](http://developers.xstore.pro/documentation/current#getTickPrices)
+### [getTickPrices](http://developers.xstore.pro/documentation/current#getTickPrices)
 
 Returns an array of current quotations for given symbols.
 
@@ -83,7 +83,7 @@ $timestamp = new DateTime();
 $response = $client->getTickPrices($level, $symbols, $timestamp);
 ```
 
-### # [getTrades](http://developers.xstore.pro/documentation/current#getTrades)
+### [getTrades](http://developers.xstore.pro/documentation/current#getTrades)
 
 Returns an array of user's trades.
 
@@ -92,7 +92,7 @@ $openedOnly = true;
 $response = $client->getTrades($openedOnly);
 ```
 
-### # [getTradesHistory](http://developers.xstore.pro/documentation/current#getTradesHistory)
+### [getTradesHistory](http://developers.xstore.pro/documentation/current#getTradesHistory)
 
 Returns an array of user's trades which were closed within a specified period.
 
@@ -102,7 +102,7 @@ $end = new DateTime();
 $response = $client->getTradesHistory($start, $end);
 ```
 
-### # [getTradingHours](http://developers.xstore.pro/documentation/current#getTradingHours)
+### [getTradingHours](http://developers.xstore.pro/documentation/current#getTradingHours)
 
 Returns quotes and trading times.
 
@@ -111,7 +111,7 @@ $symbols = ['EURPLN', 'AGO.PL'];
 $response = $client->getTradingHours($symbols);
 ```
 
-### # [getVersion](http://developers.xstore.pro/documentation/current#getVersion)
+### [getVersion](http://developers.xstore.pro/documentation/current#getVersion)
 
 Returns the current API version.
 
@@ -119,7 +119,7 @@ Returns the current API version.
 $response = $client->getVersion();
 ```
 
-### # [getProfitCalculation](http://developers.xstore.pro/documentation/current#getProfitCalculation)
+### [getProfitCalculation](http://developers.xstore.pro/documentation/current#getProfitCalculation)
 
 Calculates estimated profit for given deal data.
 
@@ -132,7 +132,7 @@ $volume = 1.0;
 $response = $client->getProfitCalculation($closePrice, $cmd, $openPrice, $symbol, $volume);
 ```
 
-### # [getServerTime](http://developers.xstore.pro/documentation/current#getServerTime)
+### [getServerTime](http://developers.xstore.pro/documentation/current#getServerTime)
 
 Returns the current time on the trading server.
 
@@ -140,7 +140,7 @@ Returns the current time on the trading server.
 $response = $client->getServerTime();
 ```
 
-### # [getMarginTrade](http://developers.xstore.pro/documentation/current#getMarginTrade)
+### [getMarginTrade](http://developers.xstore.pro/documentation/current#getMarginTrade)
 
 Returns expected margin for a given instrument and volume.
 
@@ -150,7 +150,7 @@ $volume = 1.0;
 $response = $client->getMarginTrade($symbol, $volume);
 ```
 
-### # [getIbsHistory](http://developers.xstore.pro/documentation/current#getIbsHistory)
+### [getIbsHistory](http://developers.xstore.pro/documentation/current#getIbsHistory)
 
 Returns IBs data from the given time range.
 
@@ -160,7 +160,7 @@ $end = new DateTime();
 $response = $client->getIbsHistory($start, $end);
 ```
 
-### # [getNews](http://developers.xstore.pro/documentation/current#getNews)
+### [getNews](http://developers.xstore.pro/documentation/current#getNews)
 
 Returns news from the trading server which were sent within a specified period.
 
@@ -170,7 +170,7 @@ $end = new DateTime();
 $response = $client->getNews($start, $end);
 ```
 
-### # [getCurrentUserData](http://developers.xstore.pro/documentation/current#getCurrentUserData)
+### [getCurrentUserData](http://developers.xstore.pro/documentation/current#getCurrentUserData)
 
 Returns information about account currency and leverage.
 
@@ -178,7 +178,7 @@ Returns information about account currency and leverage.
 $response = $client->getCurrentUserData();
 ```
 
-### # [getMarginLevel](http://developers.xstore.pro/documentation/current#getMarginLevel)
+### [getMarginLevel](http://developers.xstore.pro/documentation/current#getMarginLevel)
 
 Returns various account indicators.
 
@@ -186,7 +186,7 @@ Returns various account indicators.
 $response = $client->getMarginLevel();
 ```
 
-### # [login](http://developers.xstore.pro/documentation/current#login)
+### [login](http://developers.xstore.pro/documentation/current#login)
 
 Logs in to the xStation5 API.
 
@@ -194,7 +194,7 @@ Logs in to the xStation5 API.
 $response = $client->login();
 ```
 
-### # [logout](http://developers.xstore.pro/documentation/current#logout)
+### [logout](http://developers.xstore.pro/documentation/current#logout)
 
 Logs out from the xStation5 API.
 
@@ -202,7 +202,7 @@ Logs out from the xStation5 API.
 $response = $client->logout();
 ```
 
-### # [getSymbol](http://developers.xstore.pro/documentation/current#getSymbol)
+### [getSymbol](http://developers.xstore.pro/documentation/current#getSymbol)
 
 Retrieves information about a specific symbol.
 
@@ -211,7 +211,7 @@ $symbol = 'EURUSD';
 $response = $client->getSymbol($symbol);
 ```
 
-### # [getAllSymbols](http://developers.xstore.pro/documentation/current#getAllSymbols)
+### [getAllSymbols](http://developers.xstore.pro/documentation/current#getAllSymbols)
 
 Retrieves information about all symbols.
 
@@ -219,7 +219,7 @@ Retrieves information about all symbols.
 $response = $client->getAllSymbols();
 ```
 
-### # [tradeTransaction](http://developers.xstore.pro/documentation/current#tradeTransaction)
+### [tradeTransaction](http://developers.xstore.pro/documentation/current#tradeTransaction)
 
 Starts a trade transaction.
 
@@ -228,7 +228,7 @@ $tradeTransInfo = new TradeTransInfo(/* parameters */);
 $response = $client->tradeTransaction($tradeTransInfo);
 ```
 
-### # [tradeTransactionStatus](http://developers.xstore.pro/documentation/current#tradeTransactionStatus)
+### [tradeTransactionStatus](http://developers.xstore.pro/documentation/current#tradeTransactionStatus)
 
 Returns the current transaction status.
 
@@ -237,7 +237,7 @@ $order = 123456;
 $response = $client->tradeTransactionStatus($order);
 ```
 
-### # [ping](http://developers.xstore.pro/documentation/current#ping)
+### [ping](http://developers.xstore.pro/documentation/current#ping)
 
 Regularly calling this function is enough to refresh the internal state of all the components in the system.
 
@@ -245,7 +245,7 @@ Regularly calling this function is enough to refresh the internal state of all t
 $response = $client->ping();
 ```
 
-### # [getCalendar](http://developers.xstore.pro/documentation/current#getCalendar)
+### [getCalendar](http://developers.xstore.pro/documentation/current#getCalendar)
 
 Returns a calendar with market events.
 
@@ -253,7 +253,7 @@ Returns a calendar with market events.
 $response = $client->getCalendar();
 ```
 
-### # [getChartLastRequest](http://developers.xstore.pro/documentation/current#getChartLastRequest)
+### [getChartLastRequest](http://developers.xstore.pro/documentation/current#getChartLastRequest)
 
 Returns chart info from the start date to the current time.
 
@@ -262,7 +262,7 @@ $chartLastInfoRecord = new ChartLastInfoRecord(/* parameters */);
 $response = $client->getChartLastRequest($chartLastInfoRecord);
 ```
 
-### # [getChartRangeRequest](http://developers.xstore.pro/documentation/current#getChartRangeRequest)
+### [getChartRangeRequest](http://developers.xstore.pro/documentation/current#getChartRangeRequest)
 
 Returns chart info from the start date to the current time.
 
@@ -271,7 +271,7 @@ $chartRangeInfoRecord = new ChartRangeInfoRecord(/* parameters */);
 $response = $client->getChartRangeRequest($chartRangeInfoRecord);
 ```
 
-### # [getCommissionDef](http://developers.xstore.pro/documentation/current#getCommissionDef)
+### [getCommissionDef](http://developers.xstore.pro/documentation/current#getCommissionDef)
 
 Returns the calculation of commission and rate of exchange.
 
@@ -281,7 +281,7 @@ $volume = 1.0;
 $response = $client->getCommissionDef($symbol, $volume);
 ```
 
-### # [getTradeRecords](http://developers.xstore.pro/documentation/current#getTradeRecords)
+### [getTradeRecords](http://developers.xstore.pro/documentation/current#getTradeRecords)
 
 Returns an array of trades listed in orders argument.
 
