@@ -1,5 +1,18 @@
 # Release Notes
 
+## [1.0.0](https://github.com/timirey/xapi-php/compare/0.7.2.2...1.0.0) - 2024-07-02
+
+* Add documentation.
+* Add dev tools.
+* Add non-streaming commands and tests.
+* Add PHPDoc blocks on every property, method and class.
+* Update folder structure.
+* Add enums for host, payloads and responses.
+
+## [1.0.0-rc.3](https://github.com/timirey/xapi-php/compare/1.0.0-rc.2...1.0.0-rc.3) - 2024-07-02
+
+* Update CHANGELOG.md, composer.json and README.md.
+
 ## [1.0.0-rc.2](https://github.com/timirey/xapi-php/compare/1.0.0-rc...1.0.0-rc.2) - 2024-07-02
 
 * Adjusted README.md with documentation.
