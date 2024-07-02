@@ -43,7 +43,7 @@ data retrieval.
     - [ping](#ping)
     - [tradeTransaction](#tradetransaction)
     - [tradeTransactionStatus](#tradetransactionstatus)
-- [Error handling](#error-handling)
+- [Error messages](#error-messages)
 - [License](#license)
 - [Reference](#reference)
 
@@ -577,9 +577,33 @@ $response = $client->tradeTransactionStatus(
 );
 ```
 
-## Error handling
+## Error messages
 
-Todo
+If any of the request fails, it will throw an instance of `ResponseException`.
+
+```PHP
+use Timirey\XApi\Exceptions\ResponseException;
+use Timirey\XApi\Enums\Host;
+use Timirey\XApi\Client;
+
+/** 
+ * @var Client $client 
+ */
+$client = new Client(
+    userId: 123456789, 
+    password: 'invalidPassword', 
+    host: Host::DEMO
+);
+
+try {
+    $client->login();
+} catch (ResponseException $e) {
+    echo ($e->getErrorCode()); // 'BE005'
+    echo ($e->getErrorDescr()); // 'userPasswordCheck: Invalid login or password.'
+}
+```
+
+All errors code and description can be checked on the [official documentation](http://developers.xstore.pro/documentation#error-messages).
 
 ## License
 
