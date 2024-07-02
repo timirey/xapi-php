@@ -1,4 +1,12 @@
-![xStore Developers](https://github.com/timirey/xapi-php/assets/15349915/8f2f6b27-29d6-487d-bbcc-bea2befebd5b)
+<p align="center">
+<img src="https://github.com/timirey/xapi-php/assets/15349915/8f2f6b27-29d6-487d-bbcc-bea2befebd5b" alt="xStore Developers">
+</p>
+
+<p align="center">
+<a href="https://github.com/timirey/xapi-php/actions"><img src="https://github.com/timirey/xapi-php/actions/workflows/tests.yml/badge.svg" alt="Tests"></a>
+<a href="https://packagist.org/packages/timirey/xapi-php"><img src="https://img.shields.io/packagist/v/timirey/xapi-php" alt="Latest Stable Version"></a>
+<a href="https://packagist.org/packages/timirey/xapi-php"><img src="https://img.shields.io/packagist/l/timirey/xapi-php" alt="License"></a>
+</p>
 
 This PHP library provides a comprehensive and user-friendly interface for interacting with the X-Trade Brokers (XTB)
 xStation5 Trading API. It supports various functionalities including account management, trade execution, and market
@@ -35,13 +43,13 @@ data retrieval.
     - [ping](#ping)
     - [tradeTransaction](#tradetransaction)
     - [tradeTransactionStatus](#tradetransactionstatus)
-- [Error handling](#error-handling)
+- [Error messages](#error-messages)
 - [License](#license)
 - [Reference](#reference)
 
 ## Installation
 
-Install the package via Composer:
+Install the package via Composer.
 
 ```SH
 composer require timirey/xapi-php
@@ -569,9 +577,33 @@ $response = $client->tradeTransactionStatus(
 );
 ```
 
-## Error handling
+## Error messages
 
-Todo
+If any of the request fails, it will throw an instance of `ResponseException`.
+
+```PHP
+use Timirey\XApi\Exceptions\ResponseException;
+use Timirey\XApi\Enums\Host;
+use Timirey\XApi\Client;
+
+/** 
+ * @var Client $client 
+ */
+$client = new Client(
+    userId: 123456789, 
+    password: 'invalidPassword', 
+    host: Host::DEMO
+);
+
+try {
+    $client->login();
+} catch (ResponseException $e) {
+    echo ($e->getErrorCode()); // 'BE005'
+    echo ($e->getErrorDescr()); // 'userPasswordCheck: Invalid login or password.'
+}
+```
+
+All errors code and description can be checked on the [official documentation](http://developers.xstore.pro/documentation#error-messages).
 
 ## License
 
