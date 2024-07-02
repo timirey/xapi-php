@@ -2,7 +2,7 @@
 
 ## [1.1.0](https://github.com/timirey/xapi-php/compare/1.0.1...1.1.0) - 2024-07-02
 
-* Some small changes to README.md and GitHub workflows.
+* Add new exceptions and improved error handling.
 
 ## [1.0.1](https://github.com/timirey/xapi-php/compare/1.0.0...1.0.1) - 2024-07-02
 
