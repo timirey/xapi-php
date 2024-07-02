@@ -1,5 +1,13 @@
 # Release Notes
 
+## [1.1.0](https://github.com/timirey/xapi-php/compare/1.0.1...1.1.0) - 2024-07-02
+
+* Some small changes to README.md and GitHub workflows.
+
+## [1.0.1](https://github.com/timirey/xapi-php/compare/1.0.0...1.0.1) - 2024-07-02
+
+* Some small changes to README.md and GitHub workflows.
+
 ## [1.0.0](https://github.com/timirey/xapi-php/compare/0.7.2.2...1.0.0) - 2024-07-02
 
 * Add documentation.
