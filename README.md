@@ -43,7 +43,9 @@ data retrieval.
     - [ping](#ping)
     - [tradeTransaction](#tradetransaction)
     - [tradeTransactionStatus](#tradetransactionstatus)
-- [Error messages](#error-messages)
+- [Error handling](#error-handling)
+  - [ErrorResponseException](#errorresponseexception)
+  - [InvalidResponseException](#invalidresponseexception)
 - [Testing](#testing)
 - [License](#license)
 - [Reference](#reference)
@@ -578,9 +580,13 @@ $response = $client->tradeTransactionStatus(
 );
 ```
 
-## Error messages
+## Error handling
 
-If any request fails, it will throw an instance of ResponseException.
+Custom exceptions for handling request errors.
+
+### ErrorResponseException
+
+Thrown when the API returns an error (e.g., invalid password). Provides error code and description.
 
 ```PHP
 use Timirey\XApi\Exceptions\ResponseException;
@@ -598,13 +604,38 @@ $client = new Client(
 
 try {
     $client->login();
-} catch (ResponseException $e) {
+} catch (ErrorResponseException $e) {
     echo ($e->getErrorCode()); // 'BE005'
     echo ($e->getErrorDescr()); // 'userPasswordCheck: Invalid login or password.'
 }
 ```
 
 All error codes and descriptions can be found in the [official documentation](http://developers.xstore.pro/documentation#error-messages).
+
+### InvalidResponseException
+
+Thrown when a request fails and the API does not return a proper error response (e.g., invalid or incomplete response).
+
+```PHP
+use \Timirey\XApi\Exceptions\InvalidResponseException;
+use Timirey\XApi\Enums\Host;
+use Timirey\XApi\Client;
+
+/** 
+ * @var Client $client 
+ */
+$client = new Client(
+    userId: 123456789, 
+    password: 'password', 
+    host: Host::DEMO
+);
+
+try {
+    $client->login();
+} catch (InvalidResponseException $e) {
+    echo ($e->getMessage()); // 'The response did not include a status.'
+}
+```
 
 ## Testing
 
