@@ -6,7 +6,10 @@ This PHP library provides a comprehensive and user-friendly interface for intera
 
 - [Installation](#installation)
 - [Usage](#usage)
-- [Commands](#commands)
+- [Available Commands](#available-commands)
+  - [login](#login)
+  - [logout](#logout)
+- [Retrieving trading data](#retrieving-trading-data)
   - [getStepRules](#getsteprules)
   - [getTickPrices](#gettickprices)
   - [getTrades](#gettrades)
@@ -20,8 +23,6 @@ This PHP library provides a comprehensive and user-friendly interface for intera
   - [getNews](#getnews)
   - [getCurrentUserData](#getcurrentuserdata)
   - [getMarginLevel](#getmarginlevel)
-  - [login](#login)
-  - [logout](#logout)
   - [getSymbol](#getsymbol)
   - [getAllSymbols](#getallsymbols)
   - [tradeTransaction](#tradetransaction)
@@ -61,7 +62,23 @@ $client->login();
 
 Now you can send commands.
 
-## Commands
+## Available Commands
+
+Request-Reply commands are performed on main connection socket. The reply is sent by main connection socket.
+
+### [login](http://developers.xstore.pro/documentation/current#login)
+
+Logs in to the xStation5 API.
+
+```PHP
+$response = $client->login();
+```
+
+### [logout](http://developers.xstore.pro/documentation/current#logout)
+
+Logs out from the xStation5 API.
+
+## Retrieving trading data
 
 Currently, it supports only non-streaming commands. Streaming commands will be released later.
 
@@ -186,18 +203,6 @@ Returns various account indicators.
 ```PHP
 $response = $client->getMarginLevel();
 ```
-
-### [login](http://developers.xstore.pro/documentation/current#login)
-
-Logs in to the xStation5 API.
-
-```PHP
-$response = $client->login();
-```
-
-### [logout](http://developers.xstore.pro/documentation/current#logout)
-
-Logs out from the xStation5 API.
 
 ```PHP
 $response = $client->logout();
