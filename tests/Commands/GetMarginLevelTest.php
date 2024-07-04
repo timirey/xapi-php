@@ -22,8 +22,8 @@ test('getMarginLevel command', function () {
             'equity' => 995985397.56,
             'margin' => 572634.43,
             'marginFree' => 995227635.00,
-            'marginLevel' => 173930.41
-        ]
+            'marginLevel' => 173930.41,
+        ],
     ];
 
     $this->mockResponse($payload, $mockResponse);

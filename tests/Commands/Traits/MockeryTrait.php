@@ -27,22 +27,21 @@ trait MockeryTrait
      *
      * This method should be called in the beforeEach() block of your tests.
      *
-     * @param integer $userId   User id.
-     * @param string  $password Password.
-     * @param Host    $host     Host URI.
-     * @return void
+     * @param  int  $userId  User id.
+     * @param  string  $password  Password.
+     * @param  Host  $host  Host URI.
      */
     public function mockClient(int $userId = 12345, string $password = 'password', Host $host = Host::DEMO): void
     {
         $this->webSocketClient = Mockery::mock(WebSocketClient::class);
         $this->message = Mockery::mock(Message::class);
 
-        $this->client = new class ($userId, $password, $host) extends Client {
+        $this->client = new class($userId, $password, $host) extends Client
+        {
             /**
              * Sets the WebSocket client.
              *
-             * @param WebSocketClient $client WebSocket client.
-             * @return void
+             * @param  WebSocketClient  $client  WebSocket client.
              */
             public function setWebSocketClient(WebSocketClient $client): void
             {
@@ -56,9 +55,9 @@ trait MockeryTrait
     /**
      * Mocks the WebSocket response for a given payload.
      *
-     * @param AbstractPayload $payload  The payload to be sent.
-     * @param array           $response The mocked response data.
-     * @return void
+     * @param  AbstractPayload  $payload  The payload to be sent.
+     * @param  array  $response  The mocked response data.
+     *
      * @throws JsonException If encoding to JSON fails.
      */
     public function mockResponse(AbstractPayload $payload, array $response): void

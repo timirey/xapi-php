@@ -23,9 +23,9 @@ test('getNews command', function () {
                 'key' => '1f6da766abd29927aa854823f0105c23',
                 'time' => 1262944112000,
                 'timeString' => 'May 17, 2013 4:30:00 PM',
-                'title' => 'Breaking trend'
+                'title' => 'Breaking trend',
             ],
-        ]
+        ],
     ];
 
     $this->mockResponse($payload, $mockResponse);

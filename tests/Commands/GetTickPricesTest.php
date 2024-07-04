@@ -30,10 +30,10 @@ test('getTickPrices command', function () {
                     'spreadRaw' => 0.000003,
                     'spreadTable' => 0.00042,
                     'symbol' => 'KOMB.CZ',
-                    'timestamp' => 1272529161605
-                ]
-            ]
-        ]
+                    'timestamp' => 1272529161605,
+                ],
+            ],
+        ],
     ];
 
     $this->mockResponse($payload, $mockResponse);

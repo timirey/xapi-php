@@ -10,9 +10,7 @@ class TradeTransactionResponse extends AbstractResponse
     /**
      * Constructor for TradeTransactionResponse.
      *
-     * @param integer $order Unique order number.
+     * @param  int  $order  Unique order number.
      */
-    public function __construct(public int $order)
-    {
-    }
+    public function __construct(public int $order) {}
 }

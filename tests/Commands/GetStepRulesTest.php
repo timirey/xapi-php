@@ -24,15 +24,15 @@ test('getStepRules command', function () {
                 'steps' => [
                     [
                         'fromValue' => 0.1,
-                        'step' => 0.0025
+                        'step' => 0.0025,
                     ],
                     [
                         'fromValue' => 1.0,
-                        'step' => 0.001
-                    ]
-                ]
+                        'step' => 0.001,
+                    ],
+                ],
             ],
-        ]
+        ],
     ];
 
     $this->mockResponse($payload, $mockResponse);

@@ -3,7 +3,6 @@
 namespace Timirey\XApi\Responses;
 
 use Timirey\XApi\Responses\Data\CalendarRecord;
-use Timirey\XApi\Responses\Data\SymbolRecord;
 
 /**
  * Class that contains the response of the getCalendar command.
@@ -13,22 +12,20 @@ class GetCalendarResponse extends AbstractResponse
     /**
      * Constructor for GetCalendarResponse.
      *
-     * @param CalendarRecord[] $calendarRecords CalendarRecord instances.
+     * @param  CalendarRecord[]  $calendarRecords  CalendarRecord instances.
      */
-    public function __construct(public array $calendarRecords)
-    {
-    }
+    public function __construct(public array $calendarRecords) {}
 
     /**
      * Create a response instance from the validated data.
      *
-     * @param array $data Validated response data.
+     * @param  array  $data  Validated response data.
      * @return static Instance of the response.
      */
     protected static function create(array $data): static
     {
         return new static(array_map(
-            static fn(array $calendarRecordData): CalendarRecord => new CalendarRecord(...$calendarRecordData),
+            static fn (array $calendarRecordData): CalendarRecord => new CalendarRecord(...$calendarRecordData),
             $data['returnData']
         ));
     }

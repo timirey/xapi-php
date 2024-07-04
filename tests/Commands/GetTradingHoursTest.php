@@ -26,9 +26,9 @@ test('getTradingHours command', function () {
                 'symbol' => 'USDPLN',
                 'trading' => [
                     ['day' => 2, 'fromT' => 63000000, 'toT' => 63300000],
-                ]
+                ],
             ],
-        ]
+        ],
     ];
 
     $this->mockResponse($payload, $mockResponse);

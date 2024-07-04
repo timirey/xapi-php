@@ -27,13 +27,14 @@ abstract class AbstractPayload
      * Convert the object to JSON.
      *
      * @return string JSON representation of the payload.
+     *
      * @throws JsonException If encoding to JSON fails.
      */
     public function toJson(): string
     {
         $payload['command'] = $this->getCommand();
 
-        if (!empty($this->arguments)) {
+        if (! empty($this->arguments)) {
             $payload['arguments'] = $this->arguments;
         }
 
@@ -44,6 +45,7 @@ abstract class AbstractPayload
      * Magic method for converting to string.
      *
      * @return string JSON representation of the payload.
+     *
      * @throws JsonException If encoding to JSON fails.
      */
     public function __toString(): string

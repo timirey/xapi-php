@@ -23,8 +23,8 @@ test('getCurrentUserData command', function () {
             'leverage' => 1,
             'leverageMultiplier' => 0.25,
             'spreadType' => 'FLOAT',
-            'trailingStop' => false
-        ]
+            'trailingStop' => false,
+        ],
     ];
 
     $this->mockResponse($payload, $mockResponse);

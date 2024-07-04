@@ -43,9 +43,9 @@ test('getTrades command', function () {
                 'symbol' => 'EURUSD',
                 'timestamp' => 1272540251000,
                 'tp' => 0.0,
-                'volume' => 0.10
+                'volume' => 0.10,
             ],
-        ]
+        ],
     ];
 
     $this->mockResponse($payload, $mockResponse);

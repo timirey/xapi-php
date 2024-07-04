@@ -17,8 +17,8 @@ test('getCommissionDef command', function () {
         'status' => true,
         'returnData' => [
             'commission' => 5.0,
-            'rateOfExchange' => 1.2
-        ]
+            'rateOfExchange' => 1.2,
+        ],
     ];
 
     $this->mockResponse($payload, $mockResponse);

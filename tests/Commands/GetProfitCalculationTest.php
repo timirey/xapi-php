@@ -23,8 +23,8 @@ test('getProfitCalculation command', function () {
     $mockResponse = [
         'status' => true,
         'returnData' => [
-            'profit' => 714.303
-        ]
+            'profit' => 714.303,
+        ],
     ];
 
     $this->mockResponse($payload, $mockResponse);

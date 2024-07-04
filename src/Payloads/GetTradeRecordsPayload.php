@@ -10,7 +10,7 @@ class GetTradeRecordsPayload extends AbstractPayload
     /**
      * Constructor for GetTradeRecordsPayload.
      *
-     * @param array $orders Array of orders (position numbers).
+     * @param  array  $orders  Array of orders (position numbers).
      */
     public function __construct(array $orders)
     {

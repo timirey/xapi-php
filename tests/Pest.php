@@ -11,8 +11,7 @@
 |
 */
 
-uses(Timirey\XApi\Tests\TestCase::class)->in('Unit');
-uses(\Timirey\XApi\Tests\Commands\Traits\MockeryTrait::class)->in('Unit/Commands');
+//uses(Timirey\XApi\Tests\TestCase::class)->in('Commands');
 
 /*
 |--------------------------------------------------------------------------

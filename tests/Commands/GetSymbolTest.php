@@ -66,7 +66,7 @@ test('getSymbol command', function () {
             'timeString' => '2021-07-02 12:00:00',
             'shortSelling' => true,
             'currencyPair' => true,
-        ]
+        ],
     ];
 
     $this->mockResponse($payload, $mockResponse);

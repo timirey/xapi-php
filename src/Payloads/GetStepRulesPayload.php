@@ -9,8 +9,6 @@ class GetStepRulesPayload extends AbstractPayload
 {
     /**
      * {@inheritdoc}
-     *
-     * @return string
      */
     public function getCommand(): string
     {

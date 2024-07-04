@@ -17,8 +17,8 @@ test('getServerTime command', function () {
         'status' => true,
         'returnData' => [
             'time' => 1392211379731,
-            'timeString' => 'Feb 12, 2014 2:22:59 PM'
-        ]
+            'timeString' => 'Feb 12, 2014 2:22:59 PM',
+        ],
     ];
 
     $this->mockResponse($payload, $mockResponse);

@@ -68,7 +68,7 @@ test('getAllSymbols command', function () {
                 'shortSelling' => true,
                 'currencyPair' => true,
             ],
-        ]
+        ],
     ];
 
     $this->mockResponse($payload, $mockResponse);

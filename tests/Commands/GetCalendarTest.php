@@ -25,9 +25,9 @@ test('getCalendar command', function () {
                 'period' => 'Q1 2021',
                 'previous' => '3.2%',
                 'time' => 1720170000000,
-                'title' => 'GDP Growth Rate'
+                'title' => 'GDP Growth Rate',
             ],
-        ]
+        ],
     ];
 
     $this->mockResponse($payload, $mockResponse);

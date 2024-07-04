@@ -14,7 +14,7 @@ test('login command', function () {
     $payload = new LoginPayload(12345, 'password');
     $mockResponse = [
         'status' => true,
-        'streamSessionId' => 'streamSessionId'
+        'streamSessionId' => 'streamSessionId',
     ];
 
     $this->mockResponse($payload, $mockResponse);

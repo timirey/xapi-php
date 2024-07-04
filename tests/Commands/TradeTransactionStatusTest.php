@@ -21,8 +21,8 @@ test('tradeTransactionStatus command', function () {
             'customComment' => 'Test trade',
             'message' => 'Success',
             'order' => 123456789,
-            'requestStatus' => RequestStatus::PENDING
-        ]
+            'requestStatus' => RequestStatus::PENDING,
+        ],
     ];
 
     $this->mockResponse($payload, $mockResponse);

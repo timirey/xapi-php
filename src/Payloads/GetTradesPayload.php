@@ -10,7 +10,7 @@ class GetTradesPayload extends AbstractPayload
     /**
      * Constructor for GetTradesPayload.
      *
-     * @param boolean $openedOnly If true then only opened trades will be returned.
+     * @param  bool  $openedOnly  If true then only opened trades will be returned.
      */
     public function __construct(bool $openedOnly)
     {

@@ -15,8 +15,8 @@ test('getVersion command', function () {
     $mockResponse = [
         'status' => true,
         'returnData' => [
-            'version' => '2.4.15'
-        ]
+            'version' => '2.4.15',
+        ],
     ];
 
     $this->mockResponse($payload, $mockResponse);

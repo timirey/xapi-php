@@ -40,8 +40,8 @@ test('tradeTransaction command', function () {
     $mockResponse = [
         'status' => true,
         'returnData' => [
-            'order' => 123456789
-        ]
+            'order' => 123456789,
+        ],
     ];
 
     $this->mockResponse($payload, $mockResponse);

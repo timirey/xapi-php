@@ -12,8 +12,8 @@ class ErrorResponseException extends Exception
     /**
      * Constructor for ErrorResponseException.
      *
-     * @param string $errorCode  Error code.
-     * @param string $errorDescr Error description.
+     * @param  string  $errorCode  Error code.
+     * @param  string  $errorDescr  Error description.
      */
     public function __construct(protected string $errorCode, protected string $errorDescr)
     {

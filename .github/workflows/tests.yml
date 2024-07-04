@@ -22,8 +22,8 @@ jobs:
       - name: Install Dependencies
         run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
 
-      - name: Run PHP CodeSniffer (lint)
-        run: composer lint
+      - name: Run PHP CodeSniffer (Pint)
+        run: vendor/bin/pint --test
 
       - name: Execute tests (Unit and Feature tests) via PHPUnit/Pest
-        run: composer test
+        run: vendor/bin/pest

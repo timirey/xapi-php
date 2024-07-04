@@ -27,9 +27,9 @@ test('getIbsHistory command', function () {
                 'surname' => 'IB_Client_1',
                 'symbol' => 'EURUSD',
                 'timestamp' => 1395755870000,
-                'volume' => 1.0
+                'volume' => 1.0,
             ],
-        ]
+        ],
     ];
 
     $this->mockResponse($payload, $mockResponse);

@@ -42,10 +42,10 @@ test('getChartRangeRequest command', function () {
                     'high' => 1.125,
                     'low' => 1.120,
                     'open' => 1.122,
-                    'vol' => 100
+                    'vol' => 100,
                 ],
-            ]
-        ]
+            ],
+        ],
     ];
 
     $this->mockResponse($payload, $mockResponse);
