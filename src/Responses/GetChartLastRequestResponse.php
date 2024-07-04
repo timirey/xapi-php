@@ -12,8 +12,8 @@ class GetChartLastRequestResponse extends AbstractResponse
     /**
      * Constructor for GetChartLastRequestResponse.
      *
-     * @param  int  $digits  The number of decimal places for price values.
-     * @param  RateInfoRecord[]  $rateInfoRecords  An array of rate information records.
+     * @param int              $digits          The number of decimal places for price values.
+     * @param RateInfoRecord[] $rateInfoRecords An array of rate information records.
      */
     public function __construct(public int $digits, public array $rateInfoRecords)
     {
@@ -22,7 +22,8 @@ class GetChartLastRequestResponse extends AbstractResponse
     /**
      * Create a response instance from the validated data.
      *
-     * @param  array  $data  Validated response data.
+     * @param array $data Validated response data.
+     *
      * @return static Instance of the response.
      */
     protected static function create(array $data): static

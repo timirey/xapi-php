@@ -12,7 +12,7 @@ class GetChartRangeRequestPayload extends AbstractPayload
     /**
      * Constructor for GetChartRangeRequestPayload.
      *
-     * @param  ChartRangeInfoRecord  $chartRangeInfoRecord  Chart range info parameters.
+     * @param ChartRangeInfoRecord $chartRangeInfoRecord Chart range info parameters.
      */
     public function __construct(ChartRangeInfoRecord $chartRangeInfoRecord)
     {

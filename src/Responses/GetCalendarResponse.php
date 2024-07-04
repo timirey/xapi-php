@@ -12,7 +12,7 @@ class GetCalendarResponse extends AbstractResponse
     /**
      * Constructor for GetCalendarResponse.
      *
-     * @param  CalendarRecord[]  $calendarRecords  CalendarRecord instances.
+     * @param CalendarRecord[] $calendarRecords CalendarRecord instances.
      */
     public function __construct(public array $calendarRecords)
     {
@@ -21,7 +21,8 @@ class GetCalendarResponse extends AbstractResponse
     /**
      * Create a response instance from the validated data.
      *
-     * @param  array  $data  Validated response data.
+     * @param array $data Validated response data.
+     *
      * @return static Instance of the response.
      */
     protected static function create(array $data): static

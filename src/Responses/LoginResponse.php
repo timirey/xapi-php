@@ -10,7 +10,7 @@ class LoginResponse extends AbstractResponse
     /**
      * Constructor for LoginResponse.
      *
-     * @param  string  $streamSessionId  Stream session ID.
+     * @param string $streamSessionId Stream session ID.
      */
     public function __construct(public string $streamSessionId)
     {

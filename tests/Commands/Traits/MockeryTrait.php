@@ -12,13 +12,13 @@ use WebSocket\Client as WebSocketClient;
 use WebSocket\Message\Message;
 
 /**
- * Trait ClientTrait
+ * Trait ClientTrait.
  *
  * Provides setup and utility methods for mocking the WebSocket client and handling API responses.
  *
  * @property MockInterface $webSocketClient
  * @property MockInterface $message
- * @property Client $client
+ * @property Client        $client
  */
 trait MockeryTrait
 {
@@ -27,9 +27,9 @@ trait MockeryTrait
      *
      * This method should be called in the beforeEach() block of your tests.
      *
-     * @param  int  $userId  User id.
-     * @param  string  $password  Password.
-     * @param  Host  $host  Host URI.
+     * @param int    $userId   User id.
+     * @param string $password Password.
+     * @param Host   $host     Host URI.
      */
     public function mockClient(int $userId = 12345, string $password = 'password', Host $host = Host::DEMO): void
     {
@@ -40,7 +40,7 @@ trait MockeryTrait
             /**
              * Sets the WebSocket client.
              *
-             * @param  WebSocketClient  $client  WebSocket client.
+             * @param WebSocketClient $client WebSocket client.
              */
             public function setWebSocketClient(WebSocketClient $client): void
             {
@@ -54,8 +54,8 @@ trait MockeryTrait
     /**
      * Mocks the WebSocket response for a given payload.
      *
-     * @param  AbstractPayload  $payload  The payload to be sent.
-     * @param  array  $response  The mocked response data.
+     * @param AbstractPayload $payload  The payload to be sent.
+     * @param array           $response The mocked response data.
      *
      * @throws JsonException If encoding to JSON fails.
      */

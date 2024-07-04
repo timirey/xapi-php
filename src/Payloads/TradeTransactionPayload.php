@@ -12,7 +12,7 @@ class TradeTransactionPayload extends AbstractPayload
     /**
      * Constructor for TradeTransactionPayload.
      *
-     * @param  TradeTransInfo  $tradeTransInfo  Transaction parameters.
+     * @param TradeTransInfo $tradeTransInfo Transaction parameters.
      */
     public function __construct(TradeTransInfo $tradeTransInfo)
     {

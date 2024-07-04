@@ -46,54 +46,54 @@ class SymbolRecord
     /**
      * Constructor for SymbolRecord.
      *
-     * @param  string  $symbol  Symbol name.
-     * @param  string  $currency  Currency.
-     * @param  string  $categoryName  Category name.
-     * @param  string  $currencyProfit  The currency of calculated profit.
-     * @param  int  $quoteId  Source of price.
-     * @param  int  $quoteIdCross  Cross quote ID.
-     * @param  int  $marginMode  For margin calculation.
-     * @param  int  $profitMode  For profit calculation.
-     * @param  int  $pipsPrecision  Number of symbol's pip decimal places.
-     * @param  int  $contractSize  Size of 1 lot.
-     * @param  int  $exemode  Execution mode.
-     * @param  int  $time  Ask & bid tick time.
-     * @param  int|null  $expiration  Expiration time, null if not applicable.
-     * @param  int  $stopsLevel  Min distance (in pips) from the current price where the sl/tp can be set.
-     * @param  int  $precision  Number of symbol's price decimal places.
-     * @param  int  $swapType  Type of swap calculated.
-     * @param  int  $stepRuleId  Appropriate step rule ID from getStepRules command response.
-     * @param  int  $type  Instrument class number.
-     * @param  int  $instantMaxVolume  Maximum instant volume multiplied by 100 (in lots).
-     * @param  string  $groupName  Symbol group name.
-     * @param  string  $description  Description.
-     * @param  bool  $longOnly  Indicates if the symbol is long only.
-     * @param  bool  $trailingEnabled  Indicates whether trailing stop (offset) is applicable to the instrument.
-     * @param  bool  $marginHedgedStrong  For margin calculation.
-     * @param  bool  $swapEnable  Indicates whether swap value is added to position on end of day.
-     * @param  float  $percentage  Percentage.
-     * @param  float  $bid  Bid price in base currency.
-     * @param  float  $ask  Ask price in base currency.
-     * @param  float  $high  The highest price of the day in base currency.
-     * @param  float  $low  The lowest price of the day in base currency.
-     * @param  float  $lotMin  Minimum size of trade.
-     * @param  float  $lotMax  Maximum size of trade.
-     * @param  float  $lotStep  Min step by which the size of trade can be changed.
-     * @param  float  $tickSize  Smallest possible price change.
-     * @param  float  $tickValue  Smallest possible price change (in base currency).
-     * @param  float  $swapLong  Swap value for long positions in pips.
-     * @param  float  $swapShort  Swap value for short positions in pips.
-     * @param  float  $leverage  Symbol leverage.
-     * @param  float  $spreadRaw  The difference between raw ask and bid prices.
-     * @param  float  $spreadTable  Spread representation.
-     * @param  int|null  $starting  Starting time, null if not applicable.
-     * @param  int  $swap_rollover3days  Time when additional swap is accounted for weekend.
-     * @param  int|null  $marginMaintenance  For margin calculation, null if not applicable.
-     * @param  int  $marginHedged  Used for profit calculation.
-     * @param  int  $initialMargin  Initial margin for 1 lot order, used for profit/margin calculation.
-     * @param  string  $timeString  Time in string format.
-     * @param  bool  $shortSelling  Indicates whether short selling is allowed on the instrument.
-     * @param  bool  $currencyPair  Indicates whether the symbol represents a currency pair.
+     * @param string   $symbol             Symbol name.
+     * @param string   $currency           Currency.
+     * @param string   $categoryName       Category name.
+     * @param string   $currencyProfit     The currency of calculated profit.
+     * @param int      $quoteId            Source of price.
+     * @param int      $quoteIdCross       Cross quote ID.
+     * @param int      $marginMode         For margin calculation.
+     * @param int      $profitMode         For profit calculation.
+     * @param int      $pipsPrecision      Number of symbol's pip decimal places.
+     * @param int      $contractSize       Size of 1 lot.
+     * @param int      $exemode            Execution mode.
+     * @param int      $time               Ask & bid tick time.
+     * @param int|null $expiration         Expiration time, null if not applicable.
+     * @param int      $stopsLevel         Min distance (in pips) from the current price where the sl/tp can be set.
+     * @param int      $precision          Number of symbol's price decimal places.
+     * @param int      $swapType           Type of swap calculated.
+     * @param int      $stepRuleId         Appropriate step rule ID from getStepRules command response.
+     * @param int      $type               Instrument class number.
+     * @param int      $instantMaxVolume   Maximum instant volume multiplied by 100 (in lots).
+     * @param string   $groupName          Symbol group name.
+     * @param string   $description        Description.
+     * @param bool     $longOnly           Indicates if the symbol is long only.
+     * @param bool     $trailingEnabled    Indicates whether trailing stop (offset) is applicable to the instrument.
+     * @param bool     $marginHedgedStrong For margin calculation.
+     * @param bool     $swapEnable         Indicates whether swap value is added to position on end of day.
+     * @param float    $percentage         Percentage.
+     * @param float    $bid                Bid price in base currency.
+     * @param float    $ask                Ask price in base currency.
+     * @param float    $high               The highest price of the day in base currency.
+     * @param float    $low                The lowest price of the day in base currency.
+     * @param float    $lotMin             Minimum size of trade.
+     * @param float    $lotMax             Maximum size of trade.
+     * @param float    $lotStep            Min step by which the size of trade can be changed.
+     * @param float    $tickSize           Smallest possible price change.
+     * @param float    $tickValue          Smallest possible price change (in base currency).
+     * @param float    $swapLong           Swap value for long positions in pips.
+     * @param float    $swapShort          Swap value for short positions in pips.
+     * @param float    $leverage           Symbol leverage.
+     * @param float    $spreadRaw          The difference between raw ask and bid prices.
+     * @param float    $spreadTable        Spread representation.
+     * @param int|null $starting           Starting time, null if not applicable.
+     * @param int      $swap_rollover3days Time when additional swap is accounted for weekend.
+     * @param int|null $marginMaintenance  For margin calculation, null if not applicable.
+     * @param int      $marginHedged       Used for profit calculation.
+     * @param int      $initialMargin      Initial margin for 1 lot order, used for profit/margin calculation.
+     * @param string   $timeString         Time in string format.
+     * @param bool     $shortSelling       Indicates whether short selling is allowed on the instrument.
+     * @param bool     $currencyPair       Indicates whether the symbol represents a currency pair.
      */
     public function __construct(
         public string $symbol,

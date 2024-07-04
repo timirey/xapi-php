@@ -12,7 +12,7 @@ class GetTradesHistoryResponse extends AbstractResponse
     /**
      * Constructor for GetTradesHistoryResponse.
      *
-     * @param  TradeRecord[]  $tradeRecords  TradeRecord instances.
+     * @param TradeRecord[] $tradeRecords TradeRecord instances.
      */
     public function __construct(public array $tradeRecords)
     {
@@ -21,7 +21,8 @@ class GetTradesHistoryResponse extends AbstractResponse
     /**
      * Create a response instance from the validated data.
      *
-     * @param  array  $data  Validated response data.
+     * @param array $data Validated response data.
+     *
      * @return static Instance of the response.
      */
     protected static function create(array $data): static

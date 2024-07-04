@@ -10,7 +10,7 @@ class TradeTransactionStatusPayload extends AbstractPayload
     /**
      * Constructor for TradeTransactionStatusPayload.
      *
-     * @param  int  $order  Unique order number.
+     * @param int $order Unique order number.
      */
     public function __construct(public int $order)
     {

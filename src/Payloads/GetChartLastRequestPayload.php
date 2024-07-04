@@ -12,7 +12,7 @@ class GetChartLastRequestPayload extends AbstractPayload
     /**
      * Constructor for GetChartLastRequestPayload.
      *
-     * @param  ChartLastInfoRecord  $chartLastInfoRecord  Chart last info parameters.
+     * @param ChartLastInfoRecord $chartLastInfoRecord Chart last info parameters.
      */
     public function __construct(ChartLastInfoRecord $chartLastInfoRecord)
     {

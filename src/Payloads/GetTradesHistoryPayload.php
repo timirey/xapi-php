@@ -13,8 +13,8 @@ class GetTradesHistoryPayload extends AbstractPayload
     /**
      * Constructor for GetTradesHistoryPayload.
      *
-     * @param  DateTime  $start  Start time for trade history retrieval.
-     * @param  DateTime  $end  End time for trade history retrieval.
+     * @param DateTime $start Start time for trade history retrieval.
+     * @param DateTime $end   End time for trade history retrieval.
      */
     public function __construct(DateTime $start, DateTime $end)
     {

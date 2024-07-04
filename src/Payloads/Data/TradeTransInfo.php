@@ -20,17 +20,17 @@ class TradeTransInfo
     /**
      * Constructor for TradeTransInfo.
      *
-     * @param  Cmd  $cmd  Operation code.
-     * @param  string|null  $customComment  The value the customer may provide in order to retrieve it later.
-     * @param  DateTime  $expiration  Pending order expiration time.
-     * @param  int  $offset  Trailing offset.
-     * @param  int  $order  Position number or 0 for closing/modifications.
-     * @param  float  $price  Trade price.
-     * @param  float  $sl  Stop loss.
-     * @param  string  $symbol  Trade symbol.
-     * @param  float  $tp  Take profit.
-     * @param  Type  $type  Trade transaction type.
-     * @param  float  $volume  Trade volume.
+     * @param Cmd         $cmd           Operation code.
+     * @param string|null $customComment The value the customer may provide in order to retrieve it later.
+     * @param DateTime    $expiration    Pending order expiration time.
+     * @param int         $offset        Trailing offset.
+     * @param int         $order         Position number or 0 for closing/modifications.
+     * @param float       $price         Trade price.
+     * @param float       $sl            Stop loss.
+     * @param string      $symbol        Trade symbol.
+     * @param float       $tp            Take profit.
+     * @param Type        $type          Trade transaction type.
+     * @param float       $volume        Trade volume.
      */
     public function __construct(
         public Cmd $cmd,
