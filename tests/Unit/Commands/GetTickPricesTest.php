@@ -4,13 +4,17 @@ use Timirey\XApi\Enums\Level;
 use Timirey\XApi\Payloads\GetTickPricesPayload;
 use Timirey\XApi\Responses\Data\TickRecord;
 use Timirey\XApi\Responses\GetTickPricesResponse;
+use Timirey\XApi\Tests\Unit\Commands\Traits\MockeryTrait;
+
+uses(MockeryTrait::class);
+
+beforeEach(function () {
+    $this->mockClient();
+});
 
 test('getTickPrices command', function () {
-    $this->mockClient();
-
-    $getTickPricesPayload = new GetTickPricesPayload(Level::BASE, ['EURPLN', 'AGO.PL'], new DateTime());
-
-    $mockGetTickPricesResponse = [
+    $payload = new GetTickPricesPayload(Level::BASE, ['EURPLN', 'AGO.PL'], new DateTime());
+    $mockResponse = [
         'status' => true,
         'returnData' => [
             'quotations' => [
@@ -32,12 +36,12 @@ test('getTickPrices command', function () {
         ]
     ];
 
-    $this->mockResponse($getTickPricesPayload, $mockGetTickPricesResponse);
+    $this->mockResponse($payload, $mockResponse);
 
-    $getTickPricesResponse = $this->client->getTickPrices(Level::BASE, ['EURPLN', 'AGO.PL'], new DateTime());
+    $response = $this->client->getTickPrices(Level::BASE, ['EURPLN', 'AGO.PL'], new DateTime());
 
-    expect($getTickPricesResponse)->toBeInstanceOf(GetTickPricesResponse::class)
-        ->and($getTickPricesResponse->quotations[0])->toBeInstanceOf(TickRecord::class)
-        ->and($getTickPricesResponse->quotations[0]->level)->toBe(Level::BASE)
-        ->and($getTickPricesResponse->quotations[0]->timestamp)->toBeInstanceOf(DateTime::class);
+    expect($response)->toBeInstanceOf(GetTickPricesResponse::class)
+        ->and($response->quotations[0])->toBeInstanceOf(TickRecord::class)
+        ->and($response->quotations[0]->level)->toBe(Level::BASE)
+        ->and($response->quotations[0]->timestamp)->toBeInstanceOf(DateTime::class);
 });

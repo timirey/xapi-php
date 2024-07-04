@@ -5,13 +5,17 @@ use Timirey\XApi\Enums\ProfitMode;
 use Timirey\XApi\Enums\QuoteId;
 use Timirey\XApi\Payloads\GetAllSymbolsPayload;
 use Timirey\XApi\Responses\GetAllSymbolsResponse;
+use Timirey\XApi\Tests\Unit\Commands\Traits\MockeryTrait;
+
+uses(MockeryTrait::class);
+
+beforeEach(function () {
+    $this->mockClient();
+});
 
 test('getAllSymbols command', function () {
-    $this->mockClient();
-
-    $getAllSymbolsPayload = new GetAllSymbolsPayload();
-
-    $mockGetAllSymbolsResponse = [
+    $payload = new GetAllSymbolsPayload();
+    $mockResponse = [
         'status' => true,
         'returnData' => [
             [
@@ -67,12 +71,12 @@ test('getAllSymbols command', function () {
         ]
     ];
 
-    $this->mockResponse($getAllSymbolsPayload, $mockGetAllSymbolsResponse);
+    $this->mockResponse($payload, $mockResponse);
 
-    $getAllSymbolsResponse = $this->client->getAllSymbols();
+    $response = $this->client->getAllSymbols();
 
-    expect($getAllSymbolsResponse)->toBeInstanceOf(GetAllSymbolsResponse::class)
-        ->and($getAllSymbolsResponse->symbolRecords[0]->quoteId)->toBeInstanceOf(QuoteId::class)
-        ->and($getAllSymbolsResponse->symbolRecords[0]->profitMode)->toBeInstanceOf(ProfitMode::class)
-        ->and($getAllSymbolsResponse->symbolRecords[0]->marginMode)->toBeInstanceOf(MarginMode::class);
+    expect($response)->toBeInstanceOf(GetAllSymbolsResponse::class)
+        ->and($response->symbolRecords[0]->quoteId)->toBeInstanceOf(QuoteId::class)
+        ->and($response->symbolRecords[0]->profitMode)->toBeInstanceOf(ProfitMode::class)
+        ->and($response->symbolRecords[0]->marginMode)->toBeInstanceOf(MarginMode::class);
 });

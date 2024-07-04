@@ -5,10 +5,15 @@ use Timirey\XApi\Payloads\Data\ChartRangeInfoRecord;
 use Timirey\XApi\Payloads\GetChartRangeRequestPayload;
 use Timirey\XApi\Responses\Data\RateInfoRecord;
 use Timirey\XApi\Responses\GetChartRangeRequestResponse;
+use Timirey\XApi\Tests\Unit\Commands\Traits\MockeryTrait;
+
+uses(MockeryTrait::class);
+
+beforeEach(function () {
+    $this->mockClient();
+});
 
 test('getChartRangeRequest command', function () {
-    $this->mockClient();
-
     $chartRangeInfoRecord = new ChartRangeInfoRecord(
         period: Period::PERIOD_H1,
         start: new DateTime('-1 month'),
@@ -17,16 +22,15 @@ test('getChartRangeRequest command', function () {
         ticks: 1000
     );
 
-    $getChartRangeRequestPayload = new GetChartRangeRequestPayload($chartRangeInfoRecord);
+    $payload = new GetChartRangeRequestPayload($chartRangeInfoRecord);
 
     /**
      * @var ChartRangeInfoRecord $chartRangeRequestArgument
      */
-    $chartRangeRequestArgument = $getChartRangeRequestPayload->arguments['info'];
-
+    $chartRangeRequestArgument = $payload->arguments['info'];
     expect($chartRangeRequestArgument->period)->toBeInstanceOf(Period::class);
 
-    $mockGetChartRangeRequestResponse = [
+    $mockResponse = [
         'status' => true,
         'returnData' => [
             'digits' => 5,
@@ -44,11 +48,11 @@ test('getChartRangeRequest command', function () {
         ]
     ];
 
-    $this->mockResponse($getChartRangeRequestPayload, $mockGetChartRangeRequestResponse);
+    $this->mockResponse($payload, $mockResponse);
 
-    $getChartRangeRequestResponse = $this->client->getChartRangeRequest($chartRangeInfoRecord);
+    $response = $this->client->getChartRangeRequest($chartRangeInfoRecord);
 
-    expect($getChartRangeRequestResponse)->toBeInstanceOf(GetChartRangeRequestResponse::class)
-        ->and($getChartRangeRequestResponse->rateInfoRecords[0])->toBeInstanceOf(RateInfoRecord::class)
-        ->and($getChartRangeRequestResponse->rateInfoRecords[0]->ctm)->toBeInstanceOf(DateTime::class);
+    expect($response)->toBeInstanceOf(GetChartRangeRequestResponse::class)
+        ->and($response->rateInfoRecords[0])->toBeInstanceOf(RateInfoRecord::class)
+        ->and($response->rateInfoRecords[0]->ctm)->toBeInstanceOf(DateTime::class);
 });

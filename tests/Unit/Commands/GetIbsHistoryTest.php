@@ -4,13 +4,18 @@ use Timirey\XApi\Enums\Side;
 use Timirey\XApi\Payloads\GetIbsHistoryPayload;
 use Timirey\XApi\Responses\Data\IbRecord;
 use Timirey\XApi\Responses\GetIbsHistoryResponse;
+use Timirey\XApi\Tests\Unit\Commands\Traits\MockeryTrait;
+
+uses(MockeryTrait::class);
+
+beforeEach(function () {
+    $this->mockClient();
+});
 
 test('getIbsHistory command', function () {
-    $this->mockClient();
+    $payload = new GetIbsHistoryPayload(new DateTime('-1 month'), new DateTime());
 
-    $getIbsHistoryPayload = new GetIbsHistoryPayload(new DateTime('-1 month'), new DateTime());
-
-    $mockGetIbsHistoryResponse = [
+    $mockResponse = [
         'status' => true,
         'returnData' => [
             [
@@ -27,12 +32,12 @@ test('getIbsHistory command', function () {
         ]
     ];
 
-    $this->mockResponse($getIbsHistoryPayload, $mockGetIbsHistoryResponse);
+    $this->mockResponse($payload, $mockResponse);
 
-    $getIbsHistoryResponse = $this->client->getIbsHistory(new DateTime('-1 month'), new DateTime());
+    $response = $this->client->getIbsHistory(new DateTime('-1 month'), new DateTime());
 
-    expect($getIbsHistoryResponse)->toBeInstanceOf(GetIbsHistoryResponse::class)
-        ->and($getIbsHistoryResponse->ibRecords[0])->toBeInstanceOf(IbRecord::class)
-        ->and($getIbsHistoryResponse->ibRecords[0]->side)->toBe(Side::BUY)
-        ->and($getIbsHistoryResponse->ibRecords[0]->timestamp)->toBeInstanceOf(DateTime::class);
+    expect($response)->toBeInstanceOf(GetIbsHistoryResponse::class)
+        ->and($response->ibRecords[0])->toBeInstanceOf(IbRecord::class)
+        ->and($response->ibRecords[0]->side)->toBe(Side::BUY)
+        ->and($response->ibRecords[0]->timestamp)->toBeInstanceOf(DateTime::class);
 });

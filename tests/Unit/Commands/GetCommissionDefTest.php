@@ -2,13 +2,18 @@
 
 use Timirey\XApi\Payloads\GetCommissionDefPayload;
 use Timirey\XApi\Responses\GetCommissionDefResponse;
+use Timirey\XApi\Tests\Unit\Commands\Traits\MockeryTrait;
+
+uses(MockeryTrait::class);
+
+beforeEach(function () {
+    $this->mockClient();
+});
 
 test('getCommissionDef command', function () {
-    $this->mockClient();
+    $payload = new GetCommissionDefPayload('EURUSD', 1.0);
 
-    $getCommissionDefPayload = new GetCommissionDefPayload('EURUSD', 1.0);
-
-    $mockGetCommissionDefResponse = [
+    $mockResponse = [
         'status' => true,
         'returnData' => [
             'commission' => 5.0,
@@ -16,9 +21,11 @@ test('getCommissionDef command', function () {
         ]
     ];
 
-    $this->mockResponse($getCommissionDefPayload, $mockGetCommissionDefResponse);
+    $this->mockResponse($payload, $mockResponse);
 
-    $getCommissionDefResponse = $this->client->getCommissionDef('EURUSD', 1.0);
+    $response = $this->client->getCommissionDef('EURUSD', 1.0);
 
-    expect($getCommissionDefResponse)->toBeInstanceOf(GetCommissionDefResponse::class);
+    expect($response)->toBeInstanceOf(GetCommissionDefResponse::class)
+        ->and($response->commission)->toBe(5.0)
+        ->and($response->rateOfExchange)->toBe(1.2);
 });

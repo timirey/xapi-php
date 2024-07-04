@@ -2,13 +2,18 @@
 
 use Timirey\XApi\Payloads\GetCurrentUserDataPayload;
 use Timirey\XApi\Responses\GetCurrentUserDataResponse;
+use Timirey\XApi\Tests\Unit\Commands\Traits\MockeryTrait;
+
+uses(MockeryTrait::class);
+
+beforeEach(function () {
+    $this->mockClient();
+});
 
 test('getCurrentUserData command', function () {
-    $this->mockClient();
+    $payload = new GetCurrentUserDataPayload();
 
-    $getCurrentUserDataPayload = new GetCurrentUserDataPayload();
-
-    $mockGetCurrentUserDataResponse = [
+    $mockResponse = [
         'status' => true,
         'returnData' => [
             'companyUnit' => 8,
@@ -22,9 +27,17 @@ test('getCurrentUserData command', function () {
         ]
     ];
 
-    $this->mockResponse($getCurrentUserDataPayload, $mockGetCurrentUserDataResponse);
+    $this->mockResponse($payload, $mockResponse);
 
-    $getCurrentUserDataResponse = $this->client->getCurrentUserData();
+    $response = $this->client->getCurrentUserData();
 
-    expect($getCurrentUserDataResponse)->toBeInstanceOf(GetCurrentUserDataResponse::class);
+    expect($response)->toBeInstanceOf(GetCurrentUserDataResponse::class)
+        ->and($response->companyUnit)->toBe(8)
+        ->and($response->currency)->toBe('PLN')
+        ->and($response->group)->toBe('demoPLeurSTANDARD200')
+        ->and($response->ibAccount)->toBe(false)
+        ->and($response->leverage)->toBe(1)
+        ->and($response->leverageMultiplier)->toBe(0.25)
+        ->and($response->spreadType)->toBe('FLOAT')
+        ->and($response->trailingStop)->toBe(false);
 });

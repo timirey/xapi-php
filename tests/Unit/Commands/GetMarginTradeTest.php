@@ -2,22 +2,28 @@
 
 use Timirey\XApi\Payloads\GetMarginTradePayload;
 use Timirey\XApi\Responses\GetMarginTradeResponse;
+use Timirey\XApi\Tests\Unit\Commands\Traits\MockeryTrait;
+
+uses(MockeryTrait::class);
+
+beforeEach(function () {
+    $this->mockClient();
+});
 
 test('getMarginTrade command', function () {
-    $this->mockClient();
+    $payload = new GetMarginTradePayload('EURPLN', 1.0);
 
-    $getMarginTradePayload = new GetMarginTradePayload('EURPLN', 1.0);
-
-    $mockGetMarginTradeResponse = [
+    $mockResponse = [
         'status' => true,
         'returnData' => [
             'margin' => 4399.350
         ]
     ];
 
-    $this->mockResponse($getMarginTradePayload, $mockGetMarginTradeResponse);
+    $this->mockResponse($payload, $mockResponse);
 
-    $getMarginTradeResponse = $this->client->getMarginTrade('EURPLN', 1.0);
+    $response = $this->client->getMarginTrade('EURPLN', 1.0);
 
-    expect($getMarginTradeResponse)->toBeInstanceOf(GetMarginTradeResponse::class);
+    expect($response)->toBeInstanceOf(GetMarginTradeResponse::class)
+        ->and($response->margin)->toBe(4399.350);
 });

@@ -2,19 +2,23 @@
 
 use Timirey\XApi\Payloads\PingPayload;
 use Timirey\XApi\Responses\PingResponse;
+use Timirey\XApi\Tests\Unit\Commands\Traits\MockeryTrait;
+
+uses(MockeryTrait::class);
+
+beforeEach(function () {
+    $this->mockClient();
+});
 
 test('ping command', function () {
-    $this->mockClient();
-
-    $pingPayload = new PingPayload();
-
-    $mockPingResponse = [
+    $payload = new PingPayload();
+    $mockResponse = [
         'status' => true,
     ];
 
-    $this->mockResponse($pingPayload, $mockPingResponse);
+    $this->mockResponse($payload, $mockResponse);
 
-    $pingResponse = $this->client->ping();
+    $response = $this->client->ping();
 
-    expect($pingResponse)->toBeInstanceOf(PingResponse::class);
+    expect($response)->toBeInstanceOf(PingResponse::class);
 });

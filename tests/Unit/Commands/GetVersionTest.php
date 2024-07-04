@@ -2,22 +2,26 @@
 
 use Timirey\XApi\Payloads\GetVersionPayload;
 use Timirey\XApi\Responses\GetVersionResponse;
+use Timirey\XApi\Tests\Unit\Commands\Traits\MockeryTrait;
+
+uses(MockeryTrait::class);
+
+beforeEach(function () {
+    $this->mockClient();
+});
 
 test('getVersion command', function () {
-    $this->mockClient();
-
-    $getVersionPayload = new GetVersionPayload();
-
-    $mockGetVersionResponse = [
+    $payload = new GetVersionPayload();
+    $mockResponse = [
         'status' => true,
         'returnData' => [
             'version' => '2.4.15'
         ]
     ];
 
-    $this->mockResponse($getVersionPayload, $mockGetVersionResponse);
+    $this->mockResponse($payload, $mockResponse);
 
-    $getVersionResponse = $this->client->getVersion();
+    $response = $this->client->getVersion();
 
-    expect($getVersionResponse)->toBeInstanceOf(GetVersionResponse::class);
+    expect($response)->toBeInstanceOf(GetVersionResponse::class);
 });

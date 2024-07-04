@@ -1,22 +1,24 @@
 <?php
 
-use Timirey\XApi\Payloads\LoginPayload;
 use Timirey\XApi\Payloads\LogoutPayload;
-use Timirey\XApi\Responses\LoginResponse;
 use Timirey\XApi\Responses\LogoutResponse;
+use Timirey\XApi\Tests\Unit\Commands\Traits\MockeryTrait;
+
+uses(MockeryTrait::class);
+
+beforeEach(function () {
+    $this->mockClient();
+});
 
 test('logout command', function () {
-    $this->mockClient();
-
-    $logoutPayload = new LogoutPayload();
-
-    $mockLogoutResponse = [
+    $payload = new LogoutPayload();
+    $mockResponse = [
         'status' => true,
     ];
 
-    $this->mockResponse($logoutPayload, $mockLogoutResponse);
+    $this->mockResponse($payload, $mockResponse);
 
-    $logoutResponse = $this->client->logout();
+    $response = $this->client->logout();
 
-    expect($logoutResponse)->toBeInstanceOf(LogoutResponse::class);
+    expect($response)->toBeInstanceOf(LogoutResponse::class);
 });

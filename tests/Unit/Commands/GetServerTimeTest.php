@@ -2,13 +2,18 @@
 
 use Timirey\XApi\Payloads\GetServerTimePayload;
 use Timirey\XApi\Responses\GetServerTimeResponse;
+use Timirey\XApi\Tests\Unit\Commands\Traits\MockeryTrait;
+
+uses(MockeryTrait::class);
+
+beforeEach(function () {
+    $this->mockClient();
+});
 
 test('getServerTime command', function () {
-    $this->mockClient();
+    $payload = new GetServerTimePayload();
 
-    $getServerTimePayload = new GetServerTimePayload();
-
-    $mockGetServerTimeResponse = [
+    $mockResponse = [
         'status' => true,
         'returnData' => [
             'time' => 1392211379731,
@@ -16,10 +21,11 @@ test('getServerTime command', function () {
         ]
     ];
 
-    $this->mockResponse($getServerTimePayload, $mockGetServerTimeResponse);
+    $this->mockResponse($payload, $mockResponse);
 
-    $getServerTimeResponse = $this->client->getServerTime();
+    $response = $this->client->getServerTime();
 
-    expect($getServerTimeResponse)->toBeInstanceOf(GetServerTimeResponse::class)
-        ->and($getServerTimeResponse->time)->toBeInstanceOf(DateTime::class);
+    expect($response)->toBeInstanceOf(GetServerTimeResponse::class)
+        ->and($response->time)->toBeInstanceOf(DateTime::class)
+        ->and($response->timeString)->toBe('Feb 12, 2014 2:22:59 PM');
 });

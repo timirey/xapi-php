@@ -4,13 +4,18 @@ use Timirey\XApi\Payloads\GetStepRulesPayload;
 use Timirey\XApi\Responses\Data\StepRecord;
 use Timirey\XApi\Responses\Data\StepRuleRecord;
 use Timirey\XApi\Responses\GetStepRulesResponse;
+use Timirey\XApi\Tests\Unit\Commands\Traits\MockeryTrait;
+
+uses(MockeryTrait::class);
+
+beforeEach(function () {
+    $this->mockClient();
+});
 
 test('getStepRules command', function () {
-    $this->mockClient();
+    $payload = new GetStepRulesPayload();
 
-    $getStepRulesPayload = new GetStepRulesPayload();
-
-    $mockGetStepRulesResponse = [
+    $mockResponse = [
         'status' => true,
         'returnData' => [
             [
@@ -30,11 +35,11 @@ test('getStepRules command', function () {
         ]
     ];
 
-    $this->mockResponse($getStepRulesPayload, $mockGetStepRulesResponse);
+    $this->mockResponse($payload, $mockResponse);
 
-    $getStepRulesResponse = $this->client->getStepRules();
+    $response = $this->client->getStepRules();
 
-    expect($getStepRulesResponse)->toBeInstanceOf(GetStepRulesResponse::class)
-        ->and($getStepRulesResponse->stepRuleRecords[0])->toBeInstanceOf(StepRuleRecord::class)
-        ->and($getStepRulesResponse->stepRuleRecords[0]->stepRecords[0])->toBeInstanceOf(StepRecord::class);
+    expect($response)->toBeInstanceOf(GetStepRulesResponse::class)
+        ->and($response->stepRuleRecords[0])->toBeInstanceOf(StepRuleRecord::class)
+        ->and($response->stepRuleRecords[0]->stepRecords[0])->toBeInstanceOf(StepRecord::class);
 });

@@ -3,13 +3,18 @@
 use Timirey\XApi\Payloads\GetNewsPayload;
 use Timirey\XApi\Responses\Data\NewsTopicRecord;
 use Timirey\XApi\Responses\GetNewsResponse;
+use Timirey\XApi\Tests\Unit\Commands\Traits\MockeryTrait;
+
+uses(MockeryTrait::class);
+
+beforeEach(function () {
+    $this->mockClient();
+});
 
 test('getNews command', function () {
-    $this->mockClient();
+    $payload = new GetNewsPayload(new DateTime('-1 month'), new DateTime());
 
-    $getNewsPayload = new GetNewsPayload(new DateTime('-1 month'), new DateTime());
-
-    $mockGetNewsResponse = [
+    $mockResponse = [
         'status' => true,
         'returnData' => [
             [
@@ -23,11 +28,11 @@ test('getNews command', function () {
         ]
     ];
 
-    $this->mockResponse($getNewsPayload, $mockGetNewsResponse);
+    $this->mockResponse($payload, $mockResponse);
 
-    $getNewsResponse = $this->client->getNews(new DateTime('-1 month'), new DateTime());
+    $response = $this->client->getNews(new DateTime('-1 month'), new DateTime());
 
-    expect($getNewsResponse)->toBeInstanceOf(GetNewsResponse::class)
-        ->and($getNewsResponse->newsTopicRecords[0])->toBeInstanceOf(NewsTopicRecord::class)
-        ->and($getNewsResponse->newsTopicRecords[0]->time)->toBeInstanceOf(DateTime::class);
+    expect($response)->toBeInstanceOf(GetNewsResponse::class)
+        ->and($response->newsTopicRecords[0])->toBeInstanceOf(NewsTopicRecord::class)
+        ->and($response->newsTopicRecords[0]->time)->toBeInstanceOf(DateTime::class);
 });

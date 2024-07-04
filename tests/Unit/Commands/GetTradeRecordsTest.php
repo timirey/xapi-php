@@ -4,13 +4,17 @@ use Timirey\XApi\Enums\Cmd;
 use Timirey\XApi\Payloads\GetTradeRecordsPayload;
 use Timirey\XApi\Responses\Data\TradeRecord;
 use Timirey\XApi\Responses\GetTradeRecordsResponse;
+use Timirey\XApi\Tests\Unit\Commands\Traits\MockeryTrait;
+
+uses(MockeryTrait::class);
+
+beforeEach(function () {
+    $this->mockClient();
+});
 
 test('getTradeRecords command', function () {
-    $this->mockClient();
-
-    $getTradeRecordsPayload = new GetTradeRecordsPayload([7489839, 7489841]);
-
-    $mockGetTradeRecordsResponse = [
+    $payload = new GetTradeRecordsPayload([7489839, 7489841]);
+    $mockResponse = [
         'status' => true,
         'returnData' => [
             [
@@ -44,13 +48,13 @@ test('getTradeRecords command', function () {
         ]
     ];
 
-    $this->mockResponse($getTradeRecordsPayload, $mockGetTradeRecordsResponse);
+    $this->mockResponse($payload, $mockResponse);
 
-    $getTradeRecordsResponse = $this->client->getTradeRecords([7489839, 7489841]);
+    $response = $this->client->getTradeRecords([7489839, 7489841]);
 
-    expect($getTradeRecordsResponse)->toBeInstanceOf(GetTradeRecordsResponse::class)
-        ->and($getTradeRecordsResponse->tradeRecords[0])->toBeInstanceOf(TradeRecord::class)
-        ->and($getTradeRecordsResponse->tradeRecords[0]->cmd)->toBe(Cmd::BUY)
-        ->and($getTradeRecordsResponse->tradeRecords[0]->open_time)->toBeInstanceOf(DateTime::class)
-        ->and($getTradeRecordsResponse->tradeRecords[0]->timestamp)->toBeInstanceOf(DateTime::class);
+    expect($response)->toBeInstanceOf(GetTradeRecordsResponse::class)
+        ->and($response->tradeRecords[0])->toBeInstanceOf(TradeRecord::class)
+        ->and($response->tradeRecords[0]->cmd)->toBe(Cmd::BUY)
+        ->and($response->tradeRecords[0]->open_time)->toBeInstanceOf(DateTime::class)
+        ->and($response->tradeRecords[0]->timestamp)->toBeInstanceOf(DateTime::class);
 });

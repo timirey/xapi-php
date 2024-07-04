@@ -6,13 +6,17 @@ use Timirey\XApi\Responses\Data\QuotesRecord;
 use Timirey\XApi\Responses\Data\TradingHoursRecord;
 use Timirey\XApi\Responses\Data\TradingRecord;
 use Timirey\XApi\Responses\GetTradingHoursResponse;
+use Timirey\XApi\Tests\Unit\Commands\Traits\MockeryTrait;
+
+uses(MockeryTrait::class);
+
+beforeEach(function () {
+    $this->mockClient();
+});
 
 test('getTradingHours command', function () {
-    $this->mockClient();
-
-    $getTradingHoursPayload = new GetTradingHoursPayload(['EURPLN', 'AGO.PL']);
-
-    $mockGetTradingHoursResponse = [
+    $payload = new GetTradingHoursPayload(['EURPLN', 'AGO.PL']);
+    $mockResponse = [
         'status' => true,
         'returnData' => [
             [
@@ -27,18 +31,18 @@ test('getTradingHours command', function () {
         ]
     ];
 
-    $this->mockResponse($getTradingHoursPayload, $mockGetTradingHoursResponse);
+    $this->mockResponse($payload, $mockResponse);
 
-    $getTradingHoursResponse = $this->client->getTradingHours(['EURPLN', 'AGO.PL']);
+    $response = $this->client->getTradingHours(['EURPLN', 'AGO.PL']);
 
-    expect($getTradingHoursResponse)->toBeInstanceOf(GetTradingHoursResponse::class)
-        ->and($getTradingHoursResponse->tradingHoursRecords[0])->toBeInstanceOf(TradingHoursRecord::class)
-        ->and($getTradingHoursResponse->tradingHoursRecords[0]->quotes[0])->toBeInstanceOf(QuotesRecord::class)
-        ->and($getTradingHoursResponse->tradingHoursRecords[0]->quotes[0]->day)->toBe(Day::TUESDAY)
-        ->and($getTradingHoursResponse->tradingHoursRecords[0]->quotes[0]->fromT)->toBeInstanceOf(DateTime::class)
-        ->and($getTradingHoursResponse->tradingHoursRecords[0]->quotes[0]->toT)->toBeInstanceOf(DateTime::class)
-        ->and($getTradingHoursResponse->tradingHoursRecords[0]->trading[0])->toBeInstanceOf(TradingRecord::class)
-        ->and($getTradingHoursResponse->tradingHoursRecords[0]->trading[0]->day)->toBe(Day::TUESDAY)
-        ->and($getTradingHoursResponse->tradingHoursRecords[0]->trading[0]->fromT)->toBeInstanceOf(DateTime::class)
-        ->and($getTradingHoursResponse->tradingHoursRecords[0]->trading[0]->toT)->toBeInstanceOf(DateTime::class);
+    expect($response)->toBeInstanceOf(GetTradingHoursResponse::class)
+        ->and($response->tradingHoursRecords[0])->toBeInstanceOf(TradingHoursRecord::class)
+        ->and($response->tradingHoursRecords[0]->quotes[0])->toBeInstanceOf(QuotesRecord::class)
+        ->and($response->tradingHoursRecords[0]->quotes[0]->day)->toBe(Day::TUESDAY)
+        ->and($response->tradingHoursRecords[0]->quotes[0]->fromT)->toBeInstanceOf(DateTime::class)
+        ->and($response->tradingHoursRecords[0]->quotes[0]->toT)->toBeInstanceOf(DateTime::class)
+        ->and($response->tradingHoursRecords[0]->trading[0])->toBeInstanceOf(TradingRecord::class)
+        ->and($response->tradingHoursRecords[0]->trading[0]->day)->toBe(Day::TUESDAY)
+        ->and($response->tradingHoursRecords[0]->trading[0]->fromT)->toBeInstanceOf(DateTime::class)
+        ->and($response->tradingHoursRecords[0]->trading[0]->toT)->toBeInstanceOf(DateTime::class);
 });

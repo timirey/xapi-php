@@ -2,20 +2,24 @@
 
 use Timirey\XApi\Payloads\LoginPayload;
 use Timirey\XApi\Responses\LoginResponse;
+use Timirey\XApi\Tests\Unit\Commands\Traits\MockeryTrait;
+
+uses(MockeryTrait::class);
+
+beforeEach(function () {
+    $this->mockClient();
+});
 
 test('login command', function () {
-    $this->mockClient();
-
-    $loginPayload = new LoginPayload(12345, 'password');
-
-    $mockLoginResponse = [
+    $payload = new LoginPayload(12345, 'password');
+    $mockResponse = [
         'status' => true,
         'streamSessionId' => 'streamSessionId'
     ];
 
-    $this->mockResponse($loginPayload, $mockLoginResponse);
+    $this->mockResponse($payload, $mockResponse);
 
-    $loginResponse = $this->client->login();
+    $response = $this->client->login();
 
-    expect($loginResponse)->toBeInstanceOf(LoginResponse::class);
+    expect($response)->toBeInstanceOf(LoginResponse::class);
 });

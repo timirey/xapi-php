@@ -3,13 +3,17 @@
 use Timirey\XApi\Enums\RequestStatus;
 use Timirey\XApi\Payloads\TradeTransactionStatusPayload;
 use Timirey\XApi\Responses\TradeTransactionStatusResponse;
+use Timirey\XApi\Tests\Unit\Commands\Traits\MockeryTrait;
+
+uses(MockeryTrait::class);
+
+beforeEach(function () {
+    $this->mockClient();
+});
 
 test('tradeTransactionStatus command', function () {
-    $this->mockClient();
-
-    $tradeTransactionStatusPayload = new TradeTransactionStatusPayload(123456789);
-
-    $mockTradeTransactionStatusResponse = [
+    $payload = new TradeTransactionStatusPayload(123456789);
+    $mockResponse = [
         'status' => true,
         'returnData' => [
             'ask' => 1.12350,
@@ -21,10 +25,10 @@ test('tradeTransactionStatus command', function () {
         ]
     ];
 
-    $this->mockResponse($tradeTransactionStatusPayload, $mockTradeTransactionStatusResponse);
+    $this->mockResponse($payload, $mockResponse);
 
-    $tradeTransactionStatusResponse = $this->client->tradeTransactionStatus(123456789);
+    $response = $this->client->tradeTransactionStatus(123456789);
 
-    expect($tradeTransactionStatusResponse)->toBeInstanceOf(TradeTransactionStatusResponse::class)
-        ->and($tradeTransactionStatusResponse->requestStatus)->toBe(RequestStatus::PENDING);
+    expect($response)->toBeInstanceOf(TradeTransactionStatusResponse::class)
+        ->and($response->requestStatus)->toBe(RequestStatus::PENDING);
 });

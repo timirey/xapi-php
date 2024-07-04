@@ -2,13 +2,18 @@
 
 use Timirey\XApi\Payloads\GetMarginLevelPayload;
 use Timirey\XApi\Responses\GetMarginLevelResponse;
+use Timirey\XApi\Tests\Unit\Commands\Traits\MockeryTrait;
+
+uses(MockeryTrait::class);
+
+beforeEach(function () {
+    $this->mockClient();
+});
 
 test('getMarginLevel command', function () {
-    $this->mockClient();
+    $payload = new GetMarginLevelPayload();
 
-    $getMarginLevelPayload = new GetMarginLevelPayload();
-
-    $mockGetMarginLevelResponse = [
+    $mockResponse = [
         'status' => true,
         'returnData' => [
             'balance' => 995800269.43,
@@ -21,9 +26,16 @@ test('getMarginLevel command', function () {
         ]
     ];
 
-    $this->mockResponse($getMarginLevelPayload, $mockGetMarginLevelResponse);
+    $this->mockResponse($payload, $mockResponse);
 
-    $getMarginLevelResponse = $this->client->getMarginLevel();
+    $response = $this->client->getMarginLevel();
 
-    expect($getMarginLevelResponse)->toBeInstanceOf(GetMarginLevelResponse::class);
+    expect($response)->toBeInstanceOf(GetMarginLevelResponse::class)
+        ->and($response->balance)->toBe(995800269.43)
+        ->and($response->credit)->toBe(1000.00)
+        ->and($response->currency)->toBe('PLN')
+        ->and($response->equity)->toBe(995985397.56)
+        ->and($response->margin)->toBe(572634.43)
+        ->and($response->marginFree)->toBe(995227635.00)
+        ->and($response->marginLevel)->toBe(173930.41);
 });

@@ -4,13 +4,17 @@ use Timirey\XApi\Enums\Impact;
 use Timirey\XApi\Payloads\GetCalendarPayload;
 use Timirey\XApi\Responses\Data\CalendarRecord;
 use Timirey\XApi\Responses\GetCalendarResponse;
+use Timirey\XApi\Tests\Unit\Commands\Traits\MockeryTrait;
+
+uses(MockeryTrait::class);
+
+beforeEach(function () {
+    $this->mockClient();
+});
 
 test('getCalendar command', function () {
-    $this->mockClient();
-
-    $getCalendarPayload = new GetCalendarPayload();
-
-    $mockGetCalendarResponse = [
+    $payload = new GetCalendarPayload();
+    $mockResponse = [
         'status' => true,
         'returnData' => [
             [
@@ -26,11 +30,11 @@ test('getCalendar command', function () {
         ]
     ];
 
-    $this->mockResponse($getCalendarPayload, $mockGetCalendarResponse);
+    $this->mockResponse($payload, $mockResponse);
 
-    $getCalendarResponse = $this->client->getCalendar();
+    $response = $this->client->getCalendar();
 
-    expect($getCalendarResponse)->toBeInstanceOf(GetCalendarResponse::class)
-        ->and($getCalendarResponse->calendarRecords[0])->toBeInstanceOf(CalendarRecord::class)
-        ->and($getCalendarResponse->calendarRecords[0]->impact)->toBeInstanceOf(Impact::class);
+    expect($response)->toBeInstanceOf(GetCalendarResponse::class)
+        ->and($response->calendarRecords[0])->toBeInstanceOf(CalendarRecord::class)
+        ->and($response->calendarRecords[0]->impact)->toBeInstanceOf(Impact::class);
 });

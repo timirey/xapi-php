@@ -6,26 +6,30 @@ use Timirey\XApi\Payloads\Data\ChartLastInfoRecord;
 use Timirey\XApi\Payloads\GetChartLastRequestPayload;
 use Timirey\XApi\Responses\Data\RateInfoRecord;
 use Timirey\XApi\Responses\GetChartLastRequestResponse;
+use Timirey\XApi\Tests\Unit\Commands\Traits\MockeryTrait;
+
+uses(MockeryTrait::class);
+
+beforeEach(function () {
+    $this->mockClient();
+});
 
 test('getChartLastRequest command', function () {
-    $this->mockClient();
-
     $chartLastInfoRecord = new ChartLastInfoRecord(
         period: Period::PERIOD_M1,
         start: new DateTime(),
         symbol: 'EURUSD'
     );
 
-    $getChartLastRequestPayload = new GetChartLastRequestPayload($chartLastInfoRecord);
+    $payload = new GetChartLastRequestPayload($chartLastInfoRecord);
 
     /**
      * @var ChartLastInfoRecord $chartLastInfoRecordArgument
      */
-    $chartLastInfoRecordArgument = $getChartLastRequestPayload->arguments['info'];
-
+    $chartLastInfoRecordArgument = $payload->arguments['info'];
     expect($chartLastInfoRecordArgument->period)->toBeInstanceOf(Period::class);
 
-    $mockGetChartLastRequestResponse = [
+    $mockResponse = [
         'status' => true,
         'returnData' => [
             'digits' => 5,
@@ -43,11 +47,11 @@ test('getChartLastRequest command', function () {
         ]
     ];
 
-    $this->mockResponse($getChartLastRequestPayload, $mockGetChartLastRequestResponse);
+    $this->mockResponse($payload, $mockResponse);
 
-    $getChartLastRequestResponse = $this->client->getChartLastRequest($chartLastInfoRecord);
+    $response = $this->client->getChartLastRequest($chartLastInfoRecord);
 
-    expect($getChartLastRequestResponse)->toBeInstanceOf(GetChartLastRequestResponse::class)
-        ->and($getChartLastRequestResponse->rateInfoRecords[0])->toBeInstanceOf(RateInfoRecord::class)
-        ->and($getChartLastRequestResponse->rateInfoRecords[0]->ctm)->toBeInstanceOf(DateTime::class);
+    expect($response)->toBeInstanceOf(GetChartLastRequestResponse::class)
+        ->and($response->rateInfoRecords[0])->toBeInstanceOf(RateInfoRecord::class)
+        ->and($response->rateInfoRecords[0]->ctm)->toBeInstanceOf(DateTime::class);
 });

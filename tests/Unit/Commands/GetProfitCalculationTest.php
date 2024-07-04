@@ -3,11 +3,16 @@
 use Timirey\XApi\Enums\Cmd;
 use Timirey\XApi\Payloads\GetProfitCalculationPayload;
 use Timirey\XApi\Responses\GetProfitCalculationResponse;
+use Timirey\XApi\Tests\Unit\Commands\Traits\MockeryTrait;
+
+uses(MockeryTrait::class);
+
+beforeEach(function () {
+    $this->mockClient();
+});
 
 test('getProfitCalculation command', function () {
-    $this->mockClient();
-
-    $getProfitCalculationPayload = new GetProfitCalculationPayload(
+    $payload = new GetProfitCalculationPayload(
         1.3000,
         Cmd::BUY,
         1.2233,
@@ -15,16 +20,16 @@ test('getProfitCalculation command', function () {
         1.0
     );
 
-    $mockGetProfitCalculationResponse = [
+    $mockResponse = [
         'status' => true,
         'returnData' => [
             'profit' => 714.303
         ]
     ];
 
-    $this->mockResponse($getProfitCalculationPayload, $mockGetProfitCalculationResponse);
+    $this->mockResponse($payload, $mockResponse);
 
-    $getProfitCalculationResponse = $this->client->getProfitCalculation(
+    $response = $this->client->getProfitCalculation(
         1.3000,
         Cmd::BUY,
         1.2233,
@@ -32,5 +37,6 @@ test('getProfitCalculation command', function () {
         1.0
     );
 
-    expect($getProfitCalculationResponse)->toBeInstanceOf(GetProfitCalculationResponse::class);
+    expect($response)->toBeInstanceOf(GetProfitCalculationResponse::class)
+        ->and($response->profit)->toBe(714.303);
 });
