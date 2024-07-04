@@ -17,7 +17,10 @@ afterEach(function () {
 });
 
 test('getIbsHistory command', function () {
-    $payload = new GetIbsHistoryPayload(new DateTime('-1 month'), new DateTime());
+    $start = new DateTime('-1 month');
+    $end = new DateTime();
+
+    $payload = new GetIbsHistoryPayload($start, $end);
 
     $mockResponse = [
         'status' => true,
@@ -38,7 +41,7 @@ test('getIbsHistory command', function () {
 
     $this->mockResponse($payload, $mockResponse);
 
-    $response = $this->client->getIbsHistory(new DateTime('-1 month'), new DateTime());
+    $response = $this->client->getIbsHistory($start, $end);
 
     expect($response)->toBeInstanceOf(GetIbsHistoryResponse::class)
         ->and($response->ibRecords[0])->toBeInstanceOf(IbRecord::class)

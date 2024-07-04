@@ -16,7 +16,10 @@ afterEach(function () {
 });
 
 test('getNews command', function () {
-    $payload = new GetNewsPayload(new DateTime('-1 month'), new DateTime());
+    $start = new DateTime('-1 month');
+    $end = new DateTime();
+
+    $payload = new GetNewsPayload($start, $end);
 
     $mockResponse = [
         'status' => true,
@@ -34,7 +37,7 @@ test('getNews command', function () {
 
     $this->mockResponse($payload, $mockResponse);
 
-    $response = $this->client->getNews(new DateTime('-1 month'), new DateTime());
+    $response = $this->client->getNews($start, $end);
 
     expect($response)->toBeInstanceOf(GetNewsResponse::class)
         ->and($response->newsTopicRecords[0])->toBeInstanceOf(NewsTopicRecord::class)

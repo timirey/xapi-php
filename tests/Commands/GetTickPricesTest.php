@@ -17,7 +17,9 @@ afterEach(function () {
 });
 
 test('getTickPrices command', function () {
-    $payload = new GetTickPricesPayload(Level::BASE, ['EURPLN', 'AGO.PL'], new DateTime());
+    $timestamp = new DateTime();
+
+    $payload = new GetTickPricesPayload(Level::BASE, ['EURPLN', 'AGO.PL'], $timestamp);
     $mockResponse = [
         'status' => true,
         'returnData' => [
@@ -42,7 +44,7 @@ test('getTickPrices command', function () {
 
     $this->mockResponse($payload, $mockResponse);
 
-    $response = $this->client->getTickPrices(Level::BASE, ['EURPLN', 'AGO.PL'], new DateTime());
+    $response = $this->client->getTickPrices(Level::BASE, ['EURPLN', 'AGO.PL'], $timestamp);
 
     expect($response)->toBeInstanceOf(GetTickPricesResponse::class)
         ->and($response->quotations[0])->toBeInstanceOf(TickRecord::class)
