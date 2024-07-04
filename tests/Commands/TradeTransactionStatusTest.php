@@ -3,7 +3,7 @@
 use Timirey\XApi\Enums\RequestStatus;
 use Timirey\XApi\Payloads\TradeTransactionStatusPayload;
 use Timirey\XApi\Responses\TradeTransactionStatusResponse;
-use Timirey\XApi\Tests\Unit\Commands\Traits\MockeryTrait;
+use Timirey\XApi\Tests\Commands\Traits\MockeryTrait;
 
 uses(MockeryTrait::class);
 

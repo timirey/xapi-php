@@ -4,7 +4,7 @@ use Timirey\XApi\Enums\Side;
 use Timirey\XApi\Payloads\GetIbsHistoryPayload;
 use Timirey\XApi\Responses\Data\IbRecord;
 use Timirey\XApi\Responses\GetIbsHistoryResponse;
-use Timirey\XApi\Tests\Unit\Commands\Traits\MockeryTrait;
+use Timirey\XApi\Tests\Commands\Traits\MockeryTrait;
 
 uses(MockeryTrait::class);
 

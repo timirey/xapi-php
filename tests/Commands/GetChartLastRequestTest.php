@@ -6,7 +6,7 @@ use Timirey\XApi\Payloads\Data\ChartLastInfoRecord;
 use Timirey\XApi\Payloads\GetChartLastRequestPayload;
 use Timirey\XApi\Responses\Data\RateInfoRecord;
 use Timirey\XApi\Responses\GetChartLastRequestResponse;
-use Timirey\XApi\Tests\Unit\Commands\Traits\MockeryTrait;
+use Timirey\XApi\Tests\Commands\Traits\MockeryTrait;
 
 uses(MockeryTrait::class);
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace Timirey\XApi\Tests\Unit\Commands\Traits;
+namespace Timirey\XApi\Tests\Commands\Traits;
 
 use JsonException;
 use Mockery;

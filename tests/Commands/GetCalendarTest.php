@@ -4,7 +4,7 @@ use Timirey\XApi\Enums\Impact;
 use Timirey\XApi\Payloads\GetCalendarPayload;
 use Timirey\XApi\Responses\Data\CalendarRecord;
 use Timirey\XApi\Responses\GetCalendarResponse;
-use Timirey\XApi\Tests\Unit\Commands\Traits\MockeryTrait;
+use Timirey\XApi\Tests\Commands\Traits\MockeryTrait;
 
 uses(MockeryTrait::class);
 

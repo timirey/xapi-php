@@ -5,7 +5,7 @@ use Timirey\XApi\Enums\Type;
 use Timirey\XApi\Payloads\Data\TradeTransInfo;
 use Timirey\XApi\Payloads\TradeTransactionPayload;
 use Timirey\XApi\Responses\TradeTransactionResponse;
-use Timirey\XApi\Tests\Unit\Commands\Traits\MockeryTrait;
+use Timirey\XApi\Tests\Commands\Traits\MockeryTrait;
 
 uses(MockeryTrait::class);
 

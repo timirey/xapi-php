@@ -2,7 +2,7 @@
 
 use Timirey\XApi\Payloads\GetMarginTradePayload;
 use Timirey\XApi\Responses\GetMarginTradeResponse;
-use Timirey\XApi\Tests\Unit\Commands\Traits\MockeryTrait;
+use Timirey\XApi\Tests\Commands\Traits\MockeryTrait;
 
 uses(MockeryTrait::class);
 

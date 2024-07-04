@@ -3,7 +3,7 @@
 use Timirey\XApi\Payloads\GetNewsPayload;
 use Timirey\XApi\Responses\Data\NewsTopicRecord;
 use Timirey\XApi\Responses\GetNewsResponse;
-use Timirey\XApi\Tests\Unit\Commands\Traits\MockeryTrait;
+use Timirey\XApi\Tests\Commands\Traits\MockeryTrait;
 
 uses(MockeryTrait::class);
 

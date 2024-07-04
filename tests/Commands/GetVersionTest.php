@@ -2,7 +2,7 @@
 
 use Timirey\XApi\Payloads\GetVersionPayload;
 use Timirey\XApi\Responses\GetVersionResponse;
-use Timirey\XApi\Tests\Unit\Commands\Traits\MockeryTrait;
+use Timirey\XApi\Tests\Commands\Traits\MockeryTrait;
 
 uses(MockeryTrait::class);
 

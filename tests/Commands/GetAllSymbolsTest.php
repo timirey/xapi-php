@@ -5,7 +5,7 @@ use Timirey\XApi\Enums\ProfitMode;
 use Timirey\XApi\Enums\QuoteId;
 use Timirey\XApi\Payloads\GetAllSymbolsPayload;
 use Timirey\XApi\Responses\GetAllSymbolsResponse;
-use Timirey\XApi\Tests\Unit\Commands\Traits\MockeryTrait;
+use Timirey\XApi\Tests\Commands\Traits\MockeryTrait;
 
 uses(MockeryTrait::class);
 

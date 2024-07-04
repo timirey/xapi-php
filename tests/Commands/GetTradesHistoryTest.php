@@ -4,7 +4,7 @@ use Timirey\XApi\Enums\Cmd;
 use Timirey\XApi\Payloads\GetTradesHistoryPayload;
 use Timirey\XApi\Responses\Data\TradeRecord;
 use Timirey\XApi\Responses\GetTradesHistoryResponse;
-use Timirey\XApi\Tests\Unit\Commands\Traits\MockeryTrait;
+use Timirey\XApi\Tests\Commands\Traits\MockeryTrait;
 
 uses(MockeryTrait::class);
 
