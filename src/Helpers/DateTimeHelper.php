@@ -14,8 +14,6 @@ class DateTimeHelper
      *
      * @param integer $timestamp The timestamp in milliseconds.
      * @return DateTime The created DateTime object.
-     *
-     * todo: rename this function.
      */
     public static function fromMilliseconds(int $timestamp): DateTime
     {
@@ -27,8 +25,6 @@ class DateTimeHelper
      *
      * @param DateTime $dateTime The DateTime object to convert.
      * @return integer The timestamp in milliseconds.
-     *
-     * todo: rename this function.
      */
     public static function toMilliseconds(DateTime $dateTime): int
     {
