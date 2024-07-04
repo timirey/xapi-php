@@ -14,7 +14,9 @@ class GetSymbolResponse extends AbstractResponse
      *
      * @param  SymbolRecord  $symbolRecord  SymbolRecord instance.
      */
-    public function __construct(public SymbolRecord $symbolRecord) {}
+    public function __construct(public SymbolRecord $symbolRecord)
+    {
+    }
 
     /**
      * Create a response instance from the validated data.

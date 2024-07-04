@@ -14,7 +14,9 @@ class GetNewsResponse extends AbstractResponse
      *
      * @param  NewsTopicRecord[]  $newsTopicRecords  NewsTopicRecord instances.
      */
-    public function __construct(public array $newsTopicRecords) {}
+    public function __construct(public array $newsTopicRecords)
+    {
+    }
 
     /**
      * Create a response instance from the validated data.

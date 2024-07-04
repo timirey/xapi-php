@@ -14,7 +14,9 @@ class GetTickPricesResponse extends AbstractResponse
      *
      * @param  TickRecord[]  $quotations  TickRecord instances, aka Quotations.
      */
-    public function __construct(public array $quotations) {}
+    public function __construct(public array $quotations)
+    {
+    }
 
     /**
      * Create a response instance from the validated data.

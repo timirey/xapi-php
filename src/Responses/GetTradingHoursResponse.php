@@ -16,7 +16,9 @@ class GetTradingHoursResponse extends AbstractResponse
      *
      * @param  TradingHoursRecord[]  $tradingHoursRecords  TradingHoursRecord instances.
      */
-    public function __construct(public array $tradingHoursRecords) {}
+    public function __construct(public array $tradingHoursRecords)
+    {
+    }
 
     /**
      * Create a response instance from the validated data.

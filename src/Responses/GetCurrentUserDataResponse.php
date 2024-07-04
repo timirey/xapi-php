@@ -28,5 +28,6 @@ class GetCurrentUserDataResponse extends AbstractResponse
         public float $leverageMultiplier,
         public ?string $spreadType,
         public bool $trailingStop
-    ) {}
+    ) {
+    }
 }

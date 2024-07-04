@@ -26,5 +26,6 @@ class GetMarginLevelResponse extends AbstractResponse
         public float $margin,
         public float $marginFree,
         public float $marginLevel
-    ) {}
+    ) {
+    }
 }

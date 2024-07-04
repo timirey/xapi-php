@@ -14,7 +14,9 @@ class GetIbsHistoryResponse extends AbstractResponse
      *
      * @param  IbRecord[]  $ibRecords  IbRecord instances.
      */
-    public function __construct(public array $ibRecords) {}
+    public function __construct(public array $ibRecords)
+    {
+    }
 
     /**
      * Create a response instance from the validated data.

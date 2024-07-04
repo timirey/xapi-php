@@ -14,7 +14,9 @@ class GetAllSymbolsResponse extends AbstractResponse
      *
      * @param  SymbolRecord[]  $symbolRecords  SymbolRecord instances.
      */
-    public function __construct(public array $symbolRecords) {}
+    public function __construct(public array $symbolRecords)
+    {
+    }
 
     /**
      * Create a response instance from the validated data.

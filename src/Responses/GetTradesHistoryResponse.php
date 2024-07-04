@@ -14,7 +14,9 @@ class GetTradesHistoryResponse extends AbstractResponse
      *
      * @param  TradeRecord[]  $tradeRecords  TradeRecord instances.
      */
-    public function __construct(public array $tradeRecords) {}
+    public function __construct(public array $tradeRecords)
+    {
+    }
 
     /**
      * Create a response instance from the validated data.

@@ -14,5 +14,7 @@ class TradingHoursRecord
      * @param  string  $symbol  Symbol.
      * @param  TradingRecord[]  $trading  Array of trading records.
      */
-    public function __construct(public array $quotes, public string $symbol, public array $trading) {}
+    public function __construct(public array $quotes, public string $symbol, public array $trading)
+    {
+    }
 }

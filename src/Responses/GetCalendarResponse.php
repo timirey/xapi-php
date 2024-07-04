@@ -14,7 +14,9 @@ class GetCalendarResponse extends AbstractResponse
      *
      * @param  CalendarRecord[]  $calendarRecords  CalendarRecord instances.
      */
-    public function __construct(public array $calendarRecords) {}
+    public function __construct(public array $calendarRecords)
+    {
+    }
 
     /**
      * Create a response instance from the validated data.

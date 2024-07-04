@@ -12,5 +12,7 @@ class GetVersionResponse extends AbstractResponse
      *
      * @param  string  $version  Current API version.
      */
-    public function __construct(public string $version) {}
+    public function __construct(public string $version)
+    {
+    }
 }

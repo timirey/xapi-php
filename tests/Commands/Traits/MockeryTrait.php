@@ -36,8 +36,7 @@ trait MockeryTrait
         $this->webSocketClient = Mockery::mock(WebSocketClient::class);
         $this->message = Mockery::mock(Message::class);
 
-        $this->client = new class($userId, $password, $host) extends Client
-        {
+        $this->client = new class ($userId, $password, $host) extends Client {
             /**
              * Sets the WebSocket client.
              *
