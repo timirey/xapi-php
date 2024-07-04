@@ -17,7 +17,10 @@ afterEach(function () {
 });
 
 test('getTradesHistory command', function () {
-    $payload = new GetTradesHistoryPayload(new DateTime('-1 month'), new DateTime());
+    $start = new DateTime('-1 month');
+    $end = new DateTime();
+
+    $payload = new GetTradesHistoryPayload($start, $end);
     $mockResponse = [
         'status' => true,
         'returnData' => [
@@ -54,7 +57,7 @@ test('getTradesHistory command', function () {
 
     $this->mockResponse($payload, $mockResponse);
 
-    $response = $this->client->getTradesHistory(new DateTime('-1 month'), new DateTime());
+    $response = $this->client->getTradesHistory($start, $end);
 
     expect($response)->toBeInstanceOf(GetTradesHistoryResponse::class)
         ->and($response->tradeRecords[0])->toBeInstanceOf(TradeRecord::class)

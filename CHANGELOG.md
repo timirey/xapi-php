@@ -1,5 +1,9 @@
 # Release Notes
 
+## [1.2.1](https://github.com/timirey/xapi-php/compare/1.2.0...1.2.1) - 2024-07-04
+
+* Fix DateTime objects in Pest tests.
+
 ## [1.2.0](https://github.com/timirey/xapi-php/compare/1.1.0...1.2.0) - 2024-07-04
 
 * Add Pint with PSR12.
