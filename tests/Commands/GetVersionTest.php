@@ -10,6 +10,10 @@ beforeEach(function () {
     $this->mockClient();
 });
 
+afterEach(function () {
+    Mockery::close();
+});
+
 test('getVersion command', function () {
     $payload = new GetVersionPayload();
     $mockResponse = [

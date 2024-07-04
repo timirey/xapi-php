@@ -10,6 +10,10 @@ beforeEach(function () {
     $this->mockClient();
 });
 
+afterEach(function () {
+    Mockery::close();
+});
+
 test('getMarginTrade command', function () {
     $payload = new GetMarginTradePayload('EURPLN', 1.0);
 

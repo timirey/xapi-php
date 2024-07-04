@@ -10,6 +10,10 @@ beforeEach(function () {
     $this->mockClient();
 });
 
+afterEach(function () {
+    Mockery::close();
+});
+
 test('login command', function () {
     $payload = new LoginPayload(12345, 'password');
     $mockResponse = [

@@ -13,6 +13,10 @@ beforeEach(function () {
     $this->mockClient();
 });
 
+afterEach(function () {
+    Mockery::close();
+});
+
 test('getAllSymbols command', function () {
     $payload = new GetAllSymbolsPayload();
     $mockResponse = [

@@ -14,6 +14,10 @@ beforeEach(function () {
     $this->mockClient();
 });
 
+afterEach(function () {
+    Mockery::close();
+});
+
 test('getChartLastRequest command', function () {
     $chartLastInfoRecord = new ChartLastInfoRecord(
         period: Period::PERIOD_M1,

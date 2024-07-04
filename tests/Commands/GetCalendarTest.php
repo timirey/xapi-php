@@ -12,6 +12,10 @@ beforeEach(function () {
     $this->mockClient();
 });
 
+afterEach(function () {
+    Mockery::close();
+});
+
 test('getCalendar command', function () {
     $payload = new GetCalendarPayload();
     $mockResponse = [

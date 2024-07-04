@@ -13,6 +13,10 @@ beforeEach(function () {
     $this->mockClient();
 });
 
+afterEach(function () {
+    Mockery::close();
+});
+
 test('getSymbol command', function () {
     $payload = new GetSymbolPayload('EURUSD');
     $mockResponse = [

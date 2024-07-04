@@ -14,6 +14,10 @@ beforeEach(function () {
     $this->mockClient();
 });
 
+afterEach(function () {
+    Mockery::close();
+});
+
 test('getTradingHours command', function () {
     $payload = new GetTradingHoursPayload(['EURPLN', 'AGO.PL']);
     $mockResponse = [

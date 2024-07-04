@@ -12,6 +12,10 @@ beforeEach(function () {
     $this->mockClient();
 });
 
+afterEach(function () {
+    Mockery::close();
+});
+
 test('getIbsHistory command', function () {
     $payload = new GetIbsHistoryPayload(new DateTime('-1 month'), new DateTime());
 

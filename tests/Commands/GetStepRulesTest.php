@@ -12,6 +12,10 @@ beforeEach(function () {
     $this->mockClient();
 });
 
+afterEach(function () {
+    Mockery::close();
+});
+
 test('getStepRules command', function () {
     $payload = new GetStepRulesPayload();
 

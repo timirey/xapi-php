@@ -11,6 +11,10 @@ beforeEach(function () {
     $this->mockClient();
 });
 
+afterEach(function () {
+    Mockery::close();
+});
+
 test('getProfitCalculation command', function () {
     $payload = new GetProfitCalculationPayload(
         1.3000,

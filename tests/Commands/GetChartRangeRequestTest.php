@@ -13,6 +13,10 @@ beforeEach(function () {
     $this->mockClient();
 });
 
+afterEach(function () {
+    Mockery::close();
+});
+
 test('getChartRangeRequest command', function () {
     $chartRangeInfoRecord = new ChartRangeInfoRecord(
         period: Period::PERIOD_H1,

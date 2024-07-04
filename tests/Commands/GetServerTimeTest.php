@@ -10,6 +10,10 @@ beforeEach(function () {
     $this->mockClient();
 });
 
+afterEach(function () {
+    Mockery::close();
+});
+
 test('getServerTime command', function () {
     $payload = new GetServerTimePayload();
 

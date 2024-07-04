@@ -12,6 +12,10 @@ beforeEach(function () {
     $this->mockClient();
 });
 
+afterEach(function () {
+    Mockery::close();
+});
+
 test('getTradesHistory command', function () {
     $payload = new GetTradesHistoryPayload(new DateTime('-1 month'), new DateTime());
     $mockResponse = [

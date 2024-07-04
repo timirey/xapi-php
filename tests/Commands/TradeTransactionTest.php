@@ -13,6 +13,10 @@ beforeEach(function () {
     $this->mockClient();
 });
 
+afterEach(function () {
+    Mockery::close();
+});
+
 test('tradeTransaction command', function () {
     $tradeTransInfo = new TradeTransInfo(
         cmd: Cmd::BUY,

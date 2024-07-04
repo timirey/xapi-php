@@ -11,6 +11,10 @@ beforeEach(function () {
     $this->mockClient();
 });
 
+afterEach(function () {
+    Mockery::close();
+});
+
 test('tradeTransactionStatus command', function () {
     $payload = new TradeTransactionStatusPayload(123456789);
     $mockResponse = [

@@ -12,6 +12,10 @@ beforeEach(function () {
     $this->mockClient();
 });
 
+afterEach(function () {
+    Mockery::close();
+});
+
 test('getTickPrices command', function () {
     $payload = new GetTickPricesPayload(Level::BASE, ['EURPLN', 'AGO.PL'], new DateTime());
     $mockResponse = [

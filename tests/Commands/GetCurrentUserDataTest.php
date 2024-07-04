@@ -10,6 +10,10 @@ beforeEach(function () {
     $this->mockClient();
 });
 
+afterEach(function () {
+    Mockery::close();
+});
+
 test('getCurrentUserData command', function () {
     $payload = new GetCurrentUserDataPayload();
 

@@ -11,6 +11,10 @@ beforeEach(function () {
     $this->mockClient();
 });
 
+afterEach(function () {
+    Mockery::close();
+});
+
 test('getNews command', function () {
     $payload = new GetNewsPayload(new DateTime('-1 month'), new DateTime());
 

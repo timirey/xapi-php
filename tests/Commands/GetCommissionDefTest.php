@@ -10,6 +10,10 @@ beforeEach(function () {
     $this->mockClient();
 });
 
+afterEach(function () {
+    Mockery::close();
+});
+
 test('getCommissionDef command', function () {
     $payload = new GetCommissionDefPayload('EURUSD', 1.0);
 
