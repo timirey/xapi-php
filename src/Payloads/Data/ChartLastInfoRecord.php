@@ -12,7 +12,7 @@ use Timirey\XApi\Helpers\DateTimeHelper;
 class ChartLastInfoRecord
 {
     /**
-     * @var integer Start of chart block (milliseconds since epoch).
+     * @var int Start of chart block (milliseconds since epoch).
      */
     public int $start;
 

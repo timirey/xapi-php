@@ -24,15 +24,15 @@ class IbRecord
     /**
      * Constructor for IbRecord.
      *
-     * @param float|null   $closePrice IB close price or null if not allowed to view.
-     * @param string|null  $login      IB user login or null if not allowed to view.
-     * @param float|null   $nominal    IB nominal or null if not allowed to view.
-     * @param float|null   $openPrice  IB open price or null if not allowed to view.
-     * @param integer|null $side       Operation code or null if not allowed to view.
-     * @param string|null  $surname    IB user surname or null if not allowed to view.
-     * @param string|null  $symbol     Symbol or null if not allowed to view.
-     * @param integer|null $timestamp  Time the record was created or null if not allowed to view.
-     * @param float|null   $volume     Volume in lots or null if not allowed to view.
+     * @param float|null  $closePrice IB close price or null if not allowed to view.
+     * @param string|null $login      IB user login or null if not allowed to view.
+     * @param float|null  $nominal    IB nominal or null if not allowed to view.
+     * @param float|null  $openPrice  IB open price or null if not allowed to view.
+     * @param int|null    $side       Operation code or null if not allowed to view.
+     * @param string|null $surname    IB user surname or null if not allowed to view.
+     * @param string|null $symbol     Symbol or null if not allowed to view.
+     * @param int|null    $timestamp  Time the record was created or null if not allowed to view.
+     * @param float|null  $volume     Volume in lots or null if not allowed to view.
      */
     public function __construct(
         public ?float $closePrice,

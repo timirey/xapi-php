@@ -1,5 +1,10 @@
 # Release Notes
 
+## [1.2.0](https://github.com/timirey/xapi-php/compare/1.1.0...1.2.0) - 2024-07-04
+
+* Add Pint with PSR12.
+* Refactor Pest tests.
+
 ## [1.1.0](https://github.com/timirey/xapi-php/compare/1.0.1...1.1.0) - 2024-07-02
 
 * Add new exceptions and improved error handling.

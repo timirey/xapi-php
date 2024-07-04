@@ -24,19 +24,20 @@ class GetTradingHoursResponse extends AbstractResponse
      * Create a response instance from the validated data.
      *
      * @param array $data Validated response data.
+     *
      * @return static Instance of the response.
      */
     protected static function create(array $data): static
     {
         return new static(array_map(
-            static fn(array $tradingHoursRecordData): TradingHoursRecord => new TradingHoursRecord(
+            static fn (array $tradingHoursRecordData): TradingHoursRecord => new TradingHoursRecord(
                 array_map(
-                    static fn(array $quotesRecordData): QuotesRecord => new QuotesRecord(...$quotesRecordData),
+                    static fn (array $quotesRecordData): QuotesRecord => new QuotesRecord(...$quotesRecordData),
                     $tradingHoursRecordData['quotes']
                 ),
                 $tradingHoursRecordData['symbol'],
                 array_map(
-                    static fn(array $tradingRecordData): TradingRecord => new TradingRecord(...$tradingRecordData),
+                    static fn (array $tradingRecordData): TradingRecord => new TradingRecord(...$tradingRecordData),
                     $tradingHoursRecordData['trading']
                 )
             ),

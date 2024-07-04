@@ -11,7 +11,7 @@
 |
 */
 
-uses(Timirey\XApi\Tests\TestCase::class)->in('Unit');
+//uses(Timirey\XApi\Tests\TestCase::class)->in('Commands');
 
 /*
 |--------------------------------------------------------------------------

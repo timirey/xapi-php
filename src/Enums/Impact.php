@@ -10,15 +10,15 @@ enum Impact: string
     /**
      * Low impact.
      */
-    case LOW = "1";
+    case LOW = '1';
 
     /**
      * Medium impact.
      */
-    case MEDIUM = "2";
+    case MEDIUM = '2';
 
     /**
      * High impact.
      */
-    case HIGH = "3";
+    case HIGH = '3';
 }

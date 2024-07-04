@@ -21,8 +21,8 @@ class TradeTransactionStatusResponse extends AbstractResponse
      * @param float       $bid           Bid price in base currency.
      * @param string|null $customComment The value the customer may provide in order to retrieve it later.
      * @param string      $message       Can be null.
-     * @param integer     $order         Unique order number.
-     * @param integer     $requestStatus Request status code.
+     * @param int         $order         Unique order number.
+     * @param int         $requestStatus Request status code.
      */
     public function __construct(
         public float $ask,
