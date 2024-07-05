@@ -91,6 +91,8 @@ class Client
     /**
      * Logs in to the xStation5 API.
      *
+     * @return LoginResponse The response from the login request.
+     *
      * @throws ErrorResponseException   If the response indicates an error.
      * @throws JsonException            If the response cannot be processed.
      * @throws InvalidResponseException Thrown when the API response is invalid or incomplete.
@@ -102,6 +104,8 @@ class Client
 
     /**
      * Logs out from the xStation5 API.
+     *
+     * @return LogoutResponse The response from the logout request.
      *
      * @throws ErrorResponseException   If the response indicates an error.
      * @throws JsonException            If the response cannot be processed.
@@ -117,6 +121,8 @@ class Client
      *
      * @param string $symbol The symbol to retrieve information for.
      *
+     * @return GetSymbolResponse The response containing symbol information.
+     *
      * @throws ErrorResponseException   If the response indicates an error.
      * @throws JsonException            If the response cannot be processed.
      * @throws InvalidResponseException Thrown when the API response is invalid or incomplete.
@@ -128,6 +134,8 @@ class Client
 
     /**
      * Retrieves information about all symbols.
+     *
+     * @return GetAllSymbolsResponse The response containing all symbols information.
      *
      * @throws ErrorResponseException   If the response indicates an error.
      * @throws JsonException            If the response cannot be processed.
@@ -143,6 +151,8 @@ class Client
      *
      * @param TradeTransInfo $tradeTransInfo Trade transaction details.
      *
+     * @return TradeTransactionResponse The response from the trade transaction request.
+     *
      * @throws ErrorResponseException   If the response indicates an error.
      * @throws JsonException            If the response cannot be processed.
      * @throws InvalidResponseException Thrown when the API response is invalid or incomplete.
@@ -156,6 +166,8 @@ class Client
      * Gets the current status of a trade transaction.
      *
      * @param int $order Order ID.
+     *
+     * @return TradeTransactionStatusResponse The response containing trade transaction status.
      *
      * @throws ErrorResponseException   If the response indicates an error.
      * @throws JsonException            If the response cannot be processed.
@@ -172,6 +184,8 @@ class Client
     /**
      * Refreshes the internal state of all system components.
      *
+     * @return PingResponse The response from the ping request.
+     *
      * @throws ErrorResponseException   If the response indicates an error.
      * @throws JsonException            If the response cannot be processed.
      * @throws InvalidResponseException Thrown when the API response is invalid or incomplete.
@@ -183,6 +197,8 @@ class Client
 
     /**
      * Returns calendar with market events.
+     *
+     * @return GetCalendarResponse The response containing market events calendar.
      *
      * @throws ErrorResponseException   If the response indicates an error.
      * @throws JsonException            If the response cannot be processed.
@@ -197,6 +213,8 @@ class Client
      * Returns chart info, from start date to the current time.
      *
      * @param ChartLastInfoRecord $chartLastInfoRecord Details of the chart request.
+     *
+     * @return GetChartLastRequestResponse The response containing chart info.
      *
      * @throws ErrorResponseException   If the response indicates an error.
      * @throws JsonException            If the response cannot be processed.
@@ -214,6 +232,8 @@ class Client
      * Returns chart info, from start date to the current time.
      *
      * @param ChartRangeInfoRecord $chartRangeInfoRecord Details of the chart range request.
+     *
+     * @return GetChartRangeRequestResponse The response containing chart range info.
      *
      * @throws ErrorResponseException   If the response indicates an error.
      * @throws JsonException            If the response cannot be processed.
@@ -233,6 +253,8 @@ class Client
      * @param string $symbol The trading symbol.
      * @param float  $volume The trading volume.
      *
+     * @return GetCommissionDefResponse The response containing commission definition.
+     *
      * @throws ErrorResponseException   If the response indicates an error.
      * @throws JsonException            If the response cannot be processed.
      * @throws InvalidResponseException Thrown when the API response is invalid or incomplete.
@@ -248,6 +270,8 @@ class Client
     /**
      * Returns information about account currency, and account leverage.
      *
+     * @return GetCurrentUserDataResponse The response containing current user data.
+     *
      * @throws ErrorResponseException   If the response indicates an error.
      * @throws JsonException            If the response cannot be processed.
      * @throws InvalidResponseException Thrown when the API response is invalid or incomplete.
@@ -259,6 +283,8 @@ class Client
 
     /**
      * Returns various account indicators.
+     *
+     * @return GetMarginLevelResponse The response containing margin level information.
      *
      * @throws ErrorResponseException   If the response indicates an error.
      * @throws JsonException            If the response cannot be processed.
@@ -274,6 +300,8 @@ class Client
      *
      * @param string $symbol The trading symbol.
      * @param float  $volume The trading volume.
+     *
+     * @return GetMarginTradeResponse The response containing margin trade information.
      *
      * @throws ErrorResponseException   If the response indicates an error.
      * @throws JsonException            If the response cannot be processed.
@@ -293,7 +321,7 @@ class Client
      * @param DateTime $start Start time for news retrieval.
      * @param DateTime $end   End time for news retrieval.
      *
-     * @return GetNewsResponse Response containing the news.
+     * @return GetNewsResponse The response containing the news.
      *
      * @throws ErrorResponseException   If the response indicates an error.
      * @throws JsonException            If the response cannot be processed.
@@ -309,6 +337,8 @@ class Client
      *
      * @param DateTime $start Start time for IBs history retrieval.
      * @param DateTime $end   End time for IBs history retrieval.
+     *
+     * @return GetIbsHistoryResponse The response containing IBs history.
      *
      * @throws ErrorResponseException   If the response indicates an error.
      * @throws JsonException            If the response cannot be processed.
@@ -328,16 +358,18 @@ class Client
      * @param string $symbol     Trading symbol.
      * @param float  $volume     Trading volume.
      *
+     * @return GetProfitCalculationResponse The response containing profit calculation.
+     *
      * @throws ErrorResponseException   If the response indicates an error.
      * @throws JsonException            If the response cannot be processed.
      * @throws InvalidResponseException Thrown when the API response is invalid or incomplete.
      */
     public function getProfitCalculation(
-        float $closePrice,
-        Cmd $cmd,
-        float $openPrice,
+        float  $closePrice,
+        Cmd    $cmd,
+        float  $openPrice,
         string $symbol,
-        float $volume
+        float  $volume
     ): GetProfitCalculationResponse {
         return $this->sendRequest(
             new GetProfitCalculationPayload($closePrice, $cmd, $openPrice, $symbol, $volume),
@@ -347,6 +379,8 @@ class Client
 
     /**
      * Returns current time on trading server.
+     *
+     * @return GetServerTimeResponse The response containing the server time.
      *
      * @throws ErrorResponseException   If the response indicates an error.
      * @throws JsonException            If the response cannot be processed.
@@ -359,6 +393,8 @@ class Client
 
     /**
      * Returns a list of step rules for DMAs.
+     *
+     * @return GetStepRulesResponse The response containing step rules.
      *
      * @throws ErrorResponseException   If the response indicates an error.
      * @throws JsonException            If the response cannot be processed.
@@ -375,6 +411,8 @@ class Client
      * @param Level    $level     The price level.
      * @param array    $symbols   Array of symbol names.
      * @param DateTime $timestamp The time from which the most recent tick should be looked for.
+     *
+     * @return GetTickPricesResponse The response containing tick prices.
      *
      * @throws ErrorResponseException   If the response indicates an error.
      * @throws JsonException            If the response cannot be processed.
@@ -393,6 +431,8 @@ class Client
      *
      * @param array $orders Array of order IDs.
      *
+     * @return GetTradeRecordsResponse The response containing trade records.
+     *
      * @throws ErrorResponseException   If the response indicates an error.
      * @throws JsonException            If the response cannot be processed.
      * @throws InvalidResponseException Thrown when the API response is invalid or incomplete.
@@ -406,6 +446,8 @@ class Client
      * Retrieves an array of user's trades.
      *
      * @param bool $openedOnly If true, only opened trades will be returned.
+     *
+     * @return GetTradesResponse The response containing trades.
      *
      * @throws ErrorResponseException   If the response indicates an error.
      * @throws JsonException            If the response cannot be processed.
@@ -422,6 +464,8 @@ class Client
      * @param DateTime $start Start time for trade history retrieval.
      * @param DateTime $end   End time for trade history retrieval.
      *
+     * @return GetTradesHistoryResponse The response containing trades history.
+     *
      * @throws ErrorResponseException   If the response indicates an error.
      * @throws JsonException            If the response cannot be processed.
      * @throws InvalidResponseException Thrown when the API response is invalid or incomplete.
@@ -436,6 +480,8 @@ class Client
      *
      * @param array $symbols Array of symbol names (Strings).
      *
+     * @return GetTradingHoursResponse The response containing trading hours.
+     *
      * @throws ErrorResponseException   If the response indicates an error.
      * @throws JsonException            If the response cannot be processed.
      * @throws InvalidResponseException Thrown when the API response is invalid or incomplete.
@@ -447,6 +493,8 @@ class Client
 
     /**
      * Returns the current API version.
+     *
+     * @return GetVersionResponse The response containing the API version.
      *
      * @throws ErrorResponseException   If the response indicates an error.
      * @throws JsonException            If the response cannot be processed.
