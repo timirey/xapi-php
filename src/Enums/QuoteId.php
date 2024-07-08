@@ -26,4 +26,9 @@ enum QuoteId: int
      * Cross source.
      */
     case CROSS = 4;
+
+    /**
+     * Unknown, not documented.
+     */
+    case FIVE = 5;
 }
