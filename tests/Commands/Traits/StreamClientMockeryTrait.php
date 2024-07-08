@@ -5,10 +5,10 @@ namespace Timirey\XApi\Tests\Commands\Traits;
 use JsonException;
 use Mockery;
 use Mockery\MockInterface;
-use Timirey\XApi\Exceptions\InvalidPayloadException;
-use Timirey\XApi\StreamClient;
 use Timirey\XApi\Enums\StreamHost;
+use Timirey\XApi\Exceptions\InvalidPayloadException;
 use Timirey\XApi\Payloads\AbstractStreamPayload;
+use Timirey\XApi\StreamClient;
 use WebSocket\Client as WebSocketClient;
 use WebSocket\Message\Message;
 
@@ -30,8 +30,6 @@ trait StreamClientMockeryTrait
      *
      * @param string     $streamSessionId Stream session ID.
      * @param StreamHost $host            Host URI.
-     *
-     * @return void
      */
     public function mockStreamClient(
         string $streamSessionId = 'streamSessionId',
@@ -45,8 +43,6 @@ trait StreamClientMockeryTrait
              * Sets the WebSocket client.
              *
              * @param WebSocketClient $client WebSocket client.
-             *
-             * @return void
              */
             public function setStreamClient(WebSocketClient $client): void
             {
@@ -65,8 +61,6 @@ trait StreamClientMockeryTrait
      *
      * @throws JsonException           If encoding to JSON fails.
      * @throws InvalidPayloadException If payload is missing or invalid.
-
-     * @return void
      */
     public function mockStreamResponse(AbstractStreamPayload $payload, array $response): void
     {

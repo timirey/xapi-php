@@ -17,15 +17,15 @@ afterEach(function () {
 test('getTradeStatus stream command', function () {
     $payload = new GetTradeStatusStreamPayload('streamSessionId');
     $mockResponse = [
-                     'command' => 'tradeStatus',
-                     'data'    => [
-                                   'customComment' => 'Some text',
-                                   'message'       => null,
-                                   'order'         => 43,
-                                   'price'         => 1.392,
-                                   'requestStatus' => 3,
-                                  ],
-                    ];
+        'command' => 'tradeStatus',
+        'data' => [
+            'customComment' => 'Some text',
+            'message' => null,
+            'order' => 43,
+            'price' => 1.392,
+            'requestStatus' => 3,
+        ],
+    ];
 
     $this->mockStreamResponse($payload, $mockResponse);
 

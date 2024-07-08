@@ -32,15 +32,15 @@ abstract class AbstractStreamPayload extends AbstractPayload
     {
         $payload['command'] = $this->getCommand();
 
-        if (!empty($this->parameters)) {
+        if (! empty($this->parameters)) {
             $payload = array_merge($payload, $this->parameters);
         }
 
-        if (!isset($payload['streamSessionId'])) {
+        if (! isset($payload['streamSessionId'])) {
             throw new InvalidPayloadException('The payload did not include a streamSessionId.');
         }
 
-        if (!is_string($payload['streamSessionId'])) {
+        if (! is_string($payload['streamSessionId'])) {
             throw new InvalidPayloadException('The streamSessionId provided in the payload is invalid.');
         }
 

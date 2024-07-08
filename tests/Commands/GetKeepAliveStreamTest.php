@@ -17,9 +17,9 @@ afterEach(function () {
 test('getKeepAlive stream command', function () {
     $payload = new GetKeepAliveStreamPayload('streamSessionId');
     $mockResponse = [
-                     'command' => 'keepAlive',
-                     'data'    => ['timestamp' => 1362944112000],
-                    ];
+        'command' => 'keepAlive',
+        'data' => ['timestamp' => 1362944112000],
+    ];
 
     $this->mockStreamResponse($payload, $mockResponse);
 

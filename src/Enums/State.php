@@ -10,10 +10,10 @@ enum State: string
     /**
      * Trade order is modified.
      */
-    case MODIFIED = "Modified";
+    case MODIFIED = 'Modified';
 
     /**
      * Trade order is deleted.
      */
-    case DELETED = "Deleted";
+    case DELETED = 'Deleted';
 }

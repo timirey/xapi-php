@@ -2,11 +2,11 @@
 
 namespace Timirey\XApi\Responses\Data;
 
+use DateTime;
 use Timirey\XApi\Enums\Cmd;
 use Timirey\XApi\Enums\State;
 use Timirey\XApi\Enums\Type;
 use Timirey\XApi\Helpers\DateTimeHelper;
-use DateTime;
 
 /**
  * Class representing the trade record data in the streaming response.

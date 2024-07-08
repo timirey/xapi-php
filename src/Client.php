@@ -72,7 +72,7 @@ use WebSocket\Client as WebSocketClient;
 class Client
 {
     /**
-     * @var WebSocketClient $client XTB WebSocket client instance.
+     * @var WebSocketClient XTB WebSocket client instance.
      */
     protected WebSocketClient $client;
 

@@ -42,9 +42,9 @@ test('tradeTransaction command', function () {
         ->and($tradeTransInfoArgument->type)->toBe(Type::OPEN);
 
     $mockResponse = [
-                     'status'     => true,
-                     'returnData' => ['order' => 123456789],
-                    ];
+        'status' => true,
+        'returnData' => ['order' => 123456789],
+    ];
 
     $this->mockResponse($payload, $mockResponse);
 

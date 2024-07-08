@@ -18,9 +18,9 @@ test('getMarginTrade command', function () {
     $payload = new GetMarginTradePayload('EURPLN', 1.0);
 
     $mockResponse = [
-                     'status'     => true,
-                     'returnData' => ['margin' => 4399.350],
-                    ];
+        'status' => true,
+        'returnData' => ['margin' => 4399.350],
+    ];
 
     $this->mockResponse($payload, $mockResponse);
 

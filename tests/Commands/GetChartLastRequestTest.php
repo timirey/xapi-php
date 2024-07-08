@@ -34,22 +34,22 @@ test('getChartLastRequest command', function () {
     expect($chartLastInfoRecordArgument->period)->toBeInstanceOf(Period::class);
 
     $mockResponse = [
-                     'status'     => true,
-                     'returnData' => [
-                                      'digits'    => 5,
-                                      'rateInfos' => [
-                                                      [
-                                                       'close'     => 1.12345,
-                                                       'ctm'       => DateTimeHelper::toMilliseconds(new DateTime()),
-                                                       'ctmString' => 'Jan 10, 2014 3:04:00 PM',
-                                                       'high'      => 1.125,
-                                                       'low'       => 1.120,
-                                                       'open'      => 1.122,
-                                                       'vol'       => 100,
-                                                      ],
-                                                     ],
-                                     ],
-                    ];
+        'status' => true,
+        'returnData' => [
+            'digits' => 5,
+            'rateInfos' => [
+                [
+                    'close' => 1.12345,
+                    'ctm' => DateTimeHelper::toMilliseconds(new DateTime()),
+                    'ctmString' => 'Jan 10, 2014 3:04:00 PM',
+                    'high' => 1.125,
+                    'low' => 1.120,
+                    'open' => 1.122,
+                    'vol' => 100,
+                ],
+            ],
+        ],
+    ];
 
     $this->mockResponse($payload, $mockResponse);
 

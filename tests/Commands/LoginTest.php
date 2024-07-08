@@ -17,9 +17,9 @@ afterEach(function () {
 test('login command', function () {
     $payload = new LoginPayload(12345, 'password');
     $mockResponse = [
-                     'status'          => true,
-                     'streamSessionId' => 'streamSessionId',
-                    ];
+        'status' => true,
+        'streamSessionId' => 'streamSessionId',
+    ];
 
     $this->mockResponse($payload, $mockResponse);
 

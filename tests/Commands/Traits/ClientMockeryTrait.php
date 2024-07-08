@@ -30,8 +30,6 @@ trait ClientMockeryTrait
      * @param integer $userId   User id.
      * @param string  $password Password.
      * @param Host    $host     Host URI.
-     *
-     * @return void
      */
     public function mockClient(int $userId = 12345, string $password = 'password', Host $host = Host::DEMO): void
     {
@@ -43,8 +41,6 @@ trait ClientMockeryTrait
              * Sets the WebSocket client.
              *
              * @param WebSocketClient $client WebSocket client.
-             *
-             * @return void
              */
             public function setWebSocketClient(WebSocketClient $client): void
             {
@@ -62,8 +58,6 @@ trait ClientMockeryTrait
      * @param array           $response The mocked response data.
      *
      * @throws JsonException If encoding to JSON fails.
-     *
-     * @return void
      */
     public function mockResponse(AbstractPayload $payload, array $response): void
     {

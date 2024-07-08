@@ -54,12 +54,10 @@ abstract class AbstractStreamResponse
      *
      * @throws ErrorResponseException   If the response indicates an error or status is missing.
      * @throws InvalidResponseException If the response is invalid or incomplete.
-     *
-     * @return void
      */
     protected static function validate(array &$data): void
     {
-        if (!isset($data['command'])) {
+        if (! isset($data['command'])) {
             throw new InvalidResponseException('The response did not include a command.');
         }
 

@@ -17,14 +17,14 @@ afterEach(function () {
 test('getProfits stream command', function () {
     $payload = new GetProfitsStreamPayload('streamSessionId');
     $mockResponse = [
-                     'command' => 'profit',
-                     'data'    => [
-                                   'order'    => 7497776,
-                                   'order2'   => 7497777,
-                                   'position' => 7497776,
-                                   'profit'   => 7076.52,
-                                  ],
-                    ];
+        'command' => 'profit',
+        'data' => [
+            'order' => 7497776,
+            'order2' => 7497777,
+            'position' => 7497776,
+            'profit' => 7076.52,
+        ],
+    ];
 
     $this->mockStreamResponse($payload, $mockResponse);
 
