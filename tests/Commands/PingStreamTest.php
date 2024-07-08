@@ -1,7 +1,6 @@
 <?php
 
 use Timirey\XApi\Payloads\PingStreamPayload;
-use Timirey\XApi\Responses\PingStreamResponse;
 use Timirey\XApi\Tests\Commands\Traits\StreamClientMockeryTrait;
 
 uses(StreamClientMockeryTrait::class);
@@ -16,17 +15,10 @@ afterEach(function () {
 
 test('ping stream command', function () {
     $payload = new PingStreamPayload('streamSessionId');
-    $mockResponse = [
-        'command' => 'ping',
-        'data' => []
-    ];
 
-    $this->mockStreamResponse($payload, $mockResponse);
+    $this->streamClient->shouldReceive('text')
+        ->once()
+        ->with($payload->toJson());
 
-    $client = $this->client;
-
-    $client->ping(function (PingStreamResponse $response) use ($client) {
-        expect($response)->toBeInstanceOf(PingStreamResponse::class);
-        $client->unsubscribe();
-    });
+    $this->client->ping();
 });
