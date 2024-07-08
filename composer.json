@@ -1,6 +1,6 @@
 {
     "name": "timirey/xapi-php",
-    "description": "PHP library for the X-Trade Brokers (XTB) xStation5 Trading API, providing seamless account management, trade execution, and market data retrieval.",
+    "description": "A PHP wrapper for the X-Trade Brokers (XTB) xStation5 Trading API, supporting real-time streaming and simple commands via WebSocket.",
     "keywords": [
         "php",
         "xtb",

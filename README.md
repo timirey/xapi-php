@@ -8,9 +8,7 @@
 <a href="https://packagist.org/packages/timirey/xapi-php"><img src="https://img.shields.io/packagist/l/timirey/xapi-php" alt="License"></a>
 </p>
 
-This PHP library provides a comprehensive and user-friendly interface for interacting with the X-Trade Brokers (XTB)
-xStation5 Trading API. It supports various functionalities including account management, trade execution, and market
-data retrieval.
+This PHP library provides a comprehensive and user-friendly interface for interacting with the X-Trade Brokers (XTB) xStation5 Trading API. It supports a wide range of functionalities, including account management, trade execution, market data retrieval, and real-time streaming commands via WebSocket, making it an ideal tool for developers looking to integrate advanced trading features and live market data into their applications.
 
 ## Table of contents
 
