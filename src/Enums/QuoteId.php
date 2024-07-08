@@ -7,27 +7,27 @@ namespace Timirey\XApi\Enums;
  */
 enum QuoteId: int
 {
-    /*
+    /**
      * Fixed source.
      */
     case FIXED = 1;
 
-    /*
+    /**
      * Float source.
      */
     case FLOAT = 2;
 
-    /*
+    /**
      * Depth source.
      */
     case DEPTH = 3;
 
-    /*
+    /**
      * Cross source.
      */
     case CROSS = 4;
 
-    /*
+    /**
      * Unknown, not documented.
      */
     case FIVE = 5;

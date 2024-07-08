@@ -7,12 +7,12 @@ namespace Timirey\XApi\Enums;
  */
 enum Side: int
 {
-    /*
+    /**
      * Buy side.
      */
     case BUY = 0;
 
-    /*
+    /**
      * Sell side.
      */
     case SELL = 1;

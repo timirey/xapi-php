@@ -28,7 +28,7 @@ test('getChartRangeRequest command', function () {
 
     $payload = new GetChartRangeRequestPayload($chartRangeInfoRecord);
 
-    /*
+    /**
      * @var ChartRangeInfoRecord $chartRangeRequestArgument
      */
     $chartRangeRequestArgument = $payload->parameters['info'];

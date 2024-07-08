@@ -7,12 +7,12 @@ namespace Timirey\XApi\Enums;
  */
 enum ProfitMode: int
 {
-    /*
+    /**
      * FOREX.
      */
     case FOREX = 5;
 
-    /*
+    /**
      * CFD.
      */
     case CFD = 6;
