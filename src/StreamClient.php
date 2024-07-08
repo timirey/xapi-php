@@ -11,12 +11,14 @@ use Timirey\XApi\Payloads\GetCandlesStreamPayload;
 use Timirey\XApi\Payloads\GetKeepAliveStreamPayload;
 use Timirey\XApi\Payloads\GetNewsStreamPayload;
 use Timirey\XApi\Payloads\GetProfitsStreamPayload;
+use Timirey\XApi\Payloads\GetTickPricesStreamPayload;
 use Timirey\XApi\Responses\AbstractStreamResponse;
 use Timirey\XApi\Responses\GetBalanceStreamResponse;
 use Timirey\XApi\Responses\GetCandlesStreamResponse;
 use Timirey\XApi\Responses\GetKeepAliveStreamResponse;
 use Timirey\XApi\Responses\GetNewsStreamResponse;
 use Timirey\XApi\Responses\GetProfitsStreamResponse;
+use Timirey\XApi\Responses\GetTickPricesStreamResponse;
 use WebSocket\Client as WebSocketClient;
 
 /**
@@ -127,6 +129,30 @@ class StreamClient
         $this->subscribe(
             new GetProfitsStreamPayload($this->streamSessionId),
             GetProfitsStreamResponse::class,
+            $callback
+        );
+    }
+
+    /**
+     * Subscribe to tick prices stream.
+     *
+     * @param string   $symbol         Symbol for which to get the tick prices.
+     * @param callable $callback       Callback function to handle the response.
+     * @param int|null $minArrivalTime Minimal interval in milliseconds between updates (optional).
+     * @param int|null $maxLevel       Maximum level of the quote (optional).
+     *
+     * @throws InvalidResponseException If the response is invalid.
+     * @throws JsonException            If JSON processing fails.
+     */
+    public function getTickPrices(
+        string $symbol,
+        callable $callback,
+        ?int $minArrivalTime = null,
+        ?int $maxLevel = null,
+    ): void {
+        $this->subscribe(
+            new GetTickPricesStreamPayload($this->streamSessionId, $symbol, $minArrivalTime, $maxLevel),
+            GetTickPricesStreamResponse::class,
             $callback
         );
     }
