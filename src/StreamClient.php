@@ -10,11 +10,13 @@ use Timirey\XApi\Payloads\GetBalanceStreamPayload;
 use Timirey\XApi\Payloads\GetCandlesStreamPayload;
 use Timirey\XApi\Payloads\GetKeepAliveStreamPayload;
 use Timirey\XApi\Payloads\GetNewsStreamPayload;
+use Timirey\XApi\Payloads\GetProfitsStreamPayload;
 use Timirey\XApi\Responses\AbstractStreamResponse;
 use Timirey\XApi\Responses\GetBalanceStreamResponse;
 use Timirey\XApi\Responses\GetCandlesStreamResponse;
 use Timirey\XApi\Responses\GetKeepAliveStreamResponse;
 use Timirey\XApi\Responses\GetNewsStreamResponse;
+use Timirey\XApi\Responses\GetProfitsStreamResponse;
 use WebSocket\Client as WebSocketClient;
 
 /**
@@ -112,6 +114,22 @@ class StreamClient
         );
     }
 
+    /**
+     * Subscribe to profits stream.
+     *
+     * @param callable $callback Callback function to handle the response.
+     *
+     * @throws InvalidResponseException If the response is invalid.
+     * @throws JsonException            If JSON processing fails.
+     */
+    public function getProfits(callable $callback): void
+    {
+        $this->subscribe(
+            new GetProfitsStreamPayload($this->streamSessionId),
+            GetProfitsStreamResponse::class,
+            $callback
+        );
+    }
 
     /**
      * Sends a request to the xStation5 API and processes the response.

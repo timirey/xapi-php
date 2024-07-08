@@ -3,9 +3,9 @@
 namespace Timirey\XApi\Payloads;
 
 /**
- * Class representing the payload for the getNews stream command.
+ * Class representing the payload for the getProfits stream command.
  */
-class GetNewsStreamPayload extends AbstractStreamPayload
+class GetProfitsStreamPayload extends AbstractStreamPayload
 {
     /**
      * Returns the command name for the payload.
@@ -14,6 +14,6 @@ class GetNewsStreamPayload extends AbstractStreamPayload
      */
     public function getCommand(): string
     {
-        return 'getNews';
+        return 'getProfits';
     }
 }
