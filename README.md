@@ -19,6 +19,7 @@ data retrieval.
 - [Available commands](#available-commands)
     - [login](#login)
     - [logout](#logout)
+- [todo: streaming]
 - [Retrieving trading data](#retrieving-trading-data)
     - [getAllSymbols](#getallsymbols)
     - [getCalendar](#getcalendar)
