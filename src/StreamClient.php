@@ -9,10 +9,12 @@ use Timirey\XApi\Payloads\AbstractStreamPayload;
 use Timirey\XApi\Payloads\GetBalanceStreamPayload;
 use Timirey\XApi\Payloads\GetCandlesStreamPayload;
 use Timirey\XApi\Payloads\GetKeepAliveStreamPayload;
+use Timirey\XApi\Payloads\GetNewsStreamPayload;
 use Timirey\XApi\Responses\AbstractStreamResponse;
 use Timirey\XApi\Responses\GetBalanceStreamResponse;
 use Timirey\XApi\Responses\GetCandlesStreamResponse;
 use Timirey\XApi\Responses\GetKeepAliveStreamResponse;
+use Timirey\XApi\Responses\GetNewsStreamResponse;
 use WebSocket\Client as WebSocketClient;
 
 /**
@@ -92,6 +94,24 @@ class StreamClient
             $callback
         );
     }
+
+    /**
+     * Subscribe to news stream.
+     *
+     * @param callable $callback Callback function to handle the response.
+     *
+     * @throws InvalidResponseException If the response is invalid.
+     * @throws JsonException            If JSON processing fails.
+     */
+    public function getNews(callable $callback): void
+    {
+        $this->subscribe(
+            new GetNewsStreamPayload($this->streamSessionId),
+            GetNewsStreamResponse::class,
+            $callback
+        );
+    }
+
 
     /**
      * Sends a request to the xStation5 API and processes the response.
