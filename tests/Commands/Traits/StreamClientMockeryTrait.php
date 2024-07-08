@@ -44,7 +44,7 @@ trait StreamClientMockeryTrait
              */
             public function setStreamClient(WebSocketClient $client): void
             {
-                $this->streamClient = $client;
+                $this->streamClient = $client; // todo: change to phpcs
             }
         };
 
