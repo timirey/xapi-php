@@ -17,15 +17,15 @@ afterEach(function () {
 test('getTradeStatus stream command', function () {
     $payload = new GetTradeStatusStreamPayload('streamSessionId');
     $mockResponse = [
-        'command' => 'tradeStatus',
-        'data' => [
-            'customComment' => 'Some text',
-            'message' => null,
-            'order' => 43,
-            'price' => 1.392,
-            'requestStatus' => 3,
-        ],
-    ];
+                     'command' => 'tradeStatus',
+                     'data'    => [
+                                   'customComment' => 'Some text',
+                                   'message'       => null,
+                                   'order'         => 43,
+                                   'price'         => 1.392,
+                                   'requestStatus' => 3,
+                                  ],
+                    ];
 
     $this->mockStreamResponse($payload, $mockResponse);
 
@@ -33,7 +33,7 @@ test('getTradeStatus stream command', function () {
 
     $client->getTradeStatus(function (GetTradeStatusStreamResponse $response) use ($client) {
         expect($response)->toBeInstanceOf(GetTradeStatusStreamResponse::class)
-            ->and($response->streamTradeStatusRecord->order)->toBe(43) //todo: update tests
+            ->and($response->streamTradeStatusRecord->order)->toBe(43) // todo: update tests
             ->and($response->streamTradeStatusRecord->requestStatus->name)->toBe('ACCEPTED');
 
         $client->unsubscribe();

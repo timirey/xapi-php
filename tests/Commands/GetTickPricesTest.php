@@ -21,26 +21,26 @@ test('getTickPrices command', function () {
 
     $payload = new GetTickPricesPayload(Level::BASE, ['EURPLN', 'AGO.PL'], $timestamp);
     $mockResponse = [
-        'status' => true,
-        'returnData' => [
-            'quotations' => [
-                [
-                    'ask' => 4000.0,
-                    'askVolume' => 15000,
-                    'bid' => 4000.0,
-                    'bidVolume' => 16000,
-                    'high' => 4000.0,
-                    'level' => Level::BASE,
-                    'exemode' => 1,
-                    'low' => 3500.0,
-                    'spreadRaw' => 0.000003,
-                    'spreadTable' => 0.00042,
-                    'symbol' => 'KOMB.CZ',
-                    'timestamp' => 1272529161605,
-                ],
-            ],
-        ],
-    ];
+                     'status'     => true,
+                     'returnData' => [
+                                      'quotations' => [
+                                                       [
+                                                        'ask'         => 4000.0,
+                                                        'askVolume'   => 15000,
+                                                        'bid'         => 4000.0,
+                                                        'bidVolume'   => 16000,
+                                                        'high'        => 4000.0,
+                                                        'level'       => Level::BASE,
+                                                        'exemode'     => 1,
+                                                        'low'         => 3500.0,
+                                                        'spreadRaw'   => 0.000003,
+                                                        'spreadTable' => 0.00042,
+                                                        'symbol'      => 'KOMB.CZ',
+                                                        'timestamp'   => 1272529161605,
+                                                       ],
+                                                      ],
+                                     ],
+                    ];
 
     $this->mockResponse($payload, $mockResponse);
 

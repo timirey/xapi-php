@@ -7,12 +7,12 @@ namespace Timirey\XApi\Enums;
  */
 enum StreamHost: string
 {
-    /**
+    /*
      * Demo account stream host URL.
      */
     case DEMO = 'wss://ws.xtb.com/demoStream';
 
-    /**
+    /*
      * Real account stream host URL.
      */
     case REAL = 'wss://ws.xtb.com/realStream';

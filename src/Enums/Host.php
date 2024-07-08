@@ -7,12 +7,12 @@ namespace Timirey\XApi\Enums;
  */
 enum Host: string
 {
-    /**
+    /*
      * Demo account host URL.
      */
     case DEMO = 'wss://ws.xtb.com/demo';
 
-    /**
+    /*
      * Real account host URL.
      */
     case REAL = 'wss://ws.xtb.com/real';

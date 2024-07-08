@@ -32,12 +32,12 @@ use WebSocket\Client as WebSocketClient;
 class StreamClient
 {
     /**
-     * XTB WebSocket stream client instance.
+     * @var WebsocketClient $streamClient XTB WebSocket stream client instance.
      */
     protected WebSocketClient $streamClient;
 
     /**
-     * Flag to control the streaming loop.
+     * @var boolean $streaming Flag to control the streaming loop.
      */
     protected bool $streaming = false;
 
@@ -59,6 +59,8 @@ class StreamClient
      *
      * @throws InvalidResponseException If the response is invalid.
      * @throws JsonException            If JSON processing fails.
+     *
+     * @return void
      */
     public function getBalance(callable $callback): void
     {
@@ -77,6 +79,8 @@ class StreamClient
      *
      * @throws InvalidResponseException If the response is invalid.
      * @throws JsonException            If JSON processing fails.
+     *
+     * @return void
      */
     public function getCandles(string $symbol, callable $callback): void
     {
@@ -94,6 +98,8 @@ class StreamClient
      *
      * @throws InvalidResponseException If the response is invalid.
      * @throws JsonException            If JSON processing fails.
+     *
+     * @return void
      */
     public function getKeepAlive(callable $callback): void
     {
@@ -111,6 +117,8 @@ class StreamClient
      *
      * @throws InvalidResponseException If the response is invalid.
      * @throws JsonException            If JSON processing fails.
+     *
+     * @return void
      */
     public function getNews(callable $callback): void
     {
@@ -128,6 +136,8 @@ class StreamClient
      *
      * @throws InvalidResponseException If the response is invalid.
      * @throws JsonException            If JSON processing fails.
+     *
+     * @return void
      */
     public function getProfits(callable $callback): void
     {
@@ -141,13 +151,15 @@ class StreamClient
     /**
      * Subscribe to tick prices stream.
      *
-     * @param string   $symbol         Symbol for which to get the tick prices.
-     * @param callable $callback       Callback function to handle the response.
-     * @param int|null $minArrivalTime Minimal interval in milliseconds between updates (optional).
-     * @param int|null $maxLevel       Maximum level of the quote (optional).
+     * @param string       $symbol         Symbol for which to get the tick prices.
+     * @param callable     $callback       Callback function to handle the response.
+     * @param integer|null $minArrivalTime Minimal interval in milliseconds between updates (optional).
+     * @param integer|null $maxLevel       Maximum level of the quote (optional).
      *
      * @throws InvalidResponseException If the response is invalid.
      * @throws JsonException            If JSON processing fails.
+     *
+     * @return void
      */
     public function getTickPrices(
         string $symbol,
@@ -169,6 +181,8 @@ class StreamClient
      *
      * @throws InvalidResponseException If the response is invalid.
      * @throws JsonException            If JSON processing fails.
+     *
+     * @return void
      */
     public function getTrades(callable $callback): void
     {
@@ -186,6 +200,8 @@ class StreamClient
      *
      * @throws InvalidResponseException If the response is invalid.
      * @throws JsonException            If JSON processing fails.
+     *
+     * @return void
      */
     public function getTradeStatus(callable $callback): void
     {
@@ -199,7 +215,7 @@ class StreamClient
     /**
      * Send a ping command to the xStation5 API.
      *
-     * @param callable $callback Callback function to handle the response.
+     * @return void
      */
     public function ping(): void
     {
@@ -217,6 +233,8 @@ class StreamClient
      *
      * @throws InvalidResponseException If the response is invalid.
      * @throws JsonException            If JSON processing fails.
+     *
+     * @return void
      */
     protected function subscribe(AbstractStreamPayload $payload, string $responseClass, callable $callback): void
     {
@@ -233,6 +251,8 @@ class StreamClient
 
     /**
      * Unsubscribe from the stream.
+     *
+     * @return void
      */
     public function unsubscribe(): void
     {

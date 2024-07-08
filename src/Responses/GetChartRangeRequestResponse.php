@@ -12,7 +12,7 @@ class GetChartRangeRequestResponse extends AbstractResponse
     /**
      * Constructor for GetChartRangeRequestResponse.
      *
-     * @param int              $digits          The number of decimal places for price values.
+     * @param integer          $digits          The number of decimal places for price values.
      * @param RateInfoRecord[] $rateInfoRecords An array of rate information records.
      */
     public function __construct(public int $digits, public array $rateInfoRecords)

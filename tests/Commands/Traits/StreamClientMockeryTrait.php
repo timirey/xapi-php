@@ -30,9 +30,13 @@ trait StreamClientMockeryTrait
      *
      * @param string     $streamSessionId Stream session ID.
      * @param StreamHost $host            Host URI.
+     *
+     * @return void
      */
-    public function mockStreamClient(string $streamSessionId = 'streamSessionId', StreamHost $host = StreamHost::DEMO): void
-    {
+    public function mockStreamClient(
+        string $streamSessionId = 'streamSessionId',
+        StreamHost $host = StreamHost::DEMO
+    ): void {
         $this->streamClient = Mockery::mock(WebSocketClient::class);
         $this->message = Mockery::mock(Message::class);
 
@@ -41,6 +45,8 @@ trait StreamClientMockeryTrait
              * Sets the WebSocket client.
              *
              * @param WebSocketClient $client WebSocket client.
+             *
+             * @return void
              */
             public function setStreamClient(WebSocketClient $client): void
             {
@@ -59,6 +65,8 @@ trait StreamClientMockeryTrait
      *
      * @throws JsonException           If encoding to JSON fails.
      * @throws InvalidPayloadException If payload is missing or invalid.
+
+     * @return void
      */
     public function mockStreamResponse(AbstractStreamPayload $payload, array $response): void
     {

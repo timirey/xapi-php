@@ -16,9 +16,7 @@ afterEach(function () {
 
 test('ping command', function () {
     $payload = new PingPayload();
-    $mockResponse = [
-        'status' => true,
-    ];
+    $mockResponse = ['status' => true];
 
     $this->mockResponse($payload, $mockResponse);
 

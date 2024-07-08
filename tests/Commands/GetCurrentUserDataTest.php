@@ -18,18 +18,18 @@ test('getCurrentUserData command', function () {
     $payload = new GetCurrentUserDataPayload();
 
     $mockResponse = [
-        'status' => true,
-        'returnData' => [
-            'companyUnit' => 8,
-            'currency' => 'PLN',
-            'group' => 'demoPLeurSTANDARD200',
-            'ibAccount' => false,
-            'leverage' => 1,
-            'leverageMultiplier' => 0.25,
-            'spreadType' => 'FLOAT',
-            'trailingStop' => false,
-        ],
-    ];
+                     'status'     => true,
+                     'returnData' => [
+                                      'companyUnit'        => 8,
+                                      'currency'           => 'PLN',
+                                      'group'              => 'demoPLeurSTANDARD200',
+                                      'ibAccount'          => false,
+                                      'leverage'           => 1,
+                                      'leverageMultiplier' => 0.25,
+                                      'spreadType'         => 'FLOAT',
+                                      'trailingStop'       => false,
+                                     ],
+                    ];
 
     $this->mockResponse($payload, $mockResponse);
 

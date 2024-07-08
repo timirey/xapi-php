@@ -10,10 +10,10 @@ class StreamProfitRecord
     /**
      * Constructor for the StreamProfitRecord class.
      *
-     * @param int   $order    Order number.
-     * @param int   $order2   Transaction ID.
-     * @param int   $position Position number.
-     * @param float $profit   Profit in account currency.
+     * @param integer $order    Order number.
+     * @param integer $order2   Transaction ID.
+     * @param integer $position Position number.
+     * @param float   $profit   Profit in account currency.
      */
     public function __construct(
         public int $order,

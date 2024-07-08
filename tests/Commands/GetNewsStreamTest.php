@@ -17,14 +17,14 @@ afterEach(function () {
 test('getNews stream command', function () {
     $payload = new GetNewsStreamPayload('streamSessionId');
     $mockResponse = [
-        'command' => 'news',
-        'data' => [
-            'body' => '<html>...</html>',
-            'key' => '1f6da766abd29927aa854823f0105c23',
-            'time' => 1262944112000,
-            'title' => 'Breaking trend',
-        ],
-    ];
+                     'command' => 'news',
+                     'data'    => [
+                                   'body'  => '<html>...</html>',
+                                   'key'   => '1f6da766abd29927aa854823f0105c23',
+                                   'time'  => 1262944112000,
+                                   'title' => 'Breaking trend',
+                                  ],
+                    ];
 
     $this->mockStreamResponse($payload, $mockResponse);
 

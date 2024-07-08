@@ -7,12 +7,12 @@ namespace Timirey\XApi\Enums;
  */
 enum State: string
 {
-    /**
+    /*
      * Trade order is modified.
      */
     case MODIFIED = "Modified";
 
-    /**
+    /*
      * Trade order is deleted.
      */
     case DELETED = "Deleted";

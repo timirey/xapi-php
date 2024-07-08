@@ -18,12 +18,12 @@ test('getCommissionDef command', function () {
     $payload = new GetCommissionDefPayload('EURUSD', 1.0);
 
     $mockResponse = [
-        'status' => true,
-        'returnData' => [
-            'commission' => 5.0,
-            'rateOfExchange' => 1.2,
-        ],
-    ];
+                     'status'     => true,
+                     'returnData' => [
+                                      'commission'     => 5.0,
+                                      'rateOfExchange' => 1.2,
+                                     ],
+                    ];
 
     $this->mockResponse($payload, $mockResponse);
 

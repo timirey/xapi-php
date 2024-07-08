@@ -21,19 +21,27 @@ afterEach(function () {
 test('getTradingHours command', function () {
     $payload = new GetTradingHoursPayload(['EURPLN', 'AGO.PL']);
     $mockResponse = [
-        'status' => true,
-        'returnData' => [
-            [
-                'quotes' => [
-                    ['day' => 2, 'fromT' => 63000000, 'toT' => 63300000],
-                ],
-                'symbol' => 'USDPLN',
-                'trading' => [
-                    ['day' => 2, 'fromT' => 63000000, 'toT' => 63300000],
-                ],
-            ],
-        ],
-    ];
+                     'status'     => true,
+                     'returnData' => [
+                                      [
+                                       'quotes'  => [
+                                                     [
+                                                      'day'   => 2,
+                                                      'fromT' => 63000000,
+                                                      'toT'   => 63300000,
+                                                     ],
+                                                    ],
+                                       'symbol'  => 'USDPLN',
+                                       'trading' => [
+                                                     [
+                                                      'day'   => 2,
+                                                      'fromT' => 63000000,
+                                                      'toT'   => 63300000,
+                                                     ],
+                                                    ],
+                                      ],
+                                     ],
+                    ];
 
     $this->mockResponse($payload, $mockResponse);
 

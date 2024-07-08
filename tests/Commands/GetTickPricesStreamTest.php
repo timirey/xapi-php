@@ -18,22 +18,22 @@ afterEach(function () {
 test('getTickPrices stream command', function () {
     $payload = new GetTickPricesStreamPayload('streamSessionId', 'EURUSD', 5000, 2);
     $mockResponse = [
-        'command' => 'tickPrices',
-        'data' => [
-            'ask' => 4000.0,
-            'askVolume' => 15000,
-            'bid' => 4000.0,
-            'bidVolume' => 16000,
-            'high' => 4000.0,
-            'level' => 0,
-            'low' => 3500.0,
-            'quoteId' => QuoteId::FIXED,
-            'spreadRaw' => 0.000003,
-            'spreadTable' => 0.00042,
-            'symbol' => 'KOMB.CZ',
-            'timestamp' => 1272529161605,
-        ],
-    ];
+                     'command' => 'tickPrices',
+                     'data'    => [
+                                   'ask'         => 4000.0,
+                                   'askVolume'   => 15000,
+                                   'bid'         => 4000.0,
+                                   'bidVolume'   => 16000,
+                                   'high'        => 4000.0,
+                                   'level'       => 0,
+                                   'low'         => 3500.0,
+                                   'quoteId'     => QuoteId::FIXED,
+                                   'spreadRaw'   => 0.000003,
+                                   'spreadTable' => 0.00042,
+                                   'symbol'      => 'KOMB.CZ',
+                                   'timestamp'   => 1272529161605,
+                                  ],
+                    ];
 
     $this->mockStreamResponse($payload, $mockResponse);
 

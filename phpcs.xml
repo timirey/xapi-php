@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<ruleset name="Custom Ruleset">
+    <description>PSR-12</description>
+
+    <!-- Set the coding standard to PSR-12 -->
+    <rule ref="PSR12"/>
+
+    <!-- Add custom rules for PHPDoc -->
+    <rule ref="Squiz.Commenting.ClassComment"/>
+    <rule ref="Squiz.Commenting.FunctionComment"/>
+    <rule ref="Squiz.Commenting.VariableComment"/>
+
+    <!-- Directories to include -->
+    <file>src</file>
+    <file>tests</file>
+
+    <!-- Exclude specific files -->
+    <exclude-pattern>tests/Pest.php</exclude-pattern>
+    <exclude-pattern>tests/TestCase.php</exclude-pattern>
+
+    <!-- Exclude specific directories -->
+    <exclude-pattern>vendor/*</exclude-pattern>
+</ruleset>

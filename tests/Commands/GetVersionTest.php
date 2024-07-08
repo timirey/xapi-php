@@ -17,11 +17,9 @@ afterEach(function () {
 test('getVersion command', function () {
     $payload = new GetVersionPayload();
     $mockResponse = [
-        'status' => true,
-        'returnData' => [
-            'version' => '2.4.15',
-        ],
-    ];
+                     'status'     => true,
+                     'returnData' => ['version' => '2.4.15'],
+                    ];
 
     $this->mockResponse($payload, $mockResponse);
 

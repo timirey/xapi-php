@@ -18,10 +18,10 @@ class StreamNewsRecord
     /**
      * Constructor for the StreamNewsRecord class.
      *
-     * @param string $body  Body of the news.
-     * @param string $key   News key.
-     * @param int    $time  Time of the news.
-     * @param string $title Title of the news.
+     * @param string  $body  Body of the news.
+     * @param string  $key   News key.
+     * @param integer $time  Time of the news.
+     * @param string  $title Title of the news.
      */
     public function __construct(
         public string $body,

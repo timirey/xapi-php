@@ -16,9 +16,7 @@ afterEach(function () {
 
 test('logout command', function () {
     $payload = new LogoutPayload();
-    $mockResponse = [
-        'status' => true,
-    ];
+    $mockResponse = ['status' => true];
 
     $this->mockResponse($payload, $mockResponse);
 

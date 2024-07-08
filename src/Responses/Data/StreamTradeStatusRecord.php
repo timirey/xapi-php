@@ -19,9 +19,9 @@ class StreamTradeStatusRecord
      *
      * @param string      $customComment Custom comment.
      * @param string|null $message       Message.
-     * @param int         $order         Unique order number.
+     * @param integer     $order         Unique order number.
      * @param float       $price         Price in base currency.
-     * @param int         $requestStatus Request status code.
+     * @param integer     $requestStatus Request status code.
      */
     public function __construct(
         public string $customComment,

@@ -19,20 +19,20 @@ afterEach(function () {
 test('getCalendar command', function () {
     $payload = new GetCalendarPayload();
     $mockResponse = [
-        'status' => true,
-        'returnData' => [
-            [
-                'country' => 'US',
-                'current' => '',
-                'forecast' => '3.5%',
-                'impact' => Impact::MEDIUM,
-                'period' => 'Q1 2021',
-                'previous' => '3.2%',
-                'time' => 1720170000000,
-                'title' => 'GDP Growth Rate',
-            ],
-        ],
-    ];
+                     'status'     => true,
+                     'returnData' => [
+                                      [
+                                       'country'  => 'US',
+                                       'current'  => '',
+                                       'forecast' => '3.5%',
+                                       'impact'   => Impact::MEDIUM,
+                                       'period'   => 'Q1 2021',
+                                       'previous' => '3.2%',
+                                       'time'     => 1720170000000,
+                                       'title'    => 'GDP Growth Rate',
+                                      ],
+                                     ],
+                    ];
 
     $this->mockResponse($payload, $mockResponse);
 

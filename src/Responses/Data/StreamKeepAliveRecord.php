@@ -18,7 +18,7 @@ class StreamKeepAliveRecord
     /**
      * Constructor for the StreamKeepAliveRecord class.
      *
-     * @param int $timestamp Current timestamp.
+     * @param integer $timestamp Current timestamp.
      */
     public function __construct(int $timestamp)
     {

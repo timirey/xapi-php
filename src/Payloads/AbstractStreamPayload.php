@@ -10,6 +10,11 @@ use Timirey\XApi\Exceptions\InvalidPayloadException;
  */
 abstract class AbstractStreamPayload extends AbstractPayload
 {
+    /**
+     * Constructor for AbstractStreamPayload.
+     *
+     * @param string $streamSessionId Stream session id.
+     */
     public function __construct(string $streamSessionId)
     {
         $this->parameters['streamSessionId'] = $streamSessionId;

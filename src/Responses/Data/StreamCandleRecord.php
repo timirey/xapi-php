@@ -17,15 +17,15 @@ class StreamCandleRecord
     /**
      * Constructor for the StreamCandleRecord class.
      *
-     * @param float  $close     Close price.
-     * @param int    $ctm       Candle start time in CET time zone.
-     * @param string $ctmString String representation of the ctm field.
-     * @param float  $high      Highest value in the given period.
-     * @param float  $low       Lowest value in the given period.
-     * @param float  $open      Open price.
-     * @param int    $quoteId   Source of price.
-     * @param string $symbol    Symbol.
-     * @param float  $vol       Volume in lots.
+     * @param float   $close     Close price.
+     * @param integer $ctm       Candle start time in CET time zone.
+     * @param string  $ctmString String representation of the ctm field.
+     * @param float   $high      Highest value in the given period.
+     * @param float   $low       Lowest value in the given period.
+     * @param float   $open      Open price.
+     * @param integer $quoteId   Source of price.
+     * @param string  $symbol    Symbol.
+     * @param float   $vol       Volume in lots.
      */
     public function __construct(
         public float $close,

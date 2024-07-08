@@ -33,15 +33,12 @@
     ],
     "require": {
         "php": "^8.1",
-        "phrity/websocket": "^3.0",
-        "react/socket": "^1.15",
-        "ratchet/pawl": "^0.4.1"
+        "phrity/websocket": "^3.0"
     },
     "require-dev": {
-        "pestphp/pest": "^2.0",
-        "mockery/mockery": "^1.0",
-        "squizlabs/php_codesniffer": "^3.0",
-        "laravel/pint": "^1.0"
+        "pestphp/pest": "^2.34",
+        "mockery/mockery": "^1.6",
+        "squizlabs/php_codesniffer": "^3.10"
     },
     "config": {
         "allow-plugins": {

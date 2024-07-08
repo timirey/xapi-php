@@ -72,16 +72,16 @@ use WebSocket\Client as WebSocketClient;
 class Client
 {
     /**
-     * XTB WebSocket client instance.
+     * @var WebSocketClient $client XTB WebSocket client instance.
      */
     protected WebSocketClient $client;
 
     /**
      * Constructor for the Client class.
      *
-     * @param int    $userId   User ID.
-     * @param string $password User password.
-     * @param Host   $host     WebSocket host URL.
+     * @param integer $userId   User ID.
+     * @param string  $password User password.
+     * @param Host    $host     WebSocket host URL.
      */
     public function __construct(protected int $userId, protected string $password, protected Host $host)
     {
@@ -165,7 +165,7 @@ class Client
     /**
      * Gets the current status of a trade transaction.
      *
-     * @param int $order Order ID.
+     * @param integer $order Order ID.
      *
      * @return TradeTransactionStatusResponse The response containing trade transaction status.
      *
@@ -365,11 +365,11 @@ class Client
      * @throws InvalidResponseException Thrown when the API response is invalid or incomplete.
      */
     public function getProfitCalculation(
-        float  $closePrice,
-        Cmd    $cmd,
-        float  $openPrice,
+        float $closePrice,
+        Cmd $cmd,
+        float $openPrice,
         string $symbol,
-        float  $volume
+        float $volume
     ): GetProfitCalculationResponse {
         return $this->request(
             new GetProfitCalculationPayload($closePrice, $cmd, $openPrice, $symbol, $volume),
@@ -445,7 +445,7 @@ class Client
     /**
      * Retrieves an array of user's trades.
      *
-     * @param bool $openedOnly If true, only opened trades will be returned.
+     * @param boolean $openedOnly If true, only opened trades will be returned.
      *
      * @return GetTradesResponse The response containing trades.
      *

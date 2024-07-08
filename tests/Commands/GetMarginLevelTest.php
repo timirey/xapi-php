@@ -18,17 +18,17 @@ test('getMarginLevel command', function () {
     $payload = new GetMarginLevelPayload();
 
     $mockResponse = [
-        'status' => true,
-        'returnData' => [
-            'balance' => 995800269.43,
-            'credit' => 1000.00,
-            'currency' => 'PLN',
-            'equity' => 995985397.56,
-            'margin' => 572634.43,
-            'marginFree' => 995227635.00,
-            'marginLevel' => 173930.41,
-        ],
-    ];
+                     'status'     => true,
+                     'returnData' => [
+                                      'balance'     => 995800269.43,
+                                      'credit'      => 1000.00,
+                                      'currency'    => 'PLN',
+                                      'equity'      => 995985397.56,
+                                      'margin'      => 572634.43,
+                                      'marginFree'  => 995227635.00,
+                                      'marginLevel' => 173930.41,
+                                     ],
+                    ];
 
     $this->mockResponse($payload, $mockResponse);
 

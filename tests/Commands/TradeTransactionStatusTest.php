@@ -18,16 +18,16 @@ afterEach(function () {
 test('tradeTransactionStatus command', function () {
     $payload = new TradeTransactionStatusPayload(123456789);
     $mockResponse = [
-        'status' => true,
-        'returnData' => [
-            'ask' => 1.12350,
-            'bid' => 1.12345,
-            'customComment' => 'Test trade',
-            'message' => 'Success',
-            'order' => 123456789,
-            'requestStatus' => RequestStatus::PENDING,
-        ],
-    ];
+                     'status'     => true,
+                     'returnData' => [
+                                      'ask'           => 1.12350,
+                                      'bid'           => 1.12345,
+                                      'customComment' => 'Test trade',
+                                      'message'       => 'Success',
+                                      'order'         => 123456789,
+                                      'requestStatus' => RequestStatus::PENDING,
+                                     ],
+                    ];
 
     $this->mockResponse($payload, $mockResponse);
 
