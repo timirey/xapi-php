@@ -20,7 +20,7 @@ use WebSocket\Message\Message;
  * @property MockInterface $message
  * @property Client        $client
  */
-trait MockeryTrait
+trait ClientMockeryTrait
 {
     /**
      * Sets up the mocked WebSocket client and message.

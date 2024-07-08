@@ -8,9 +8,9 @@ use Timirey\XApi\Exceptions\ErrorResponseException;
 use Timirey\XApi\Exceptions\InvalidResponseException;
 
 /**
- * Abstract class for responses.
+ * Abstract class for streaming responses.
  */
-abstract class AbstractResponse
+abstract class AbstractStreamResponse
 {
     /**
      * Create an instance from JSON.
@@ -21,7 +21,7 @@ abstract class AbstractResponse
      *
      * @throws ErrorResponseException   If the response indicates an error.
      * @throws JsonException            If the response cannot be processed.
-     * @throws InvalidResponseException Thrown when the API response is invalid or incomplete.
+     * @throws InvalidResponseException If the response is invalid or incomplete.
      */
     public static function instantiate(string $json): static
     {
@@ -40,7 +40,7 @@ abstract class AbstractResponse
      * @return array<string, mixed> Decoded JSON data.
      *
      * @throws InvalidArgumentException If the JSON is invalid.
-     * @throws JsonException            Internal json exception.
+     * @throws JsonException            Internal JSON exception.
      */
     protected static function parseJson(string $json): array
     {
@@ -50,22 +50,18 @@ abstract class AbstractResponse
     /**
      * Validate the response data.
      *
-     * @param array<string, mixed> $response Response data.
+     * @param array<string, mixed> $data Response data.
      *
      * @throws ErrorResponseException   If the response indicates an error or status is missing.
-     * @throws InvalidResponseException If the response cannot be processed.
+     * @throws InvalidResponseException If the response is invalid or incomplete.
      */
-    protected static function validate(array &$response): void
+    protected static function validate(array &$data): void
     {
-        if (! isset($response['status'])) {
-            throw new InvalidResponseException('The response did not include a status.');
+        if (!isset($data['command'])) {
+            throw new InvalidResponseException('The response did not include a command.');
         }
 
-        if ($response['status'] === false) {
-            throw new ErrorResponseException($response['errorCode'], $response['errorDescr']);
-        }
-
-        unset($response['status']);
+        unset($data['command']);
     }
 
     /**
@@ -77,6 +73,6 @@ abstract class AbstractResponse
      */
     protected static function create(array $response): static
     {
-        return new static(...($response['returnData'] ?? $response));
+        return new static(...($response['data'] ?? $response));
     }
 }

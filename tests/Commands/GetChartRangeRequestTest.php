@@ -5,9 +5,9 @@ use Timirey\XApi\Payloads\Data\ChartRangeInfoRecord;
 use Timirey\XApi\Payloads\GetChartRangeRequestPayload;
 use Timirey\XApi\Responses\Data\RateInfoRecord;
 use Timirey\XApi\Responses\GetChartRangeRequestResponse;
-use Timirey\XApi\Tests\Commands\Traits\MockeryTrait;
+use Timirey\XApi\Tests\Commands\Traits\ClientMockeryTrait;
 
-uses(MockeryTrait::class);
+uses(ClientMockeryTrait::class);
 
 beforeEach(function () {
     $this->mockClient();
