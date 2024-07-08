@@ -12,6 +12,7 @@ use Timirey\XApi\Payloads\GetKeepAliveStreamPayload;
 use Timirey\XApi\Payloads\GetNewsStreamPayload;
 use Timirey\XApi\Payloads\GetProfitsStreamPayload;
 use Timirey\XApi\Payloads\GetTickPricesStreamPayload;
+use Timirey\XApi\Payloads\GetTradesStreamPayload;
 use Timirey\XApi\Responses\AbstractStreamResponse;
 use Timirey\XApi\Responses\GetBalanceStreamResponse;
 use Timirey\XApi\Responses\GetCandlesStreamResponse;
@@ -19,6 +20,7 @@ use Timirey\XApi\Responses\GetKeepAliveStreamResponse;
 use Timirey\XApi\Responses\GetNewsStreamResponse;
 use Timirey\XApi\Responses\GetProfitsStreamResponse;
 use Timirey\XApi\Responses\GetTickPricesStreamResponse;
+use Timirey\XApi\Responses\GetTradesStreamResponse;
 use WebSocket\Client as WebSocketClient;
 
 /**
@@ -153,6 +155,23 @@ class StreamClient
         $this->subscribe(
             new GetTickPricesStreamPayload($this->streamSessionId, $symbol, $minArrivalTime, $maxLevel),
             GetTickPricesStreamResponse::class,
+            $callback
+        );
+    }
+
+    /**
+     * Subscribe to trades stream.
+     *
+     * @param callable $callback Callback function to handle the response.
+     *
+     * @throws InvalidResponseException If the response is invalid.
+     * @throws JsonException            If JSON processing fails.
+     */
+    public function getTrades(callable $callback): void
+    {
+        $this->subscribe(
+            new GetTradesStreamPayload($this->streamSessionId),
+            GetTradesStreamResponse::class,
             $callback
         );
     }
