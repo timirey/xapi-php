@@ -1,5 +1,5 @@
 <p align="center">
-<img src="https://raw.githubusercontent.com/timirey/xapi-php/main/.github/logo.svg" alt="XTB Online Investing">
+<img src="https://raw.githubusercontent.com/timirey/xapi-php/master/.github/logo.svg" alt="XTB Online Investing" width="320">
 </p>
 
 <p align="center">
