@@ -1,0 +1,77 @@
+[08-Jul-2024 12:34:00 UTC] PHP Fatal error:  Uncaught TypeError: WebSocket\Client::send(): Argument #1 ($message) must be of type WebSocket\Message\Message, string given, called in /Volumes/Workspace/personal/xapi-php/test.php on line 35 and defined in /Volumes/Workspace/personal/xapi-php/vendor/phrity/websocket/src/Client.php:229
+Stack trace:
+#0 /Volumes/Workspace/personal/xapi-php/test.php(35): WebSocket\Client->send('{"command":"log...')
+#1 /Volumes/Workspace/personal/xapi-php/test.php(117): APIClient->send(Array)
+#2 /Volumes/Workspace/personal/xapi-php/test.php(131): main()
+#3 {main}
+  thrown in /Volumes/Workspace/personal/xapi-php/vendor/phrity/websocket/src/Client.php on line 229
+[08-Jul-2024 12:34:15 UTC] PHP Fatal error:  Uncaught Error: Call to undefined method APIClient::text() in /Volumes/Workspace/personal/xapi-php/test.php:117
+Stack trace:
+#0 /Volumes/Workspace/personal/xapi-php/test.php(131): main()
+#1 {main}
+  thrown in /Volumes/Workspace/personal/xapi-php/test.php on line 117
+[08-Jul-2024 12:34:29 UTC] PHP Fatal error:  Uncaught TypeError: WebSocket\Client::send(): Argument #1 ($message) must be of type WebSocket\Message\Message, string given, called in /Volumes/Workspace/personal/xapi-php/test.php on line 35 and defined in /Volumes/Workspace/personal/xapi-php/vendor/phrity/websocket/src/Client.php:229
+Stack trace:
+#0 /Volumes/Workspace/personal/xapi-php/test.php(35): WebSocket\Client->send('{"command":"log...')
+#1 /Volumes/Workspace/personal/xapi-php/test.php(117): APIClient->send(Array)
+#2 /Volumes/Workspace/personal/xapi-php/test.php(131): main()
+#3 {main}
+  thrown in /Volumes/Workspace/personal/xapi-php/vendor/phrity/websocket/src/Client.php on line 229
+[08-Jul-2024 12:34:42 UTC] PHP Fatal error:  Uncaught TypeError: WebSocket\Client::send(): Argument #1 ($message) must be of type WebSocket\Message\Message, string given, called in /Volumes/Workspace/personal/xapi-php/test.php on line 35 and defined in /Volumes/Workspace/personal/xapi-php/vendor/phrity/websocket/src/Client.php:229
+Stack trace:
+#0 /Volumes/Workspace/personal/xapi-php/test.php(35): WebSocket\Client->send('{"command":"log...')
+#1 /Volumes/Workspace/personal/xapi-php/test.php(117): APIClient->send(Array)
+#2 /Volumes/Workspace/personal/xapi-php/test.php(131): main()
+#3 {main}
+  thrown in /Volumes/Workspace/personal/xapi-php/vendor/phrity/websocket/src/Client.php on line 229
+[08-Jul-2024 12:35:19 UTC] PHP Warning:  Trying to access array offset on null in /Volumes/Workspace/personal/xapi-php/test.php on line 123
+[08-Jul-2024 12:35:19 UTC] PHP Fatal error:  Uncaught TypeError: WebSocket\Client::send(): Argument #1 ($message) must be of type WebSocket\Message\Message, string given, called in /Volumes/Workspace/personal/xapi-php/test.php on line 67 and defined in /Volumes/Workspace/personal/xapi-php/vendor/phrity/websocket/src/Client.php:229
+Stack trace:
+#0 /Volumes/Workspace/personal/xapi-php/test.php(67): WebSocket\Client->send('{"command":"get...')
+#1 /Volumes/Workspace/personal/xapi-php/test.php(92): APIStreamClient->send(Array)
+#2 /Volumes/Workspace/personal/xapi-php/test.php(127): APIStreamClient->subscribePrice('EURUSD')
+#3 /Volumes/Workspace/personal/xapi-php/test.php(131): main()
+#4 {main}
+  thrown in /Volumes/Workspace/personal/xapi-php/vendor/phrity/websocket/src/Client.php on line 229
+[08-Jul-2024 12:35:34 UTC] PHP Warning:  Trying to access array offset on null in /Volumes/Workspace/personal/xapi-php/test.php on line 123
+[08-Jul-2024 12:35:34 UTC] PHP Fatal error:  Uncaught WebSocket\Exception\ConnectionClosedException: Connection has unexpectedly closed in /Volumes/Workspace/personal/xapi-php/vendor/phrity/websocket/src/Connection.php:374
+Stack trace:
+#0 /Volumes/Workspace/personal/xapi-php/vendor/phrity/websocket/src/Connection.php(301): WebSocket\Connection->throwException(Object(RuntimeException))
+#1 /Volumes/Workspace/personal/xapi-php/vendor/phrity/websocket/src/Client.php(247): WebSocket\Connection->pullMessage()
+#2 /Volumes/Workspace/personal/xapi-php/test.php(72): WebSocket\Client->receive()
+#3 /Volumes/Workspace/personal/xapi-php/test.php(78): APIStreamClient->receive()
+#4 /Volumes/Workspace/personal/xapi-php/test.php(128): APIStreamClient->readStream()
+#5 /Volumes/Workspace/personal/xapi-php/test.php(131): main()
+#6 {main}
+  thrown in /Volumes/Workspace/personal/xapi-php/vendor/phrity/websocket/src/Connection.php on line 374
+[08-Jul-2024 12:35:55 UTC] PHP Warning:  Trying to access array offset on null in /Volumes/Workspace/personal/xapi-php/test.php on line 123
+[08-Jul-2024 12:35:56 UTC] PHP Fatal error:  Uncaught WebSocket\Exception\ConnectionClosedException: Connection has unexpectedly closed in /Volumes/Workspace/personal/xapi-php/vendor/phrity/websocket/src/Connection.php:374
+Stack trace:
+#0 /Volumes/Workspace/personal/xapi-php/vendor/phrity/websocket/src/Connection.php(301): WebSocket\Connection->throwException(Object(RuntimeException))
+#1 /Volumes/Workspace/personal/xapi-php/vendor/phrity/websocket/src/Client.php(247): WebSocket\Connection->pullMessage()
+#2 /Volumes/Workspace/personal/xapi-php/test.php(72): WebSocket\Client->receive()
+#3 /Volumes/Workspace/personal/xapi-php/test.php(78): APIStreamClient->receive()
+#4 /Volumes/Workspace/personal/xapi-php/test.php(128): APIStreamClient->readStream()
+#5 /Volumes/Workspace/personal/xapi-php/test.php(131): main()
+#6 {main}
+  thrown in /Volumes/Workspace/personal/xapi-php/vendor/phrity/websocket/src/Connection.php on line 374
+[08-Jul-2024 12:39:08 UTC] PHP Fatal error:  Uncaught WebSocket\Exception\ConnectionClosedException: Connection has unexpectedly closed in /Volumes/Workspace/personal/xapi-php/vendor/phrity/websocket/src/Connection.php:374
+Stack trace:
+#0 /Volumes/Workspace/personal/xapi-php/vendor/phrity/websocket/src/Connection.php(301): WebSocket\Connection->throwException(Object(RuntimeException))
+#1 /Volumes/Workspace/personal/xapi-php/vendor/phrity/websocket/src/Client.php(247): WebSocket\Connection->pullMessage()
+#2 /Volumes/Workspace/personal/xapi-php/test.php(42): WebSocket\Client->receive()
+#3 /Volumes/Workspace/personal/xapi-php/test.php(128): APIClient->receive()
+#4 /Volumes/Workspace/personal/xapi-php/test.php(142): main()
+#5 {main}
+  thrown in /Volumes/Workspace/personal/xapi-php/vendor/phrity/websocket/src/Connection.php on line 374
+[08-Jul-2024 12:40:50 UTC] PHP Fatal error:  Uncaught Error: Call to a member function getContent() on null in /Volumes/Workspace/personal/xapi-php/test.php:78
+Stack trace:
+#0 /Volumes/Workspace/personal/xapi-php/test.php(129): APIStreamClient->readStream()
+#1 /Volumes/Workspace/personal/xapi-php/test.php(132): main()
+#2 {main}
+  thrown in /Volumes/Workspace/personal/xapi-php/test.php on line 78
+[08-Jul-2024 12:41:06 UTC] PHP Fatal error:  Uncaught TypeError: Cannot access offset of type string on string in /Volumes/Workspace/personal/xapi-php/test.php:124
+Stack trace:
+#0 /Volumes/Workspace/personal/xapi-php/test.php(132): main()
+#1 {main}
+  thrown in /Volumes/Workspace/personal/xapi-php/test.php on line 124

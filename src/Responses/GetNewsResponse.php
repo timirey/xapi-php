@@ -21,15 +21,15 @@ class GetNewsResponse extends AbstractResponse
     /**
      * Create a response instance from the validated data.
      *
-     * @param array $data Validated response data.
+     * @param array $response Validated response data.
      *
      * @return static Instance of the response.
      */
-    protected static function create(array $data): static
+    protected static function create(array $response): static
     {
         return new static(array_map(
             static fn (array $newsTopicRecordData): NewsTopicRecord => new NewsTopicRecord(...$newsTopicRecordData),
-            $data['returnData']
+            $response['returnData']
         ));
     }
 }

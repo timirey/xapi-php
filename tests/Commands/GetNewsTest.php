@@ -3,9 +3,9 @@
 use Timirey\XApi\Payloads\GetNewsPayload;
 use Timirey\XApi\Responses\Data\NewsTopicRecord;
 use Timirey\XApi\Responses\GetNewsResponse;
-use Timirey\XApi\Tests\Commands\Traits\MockeryTrait;
+use Timirey\XApi\Tests\Commands\Traits\ClientMockeryTrait;
 
-uses(MockeryTrait::class);
+uses(ClientMockeryTrait::class);
 
 beforeEach(function () {
     $this->mockClient();

@@ -6,9 +6,9 @@ use Timirey\XApi\Payloads\Data\ChartLastInfoRecord;
 use Timirey\XApi\Payloads\GetChartLastRequestPayload;
 use Timirey\XApi\Responses\Data\RateInfoRecord;
 use Timirey\XApi\Responses\GetChartLastRequestResponse;
-use Timirey\XApi\Tests\Commands\Traits\MockeryTrait;
+use Timirey\XApi\Tests\Commands\Traits\ClientMockeryTrait;
 
-uses(MockeryTrait::class);
+uses(ClientMockeryTrait::class);
 
 beforeEach(function () {
     $this->mockClient();
@@ -30,7 +30,7 @@ test('getChartLastRequest command', function () {
     /**
      * @var ChartLastInfoRecord $chartLastInfoRecordArgument
      */
-    $chartLastInfoRecordArgument = $payload->arguments['info'];
+    $chartLastInfoRecordArgument = $payload->parameters['info'];
     expect($chartLastInfoRecordArgument->period)->toBeInstanceOf(Period::class);
 
     $mockResponse = [

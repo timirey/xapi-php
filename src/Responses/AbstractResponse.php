@@ -50,33 +50,33 @@ abstract class AbstractResponse
     /**
      * Validate the response data.
      *
-     * @param array<string, mixed> $data Response data.
+     * @param array<string, mixed> $response Response data.
      *
      * @throws ErrorResponseException   If the response indicates an error or status is missing.
      * @throws InvalidResponseException If the response cannot be processed.
      */
-    protected static function validate(array &$data): void
+    protected static function validate(array &$response): void
     {
-        if (! isset($data['status'])) {
+        if (! isset($response['status'])) {
             throw new InvalidResponseException('The response did not include a status.');
         }
 
-        if ($data['status'] === false) {
-            throw new ErrorResponseException($data['errorCode'], $data['errorDescr']);
+        if ($response['status'] === false) {
+            throw new ErrorResponseException($response['errorCode'], $response['errorDescr']);
         }
 
-        unset($data['status']);
+        unset($response['status']);
     }
 
     /**
      * Create a response instance from the validated data.
      *
-     * @param array<string, mixed> $data Validated response data.
+     * @param array<string, mixed> $response Validated response data.
      *
      * @return static Instance of the response.
      */
-    protected static function create(array $data): static
+    protected static function create(array $response): static
     {
-        return new static(...($data['returnData'] ?? $data));
+        return new static(...($response['returnData'] ?? $response));
     }
 }

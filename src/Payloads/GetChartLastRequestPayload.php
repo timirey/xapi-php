@@ -16,7 +16,7 @@ class GetChartLastRequestPayload extends AbstractPayload
      */
     public function __construct(ChartLastInfoRecord $chartLastInfoRecord)
     {
-        $this->arguments['info'] = $chartLastInfoRecord;
+        $this->parameters['info'] = $chartLastInfoRecord;
     }
 
     /**

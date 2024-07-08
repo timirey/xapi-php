@@ -5,9 +5,9 @@ use Timirey\XApi\Enums\ProfitMode;
 use Timirey\XApi\Enums\QuoteId;
 use Timirey\XApi\Payloads\GetSymbolPayload;
 use Timirey\XApi\Responses\GetSymbolResponse;
-use Timirey\XApi\Tests\Commands\Traits\MockeryTrait;
+use Timirey\XApi\Tests\Commands\Traits\ClientMockeryTrait;
 
-uses(MockeryTrait::class);
+uses(ClientMockeryTrait::class);
 
 beforeEach(function () {
     $this->mockClient();

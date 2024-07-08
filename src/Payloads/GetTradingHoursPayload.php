@@ -14,7 +14,7 @@ class GetTradingHoursPayload extends AbstractPayload
      */
     public function __construct(array $symbols)
     {
-        $this->arguments['symbols'] = $symbols;
+        $this->parameters['symbols'] = $symbols;
     }
 
     /**

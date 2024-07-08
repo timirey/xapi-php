@@ -2,9 +2,9 @@
 
 use Timirey\XApi\Payloads\GetVersionPayload;
 use Timirey\XApi\Responses\GetVersionResponse;
-use Timirey\XApi\Tests\Commands\Traits\MockeryTrait;
+use Timirey\XApi\Tests\Commands\Traits\ClientMockeryTrait;
 
-uses(MockeryTrait::class);
+uses(ClientMockeryTrait::class);
 
 beforeEach(function () {
     $this->mockClient();

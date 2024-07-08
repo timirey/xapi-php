@@ -16,7 +16,7 @@ class TradeTransactionPayload extends AbstractPayload
      */
     public function __construct(TradeTransInfo $tradeTransInfo)
     {
-        $this->arguments['tradeTransInfo'] = $tradeTransInfo;
+        $this->parameters['tradeTransInfo'] = $tradeTransInfo;
     }
 
     /**

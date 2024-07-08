@@ -10,11 +10,11 @@ use JsonException;
 abstract class AbstractPayload
 {
     /**
-     * Array of arguments used in payload.
+     * Array of parameters used in payload.
      *
      * @var array<string>
      */
-    public array $arguments = [];
+    public array $parameters = [];
 
     /**
      * Get the command.
@@ -34,8 +34,8 @@ abstract class AbstractPayload
     {
         $payload['command'] = $this->getCommand();
 
-        if (! empty($this->arguments)) {
-            $payload['arguments'] = $this->arguments;
+        if (! empty($this->parameters)) {
+            $payload['arguments'] = $this->parameters;
         }
 
         return json_encode($payload, JSON_THROW_ON_ERROR);

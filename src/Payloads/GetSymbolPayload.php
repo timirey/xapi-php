@@ -14,7 +14,7 @@ class GetSymbolPayload extends AbstractPayload
      */
     public function __construct(string $symbol)
     {
-        $this->arguments['symbol'] = $symbol;
+        $this->parameters['symbol'] = $symbol;
     }
 
     /**

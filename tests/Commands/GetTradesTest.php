@@ -4,9 +4,9 @@ use Timirey\XApi\Enums\Cmd;
 use Timirey\XApi\Payloads\GetTradesPayload;
 use Timirey\XApi\Responses\Data\TradeRecord;
 use Timirey\XApi\Responses\GetTradesResponse;
-use Timirey\XApi\Tests\Commands\Traits\MockeryTrait;
+use Timirey\XApi\Tests\Commands\Traits\ClientMockeryTrait;
 
-uses(MockeryTrait::class);
+uses(ClientMockeryTrait::class);
 
 beforeEach(function () {
     $this->mockClient();
