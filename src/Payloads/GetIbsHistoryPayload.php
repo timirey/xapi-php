@@ -18,8 +18,8 @@ class GetIbsHistoryPayload extends AbstractPayload
      */
     public function __construct(DateTime $start, DateTime $end)
     {
-        $this->arguments['start'] = DateTimeHelper::toMilliseconds($start);
-        $this->arguments['end'] = DateTimeHelper::toMilliseconds($end);
+        $this->parameters['start'] = DateTimeHelper::toMilliseconds($start);
+        $this->parameters['end'] = DateTimeHelper::toMilliseconds($end);
     }
 
     /**
