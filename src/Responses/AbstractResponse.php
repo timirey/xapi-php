@@ -54,6 +54,8 @@ abstract class AbstractResponse
      *
      * @throws ErrorResponseException   If the response indicates an error or status is missing.
      * @throws InvalidResponseException If the response cannot be processed.
+     *
+     * @return void
      */
     protected static function validate(array &$response): void
     {

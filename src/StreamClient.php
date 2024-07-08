@@ -59,6 +59,8 @@ class StreamClient
      *
      * @throws InvalidResponseException If the response is invalid.
      * @throws JsonException            If JSON processing fails.
+     *
+     * @return void
      */
     public function getBalance(callable $callback): void
     {
@@ -77,6 +79,8 @@ class StreamClient
      *
      * @throws InvalidResponseException If the response is invalid.
      * @throws JsonException            If JSON processing fails.
+     *
+     * @return void
      */
     public function getCandles(string $symbol, callable $callback): void
     {
@@ -94,6 +98,8 @@ class StreamClient
      *
      * @throws InvalidResponseException If the response is invalid.
      * @throws JsonException            If JSON processing fails.
+     *
+     * @return void
      */
     public function getKeepAlive(callable $callback): void
     {
@@ -111,6 +117,8 @@ class StreamClient
      *
      * @throws InvalidResponseException If the response is invalid.
      * @throws JsonException            If JSON processing fails.
+     *
+     * @return void
      */
     public function getNews(callable $callback): void
     {
@@ -128,6 +136,8 @@ class StreamClient
      *
      * @throws InvalidResponseException If the response is invalid.
      * @throws JsonException            If JSON processing fails.
+     *
+     * @return void
      */
     public function getProfits(callable $callback): void
     {
@@ -148,6 +158,8 @@ class StreamClient
      *
      * @throws InvalidResponseException If the response is invalid.
      * @throws JsonException            If JSON processing fails.
+     *
+     * @return void
      */
     public function getTickPrices(
         string $symbol,
@@ -169,6 +181,8 @@ class StreamClient
      *
      * @throws InvalidResponseException If the response is invalid.
      * @throws JsonException            If JSON processing fails.
+     *
+     * @return void
      */
     public function getTrades(callable $callback): void
     {
@@ -186,6 +200,8 @@ class StreamClient
      *
      * @throws InvalidResponseException If the response is invalid.
      * @throws JsonException            If JSON processing fails.
+     *
+     * @return void
      */
     public function getTradeStatus(callable $callback): void
     {
@@ -198,6 +214,8 @@ class StreamClient
 
     /**
      * Send a ping command to the xStation5 API.
+     *
+     * @return void
      */
     public function ping(): void
     {
@@ -215,6 +233,8 @@ class StreamClient
      *
      * @throws InvalidResponseException If the response is invalid.
      * @throws JsonException            If JSON processing fails.
+     *
+     * @return void
      */
     protected function subscribe(AbstractStreamPayload $payload, string $responseClass, callable $callback): void
     {
@@ -231,6 +251,8 @@ class StreamClient
 
     /**
      * Unsubscribe from the stream.
+     *
+     * @return void
      */
     public function unsubscribe(): void
     {

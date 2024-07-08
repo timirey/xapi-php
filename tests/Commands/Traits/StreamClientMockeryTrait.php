@@ -30,6 +30,8 @@ trait StreamClientMockeryTrait
      *
      * @param string     $streamSessionId Stream session ID.
      * @param StreamHost $host            Host URI.
+     *
+     * @return void
      */
     public function mockStreamClient(
         string $streamSessionId = 'streamSessionId',
@@ -43,10 +45,12 @@ trait StreamClientMockeryTrait
              * Sets the WebSocket client.
              *
              * @param WebSocketClient $client WebSocket client.
+             *
+             * @return void
              */
             public function setStreamClient(WebSocketClient $client): void
             {
-                $this->streamClient = $client; // todo: change to phpcs
+                $this->streamClient = $client;
             }
         };
 
@@ -61,6 +65,8 @@ trait StreamClientMockeryTrait
      *
      * @throws JsonException           If encoding to JSON fails.
      * @throws InvalidPayloadException If payload is missing or invalid.
+     *
+     * @return void
      */
     public function mockStreamResponse(AbstractStreamPayload $payload, array $response): void
     {
