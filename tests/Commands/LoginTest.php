@@ -2,9 +2,9 @@
 
 use Timirey\XApi\Payloads\LoginPayload;
 use Timirey\XApi\Responses\LoginResponse;
-use Timirey\XApi\Tests\Commands\Traits\MockeryTrait;
+use Timirey\XApi\Tests\Commands\Traits\ClientMockeryTrait;
 
-uses(MockeryTrait::class);
+uses(ClientMockeryTrait::class);
 
 beforeEach(function () {
     $this->mockClient();

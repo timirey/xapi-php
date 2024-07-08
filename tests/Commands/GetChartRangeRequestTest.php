@@ -5,9 +5,9 @@ use Timirey\XApi\Payloads\Data\ChartRangeInfoRecord;
 use Timirey\XApi\Payloads\GetChartRangeRequestPayload;
 use Timirey\XApi\Responses\Data\RateInfoRecord;
 use Timirey\XApi\Responses\GetChartRangeRequestResponse;
-use Timirey\XApi\Tests\Commands\Traits\MockeryTrait;
+use Timirey\XApi\Tests\Commands\Traits\ClientMockeryTrait;
 
-uses(MockeryTrait::class);
+uses(ClientMockeryTrait::class);
 
 beforeEach(function () {
     $this->mockClient();
@@ -31,7 +31,7 @@ test('getChartRangeRequest command', function () {
     /**
      * @var ChartRangeInfoRecord $chartRangeRequestArgument
      */
-    $chartRangeRequestArgument = $payload->arguments['info'];
+    $chartRangeRequestArgument = $payload->parameters['info'];
     expect($chartRangeRequestArgument->period)->toBeInstanceOf(Period::class);
 
     $mockResponse = [

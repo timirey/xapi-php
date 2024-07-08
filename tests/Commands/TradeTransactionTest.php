@@ -5,9 +5,9 @@ use Timirey\XApi\Enums\Type;
 use Timirey\XApi\Payloads\Data\TradeTransInfo;
 use Timirey\XApi\Payloads\TradeTransactionPayload;
 use Timirey\XApi\Responses\TradeTransactionResponse;
-use Timirey\XApi\Tests\Commands\Traits\MockeryTrait;
+use Timirey\XApi\Tests\Commands\Traits\ClientMockeryTrait;
 
-uses(MockeryTrait::class);
+uses(ClientMockeryTrait::class);
 
 beforeEach(function () {
     $this->mockClient();
@@ -34,8 +34,8 @@ test('tradeTransaction command', function () {
 
     $payload = new TradeTransactionPayload($tradeTransInfo);
 
-    /** @var TradeTransInfo $tradeTransInfoArgument */
-    $tradeTransInfoArgument = $payload->arguments['tradeTransInfo'];
+    // @var TradeTransInfo $tradeTransInfoArgument
+    $tradeTransInfoArgument = $payload->parameters['tradeTransInfo'];
 
     expect($tradeTransInfoArgument)->toBeInstanceOf(TradeTransInfo::class)
         ->and($tradeTransInfoArgument->cmd)->toBe(Cmd::BUY)
@@ -43,9 +43,7 @@ test('tradeTransaction command', function () {
 
     $mockResponse = [
         'status' => true,
-        'returnData' => [
-            'order' => 123456789,
-        ],
+        'returnData' => ['order' => 123456789],
     ];
 
     $this->mockResponse($payload, $mockResponse);

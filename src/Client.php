@@ -72,16 +72,16 @@ use WebSocket\Client as WebSocketClient;
 class Client
 {
     /**
-     * XTB WebSocket client instance.
+     * @var WebSocketClient XTB WebSocket client instance.
      */
     protected WebSocketClient $client;
 
     /**
      * Constructor for the Client class.
      *
-     * @param int    $userId   User ID.
-     * @param string $password User password.
-     * @param Host   $host     WebSocket host URL.
+     * @param integer $userId   User ID.
+     * @param string  $password User password.
+     * @param Host    $host     WebSocket host URL.
      */
     public function __construct(protected int $userId, protected string $password, protected Host $host)
     {
@@ -91,17 +91,21 @@ class Client
     /**
      * Logs in to the xStation5 API.
      *
+     * @return LoginResponse The response from the login request.
+     *
      * @throws ErrorResponseException   If the response indicates an error.
      * @throws JsonException            If the response cannot be processed.
      * @throws InvalidResponseException Thrown when the API response is invalid or incomplete.
      */
     public function login(): LoginResponse
     {
-        return $this->sendRequest(new LoginPayload($this->userId, $this->password), LoginResponse::class);
+        return $this->request(new LoginPayload($this->userId, $this->password), LoginResponse::class);
     }
 
     /**
      * Logs out from the xStation5 API.
+     *
+     * @return LogoutResponse The response from the logout request.
      *
      * @throws ErrorResponseException   If the response indicates an error.
      * @throws JsonException            If the response cannot be processed.
@@ -109,7 +113,7 @@ class Client
      */
     public function logout(): LogoutResponse
     {
-        return $this->sendRequest(new LogoutPayload(), LogoutResponse::class);
+        return $this->request(new LogoutPayload(), LogoutResponse::class);
     }
 
     /**
@@ -117,17 +121,21 @@ class Client
      *
      * @param string $symbol The symbol to retrieve information for.
      *
+     * @return GetSymbolResponse The response containing symbol information.
+     *
      * @throws ErrorResponseException   If the response indicates an error.
      * @throws JsonException            If the response cannot be processed.
      * @throws InvalidResponseException Thrown when the API response is invalid or incomplete.
      */
     public function getSymbol(string $symbol): GetSymbolResponse
     {
-        return $this->sendRequest(new GetSymbolPayload($symbol), GetSymbolResponse::class);
+        return $this->request(new GetSymbolPayload($symbol), GetSymbolResponse::class);
     }
 
     /**
      * Retrieves information about all symbols.
+     *
+     * @return GetAllSymbolsResponse The response containing all symbols information.
      *
      * @throws ErrorResponseException   If the response indicates an error.
      * @throws JsonException            If the response cannot be processed.
@@ -135,7 +143,7 @@ class Client
      */
     public function getAllSymbols(): GetAllSymbolsResponse
     {
-        return $this->sendRequest(new GetAllSymbolsPayload(), GetAllSymbolsResponse::class);
+        return $this->request(new GetAllSymbolsPayload(), GetAllSymbolsResponse::class);
     }
 
     /**
@@ -143,19 +151,23 @@ class Client
      *
      * @param TradeTransInfo $tradeTransInfo Trade transaction details.
      *
+     * @return TradeTransactionResponse The response from the trade transaction request.
+     *
      * @throws ErrorResponseException   If the response indicates an error.
      * @throws JsonException            If the response cannot be processed.
      * @throws InvalidResponseException Thrown when the API response is invalid or incomplete.
      */
     public function tradeTransaction(TradeTransInfo $tradeTransInfo): TradeTransactionResponse
     {
-        return $this->sendRequest(new TradeTransactionPayload($tradeTransInfo), TradeTransactionResponse::class);
+        return $this->request(new TradeTransactionPayload($tradeTransInfo), TradeTransactionResponse::class);
     }
 
     /**
      * Gets the current status of a trade transaction.
      *
-     * @param int $order Order ID.
+     * @param integer $order Order ID.
+     *
+     * @return TradeTransactionStatusResponse The response containing trade transaction status.
      *
      * @throws ErrorResponseException   If the response indicates an error.
      * @throws JsonException            If the response cannot be processed.
@@ -163,7 +175,7 @@ class Client
      */
     public function tradeTransactionStatus(int $order): TradeTransactionStatusResponse
     {
-        return $this->sendRequest(
+        return $this->request(
             new TradeTransactionStatusPayload($order),
             TradeTransactionStatusResponse::class
         );
@@ -172,17 +184,21 @@ class Client
     /**
      * Refreshes the internal state of all system components.
      *
+     * @return PingResponse The response from the ping request.
+     *
      * @throws ErrorResponseException   If the response indicates an error.
      * @throws JsonException            If the response cannot be processed.
      * @throws InvalidResponseException Thrown when the API response is invalid or incomplete.
      */
     public function ping(): PingResponse
     {
-        return $this->sendRequest(new PingPayload(), PingResponse::class);
+        return $this->request(new PingPayload(), PingResponse::class);
     }
 
     /**
      * Returns calendar with market events.
+     *
+     * @return GetCalendarResponse The response containing market events calendar.
      *
      * @throws ErrorResponseException   If the response indicates an error.
      * @throws JsonException            If the response cannot be processed.
@@ -190,7 +206,7 @@ class Client
      */
     public function getCalendar(): GetCalendarResponse
     {
-        return $this->sendRequest(new GetCalendarPayload(), GetCalendarResponse::class);
+        return $this->request(new GetCalendarPayload(), GetCalendarResponse::class);
     }
 
     /**
@@ -198,13 +214,15 @@ class Client
      *
      * @param ChartLastInfoRecord $chartLastInfoRecord Details of the chart request.
      *
+     * @return GetChartLastRequestResponse The response containing chart info.
+     *
      * @throws ErrorResponseException   If the response indicates an error.
      * @throws JsonException            If the response cannot be processed.
      * @throws InvalidResponseException Thrown when the API response is invalid or incomplete.
      */
     public function getChartLastRequest(ChartLastInfoRecord $chartLastInfoRecord): GetChartLastRequestResponse
     {
-        return $this->sendRequest(
+        return $this->request(
             new GetChartLastRequestPayload($chartLastInfoRecord),
             GetChartLastRequestResponse::class
         );
@@ -215,13 +233,15 @@ class Client
      *
      * @param ChartRangeInfoRecord $chartRangeInfoRecord Details of the chart range request.
      *
+     * @return GetChartRangeRequestResponse The response containing chart range info.
+     *
      * @throws ErrorResponseException   If the response indicates an error.
      * @throws JsonException            If the response cannot be processed.
      * @throws InvalidResponseException Thrown when the API response is invalid or incomplete.
      */
     public function getChartRangeRequest(ChartRangeInfoRecord $chartRangeInfoRecord): GetChartRangeRequestResponse
     {
-        return $this->sendRequest(
+        return $this->request(
             new GetChartRangeRequestPayload($chartRangeInfoRecord),
             GetChartRangeRequestResponse::class
         );
@@ -233,13 +253,15 @@ class Client
      * @param string $symbol The trading symbol.
      * @param float  $volume The trading volume.
      *
+     * @return GetCommissionDefResponse The response containing commission definition.
+     *
      * @throws ErrorResponseException   If the response indicates an error.
      * @throws JsonException            If the response cannot be processed.
      * @throws InvalidResponseException Thrown when the API response is invalid or incomplete.
      */
     public function getCommissionDef(string $symbol, float $volume): GetCommissionDefResponse
     {
-        return $this->sendRequest(
+        return $this->request(
             new GetCommissionDefPayload($symbol, $volume),
             GetCommissionDefResponse::class
         );
@@ -248,17 +270,21 @@ class Client
     /**
      * Returns information about account currency, and account leverage.
      *
+     * @return GetCurrentUserDataResponse The response containing current user data.
+     *
      * @throws ErrorResponseException   If the response indicates an error.
      * @throws JsonException            If the response cannot be processed.
      * @throws InvalidResponseException Thrown when the API response is invalid or incomplete.
      */
     public function getCurrentUserData(): GetCurrentUserDataResponse
     {
-        return $this->sendRequest(new GetCurrentUserDataPayload(), GetCurrentUserDataResponse::class);
+        return $this->request(new GetCurrentUserDataPayload(), GetCurrentUserDataResponse::class);
     }
 
     /**
      * Returns various account indicators.
+     *
+     * @return GetMarginLevelResponse The response containing margin level information.
      *
      * @throws ErrorResponseException   If the response indicates an error.
      * @throws JsonException            If the response cannot be processed.
@@ -266,7 +292,7 @@ class Client
      */
     public function getMarginLevel(): GetMarginLevelResponse
     {
-        return $this->sendRequest(new GetMarginLevelPayload(), GetMarginLevelResponse::class);
+        return $this->request(new GetMarginLevelPayload(), GetMarginLevelResponse::class);
     }
 
     /**
@@ -275,13 +301,15 @@ class Client
      * @param string $symbol The trading symbol.
      * @param float  $volume The trading volume.
      *
+     * @return GetMarginTradeResponse The response containing margin trade information.
+     *
      * @throws ErrorResponseException   If the response indicates an error.
      * @throws JsonException            If the response cannot be processed.
      * @throws InvalidResponseException Thrown when the API response is invalid or incomplete.
      */
     public function getMarginTrade(string $symbol, float $volume): GetMarginTradeResponse
     {
-        return $this->sendRequest(
+        return $this->request(
             new GetMarginTradePayload($symbol, $volume),
             GetMarginTradeResponse::class
         );
@@ -293,7 +321,7 @@ class Client
      * @param DateTime $start Start time for news retrieval.
      * @param DateTime $end   End time for news retrieval.
      *
-     * @return GetNewsResponse Response containing the news.
+     * @return GetNewsResponse The response containing the news.
      *
      * @throws ErrorResponseException   If the response indicates an error.
      * @throws JsonException            If the response cannot be processed.
@@ -301,7 +329,7 @@ class Client
      */
     public function getNews(DateTime $start, DateTime $end): GetNewsResponse
     {
-        return $this->sendRequest(new GetNewsPayload($start, $end), GetNewsResponse::class);
+        return $this->request(new GetNewsPayload($start, $end), GetNewsResponse::class);
     }
 
     /**
@@ -310,13 +338,15 @@ class Client
      * @param DateTime $start Start time for IBs history retrieval.
      * @param DateTime $end   End time for IBs history retrieval.
      *
+     * @return GetIbsHistoryResponse The response containing IBs history.
+     *
      * @throws ErrorResponseException   If the response indicates an error.
      * @throws JsonException            If the response cannot be processed.
      * @throws InvalidResponseException Thrown when the API response is invalid or incomplete.
      */
     public function getIbsHistory(DateTime $start, DateTime $end): GetIbsHistoryResponse
     {
-        return $this->sendRequest(new GetIbsHistoryPayload($start, $end), GetIbsHistoryResponse::class);
+        return $this->request(new GetIbsHistoryPayload($start, $end), GetIbsHistoryResponse::class);
     }
 
     /**
@@ -327,6 +357,8 @@ class Client
      * @param float  $openPrice  Theoretical open price of the order.
      * @param string $symbol     Trading symbol.
      * @param float  $volume     Trading volume.
+     *
+     * @return GetProfitCalculationResponse The response containing profit calculation.
      *
      * @throws ErrorResponseException   If the response indicates an error.
      * @throws JsonException            If the response cannot be processed.
@@ -339,7 +371,7 @@ class Client
         string $symbol,
         float $volume
     ): GetProfitCalculationResponse {
-        return $this->sendRequest(
+        return $this->request(
             new GetProfitCalculationPayload($closePrice, $cmd, $openPrice, $symbol, $volume),
             GetProfitCalculationResponse::class
         );
@@ -348,17 +380,21 @@ class Client
     /**
      * Returns current time on trading server.
      *
+     * @return GetServerTimeResponse The response containing the server time.
+     *
      * @throws ErrorResponseException   If the response indicates an error.
      * @throws JsonException            If the response cannot be processed.
      * @throws InvalidResponseException Thrown when the API response is invalid or incomplete.
      */
     public function getServerTime(): GetServerTimeResponse
     {
-        return $this->sendRequest(new GetServerTimePayload(), GetServerTimeResponse::class);
+        return $this->request(new GetServerTimePayload(), GetServerTimeResponse::class);
     }
 
     /**
      * Returns a list of step rules for DMAs.
+     *
+     * @return GetStepRulesResponse The response containing step rules.
      *
      * @throws ErrorResponseException   If the response indicates an error.
      * @throws JsonException            If the response cannot be processed.
@@ -366,7 +402,7 @@ class Client
      */
     public function getStepRules(): GetStepRulesResponse
     {
-        return $this->sendRequest(new GetStepRulesPayload(), GetStepRulesResponse::class);
+        return $this->request(new GetStepRulesPayload(), GetStepRulesResponse::class);
     }
 
     /**
@@ -376,13 +412,15 @@ class Client
      * @param array    $symbols   Array of symbol names.
      * @param DateTime $timestamp The time from which the most recent tick should be looked for.
      *
+     * @return GetTickPricesResponse The response containing tick prices.
+     *
      * @throws ErrorResponseException   If the response indicates an error.
      * @throws JsonException            If the response cannot be processed.
      * @throws InvalidResponseException Thrown when the API response is invalid or incomplete.
      */
     public function getTickPrices(Level $level, array $symbols, DateTime $timestamp): GetTickPricesResponse
     {
-        return $this->sendRequest(
+        return $this->request(
             new GetTickPricesPayload($level, $symbols, $timestamp),
             GetTickPricesResponse::class
         );
@@ -393,19 +431,23 @@ class Client
      *
      * @param array $orders Array of order IDs.
      *
+     * @return GetTradeRecordsResponse The response containing trade records.
+     *
      * @throws ErrorResponseException   If the response indicates an error.
      * @throws JsonException            If the response cannot be processed.
      * @throws InvalidResponseException Thrown when the API response is invalid or incomplete.
      */
     public function getTradeRecords(array $orders): GetTradeRecordsResponse
     {
-        return $this->sendRequest(new GetTradeRecordsPayload($orders), GetTradeRecordsResponse::class);
+        return $this->request(new GetTradeRecordsPayload($orders), GetTradeRecordsResponse::class);
     }
 
     /**
      * Retrieves an array of user's trades.
      *
-     * @param bool $openedOnly If true, only opened trades will be returned.
+     * @param boolean $openedOnly If true, only opened trades will be returned.
+     *
+     * @return GetTradesResponse The response containing trades.
      *
      * @throws ErrorResponseException   If the response indicates an error.
      * @throws JsonException            If the response cannot be processed.
@@ -413,7 +455,7 @@ class Client
      */
     public function getTrades(bool $openedOnly): GetTradesResponse
     {
-        return $this->sendRequest(new GetTradesPayload($openedOnly), GetTradesResponse::class);
+        return $this->request(new GetTradesPayload($openedOnly), GetTradesResponse::class);
     }
 
     /**
@@ -422,13 +464,15 @@ class Client
      * @param DateTime $start Start time for trade history retrieval.
      * @param DateTime $end   End time for trade history retrieval.
      *
+     * @return GetTradesHistoryResponse The response containing trades history.
+     *
      * @throws ErrorResponseException   If the response indicates an error.
      * @throws JsonException            If the response cannot be processed.
      * @throws InvalidResponseException Thrown when the API response is invalid or incomplete.
      */
     public function getTradesHistory(DateTime $start, DateTime $end): GetTradesHistoryResponse
     {
-        return $this->sendRequest(new GetTradesHistoryPayload($start, $end), GetTradesHistoryResponse::class);
+        return $this->request(new GetTradesHistoryPayload($start, $end), GetTradesHistoryResponse::class);
     }
 
     /**
@@ -436,17 +480,21 @@ class Client
      *
      * @param array $symbols Array of symbol names (Strings).
      *
+     * @return GetTradingHoursResponse The response containing trading hours.
+     *
      * @throws ErrorResponseException   If the response indicates an error.
      * @throws JsonException            If the response cannot be processed.
      * @throws InvalidResponseException Thrown when the API response is invalid or incomplete.
      */
     public function getTradingHours(array $symbols): GetTradingHoursResponse
     {
-        return $this->sendRequest(new GetTradingHoursPayload($symbols), GetTradingHoursResponse::class);
+        return $this->request(new GetTradingHoursPayload($symbols), GetTradingHoursResponse::class);
     }
 
     /**
      * Returns the current API version.
+     *
+     * @return GetVersionResponse The response containing the API version.
      *
      * @throws ErrorResponseException   If the response indicates an error.
      * @throws JsonException            If the response cannot be processed.
@@ -454,7 +502,7 @@ class Client
      */
     public function getVersion(): GetVersionResponse
     {
-        return $this->sendRequest(new GetVersionPayload(), GetVersionResponse::class);
+        return $this->request(new GetVersionPayload(), GetVersionResponse::class);
     }
 
     /**
@@ -471,7 +519,7 @@ class Client
      * @throws JsonException            If the response cannot be processed.
      * @throws InvalidResponseException Thrown when the API response is invalid or incomplete.
      */
-    protected function sendRequest(AbstractPayload $payload, string $responseClass): AbstractResponse
+    protected function request(AbstractPayload $payload, string $responseClass): AbstractResponse
     {
         $this->client->text($payload);
 

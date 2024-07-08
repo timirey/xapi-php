@@ -2,9 +2,9 @@
 
 use Timirey\XApi\Payloads\PingPayload;
 use Timirey\XApi\Responses\PingResponse;
-use Timirey\XApi\Tests\Commands\Traits\MockeryTrait;
+use Timirey\XApi\Tests\Commands\Traits\ClientMockeryTrait;
 
-uses(MockeryTrait::class);
+uses(ClientMockeryTrait::class);
 
 beforeEach(function () {
     $this->mockClient();
@@ -16,9 +16,7 @@ afterEach(function () {
 
 test('ping command', function () {
     $payload = new PingPayload();
-    $mockResponse = [
-        'status' => true,
-    ];
+    $mockResponse = ['status' => true];
 
     $this->mockResponse($payload, $mockResponse);
 

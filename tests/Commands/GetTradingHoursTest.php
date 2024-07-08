@@ -6,9 +6,9 @@ use Timirey\XApi\Responses\Data\QuotesRecord;
 use Timirey\XApi\Responses\Data\TradingHoursRecord;
 use Timirey\XApi\Responses\Data\TradingRecord;
 use Timirey\XApi\Responses\GetTradingHoursResponse;
-use Timirey\XApi\Tests\Commands\Traits\MockeryTrait;
+use Timirey\XApi\Tests\Commands\Traits\ClientMockeryTrait;
 
-uses(MockeryTrait::class);
+uses(ClientMockeryTrait::class);
 
 beforeEach(function () {
     $this->mockClient();
@@ -25,11 +25,19 @@ test('getTradingHours command', function () {
         'returnData' => [
             [
                 'quotes' => [
-                    ['day' => 2, 'fromT' => 63000000, 'toT' => 63300000],
+                    [
+                        'day' => 2,
+                        'fromT' => 63000000,
+                        'toT' => 63300000,
+                    ],
                 ],
                 'symbol' => 'USDPLN',
                 'trading' => [
-                    ['day' => 2, 'fromT' => 63000000, 'toT' => 63300000],
+                    [
+                        'day' => 2,
+                        'fromT' => 63000000,
+                        'toT' => 63300000,
+                    ],
                 ],
             ],
         ],

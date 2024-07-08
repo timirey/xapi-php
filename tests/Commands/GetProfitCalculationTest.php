@@ -3,9 +3,9 @@
 use Timirey\XApi\Enums\Cmd;
 use Timirey\XApi\Payloads\GetProfitCalculationPayload;
 use Timirey\XApi\Responses\GetProfitCalculationResponse;
-use Timirey\XApi\Tests\Commands\Traits\MockeryTrait;
+use Timirey\XApi\Tests\Commands\Traits\ClientMockeryTrait;
 
-uses(MockeryTrait::class);
+uses(ClientMockeryTrait::class);
 
 beforeEach(function () {
     $this->mockClient();
@@ -26,9 +26,7 @@ test('getProfitCalculation command', function () {
 
     $mockResponse = [
         'status' => true,
-        'returnData' => [
-            'profit' => 714.303,
-        ],
+        'returnData' => ['profit' => 714.303],
     ];
 
     $this->mockResponse($payload, $mockResponse);

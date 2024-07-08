@@ -1,5 +1,12 @@
 # Release Notes
 
+## [2.0.0-alpha](https://github.com/timirey/xapi-php/compare/1.2.1...2.0.0-alpha) - 2024-07-08
+
+* Added support for streaming communication.
+* Added [streaming commands](http://developers.xstore.pro/documentation/#available-streaming-commands).
+* Changed back from Pint to PHP CS.
+* Backwards incompatible changes.
+
 ## [1.2.1](https://github.com/timirey/xapi-php/compare/1.2.0...1.2.1) - 2024-07-04
 
 * Fix DateTime objects in Pest tests.

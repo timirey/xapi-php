@@ -12,23 +12,23 @@ use Timirey\XApi\Helpers\DateTimeHelper;
 class ChartRangeInfoRecord
 {
     /**
-     * @var int Start of chart block (milliseconds since epoch).
+     * @var integer Start of chart block (milliseconds since epoch).
      */
     public int $start;
 
     /**
-     * @var int End of chart block (milliseconds since epoch).
+     * @var integer End of chart block (milliseconds since epoch).
      */
     public int $end;
 
     /**
      * Constructor for ChartRangeInfoRecord.
      *
-     * @param Period   $period Period code.
-     * @param DateTime $start  Start of chart block.
-     * @param DateTime $end    End of chart block.
-     * @param string   $symbol Symbol.
-     * @param int|null $ticks  Number of ticks needed (optional).
+     * @param Period       $period Period code.
+     * @param DateTime     $start  Start of chart block.
+     * @param DateTime     $end    End of chart block.
+     * @param string       $symbol Symbol.
+     * @param integer|null $ticks  Number of ticks needed (optional).
      */
     public function __construct(
         public Period $period,

@@ -10,11 +10,11 @@ class GetTradesPayload extends AbstractPayload
     /**
      * Constructor for GetTradesPayload.
      *
-     * @param bool $openedOnly If true then only opened trades will be returned.
+     * @param boolean $openedOnly If true then only opened trades will be returned.
      */
     public function __construct(bool $openedOnly)
     {
-        $this->arguments['openedOnly'] = $openedOnly;
+        $this->parameters['openedOnly'] = $openedOnly;
     }
 
     /**

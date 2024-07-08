@@ -14,7 +14,7 @@ class GetTradeRecordsPayload extends AbstractPayload
      */
     public function __construct(array $orders)
     {
-        $this->arguments['orders'] = $orders;
+        $this->parameters['orders'] = $orders;
     }
 
     /**

@@ -2,9 +2,9 @@
 
 use Timirey\XApi\Payloads\GetMarginTradePayload;
 use Timirey\XApi\Responses\GetMarginTradeResponse;
-use Timirey\XApi\Tests\Commands\Traits\MockeryTrait;
+use Timirey\XApi\Tests\Commands\Traits\ClientMockeryTrait;
 
-uses(MockeryTrait::class);
+uses(ClientMockeryTrait::class);
 
 beforeEach(function () {
     $this->mockClient();
@@ -19,9 +19,7 @@ test('getMarginTrade command', function () {
 
     $mockResponse = [
         'status' => true,
-        'returnData' => [
-            'margin' => 4399.350,
-        ],
+        'returnData' => ['margin' => 4399.350],
     ];
 
     $this->mockResponse($payload, $mockResponse);

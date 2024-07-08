@@ -20,9 +20,9 @@ class GetTickPricesPayload extends AbstractPayload
      */
     public function __construct(Level $level, array $symbols, DateTime $timestamp)
     {
-        $this->arguments['level'] = $level->value;
-        $this->arguments['symbols'] = $symbols;
-        $this->arguments['timestamp'] = DateTimeHelper::toMilliseconds($timestamp);
+        $this->parameters['level'] = $level->value;
+        $this->parameters['symbols'] = $symbols;
+        $this->parameters['timestamp'] = DateTimeHelper::toMilliseconds($timestamp);
     }
 
     /**

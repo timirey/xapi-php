@@ -15,8 +15,8 @@ class GetCommissionDefPayload extends AbstractPayload
      */
     public function __construct(string $symbol, float $volume)
     {
-        $this->arguments['symbol'] = $symbol;
-        $this->arguments['volume'] = $volume;
+        $this->parameters['symbol'] = $symbol;
+        $this->parameters['volume'] = $volume;
     }
 
     /**
