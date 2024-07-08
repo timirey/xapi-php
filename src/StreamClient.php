@@ -14,6 +14,7 @@ use Timirey\XApi\Payloads\GetProfitsStreamPayload;
 use Timirey\XApi\Payloads\GetTickPricesStreamPayload;
 use Timirey\XApi\Payloads\GetTradesStreamPayload;
 use Timirey\XApi\Payloads\GetTradeStatusStreamPayload;
+use Timirey\XApi\Payloads\PingStreamPayload;
 use Timirey\XApi\Responses\AbstractStreamResponse;
 use Timirey\XApi\Responses\GetBalanceStreamResponse;
 use Timirey\XApi\Responses\GetCandlesStreamResponse;
@@ -23,6 +24,7 @@ use Timirey\XApi\Responses\GetProfitsStreamResponse;
 use Timirey\XApi\Responses\GetTickPricesStreamResponse;
 use Timirey\XApi\Responses\GetTradesStreamResponse;
 use Timirey\XApi\Responses\GetTradeStatusStreamResponse;
+use Timirey\XApi\Responses\PingStreamResponse;
 use WebSocket\Client as WebSocketClient;
 
 /**
@@ -194,6 +196,24 @@ class StreamClient
             $callback
         );
     }
+
+    /**
+     * Send a ping command to the xStation5 API.
+     *
+     * @param callable $callback Callback function to handle the response.
+     *
+     * @throws InvalidResponseException If the response is invalid.
+     * @throws JsonException            If JSON processing fails.
+     */
+    public function ping(callable $callback): void
+    {
+        $this->subscribe(
+            new PingStreamPayload($this->streamSessionId),
+            PingStreamResponse::class,
+            $callback
+        );
+    }
+
 
     /**
      * Sends a request to the xStation5 API and processes the response.
