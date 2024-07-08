@@ -7,8 +7,12 @@ use Timirey\XApi\Enums\StreamHost;
 use Timirey\XApi\Exceptions\InvalidResponseException;
 use Timirey\XApi\Payloads\AbstractStreamPayload;
 use Timirey\XApi\Payloads\GetBalanceStreamPayload;
+use Timirey\XApi\Payloads\GetCandlesStreamPayload;
+use Timirey\XApi\Payloads\GetKeepAliveStreamPayload;
 use Timirey\XApi\Responses\AbstractStreamResponse;
 use Timirey\XApi\Responses\GetBalanceStreamResponse;
+use Timirey\XApi\Responses\GetCandlesStreamResponse;
+use Timirey\XApi\Responses\GetKeepAliveStreamResponse;
 use WebSocket\Client as WebSocketClient;
 
 /**
@@ -50,6 +54,41 @@ class StreamClient
         $this->subscribe(
             new GetBalanceStreamPayload($this->streamSessionId),
             GetBalanceStreamResponse::class,
+            $callback
+        );
+    }
+
+    /**
+     * Subscribe to candles stream.
+     *
+     * @param string   $symbol   Symbol for which to get the candles.
+     * @param callable $callback Callback function to handle the response.
+     *
+     * @throws InvalidResponseException If the response is invalid.
+     * @throws JsonException            If JSON processing fails.
+     */
+    public function getCandles(string $symbol, callable $callback): void
+    {
+        $this->subscribe(
+            new GetCandlesStreamPayload($this->streamSessionId, $symbol),
+            GetCandlesStreamResponse::class,
+            $callback
+        );
+    }
+
+    /**
+     * Subscribe to keep alive stream.
+     *
+     * @param callable $callback Callback function to handle the response.
+     *
+     * @throws InvalidResponseException If the response is invalid.
+     * @throws JsonException            If JSON processing fails.
+     */
+    public function getKeepAlive(callable $callback): void
+    {
+        $this->subscribe(
+            new GetKeepAliveStreamPayload($this->streamSessionId),
+            GetKeepAliveStreamResponse::class,
             $callback
         );
     }
