@@ -22,6 +22,14 @@ integrate advanced trading features and live market data into their applications
     - [logout](#logout)
 - [Available streaming commands](#available-streaming-commands)
     - [getBalance](#get-balance)
+    - [getCandles](#get-candles)
+    - [getKeepAlive](#get-keep-alive)
+    - [getNews](#get-news)
+    - [getProfits](#get-profits)
+    - [getTickPrices](#get-tick-prices)
+    - [getTrades](#get-trades)
+    - [getTradeStatus](#get-trade-status)
+    - [ping](#ping)
 - [Retrieving trading data](#retrieving-trading-data)
     - [getAllSymbols](#getallsymbols)
     - [getCalendar](#getcalendar)
@@ -173,6 +181,63 @@ $streamClient->getBalance(static function(GetBalanceStreamResponse $response): v
     $record = $response->streamBalanceRecord;
 });
 ```
+
+### [getCandles](http://developers.xstore.pro/documentation/#streamgetCandles)
+
+Subscribes for and unsubscribes from API chart candles. The interval of every candle is 1 minute. A new candle arrives
+every minute.
+
+```PHP
+```
+
+### [getKeepAlive](http://developers.xstore.pro/documentation/#streamgetCandles)
+
+Subscribes for and unsubscribes from 'keep alive' messages. A new 'keep alive' message is sent by the API every 3
+seconds.
+
+```PHP
+```
+
+### [getNews](http://developers.xstore.pro/documentation/#streamgetNews)
+
+Subscribes for and unsubscribes from news.
+
+```PHP
+```
+
+### [getProfits](http://developers.xstore.pro/documentation/#streamgetProfits)
+
+Subscribes for and unsubscribes from profits.
+
+```PHP
+```
+
+### [getTickPrices](http://developers.xstore.pro/documentation/#streamgetTickPrices)
+
+Establishes subscription for quotations and allows to obtain the relevant information in real-time, as soon as it is
+available in the system.
+
+```PHP
+```
+
+### [getTrades](http://developers.xstore.pro/documentation/#streamgetTrades)
+
+Establishes subscription for user trade status data and allows to obtain the relevant information in real-time, as soon
+as it is available in the system.
+
+```PHP
+```
+
+### [getTradeStatus](http://developers.xstore.pro/documentation/#streamgetTradeStatus)
+
+Allows to get status for sent trade requests in real-time, as soon as it is available in the system.
+
+```PHP
+```
+
+### [ping](http://developers.xstore.pro/documentation/#streamping)
+
+Regularly calling this function is enough to refresh the internal state of all the components in the system.
 
 ## Retrieving trading data
 
