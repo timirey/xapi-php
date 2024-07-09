@@ -104,8 +104,6 @@ $logoutResponse = $client->logout();
 Subscribe to a stream channel.
 
 ```PHP
-<?php
-
 use Timirey\XApi\Responses\GetTickPricesStreamResponse;
 use Timirey\XApi\Responses\Data\TickStreamRecord;
 use Timirey\XApi\Responses\LoginResponse;
