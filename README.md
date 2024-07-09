@@ -71,59 +71,116 @@ composer require timirey/xapi-php
 
 ## Usage
 
-Initialize the client.
+Basic usage example.
 
 ```PHP
 use Timirey\XApi\Client;
 use Timirey\XApi\Enums\Host;
-
-/** 
- * @var Client $client 
- */
-$client = new Client(
-    userId: 123456789, 
-    password: 'password', 
-    host: Host::DEMO
-);
-```
-
-Authenticate.
-
-```PHP
+use Timirey\XApi\Responses\GetCalendarResponse;
 use Timirey\XApi\Responses\LoginResponse;
-use Timirey\XApi\Client;
-
-/** 
- * @var LoginResponse $response 
- * @var Client $client
- */
-$response = $client->login();
-```
-
-Send commands.
-
-```PHP
-use Timirey\XApi\Responses\GetAllSymbolsResponse;
-use Timirey\XApi\Client;
-
-/** 
- * @var GetAllSymbolsResponse $response 
- * @var Client $client
- */
-$response = $client->getAllSymbols();
-```
-
-Logout when done.
-
-```PHP
 use Timirey\XApi\Responses\LogoutResponse;
+
+/**
+ * @var Client
+ */
+$client = new Client(userId: 123456789, password: 'password', host: Host::DEMO);
+
+/**
+ * @var LoginResponse $loginResponse
+ */
+$loginResponse = $client->login();
+
+/**
+ * @var GetCalendarResponse $getCalendarResponse
+ */
+$getCalendarResponse = $client->getCalendar();
+
+/**
+ * @var LogoutResponse $logoutResponse
+ */
+$logoutResponse = $client->logout();
+```
+
+Subscribe to a stream channel.
+
+```PHP
+<?php
+
+use Timirey\XApi\Responses\GetTickPricesStreamResponse;
+use Timirey\XApi\Responses\Data\TickStreamRecord;
+use Timirey\XApi\Responses\LoginResponse;
+use Timirey\XApi\Enums\StreamHost;
+use Timirey\XApi\StreamClient;
+use Timirey\XApi\Enums\Host;
 use Timirey\XApi\Client;
 
-/** 
- * @var LogoutResponse $response 
- * @var Client $client
+/**
+ * @var Client
  */
-$response = $client->logout();
+$client = new Client(userId: 123456789, password: 'password', host: Host::DEMO);
+
+/**
+ * @var LoginResponse $loginResponse
+ */
+$loginResponse = $client->login();
+
+/**
+ * @var string $streamSessionId
+ */
+$streamSessionId = $loginResponse->streamSessionId;
+
+/**
+ * @var $streamClient StreamClient
+ */
+$streamClient = new StreamClient(
+    streamSessionId: $streamSessionId,
+    host: StreamHost::DEMO
+);
+
+// It is better practice to handle subscriptions through a separate worker, ex.: Laravel cron job.
+$streamClient->getTickPrices(
+    symbol: 'EURUSD',
+    callback: static function (GetTickPricesStreamResponse $tickPricesStreamResponse): void {
+        /**
+         * @var TickStreamRecord $tickStreamRecord
+         */
+        $record = $tickPricesStreamResponse->tickStreamRecord;
+
+        print_r($record);
+    }
+);
+
+// Unreachable code.
+```
+
+Currently, the only way to shut down the subscriber is to unsubscribe from the callback body, or exit the script
+externally.
+
+```PHP
+use Timirey\XApi\Responses\GetTickPricesStreamResponse;
+use Timirey\XApi\StreamClient;
+
+/**
+ * @var int $tickCount
+ */
+$tickCount = 0;
+
+/**
+ * @var $streamClient StreamClient
+ */
+$streamClient->getTickPrices(
+    symbol: 'EURUSD',
+    callback: static function (GetTickPricesStreamResponse $tickPricesStreamResponse) use ($streamClient): void {
+        $tickCount++;
+        
+        // If we got 5 tick prices, unsubscribe.
+        if ($tickCount > 5) {
+            $streamClient->unsubscribe();
+        }
+    }
+);
+
+// Reachable code.
 ```
 
 ## Available commands
@@ -236,6 +293,21 @@ $streamClient->getKeepAlive(
 Subscribes for and unsubscribes from news.
 
 ```PHP
+use Timirey\XApi\Responses\Data\NewsStreamRecord;
+use Timirey\XApi\Responses\GetNewsStreamResponse;
+use Timirey\XApi\StreamClient;
+
+/**
+ * @var StreamClient $streamClient
+ */
+$streamClient->getNews(
+    callback: static function (GetNewsStreamResponse $response): void {
+        /**
+         * @var NewsStreamRecord $record
+         */
+        $record = $response->newsStreamRecord;
+    }
+);
 ```
 
 ### [getProfits](http://developers.xstore.pro/documentation/#streamgetProfits)
@@ -243,6 +315,21 @@ Subscribes for and unsubscribes from news.
 Subscribes for and unsubscribes from profits.
 
 ```PHP
+use Timirey\XApi\Responses\Data\ProfitStreamRecord;
+use Timirey\XApi\Responses\GetProfitsStreamResponse;
+use Timirey\XApi\StreamClient;
+
+/**
+ * @var StreamClient $streamClient
+ */
+$streamClient->getProfits(
+    callback: static function (GetProfitsStreamResponse $response): void {
+        /**
+         * @var ProfitStreamRecord $record
+         */
+        $record = $response->profitStreamRecord;
+    }
+);
 ```
 
 ### [getTickPrices](http://developers.xstore.pro/documentation/#streamgetTickPrices)
@@ -251,6 +338,24 @@ Establishes subscription for quotations and allows to obtain the relevant inform
 available in the system.
 
 ```PHP
+use Timirey\XApi\Responses\Data\TickStreamRecord;
+use Timirey\XApi\Responses\GetTickPricesStreamResponse;
+use Timirey\XApi\StreamClient;
+
+/**
+ * @var StreamClient $streamClient
+ */
+$streamClient->getTickPrices(
+    symbol: 'EURUSD',
+    callback: static function (GetTickPricesStreamResponse $response): void {
+        /**
+         * @var TickStreamRecord $record
+         */
+        $record = $response->tickStreamRecord;
+    },
+    maxLevel: 1,
+    minArrivalTime: 200
+);
 ```
 
 ### [getTrades](http://developers.xstore.pro/documentation/#streamgetTrades)
@@ -259,6 +364,21 @@ Establishes subscription for user trade status data and allows to obtain the rel
 as it is available in the system.
 
 ```PHP
+use Timirey\XApi\Responses\Data\TradeStreamRecord;
+use Timirey\XApi\Responses\GetTradesStreamResponse;
+use Timirey\XApi\StreamClient;
+
+/**
+ * @var StreamClient $streamClient
+ */
+$streamClient->getTrades(
+    callback: static function (GetTradesStreamResponse $response): void {
+        /**
+         * @var TradeStreamRecord $record
+         */
+        $record = $response->tradeStreamRecord;
+    }
+);
 ```
 
 ### [getTradeStatus](http://developers.xstore.pro/documentation/#streamgetTradeStatus)
@@ -266,11 +386,35 @@ as it is available in the system.
 Allows to get status for sent trade requests in real-time, as soon as it is available in the system.
 
 ```PHP
+use Timirey\XApi\Responses\Data\TradeStatusStreamRecord;
+use Timirey\XApi\Responses\GetTradeStatusStreamResponse;
+use Timirey\XApi\StreamClient;
+
+/**
+ * @var StreamClient $streamClient
+ */
+$streamClient->getTradeStatus(
+    callback: static function (GetTradeStatusStreamResponse $response): void {
+        /**
+         * @var TradeStatusStreamRecord $record
+         */
+        $record = $response->tradeStatusStreamRecord;
+    }
+);
 ```
 
 ### [ping](http://developers.xstore.pro/documentation/#streamping)
 
 Regularly calling this function is enough to refresh the internal state of all the components in the system.
+
+```PHP
+use Timirey\XApi\StreamClient;
+
+/**
+ * @var StreamClient $streamClient
+ */
+$streamClient->ping();
+```
 
 ## Retrieving trading data
 

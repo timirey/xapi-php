@@ -242,9 +242,11 @@ class StreamClient
 
         $this->streamClient->text($payload);
 
+        // todo: think of different approach instead of infinite cycle, maybe use promises?
         while ($this->streaming) {
             $response = $responseClass::instantiate($this->streamClient->receive()->getContent());
 
+            // todo: we should perform a check for duplicated response, maybe by timestamp?
             call_user_func($callback, $response);
         }
     }
