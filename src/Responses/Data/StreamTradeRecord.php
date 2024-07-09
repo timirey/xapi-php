@@ -31,17 +31,32 @@ class StreamTradeRecord
     /**
      * @var DateTime|null Expiration timestamp.
      */
-    public ?DateTime $expiration;
+    public ?DateTime $expiration = null;
 
     /**
      * @var DateTime|null Close timestamp.
      */
-    public ?DateTime $close_time;
+    public ?DateTime $closeTime = null;
 
     /**
      * @var DateTime Open timestamp.
      */
-    public DateTime $open_time;
+    public DateTime $openTime;
+
+    /**
+     * @var float $openPrice
+     */
+    public float $openPrice;
+
+    /**
+     * @var float $closePrice
+     */
+    public float $closePrice;
+
+    /**
+     * @var float $marginRate
+     */
+    public float $marginRate;
 
     /**
      * Constructor for the StreamTradeRecord class.
@@ -72,7 +87,7 @@ class StreamTradeRecord
      * @param float        $volume        Volume in lots.
      */
     public function __construct(
-        public float $close_price, // todo: change everything to camel case close_price -> closePrice
+        float $close_price,
         ?int $close_time,
         public bool $closed,
         int $cmd,
@@ -81,9 +96,9 @@ class StreamTradeRecord
         public string $customComment,
         public int $digits,
         ?int $expiration,
-        public float $margin_rate,
+        float $margin_rate,
         public int $offset,
-        public float $open_price,
+        float $open_price,
         int $open_time,
         public int $order,
         public int $order2,
@@ -101,14 +116,18 @@ class StreamTradeRecord
         $this->state = State::from($state);
         $this->type = Type::from($type);
 
-        $this->open_time = DateTimeHelper::fromMilliseconds($open_time);
+        $this->openTime = DateTimeHelper::fromMilliseconds($open_time);
 
         if ($close_time !== null) {
-            $this->close_time = DateTimeHelper::fromMilliseconds($close_time);
+            $this->closeTime = DateTimeHelper::fromMilliseconds($close_time);
         }
 
         if ($expiration !== null) {
             $this->expiration = DateTimeHelper::fromMilliseconds($expiration);
         }
+
+        $this->openPrice = $open_price;
+        $this->closePrice = $close_price;
+        $this->marginRate = $margin_rate;
     }
 }
