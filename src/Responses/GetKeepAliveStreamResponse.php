@@ -12,7 +12,7 @@ class GetKeepAliveStreamResponse extends AbstractStreamResponse
     /**
      * Constructor for the GetKeepAliveStreamResponse class.
      *
-     * @param StreamKeepAliveRecord $streamKeepAliveRecord Keep alive record data.
+     * @param  StreamKeepAliveRecord $streamKeepAliveRecord Keep alive record data.
      */
     public function __construct(public StreamKeepAliveRecord $streamKeepAliveRecord)
     {
@@ -21,8 +21,7 @@ class GetKeepAliveStreamResponse extends AbstractStreamResponse
     /**
      * Create an instance from the validated data.
      *
-     * @param array<string, mixed> $response Validated response data.
-     *
+     * @param  array<string, mixed> $response Validated response data.
      * @return static Instance of the response.
      */
     protected static function create(array $response): static

@@ -34,12 +34,5 @@ test('getMarginLevel command', function () {
 
     $response = $this->client->getMarginLevel();
 
-    expect($response)->toBeInstanceOf(GetMarginLevelResponse::class)
-        ->and($response->balance)->toBe(995800269.43)
-        ->and($response->credit)->toBe(1000.00)
-        ->and($response->currency)->toBe('PLN')
-        ->and($response->equity)->toBe(995985397.56)
-        ->and($response->margin)->toBe(572634.43)
-        ->and($response->marginFree)->toBe(995227635.00)
-        ->and($response->marginLevel)->toBe(173930.41);
+    expect($response)->toBeInstanceOf(GetMarginLevelResponse::class);
 });

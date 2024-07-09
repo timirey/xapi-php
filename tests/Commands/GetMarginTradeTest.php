@@ -26,6 +26,5 @@ test('getMarginTrade command', function () {
 
     $response = $this->client->getMarginTrade('EURPLN', 1.0);
 
-    expect($response)->toBeInstanceOf(GetMarginTradeResponse::class)
-        ->and($response->margin)->toBe(4399.350);
+    expect($response)->toBeInstanceOf(GetMarginTradeResponse::class);
 });

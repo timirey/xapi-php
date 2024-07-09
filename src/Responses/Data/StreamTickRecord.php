@@ -24,18 +24,18 @@ class StreamTickRecord
     /**
      * Constructor for the StreamTickRecord class.
      *
-     * @param float        $ask         Ask price.
-     * @param integer|null $askVolume   Number of available lots to buy at given price or null if not applicable.
-     * @param float        $bid         Bid price.
-     * @param integer|null $bidVolume   Number of available lots to buy at given price or null if not applicable.
-     * @param float        $high        The highest price of the day in base currency.
-     * @param integer      $level       Price level.
-     * @param float        $low         The lowest price of the day in base currency.
-     * @param integer      $quoteId     Source of price.
-     * @param float        $spreadRaw   The difference between raw ask and bid prices.
-     * @param float        $spreadTable Spread representation.
-     * @param string       $symbol      Symbol.
-     * @param integer      $timestamp   Timestamp.
+     * @param  float        $ask         Ask price.
+     * @param  integer|null $askVolume   Number of available lots to buy at given price or null if not applicable.
+     * @param  float        $bid         Bid price.
+     * @param  integer|null $bidVolume   Number of available lots to buy at given price or null if not applicable.
+     * @param  float        $high        The highest price of the day in base currency.
+     * @param  integer      $level       Price level.
+     * @param  float        $low         The lowest price of the day in base currency.
+     * @param  integer      $quoteId     Source of price.
+     * @param  float        $spreadRaw   The difference between raw ask and bid prices.
+     * @param  float        $spreadTable Spread representation.
+     * @param  string       $symbol      Symbol.
+     * @param  integer      $timestamp   Timestamp.
      */
     public function __construct(
         public float $ask,

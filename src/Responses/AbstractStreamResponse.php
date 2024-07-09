@@ -15,12 +15,11 @@ abstract class AbstractStreamResponse
     /**
      * Create an instance from JSON.
      *
-     * @param string $json JSON string.
-     *
+     * @param  string $json JSON string.
      * @return static Instance of the response.
      *
-     * @throws ErrorResponseException   If the response indicates an error.
-     * @throws JsonException            If the response cannot be processed.
+     * @throws ErrorResponseException If the response indicates an error.
+     * @throws JsonException If the response cannot be processed.
      * @throws InvalidResponseException If the response is invalid or incomplete.
      */
     public static function instantiate(string $json): static
@@ -35,12 +34,11 @@ abstract class AbstractStreamResponse
     /**
      * Decode JSON string.
      *
-     * @param string $json JSON string.
-     *
+     * @param  string $json JSON string.
      * @return array<string, mixed> Decoded JSON data.
      *
      * @throws InvalidArgumentException If the JSON is invalid.
-     * @throws JsonException            Internal JSON exception.
+     * @throws JsonException Internal JSON exception.
      */
     protected static function parseJson(string $json): array
     {
@@ -50,9 +48,9 @@ abstract class AbstractStreamResponse
     /**
      * Validate the response data.
      *
-     * @param array<string, mixed> $data Response data.
+     * @param  array<string, mixed> $data Response data.
      *
-     * @throws ErrorResponseException   If the response indicates an error or status is missing.
+     * @throws ErrorResponseException If the response indicates an error or status is missing.
      * @throws InvalidResponseException If the response is invalid or incomplete.
      *
      * @return void
@@ -69,8 +67,7 @@ abstract class AbstractStreamResponse
     /**
      * Create a response instance from the validated data.
      *
-     * @param array<string, mixed> $response Validated response data.
-     *
+     * @param  array<string, mixed> $response Validated response data.
      * @return static Instance of the response.
      */
     protected static function create(array $response): static

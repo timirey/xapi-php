@@ -12,7 +12,7 @@ class GetTradesStreamResponse extends AbstractStreamResponse
     /**
      * Constructor for the GetTradesStreamResponse class.
      *
-     * @param StreamTradeRecord $streamTradeRecord Trade record data.
+     * @param  StreamTradeRecord $streamTradeRecord Trade record data.
      */
     public function __construct(public StreamTradeRecord $streamTradeRecord)
     {
@@ -21,8 +21,7 @@ class GetTradesStreamResponse extends AbstractStreamResponse
     /**
      * Create an instance from the validated data.
      *
-     * @param array<string, mixed> $response Validated response data.
-     *
+     * @param  array<string, mixed> $response Validated response data.
      * @return static Instance of the response.
      */
     protected static function create(array $response): static

@@ -12,7 +12,7 @@ class GetCandlesStreamResponse extends AbstractStreamResponse
     /**
      * Constructor for the GetCandlesStreamResponse class.
      *
-     * @param StreamCandleRecord $streamCandleRecord Candle record data.
+     * @param  StreamCandleRecord $streamCandleRecord Candle record data.
      */
     public function __construct(public StreamCandleRecord $streamCandleRecord)
     {
@@ -21,8 +21,7 @@ class GetCandlesStreamResponse extends AbstractStreamResponse
     /**
      * Create an instance from the validated data.
      *
-     * @param array<string, mixed> $response Validated response data.
-     *
+     * @param  array<string, mixed> $response Validated response data.
      * @return static Instance of the response.
      */
     protected static function create(array $response): static

@@ -13,8 +13,8 @@ class GetIbsHistoryPayload extends AbstractPayload
     /**
      * Constructor for GetIbsHistoryPayload.
      *
-     * @param DateTime $start Start time in milliseconds since epoch.
-     * @param DateTime $end   End time in milliseconds since epoch.
+     * @param  DateTime $start Start time in milliseconds since epoch.
+     * @param  DateTime $end   End time in milliseconds since epoch.
      */
     public function __construct(DateTime $start, DateTime $end)
     {

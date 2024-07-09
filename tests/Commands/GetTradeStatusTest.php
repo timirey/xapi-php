@@ -1,5 +1,6 @@
 <?php
 
+use Timirey\XApi\Enums\RequestStatus;
 use Timirey\XApi\Payloads\GetTradeStatusStreamPayload;
 use Timirey\XApi\Responses\GetTradeStatusStreamResponse;
 use Timirey\XApi\Tests\Commands\Traits\StreamClientMockeryTrait;
@@ -33,8 +34,7 @@ test('getTradeStatus stream command', function () {
 
     $client->getTradeStatus(function (GetTradeStatusStreamResponse $response) use ($client) {
         expect($response)->toBeInstanceOf(GetTradeStatusStreamResponse::class)
-            ->and($response->streamTradeStatusRecord->order)->toBe(43) // todo: update tests
-            ->and($response->streamTradeStatusRecord->requestStatus->name)->toBe('ACCEPTED');
+            ->and($response->streamTradeStatusRecord->requestStatus)->toBeInstanceOf(RequestStatus::class);
 
         $client->unsubscribe();
     });

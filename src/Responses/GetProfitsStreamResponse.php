@@ -12,7 +12,7 @@ class GetProfitsStreamResponse extends AbstractStreamResponse
     /**
      * Constructor for the GetProfitsStreamResponse class.
      *
-     * @param StreamProfitRecord $streamProfitRecord Profit record data.
+     * @param  StreamProfitRecord $streamProfitRecord Profit record data.
      */
     public function __construct(public StreamProfitRecord $streamProfitRecord)
     {
@@ -21,8 +21,7 @@ class GetProfitsStreamResponse extends AbstractStreamResponse
     /**
      * Create an instance from the validated data.
      *
-     * @param array<string, mixed> $response Validated response data.
-     *
+     * @param  array<string, mixed> $response Validated response data.
      * @return static Instance of the response.
      */
     protected static function create(array $response): static

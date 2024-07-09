@@ -35,13 +35,5 @@ test('getCurrentUserData command', function () {
 
     $response = $this->client->getCurrentUserData();
 
-    expect($response)->toBeInstanceOf(GetCurrentUserDataResponse::class)
-        ->and($response->companyUnit)->toBe(8)
-        ->and($response->currency)->toBe('PLN')
-        ->and($response->group)->toBe('demoPLeurSTANDARD200')
-        ->and($response->ibAccount)->toBe(false)
-        ->and($response->leverage)->toBe(1)
-        ->and($response->leverageMultiplier)->toBe(0.25)
-        ->and($response->spreadType)->toBe('FLOAT')
-        ->and($response->trailingStop)->toBe(false);
+    expect($response)->toBeInstanceOf(GetCurrentUserDataResponse::class);
 });

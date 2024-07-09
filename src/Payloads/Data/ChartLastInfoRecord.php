@@ -19,9 +19,9 @@ class ChartLastInfoRecord
     /**
      * Constructor for ChartLastInfoRecord.
      *
-     * @param Period   $period Period code.
-     * @param DateTime $start  Start of chart block.
-     * @param string   $symbol Symbol.
+     * @param  Period   $period Period code.
+     * @param  DateTime $start  Start of chart block.
+     * @param  string   $symbol Symbol.
      */
     public function __construct(public Period $period, DateTime $start, public string $symbol)
     {

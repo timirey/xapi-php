@@ -44,8 +44,8 @@ class StreamClient
     /**
      * Constructor for the StreamClient class.
      *
-     * @param string     $streamSessionId Stream session ID.
-     * @param StreamHost $host            WebSocket host URL.
+     * @param  string     $streamSessionId Stream session ID.
+     * @param  StreamHost $host            WebSocket host URL.
      */
     public function __construct(protected string $streamSessionId, protected StreamHost $host)
     {
@@ -55,10 +55,10 @@ class StreamClient
     /**
      * Subscribe to balance stream.
      *
-     * @param callable $callback Callback function to handle the response.
+     * @param  callable $callback Callback function to handle the response.
      *
      * @throws InvalidResponseException If the response is invalid.
-     * @throws JsonException            If JSON processing fails.
+     * @throws JsonException If JSON processing fails.
      *
      * @return void
      */
@@ -74,11 +74,11 @@ class StreamClient
     /**
      * Subscribe to candles stream.
      *
-     * @param string   $symbol   Symbol for which to get the candles.
-     * @param callable $callback Callback function to handle the response.
+     * @param  string   $symbol   Symbol for which to get the candles.
+     * @param  callable $callback Callback function to handle the response.
      *
      * @throws InvalidResponseException If the response is invalid.
-     * @throws JsonException            If JSON processing fails.
+     * @throws JsonException If JSON processing fails.
      *
      * @return void
      */
@@ -94,10 +94,10 @@ class StreamClient
     /**
      * Subscribe to keep alive stream.
      *
-     * @param callable $callback Callback function to handle the response.
+     * @param  callable $callback Callback function to handle the response.
      *
      * @throws InvalidResponseException If the response is invalid.
-     * @throws JsonException            If JSON processing fails.
+     * @throws JsonException If JSON processing fails.
      *
      * @return void
      */
@@ -113,10 +113,10 @@ class StreamClient
     /**
      * Subscribe to news stream.
      *
-     * @param callable $callback Callback function to handle the response.
+     * @param  callable $callback Callback function to handle the response.
      *
      * @throws InvalidResponseException If the response is invalid.
-     * @throws JsonException            If JSON processing fails.
+     * @throws JsonException If JSON processing fails.
      *
      * @return void
      */
@@ -132,10 +132,10 @@ class StreamClient
     /**
      * Subscribe to profits stream.
      *
-     * @param callable $callback Callback function to handle the response.
+     * @param  callable $callback Callback function to handle the response.
      *
      * @throws InvalidResponseException If the response is invalid.
-     * @throws JsonException            If JSON processing fails.
+     * @throws JsonException If JSON processing fails.
      *
      * @return void
      */
@@ -151,13 +151,13 @@ class StreamClient
     /**
      * Subscribe to tick prices stream.
      *
-     * @param string       $symbol         Symbol for which to get the tick prices.
-     * @param callable     $callback       Callback function to handle the response.
-     * @param integer|null $minArrivalTime Minimal interval in milliseconds between updates (optional).
-     * @param integer|null $maxLevel       Maximum level of the quote (optional).
+     * @param  string       $symbol         Symbol for which to get the tick prices.
+     * @param  callable     $callback       Callback function to handle the response.
+     * @param  integer|null $minArrivalTime Minimal interval in milliseconds between updates (optional).
+     * @param  integer|null $maxLevel       Maximum level of the quote (optional).
      *
      * @throws InvalidResponseException If the response is invalid.
-     * @throws JsonException            If JSON processing fails.
+     * @throws JsonException If JSON processing fails.
      *
      * @return void
      */
@@ -177,10 +177,10 @@ class StreamClient
     /**
      * Subscribe to trades stream.
      *
-     * @param callable $callback Callback function to handle the response.
+     * @param  callable $callback Callback function to handle the response.
      *
      * @throws InvalidResponseException If the response is invalid.
-     * @throws JsonException            If JSON processing fails.
+     * @throws JsonException If JSON processing fails.
      *
      * @return void
      */
@@ -196,10 +196,10 @@ class StreamClient
     /**
      * Subscribe to trade status stream.
      *
-     * @param callable $callback Callback function to handle the response.
+     * @param  callable $callback Callback function to handle the response.
      *
      * @throws InvalidResponseException If the response is invalid.
-     * @throws JsonException            If JSON processing fails.
+     * @throws JsonException If JSON processing fails.
      *
      * @return void
      */
@@ -227,12 +227,12 @@ class StreamClient
      *
      * @template T of AbstractStreamResponse
      *
-     * @param AbstractStreamPayload  $payload       The payload to send.
-     * @param class-string<T>|string $responseClass The response class to instantiate.
-     * @param callable               $callback      Callback function to handle the response.
+     * @param  AbstractStreamPayload  $payload       The payload to send.
+     * @param  class-string<T>|string $responseClass The response class to instantiate.
+     * @param  callable               $callback      Callback function to handle the response.
      *
      * @throws InvalidResponseException If the response is invalid.
-     * @throws JsonException            If JSON processing fails.
+     * @throws JsonException If JSON processing fails.
      *
      * @return void
      */

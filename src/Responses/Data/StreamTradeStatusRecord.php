@@ -17,11 +17,11 @@ class StreamTradeStatusRecord
     /**
      * Constructor for the StreamTradeStatusRecord class.
      *
-     * @param string      $customComment Custom comment.
-     * @param string|null $message       Message.
-     * @param integer     $order         Unique order number.
-     * @param float       $price         Price in base currency.
-     * @param integer     $requestStatus Request status code.
+     * @param  string      $customComment Custom comment.
+     * @param  string|null $message       Message.
+     * @param  integer     $order         Unique order number.
+     * @param  float       $price         Price in base currency.
+     * @param  integer     $requestStatus Request status code.
      */
     public function __construct(
         public string $customComment,

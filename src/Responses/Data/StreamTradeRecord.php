@@ -44,47 +44,47 @@ class StreamTradeRecord
     public DateTime $openTime;
 
     /**
-     * @var float $openPrice
+     * @var float Open price.
      */
     public float $openPrice;
 
     /**
-     * @var float $closePrice
+     * @var float Close price.
      */
     public float $closePrice;
 
     /**
-     * @var float $marginRate
+     * @var float Margin rate.
      */
     public float $marginRate;
 
     /**
      * Constructor for the StreamTradeRecord class.
      *
-     * @param float        $close_price   Close price.
-     * @param integer|null $close_time    Close time.
-     * @param boolean      $closed        Closed status.
-     * @param integer      $cmd           Operation code.
-     * @param string       $comment       Comment.
-     * @param float        $commission    Commission.
-     * @param string       $customComment Custom comment.
-     * @param integer      $digits        Number of decimal places.
-     * @param integer|null $expiration    Expiration time.
-     * @param float        $margin_rate   Margin rate.
-     * @param integer      $offset        Trailing offset.
-     * @param float        $open_price    Open price.
-     * @param integer      $open_time     Open time.
-     * @param integer      $order         Order number.
-     * @param integer      $order2        Transaction ID.
-     * @param integer      $position      Position number.
-     * @param float        $profit        Profit.
-     * @param float        $sl            Stop loss.
-     * @param string       $state         Trade state.
-     * @param float        $storage       Storage.
-     * @param string       $symbol        Symbol.
-     * @param float        $tp            Take profit.
-     * @param integer      $type          Trade type.
-     * @param float        $volume        Volume in lots.
+     * @param  float        $close_price   Close price.
+     * @param  integer|null $close_time    Close time.
+     * @param  boolean      $closed        Closed status.
+     * @param  integer      $cmd           Operation code.
+     * @param  string       $comment       Comment.
+     * @param  float        $commission    Commission.
+     * @param  string       $customComment Custom comment.
+     * @param  integer      $digits        Number of decimal places.
+     * @param  integer|null $expiration    Expiration time.
+     * @param  float        $margin_rate   Margin rate.
+     * @param  integer      $offset        Trailing offset.
+     * @param  float        $open_price    Open price.
+     * @param  integer      $open_time     Open time.
+     * @param  integer      $order         Order number.
+     * @param  integer      $order2        Transaction ID.
+     * @param  integer      $position      Position number.
+     * @param  float        $profit        Profit.
+     * @param  float        $sl            Stop loss.
+     * @param  string       $state         Trade state.
+     * @param  float        $storage       Storage.
+     * @param  string       $symbol        Symbol.
+     * @param  float        $tp            Take profit.
+     * @param  integer      $type          Trade type.
+     * @param  float        $volume        Volume in lots.
      */
     public function __construct(
         float $close_price,

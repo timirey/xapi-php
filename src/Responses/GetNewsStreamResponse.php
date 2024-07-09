@@ -12,7 +12,7 @@ class GetNewsStreamResponse extends AbstractStreamResponse
     /**
      * Constructor for the GetNewsStreamResponse class.
      *
-     * @param StreamNewsRecord $streamNewsRecord News record data.
+     * @param  StreamNewsRecord $streamNewsRecord News record data.
      */
     public function __construct(public StreamNewsRecord $streamNewsRecord)
     {
@@ -21,8 +21,7 @@ class GetNewsStreamResponse extends AbstractStreamResponse
     /**
      * Create an instance from the validated data.
      *
-     * @param array<string, mixed> $response Validated response data.
-     *
+     * @param  array<string, mixed> $response Validated response data.
      * @return static Instance of the response.
      */
     protected static function create(array $response): static

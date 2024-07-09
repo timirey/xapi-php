@@ -19,7 +19,7 @@ use WebSocket\Message\Message;
  *
  * @property MockInterface $streamClient
  * @property MockInterface $message
- * @property StreamClient  $client
+ * @property StreamClient $client
  */
 trait StreamClientMockeryTrait
 {
@@ -28,8 +28,8 @@ trait StreamClientMockeryTrait
      *
      * This method should be called in the beforeEach() block of your tests.
      *
-     * @param string     $streamSessionId Stream session ID.
-     * @param StreamHost $host            Host URI.
+     * @param  string     $streamSessionId Stream session ID.
+     * @param  StreamHost $host            Host URI.
      *
      * @return void
      */
@@ -40,11 +40,12 @@ trait StreamClientMockeryTrait
         $this->streamClient = Mockery::mock(WebSocketClient::class);
         $this->message = Mockery::mock(Message::class);
 
-        $this->client = new class ($streamSessionId, $host) extends StreamClient {
+        $this->client = new class ($streamSessionId, $host) extends StreamClient
+        {
             /**
              * Sets the WebSocket client.
              *
-             * @param WebSocketClient $client WebSocket client.
+             * @param  WebSocketClient $client WebSocket client.
              *
              * @return void
              */
@@ -60,10 +61,10 @@ trait StreamClientMockeryTrait
     /**
      * Mocks the WebSocket response for a given payload.
      *
-     * @param AbstractStreamPayload $payload  The payload to be sent.
-     * @param array                 $response The mocked response data.
+     * @param  AbstractStreamPayload $payload  The payload to be sent.
+     * @param  array                 $response The mocked response data.
      *
-     * @throws JsonException           If encoding to JSON fails.
+     * @throws JsonException If encoding to JSON fails.
      * @throws InvalidPayloadException If payload is missing or invalid.
      *
      * @return void

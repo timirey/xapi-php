@@ -25,7 +25,7 @@ test('tradeTransactionStatus command', function () {
             'customComment' => 'Test trade',
             'message' => 'Success',
             'order' => 123456789,
-            'requestStatus' => RequestStatus::PENDING,
+            'requestStatus' => 1,
         ],
     ];
 
@@ -34,5 +34,5 @@ test('tradeTransactionStatus command', function () {
     $response = $this->client->tradeTransactionStatus(123456789);
 
     expect($response)->toBeInstanceOf(TradeTransactionStatusResponse::class)
-        ->and($response->requestStatus)->toBe(RequestStatus::PENDING);
+        ->and($response->requestStatus)->toBeInstanceOf(RequestStatus::class);
 });

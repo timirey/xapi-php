@@ -10,13 +10,13 @@ class GetMarginLevelResponse extends AbstractResponse
     /**
      * Constructor for GetMarginLevelResponse.
      *
-     * @param float  $balance     Balance in account currency.
-     * @param float  $credit      Credit.
-     * @param string $currency    User currency.
-     * @param float  $equity      Sum of balance and all profits in account currency.
-     * @param float  $margin      Margin requirements in account currency.
-     * @param float  $marginFree  Free margin in account currency.
-     * @param float  $marginLevel Margin level percentage.
+     * @param  float  $balance     Balance in account currency.
+     * @param  float  $credit      Credit.
+     * @param  string $currency    User currency.
+     * @param  float  $equity      Sum of balance and all profits in account currency.
+     * @param  float  $margin      Margin requirements in account currency.
+     * @param  float  $marginFree  Free margin in account currency.
+     * @param  float  $marginLevel Margin level percentage.
      */
     public function __construct(
         public float $balance,

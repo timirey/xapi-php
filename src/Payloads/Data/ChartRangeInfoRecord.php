@@ -24,11 +24,11 @@ class ChartRangeInfoRecord
     /**
      * Constructor for ChartRangeInfoRecord.
      *
-     * @param Period       $period Period code.
-     * @param DateTime     $start  Start of chart block.
-     * @param DateTime     $end    End of chart block.
-     * @param string       $symbol Symbol.
-     * @param integer|null $ticks  Number of ticks needed (optional).
+     * @param  Period       $period Period code.
+     * @param  DateTime     $start  Start of chart block.
+     * @param  DateTime     $end    End of chart block.
+     * @param  string       $symbol Symbol.
+     * @param  integer|null $ticks  Number of ticks needed (optional).
      */
     public function __construct(
         public Period $period,

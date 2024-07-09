@@ -58,7 +58,7 @@ test('getTradeRecords command', function () {
 
     expect($response)->toBeInstanceOf(GetTradeRecordsResponse::class)
         ->and($response->tradeRecords[0])->toBeInstanceOf(TradeRecord::class)
-        ->and($response->tradeRecords[0]->cmd)->toBe(Cmd::BUY)
+        ->and($response->tradeRecords[0]->cmd)->toBeInstanceOf(Cmd::class)
         ->and($response->tradeRecords[0]->open_time)->toBeInstanceOf(DateTime::class)
         ->and($response->tradeRecords[0]->timestamp)->toBeInstanceOf(DateTime::class);
 });

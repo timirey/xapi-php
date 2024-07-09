@@ -8,10 +8,10 @@ namespace Timirey\XApi\Payloads;
 class GetTickPricesStreamPayload extends AbstractStreamPayload
 {
     /**
-     * @param string       $streamSessionId Stream session ID.
-     * @param string       $symbol          Symbol for which to get the tick prices.
-     * @param integer|null $minArrivalTime  Minimal interval in milliseconds between updates (optional).
-     * @param integer|null $maxLevel        Maximum level of the quote (optional).
+     * @param  string       $streamSessionId Stream session ID.
+     * @param  string       $symbol          Symbol for which to get the tick prices.
+     * @param  integer|null $minArrivalTime  Minimal interval in milliseconds between updates (optional).
+     * @param  integer|null $maxLevel        Maximum level of the quote (optional).
      */
     public function __construct(
         string $streamSessionId,

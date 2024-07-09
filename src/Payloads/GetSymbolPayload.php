@@ -10,7 +10,7 @@ class GetSymbolPayload extends AbstractPayload
     /**
      * Constructor for GetSymbolPayload.
      *
-     * @param string $symbol Symbol.
+     * @param  string $symbol Symbol.
      */
     public function __construct(string $symbol)
     {

@@ -12,7 +12,7 @@ class GetTickPricesStreamResponse extends AbstractStreamResponse
     /**
      * Constructor for the GetTickPricesStreamResponse class.
      *
-     * @param StreamTickRecord $streamTickRecord Tick record data.
+     * @param  StreamTickRecord $streamTickRecord Tick record data.
      */
     public function __construct(public StreamTickRecord $streamTickRecord)
     {
@@ -21,8 +21,7 @@ class GetTickPricesStreamResponse extends AbstractStreamResponse
     /**
      * Create an instance from the validated data.
      *
-     * @param array<string, mixed> $response Validated response data.
-     *
+     * @param  array<string, mixed> $response Validated response data.
      * @return static Instance of the response.
      */
     protected static function create(array $response): static

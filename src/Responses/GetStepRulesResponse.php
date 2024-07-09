@@ -13,7 +13,7 @@ class GetStepRulesResponse extends AbstractResponse
     /**
      * Constructor for GetStepRulesResponse.
      *
-     * @param StepRuleRecord[] $stepRuleRecords StepRuleRecord instances.
+     * @param  StepRuleRecord[] $stepRuleRecords StepRuleRecord instances.
      */
     public function __construct(public array $stepRuleRecords)
     {
@@ -22,8 +22,7 @@ class GetStepRulesResponse extends AbstractResponse
     /**
      * Create a response instance from the validated data.
      *
-     * @param array $response Validated response data.
-     *
+     * @param  array $response Validated response data.
      * @return static Instance of the response.
      */
     protected static function create(array $response): static
