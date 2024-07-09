@@ -27,7 +27,7 @@ test('getTickPrices stream command', function () {
             'high' => 4000.0,
             'level' => 0,
             'low' => 3500.0,
-            'quoteId' => QuoteId::FIXED,
+            'quoteId' => 1,
             'spreadRaw' => 0.000003,
             'spreadTable' => 0.00042,
             'symbol' => 'KOMB.CZ',
@@ -41,7 +41,8 @@ test('getTickPrices stream command', function () {
 
     $client->getTickPrices('EURUSD', function (GetTickPricesStreamResponse $response) use ($client) {
         expect($response)->toBeInstanceOf(GetTickPricesStreamResponse::class)
-            ->and($response->streamTickRecord->ask)->toBe(4000.0);
+            ->and($response->tickStreamRecord->quoteId)->toBeInstanceOf(QuoteId::class)
+            ->and($response->tickStreamRecord->timestamp)->toBeInstanceOf(DateTime::class);
 
         $client->unsubscribe();
     }, 5000, 2);

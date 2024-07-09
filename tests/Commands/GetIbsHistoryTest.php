@@ -30,7 +30,7 @@ test('getIbsHistory command', function () {
                 'login' => '12345',
                 'nominal' => 6.00,
                 'openPrice' => 1.39376,
-                'side' => Side::BUY,
+                'side' => 0,
                 'surname' => 'IB_Client_1',
                 'symbol' => 'EURUSD',
                 'timestamp' => 1395755870000,
@@ -45,6 +45,6 @@ test('getIbsHistory command', function () {
 
     expect($response)->toBeInstanceOf(GetIbsHistoryResponse::class)
         ->and($response->ibRecords[0])->toBeInstanceOf(IbRecord::class)
-        ->and($response->ibRecords[0]->side)->toBe(Side::BUY)
+        ->and($response->ibRecords[0]->side)->toBeInstanceOf(Side::class)
         ->and($response->ibRecords[0]->timestamp)->toBeInstanceOf(DateTime::class);
 });

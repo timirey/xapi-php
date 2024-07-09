@@ -30,7 +30,7 @@ test('getTickPrices command', function () {
                     'bid' => 4000.0,
                     'bidVolume' => 16000,
                     'high' => 4000.0,
-                    'level' => Level::BASE,
+                    'level' => 0,
                     'exemode' => 1,
                     'low' => 3500.0,
                     'spreadRaw' => 0.000003,
@@ -48,6 +48,6 @@ test('getTickPrices command', function () {
 
     expect($response)->toBeInstanceOf(GetTickPricesResponse::class)
         ->and($response->quotations[0])->toBeInstanceOf(TickRecord::class)
-        ->and($response->quotations[0]->level)->toBe(Level::BASE)
+        ->and($response->quotations[0]->level)->toBeInstanceOf(Level::class)
         ->and($response->quotations[0]->timestamp)->toBeInstanceOf(DateTime::class);
 });

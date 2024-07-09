@@ -3,35 +3,35 @@
 namespace Timirey\XApi\Responses\Data;
 
 use DateTime;
-use Timirey\XApi\Enums\Level;
+use Timirey\XApi\Enums\QuoteId;
 use Timirey\XApi\Helpers\DateTimeHelper;
 
 /**
- * Class representing a tick record.
+ * Class representing the tick record data in the streaming response.
  */
-class TickRecord
+class TickStreamRecord
 {
-    /**
-     * @var Level Price level.
-     */
-    public Level $level;
-
     /**
      * @var DateTime Timestamp.
      */
     public DateTime $timestamp;
 
     /**
-     * Constructor for TickRecord.
+     * @var QuoteId Source of price.
+     */
+    public QuoteId $quoteId;
+
+    /**
+     * Constructor for the TickStreamRecord class.
      *
-     * @param  float        $ask         Ask price in base currency.
+     * @param  float        $ask         Ask price.
      * @param  integer|null $askVolume   Number of available lots to buy at given price or null if not applicable.
-     * @param  float        $bid         Bid price in base currency.
+     * @param  float        $bid         Bid price.
      * @param  integer|null $bidVolume   Number of available lots to buy at given price or null if not applicable.
      * @param  float        $high        The highest price of the day in base currency.
      * @param  integer      $level       Price level.
-     * @param  integer      $exemode     Execution mode.
      * @param  float        $low         The lowest price of the day in base currency.
+     * @param  integer      $quoteId     Source of price.
      * @param  float        $spreadRaw   The difference between raw ask and bid prices.
      * @param  float        $spreadTable Spread representation.
      * @param  string       $symbol      Symbol.
@@ -43,16 +43,15 @@ class TickRecord
         public float $bid,
         public ?int $bidVolume,
         public float $high,
-        int $level,
-        public int $exemode,
+        public int $level,
         public float $low,
+        int $quoteId,
         public float $spreadRaw,
         public float $spreadTable,
         public string $symbol,
         int $timestamp
     ) {
-        $this->level = Level::from($level);
-
+        $this->quoteId = QuoteId::from($quoteId);
         $this->timestamp = DateTimeHelper::fromMilliseconds($timestamp);
     }
 }

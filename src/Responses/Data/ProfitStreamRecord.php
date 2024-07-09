@@ -5,15 +5,15 @@ namespace Timirey\XApi\Responses\Data;
 /**
  * Class representing the profit record data in the streaming response.
  */
-class StreamProfitRecord
+class ProfitStreamRecord
 {
     /**
-     * Constructor for the StreamProfitRecord class.
+     * Constructor for the ProfitStreamRecord class.
      *
-     * @param integer $order    Order number.
-     * @param integer $order2   Transaction ID.
-     * @param integer $position Position number.
-     * @param float   $profit   Profit in account currency.
+     * @param  integer $order    Order number.
+     * @param  integer $order2   Transaction ID.
+     * @param  integer $position Position number.
+     * @param  float   $profit   Profit in account currency.
      */
     public function __construct(
         public int $order,

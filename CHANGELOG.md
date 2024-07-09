@@ -1,5 +1,12 @@
 # Release Notes
 
+## [2.0.0-rc](https://github.com/timirey/xapi-php/compare/2.0.0-alpha...2.0.0-rc) - 2024-07-09
+
+* Added documentation for streaming commands.
+* Updated code style and php doc blocks.
+* Updated Pest tests to include more instance check-ups.
+* Property names have changed to adapt standards.
+
 ## [2.0.0-alpha](https://github.com/timirey/xapi-php/compare/1.2.1...2.0.0-alpha) - 2024-07-08
 
 * Added support for streaming communication.

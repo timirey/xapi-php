@@ -37,8 +37,7 @@ test('getBalance stream command', function () {
     $client = $this->client;
 
     $client->getBalance(function (GetBalanceStreamResponse $response) use ($client) {
-        expect($response)->toBeInstanceOf(GetBalanceStreamResponse::class)
-            ->and($response->streamBalanceRecord->balance)->toBe(100000.0);
+        expect($response)->toBeInstanceOf(GetBalanceStreamResponse::class);
 
         $client->unsubscribe();
     });

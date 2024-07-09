@@ -18,7 +18,7 @@ use WebSocket\Message\Message;
  *
  * @property MockInterface $webSocketClient
  * @property MockInterface $message
- * @property Client        $client
+ * @property Client $client
  */
 trait ClientMockeryTrait
 {
@@ -27,9 +27,9 @@ trait ClientMockeryTrait
      *
      * This method should be called in the beforeEach() block of your tests.
      *
-     * @param integer $userId   User id.
-     * @param string  $password Password.
-     * @param Host    $host     Host URI.
+     * @param  integer $userId   User id.
+     * @param  string  $password Password.
+     * @param  Host    $host     Host URI.
      *
      * @return void
      */
@@ -38,11 +38,12 @@ trait ClientMockeryTrait
         $this->webSocketClient = Mockery::mock(WebSocketClient::class);
         $this->message = Mockery::mock(Message::class);
 
-        $this->client = new class ($userId, $password, $host) extends Client {
+        $this->client = new class ($userId, $password, $host) extends Client
+        {
             /**
              * Sets the WebSocket client.
              *
-             * @param WebSocketClient $client WebSocket client.
+             * @param  WebSocketClient $client WebSocket client.
              *
              * @return void
              */
@@ -58,8 +59,8 @@ trait ClientMockeryTrait
     /**
      * Mocks the WebSocket response for a given payload.
      *
-     * @param AbstractPayload $payload  The payload to be sent.
-     * @param array           $response The mocked response data.
+     * @param  AbstractPayload $payload  The payload to be sent.
+     * @param  array           $response The mocked response data.
      *
      * @throws JsonException If encoding to JSON fails.
      *

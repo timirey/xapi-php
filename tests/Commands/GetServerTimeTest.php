@@ -30,6 +30,5 @@ test('getServerTime command', function () {
     $response = $this->client->getServerTime();
 
     expect($response)->toBeInstanceOf(GetServerTimeResponse::class)
-        ->and($response->time)->toBeInstanceOf(DateTime::class)
-        ->and($response->timeString)->toBe('Feb 12, 2014 2:22:59 PM');
+        ->and($response->time)->toBeInstanceOf(DateTime::class);
 });

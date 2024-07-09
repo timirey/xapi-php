@@ -10,7 +10,7 @@ class GetTradingHoursPayload extends AbstractPayload
     /**
      * Constructor for GetTradingHoursPayload.
      *
-     * @param array $symbols Array of symbol names.
+     * @param  array $symbols Array of symbol names.
      */
     public function __construct(array $symbols)
     {

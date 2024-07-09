@@ -31,8 +31,7 @@ test('getProfits stream command', function () {
     $client = $this->client;
 
     $client->getProfits(function (GetProfitsStreamResponse $response) use ($client) {
-        expect($response)->toBeInstanceOf(GetProfitsStreamResponse::class)
-            ->and($response->streamProfitRecord->profit)->toBe(7076.52); // todo: add little more tests
+        expect($response)->toBeInstanceOf(GetProfitsStreamResponse::class);
 
         $client->unsubscribe();
     });

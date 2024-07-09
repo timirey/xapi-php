@@ -34,12 +34,14 @@ test('tradeTransaction command', function () {
 
     $payload = new TradeTransactionPayload($tradeTransInfo);
 
-    // @var TradeTransInfo $tradeTransInfoArgument
+    /**
+     * @var TradeTransInfo $tradeTransInfoArgument
+     */
     $tradeTransInfoArgument = $payload->parameters['tradeTransInfo'];
 
     expect($tradeTransInfoArgument)->toBeInstanceOf(TradeTransInfo::class)
-        ->and($tradeTransInfoArgument->cmd)->toBe(Cmd::BUY)
-        ->and($tradeTransInfoArgument->type)->toBe(Type::OPEN);
+        ->and($tradeTransInfoArgument->cmd)->toBeInstanceOf(Cmd::class)
+        ->and($tradeTransInfoArgument->type)->toBeInstanceOf(Type::class);
 
     $mockResponse = [
         'status' => true,

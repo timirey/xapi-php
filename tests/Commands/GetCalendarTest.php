@@ -25,7 +25,7 @@ test('getCalendar command', function () {
                 'country' => 'US',
                 'current' => '',
                 'forecast' => '3.5%',
-                'impact' => Impact::MEDIUM,
+                'impact' => '2',
                 'period' => 'Q1 2021',
                 'previous' => '3.2%',
                 'time' => 1720170000000,
@@ -40,5 +40,6 @@ test('getCalendar command', function () {
 
     expect($response)->toBeInstanceOf(GetCalendarResponse::class)
         ->and($response->calendarRecords[0])->toBeInstanceOf(CalendarRecord::class)
-        ->and($response->calendarRecords[0]->impact)->toBeInstanceOf(Impact::class);
+        ->and($response->calendarRecords[0]->impact)->toBeInstanceOf(Impact::class)
+        ->and($response->calendarRecords[0]->time)->toBeInstanceOf(DateTime::class);
 });

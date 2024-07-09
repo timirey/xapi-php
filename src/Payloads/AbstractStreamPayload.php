@@ -13,7 +13,7 @@ abstract class AbstractStreamPayload extends AbstractPayload
     /**
      * Constructor for AbstractStreamPayload.
      *
-     * @param string $streamSessionId Stream session id.
+     * @param  string $streamSessionId Stream session id.
      */
     public function __construct(string $streamSessionId)
     {
@@ -25,7 +25,7 @@ abstract class AbstractStreamPayload extends AbstractPayload
      *
      * @return string JSON representation of the payload.
      *
-     * @throws JsonException           If encoding to JSON fails.
+     * @throws JsonException If encoding to JSON fails.
      * @throws InvalidPayloadException If payload is not valid.
      */
     public function toJson(): string

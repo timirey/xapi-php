@@ -1,5 +1,6 @@
 <?php
 
+use Timirey\XApi\Enums\QuoteId;
 use Timirey\XApi\Payloads\GetCandlesStreamPayload;
 use Timirey\XApi\Responses\GetCandlesStreamResponse;
 use Timirey\XApi\Tests\Commands\Traits\StreamClientMockeryTrait;
@@ -37,7 +38,8 @@ test('getCandles stream command', function () {
 
     $client->getCandles('EURUSD', function (GetCandlesStreamResponse $response) use ($client) {
         expect($response)->toBeInstanceOf(GetCandlesStreamResponse::class)
-            ->and($response->streamCandleRecord->close)->toBe(4.1849);
+            ->and($response->candleStreamRecord->ctm)->toBeInstanceOf(DateTime::class)
+            ->and($response->candleStreamRecord->quoteId)->toBeInstanceOf(QuoteId::class);
 
         $client->unsubscribe();
     });

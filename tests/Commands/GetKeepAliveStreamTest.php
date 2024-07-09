@@ -27,7 +27,7 @@ test('getKeepAlive stream command', function () {
 
     $client->getKeepAlive(function (GetKeepAliveStreamResponse $response) use ($client) {
         expect($response)->toBeInstanceOf(GetKeepAliveStreamResponse::class)
-            ->and($response->streamKeepAliveRecord->timestamp)->toBeInstanceOf(DateTime::class);
+            ->and($response->keepAliveStreamRecord->timestamp)->toBeInstanceOf(DateTime::class);
 
         $client->unsubscribe();
     });

@@ -18,8 +18,8 @@ class GetServerTimeResponse extends AbstractResponse
     /**
      * Constructor for GetServerTimeResponse.
      *
-     * @param integer $time       Time in date time in ms.
-     * @param string  $timeString Time described in form set on server (local time of server).
+     * @param  integer $time       Time in date time in ms.
+     * @param  string  $timeString Time described in form set on server (local time of server).
      */
     public function __construct(int $time, public string $timeString)
     {

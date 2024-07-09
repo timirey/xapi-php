@@ -8,8 +8,8 @@ namespace Timirey\XApi\Payloads;
 class GetCandlesStreamPayload extends AbstractStreamPayload
 {
     /**
-     * @param string $streamSessionId Stream session ID.
-     * @param string $symbol          Symbol for which to get the candles.
+     * @param  string $streamSessionId Stream session ID.
+     * @param  string $symbol          Symbol for which to get the candles.
      */
     public function __construct(string $streamSessionId, public string $symbol)
     {

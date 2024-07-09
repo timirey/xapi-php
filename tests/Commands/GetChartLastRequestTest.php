@@ -1,7 +1,6 @@
 <?php
 
 use Timirey\XApi\Enums\Period;
-use Timirey\XApi\Helpers\DateTimeHelper;
 use Timirey\XApi\Payloads\Data\ChartLastInfoRecord;
 use Timirey\XApi\Payloads\GetChartLastRequestPayload;
 use Timirey\XApi\Responses\Data\RateInfoRecord;
@@ -40,7 +39,7 @@ test('getChartLastRequest command', function () {
             'rateInfos' => [
                 [
                     'close' => 1.12345,
-                    'ctm' => DateTimeHelper::toMilliseconds(new DateTime()),
+                    'ctm' => 1362944112000,
                     'ctmString' => 'Jan 10, 2014 3:04:00 PM',
                     'high' => 1.125,
                     'low' => 1.120,
