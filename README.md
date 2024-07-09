@@ -135,7 +135,7 @@ $streamClient = new StreamClient(
     host: StreamHost::DEMO
 );
 
-// It is better practice to handle subscriptions through a separate worker, ex.: Laravel cron job.
+// It is a better practice to handle subscriptions through a separate worker, ex.: Laravel cron job.
 $streamClient->getTickPrices(
     symbol: 'EURUSD',
     callback: static function (GetTickPricesStreamResponse $tickPricesStreamResponse): void {
