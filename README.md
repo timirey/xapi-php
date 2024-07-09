@@ -181,6 +181,11 @@ $streamClient->getTickPrices(
 );
 
 // Reachable code.
+
+/**
+ * @var LogoutResponse $logoutResponse
+ */
+$logoutResponse = $client->logout();
 ```
 
 ## Available commands
