@@ -8,7 +8,10 @@
 <a href="https://packagist.org/packages/timirey/xapi-php"><img src="https://img.shields.io/packagist/l/timirey/xapi-php" alt="License"></a>
 </p>
 
-This PHP library provides a comprehensive and user-friendly interface for interacting with the X-Trade Brokers (XTB) xStation5 Trading API. It supports a wide range of functionalities, including account management, trade execution, market data retrieval, and real-time streaming commands via WebSocket, making it an ideal tool for developers looking to integrate advanced trading features and live market data into their applications.
+This PHP library provides a comprehensive and user-friendly interface for interacting with the X-Trade Brokers (XTB)
+xStation5 Trading API. It supports a wide range of functionalities, including account management, trade execution,
+market data retrieval, and real-time streaming commands via WebSocket, making it an ideal tool for developers looking to
+integrate advanced trading features and live market data into their applications.
 
 ## Table of contents
 
@@ -18,6 +21,7 @@ This PHP library provides a comprehensive and user-friendly interface for intera
     - [login](#login)
     - [logout](#logout)
 - [Available streaming commands](#available-streaming-commands)
+    - [getBalance](#get-balance)
 - [Retrieving trading data](#retrieving-trading-data)
     - [getAllSymbols](#getallsymbols)
     - [getCalendar](#getcalendar)
@@ -43,8 +47,8 @@ This PHP library provides a comprehensive and user-friendly interface for intera
     - [tradeTransaction](#tradetransaction)
     - [tradeTransactionStatus](#tradetransactionstatus)
 - [Error handling](#error-handling)
-  - [ErrorResponseException](#errorresponseexception)
-  - [InvalidResponseException](#invalidresponseexception)
+    - [ErrorResponseException](#errorresponseexception)
+    - [InvalidResponseException](#invalidresponseexception)
 - [Testing](#testing)
 - [License](#license)
 - [Reference](#reference)
@@ -150,7 +154,7 @@ $response = $client->logout();
 
 ## Available streaming commands
 
-### [getAllSymbols](http://developers.xstore.pro/documentation/#streamgetBalance)
+### [getBalance](http://developers.xstore.pro/documentation/#streamgetBalance)
 
 Allows to get actual account indicators values in real-time, as soon as they are available in the system.
 
@@ -629,7 +633,8 @@ try {
 }
 ```
 
-All error codes and descriptions can be found in the [official documentation](http://developers.xstore.pro/documentation#error-messages).
+All error codes and descriptions can be found in
+the [official documentation](http://developers.xstore.pro/documentation#error-messages).
 
 ### InvalidResponseException
 
