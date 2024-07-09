@@ -34,7 +34,7 @@ test('getTradeStatus stream command', function () {
 
     $client->getTradeStatus(function (GetTradeStatusStreamResponse $response) use ($client) {
         expect($response)->toBeInstanceOf(GetTradeStatusStreamResponse::class)
-            ->and($response->streamTradeStatusRecord->requestStatus)->toBeInstanceOf(RequestStatus::class);
+            ->and($response->tradeStatusStreamRecord->requestStatus)->toBeInstanceOf(RequestStatus::class);
 
         $client->unsubscribe();
     });

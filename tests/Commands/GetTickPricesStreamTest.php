@@ -41,8 +41,8 @@ test('getTickPrices stream command', function () {
 
     $client->getTickPrices('EURUSD', function (GetTickPricesStreamResponse $response) use ($client) {
         expect($response)->toBeInstanceOf(GetTickPricesStreamResponse::class)
-            ->and($response->streamTickRecord->quoteId)->toBeInstanceOf(QuoteId::class)
-            ->and($response->streamTickRecord->timestamp)->toBeInstanceOf(DateTime::class);
+            ->and($response->tickStreamRecord->quoteId)->toBeInstanceOf(QuoteId::class)
+            ->and($response->tickStreamRecord->timestamp)->toBeInstanceOf(DateTime::class);
 
         $client->unsubscribe();
     }, 5000, 2);

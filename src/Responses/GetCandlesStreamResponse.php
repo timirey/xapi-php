@@ -2,7 +2,7 @@
 
 namespace Timirey\XApi\Responses;
 
-use Timirey\XApi\Responses\Data\StreamCandleRecord;
+use Timirey\XApi\Responses\Data\CandleStreamRecord;
 
 /**
  * Class that contains the response of the getCandles stream command.
@@ -12,9 +12,9 @@ class GetCandlesStreamResponse extends AbstractStreamResponse
     /**
      * Constructor for the GetCandlesStreamResponse class.
      *
-     * @param  StreamCandleRecord $streamCandleRecord Candle record data.
+     * @param  CandleStreamRecord $candleStreamRecord Candle record data.
      */
-    public function __construct(public StreamCandleRecord $streamCandleRecord)
+    public function __construct(public CandleStreamRecord $candleStreamRecord)
     {
     }
 
@@ -26,6 +26,6 @@ class GetCandlesStreamResponse extends AbstractStreamResponse
      */
     protected static function create(array $response): static
     {
-        return new static(new StreamCandleRecord(...$response['data']));
+        return new static(new CandleStreamRecord(...$response['data']));
     }
 }

@@ -167,19 +167,21 @@ $response = $client->logout();
 Allows to get actual account indicators values in real-time, as soon as they are available in the system.
 
 ```PHP
-use Timirey\XApi\Responses\Data\StreamBalanceRecord;
+use Timirey\XApi\Responses\Data\BalanceStreamRecord;
 use Timirey\XApi\Responses\GetBalanceStreamResponse;
 use Timirey\XApi\StreamClient;
 
 /**
  * @var StreamClient $streamClient
  */
-$streamClient->getBalance(static function(GetBalanceStreamResponse $response): void {
-    /**
-     * @var StreamBalanceRecord $record
-     */
-    $record = $response->streamBalanceRecord;
-});
+$streamClient->getBalance(
+    callback: static function (GetBalanceStreamResponse $response): void {
+        /**
+         * @var BalanceStreamRecord $record
+         */
+        $record = $response->balanceStreamRecord;
+    }
+);
 ```
 
 ### [getCandles](http://developers.xstore.pro/documentation/#streamgetCandles)
@@ -188,14 +190,45 @@ Subscribes for and unsubscribes from API chart candles. The interval of every ca
 every minute.
 
 ```PHP
+use Timirey\XApi\Responses\Data\CandleStreamRecord;
+use Timirey\XApi\Responses\GetCandlesStreamResponse;
+use Timirey\XApi\StreamClient;
+
+/**
+ * @var StreamClient $streamClient
+ */
+$streamClient->getCandles(
+    symbol: 'EURUSD',
+    callback: static function (GetCandlesStreamResponse $response): void {
+        /**
+         * @var CandleStreamRecord $record
+         */
+        $record = $response->candleStreamRecord;
+    }
+);
 ```
 
-### [getKeepAlive](http://developers.xstore.pro/documentation/#streamgetCandles)
+### [getKeepAlive](http://developers.xstore.pro/documentation/#streamgetKeepAlive)
 
 Subscribes for and unsubscribes from 'keep alive' messages. A new 'keep alive' message is sent by the API every 3
 seconds.
 
 ```PHP
+use Timirey\XApi\Responses\Data\KeepAliveStreamRecord;
+use Timirey\XApi\Responses\GetKeepAliveStreamResponse;
+use Timirey\XApi\StreamClient;
+
+/**
+ * @var StreamClient $streamClient
+ */
+$streamClient->getKeepAlive(
+    callback: static function (GetKeepAliveStreamResponse $response): void {
+        /**
+         * @var KeepAliveStreamRecord $record
+         */
+        $record = $response->keepAliveStreamRecord;
+    }
+);
 ```
 
 ### [getNews](http://developers.xstore.pro/documentation/#streamgetNews)

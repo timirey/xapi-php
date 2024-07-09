@@ -9,7 +9,7 @@ use Timirey\XApi\Helpers\DateTimeHelper;
 /**
  * Class representing the candle record data in the streaming response.
  */
-class StreamCandleRecord
+class CandleStreamRecord
 {
     /**
      * @var QuoteId Source of price.
@@ -22,7 +22,7 @@ class StreamCandleRecord
     public DateTime $ctm;
 
     /**
-     * Constructor for the StreamCandleRecord class.
+     * Constructor for the CandleStreamRecord class.
      *
      * @param  float   $close     Close price.
      * @param  integer $ctm       Candle start time in CET time zone.

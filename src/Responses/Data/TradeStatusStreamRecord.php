@@ -7,7 +7,7 @@ use Timirey\XApi\Enums\RequestStatus;
 /**
  * Class representing the trade status record data in the streaming response.
  */
-class StreamTradeStatusRecord
+class TradeStatusStreamRecord
 {
     /**
      * @var RequestStatus Request status.
@@ -15,7 +15,7 @@ class StreamTradeStatusRecord
     public RequestStatus $requestStatus;
 
     /**
-     * Constructor for the StreamTradeStatusRecord class.
+     * Constructor for the TradeStatusStreamRecord class.
      *
      * @param  string      $customComment Custom comment.
      * @param  string|null $message       Message.

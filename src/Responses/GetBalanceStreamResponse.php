@@ -2,7 +2,7 @@
 
 namespace Timirey\XApi\Responses;
 
-use Timirey\XApi\Responses\Data\StreamBalanceRecord;
+use Timirey\XApi\Responses\Data\BalanceStreamRecord;
 
 /**
  * Class that contains the response of the getBalance stream command.
@@ -12,9 +12,9 @@ class GetBalanceStreamResponse extends AbstractStreamResponse
     /**
      * Constructor for the GetBalanceStreamResponse class.
      *
-     * @param  StreamBalanceRecord $streamBalanceRecord Balance record data.
+     * @param  BalanceStreamRecord $balanceStreamRecord Balance record data.
      */
-    public function __construct(public StreamBalanceRecord $streamBalanceRecord)
+    public function __construct(public BalanceStreamRecord $balanceStreamRecord)
     {
     }
 
@@ -26,6 +26,6 @@ class GetBalanceStreamResponse extends AbstractStreamResponse
      */
     protected static function create(array $response): static
     {
-        return new static(new StreamBalanceRecord(...$response['data']));
+        return new static(new BalanceStreamRecord(...$response['data']));
     }
 }

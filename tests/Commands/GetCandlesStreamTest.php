@@ -38,8 +38,8 @@ test('getCandles stream command', function () {
 
     $client->getCandles('EURUSD', function (GetCandlesStreamResponse $response) use ($client) {
         expect($response)->toBeInstanceOf(GetCandlesStreamResponse::class)
-            ->and($response->streamCandleRecord->ctm)->toBeInstanceOf(DateTime::class)
-            ->and($response->streamCandleRecord->quoteId)->toBeInstanceOf(QuoteId::class);
+            ->and($response->candleStreamRecord->ctm)->toBeInstanceOf(DateTime::class)
+            ->and($response->candleStreamRecord->quoteId)->toBeInstanceOf(QuoteId::class);
 
         $client->unsubscribe();
     });

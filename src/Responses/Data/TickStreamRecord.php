@@ -9,7 +9,7 @@ use Timirey\XApi\Helpers\DateTimeHelper;
 /**
  * Class representing the tick record data in the streaming response.
  */
-class StreamTickRecord
+class TickStreamRecord
 {
     /**
      * @var DateTime Timestamp.
@@ -22,7 +22,7 @@ class StreamTickRecord
     public QuoteId $quoteId;
 
     /**
-     * Constructor for the StreamTickRecord class.
+     * Constructor for the TickStreamRecord class.
      *
      * @param  float        $ask         Ask price.
      * @param  integer|null $askVolume   Number of available lots to buy at given price or null if not applicable.

@@ -11,7 +11,7 @@ use Timirey\XApi\Helpers\DateTimeHelper;
 /**
  * Class representing the trade record data in the streaming response.
  */
-class StreamTradeRecord
+class TradeStreamRecord
 {
     /**
      * @var Cmd Operation code.
@@ -59,7 +59,7 @@ class StreamTradeRecord
     public float $marginRate;
 
     /**
-     * Constructor for the StreamTradeRecord class.
+     * Constructor for the TradeStreamRecord class.
      *
      * @param  float        $close_price   Close price.
      * @param  integer|null $close_time    Close time.

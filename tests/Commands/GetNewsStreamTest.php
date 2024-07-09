@@ -32,7 +32,7 @@ test('getNews stream command', function () {
 
     $client->getNews(function (GetNewsStreamResponse $response) use ($client) {
         expect($response)->toBeInstanceOf(GetNewsStreamResponse::class)
-            ->and($response->streamNewsRecord->time)->toBeInstanceOf(DateTime::class);
+            ->and($response->newsStreamRecord->time)->toBeInstanceOf(DateTime::class);
 
         $client->unsubscribe();
     });

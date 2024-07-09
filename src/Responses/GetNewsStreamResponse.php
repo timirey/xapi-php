@@ -2,7 +2,7 @@
 
 namespace Timirey\XApi\Responses;
 
-use Timirey\XApi\Responses\Data\StreamNewsRecord;
+use Timirey\XApi\Responses\Data\NewsStreamRecord;
 
 /**
  * Class that contains the response of the getNews stream command.
@@ -12,9 +12,9 @@ class GetNewsStreamResponse extends AbstractStreamResponse
     /**
      * Constructor for the GetNewsStreamResponse class.
      *
-     * @param  StreamNewsRecord $streamNewsRecord News record data.
+     * @param  NewsStreamRecord $newsStreamRecord News record data.
      */
-    public function __construct(public StreamNewsRecord $streamNewsRecord)
+    public function __construct(public NewsStreamRecord $newsStreamRecord)
     {
     }
 
@@ -26,6 +26,6 @@ class GetNewsStreamResponse extends AbstractStreamResponse
      */
     protected static function create(array $response): static
     {
-        return new static(new StreamNewsRecord(...$response['data']));
+        return new static(new NewsStreamRecord(...$response['data']));
     }
 }

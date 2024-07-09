@@ -5,7 +5,7 @@ namespace Timirey\XApi\Responses\Data;
 /**
  * Class representing the balance record data in the streaming response.
  */
-class StreamBalanceRecord
+class BalanceStreamRecord
 {
     /**
      * @var float FX equity.
@@ -13,7 +13,7 @@ class StreamBalanceRecord
     public float $equityFx;
 
     /**
-     * Constructor for the StreamBalanceRecord class.
+     * Constructor for the BalanceStreamRecord class.
      *
      * @param  float $balance        Account balance.
      * @param  float $margin         Account margin.
