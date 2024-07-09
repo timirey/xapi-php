@@ -17,7 +17,7 @@ This PHP library provides a comprehensive and user-friendly interface for intera
 - [Available commands](#available-commands)
     - [login](#login)
     - [logout](#logout)
-- [todo: streaming]
+- [Available streaming commands](#available-streaming-commands)
 - [Retrieving trading data](#retrieving-trading-data)
     - [getAllSymbols](#getallsymbols)
     - [getCalendar](#getcalendar)
@@ -148,9 +148,29 @@ use Timirey\XApi\Client;
 $response = $client->logout();
 ```
 
-## Retrieving trading data
+## Available streaming commands
 
-Only non-streaming commands are supported at this time. Streaming commands will be introduced in a future update.
+### [getAllSymbols](http://developers.xstore.pro/documentation/#streamgetBalance)
+
+Allows to get actual account indicators values in real-time, as soon as they are available in the system.
+
+```PHP
+use Timirey\XApi\Responses\Data\StreamBalanceRecord;
+use Timirey\XApi\Responses\GetBalanceStreamResponse;
+use Timirey\XApi\StreamClient;
+
+/**
+ * @var StreamClient $streamClient
+ */
+$streamClient->getBalance(static function(GetBalanceStreamResponse $response): void {
+    /**
+     * @var StreamBalanceRecord $record
+     */
+    $record = $response->streamBalanceRecord;
+});
+```
+
+## Retrieving trading data
 
 ### [getAllSymbols](http://developers.xstore.pro/documentation/current#getAllSymbols)
 
