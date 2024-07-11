@@ -34,13 +34,11 @@ test('getCandles stream command', function () {
 
     $this->mockStreamResponse($payload, $mockResponse);
 
-    $client = $this->client;
+    $streamClient = $this->streamClient;
 
-    $client->getCandles('EURUSD', function (GetCandlesStreamResponse $response) use ($client) {
+    $streamClient->getCandles('EURUSD', function (GetCandlesStreamResponse $response) {
         expect($response)->toBeInstanceOf(GetCandlesStreamResponse::class)
             ->and($response->candleStreamRecord->ctm)->toBeInstanceOf(DateTime::class)
             ->and($response->candleStreamRecord->quoteId)->toBeInstanceOf(QuoteId::class);
-
-        $client->unsubscribe();
     });
 });

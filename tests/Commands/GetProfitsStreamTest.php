@@ -28,11 +28,9 @@ test('getProfits stream command', function () {
 
     $this->mockStreamResponse($payload, $mockResponse);
 
-    $client = $this->client;
+    $streamClient = $this->streamClient;
 
-    $client->getProfits(function (GetProfitsStreamResponse $response) use ($client) {
+    $streamClient->getProfits(function (GetProfitsStreamResponse $response) {
         expect($response)->toBeInstanceOf(GetProfitsStreamResponse::class);
-
-        $client->unsubscribe();
     });
 });

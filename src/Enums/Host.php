@@ -10,10 +10,10 @@ enum Host: string
     /**
      * Demo account host URL.
      */
-    case DEMO = 'wss://ws.xtb.com/demo';
+    case DEMO = 'ssl://xapi.xtb.com:5124';
 
     /**
      * Real account host URL.
      */
-    case REAL = 'wss://ws.xtb.com/real';
+    case REAL = 'ssl://xapi.xtb.com:5112';
 }

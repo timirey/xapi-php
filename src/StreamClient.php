@@ -3,7 +3,10 @@
 namespace Timirey\XApi;
 
 use JsonException;
+use Timirey\XApi\Connections\StreamSocket;
 use Timirey\XApi\Enums\StreamHost;
+use Timirey\XApi\Exceptions\ErrorResponseException;
+use Timirey\XApi\Exceptions\InvalidPayloadException;
 use Timirey\XApi\Exceptions\InvalidResponseException;
 use Timirey\XApi\Payloads\AbstractStreamPayload;
 use Timirey\XApi\Payloads\GetBalanceStreamPayload;
@@ -24,7 +27,6 @@ use Timirey\XApi\Responses\GetProfitsStreamResponse;
 use Timirey\XApi\Responses\GetTickPricesStreamResponse;
 use Timirey\XApi\Responses\GetTradesStreamResponse;
 use Timirey\XApi\Responses\GetTradeStatusStreamResponse;
-use WebSocket\Client as WebSocketClient;
 
 /**
  * Client class for handling streaming data from the xStation5 API.
@@ -32,35 +34,32 @@ use WebSocket\Client as WebSocketClient;
 class StreamClient
 {
     /**
-     * @var WebsocketClient XTB WebSocket stream client instance.
+     * @var StreamSocket StreamSocket client instance.
      */
-    protected WebSocketClient $streamClient;
-
-    /**
-     * @var boolean Flag to control the streaming loop.
-     */
-    protected bool $streaming = false;
+    protected StreamSocket $streamSocket;
 
     /**
      * Constructor for the StreamClient class.
      *
-     * @param  string     $streamSessionId Stream session ID.
-     * @param  StreamHost $host            WebSocket host URL.
+     * @param string     $streamSessionId Stream session ID.
+     * @param StreamHost $host            WebSocket host URL.
      */
     public function __construct(protected string $streamSessionId, protected StreamHost $host)
     {
-        $this->streamClient = new WebSocketClient($this->host->value);
+        $this->streamSocket = new StreamSocket($this->host->value);
     }
 
     /**
      * Subscribe to balance stream.
      *
-     * @param  callable $callback Callback function to handle the response.
-     *
-     * @throws InvalidResponseException If the response is invalid.
-     * @throws JsonException If JSON processing fails.
+     * @param callable $callback Callback function to handle the response.
      *
      * @return void
+     *
+     * @throws InvalidPayloadException If payload is not valid.
+     * @throws JsonException If JSON processing fails.
+     * @throws ErrorResponseException If the response indicates an error.
+     * @throws InvalidResponseException If the response is invalid.
      */
     public function getBalance(callable $callback): void
     {
@@ -74,13 +73,15 @@ class StreamClient
     /**
      * Subscribe to candles stream.
      *
-     * @param  string   $symbol   Symbol for which to get the candles.
-     * @param  callable $callback Callback function to handle the response.
-     *
-     * @throws InvalidResponseException If the response is invalid.
-     * @throws JsonException If JSON processing fails.
+     * @param string   $symbol   Symbol for which to get the candles.
+     * @param callable $callback Callback function to handle the response.
      *
      * @return void
+     *
+     * @throws InvalidPayloadException If payload is not valid.
+     * @throws JsonException If JSON processing fails.
+     * @throws ErrorResponseException If the response indicates an error.
+     * @throws InvalidResponseException If the response is invalid.
      */
     public function getCandles(string $symbol, callable $callback): void
     {
@@ -94,12 +95,14 @@ class StreamClient
     /**
      * Subscribe to keep alive stream.
      *
-     * @param  callable $callback Callback function to handle the response.
-     *
-     * @throws InvalidResponseException If the response is invalid.
-     * @throws JsonException If JSON processing fails.
+     * @param callable $callback Callback function to handle the response.
      *
      * @return void
+     *
+     * @throws InvalidPayloadException If payload is not valid.
+     * @throws JsonException If JSON processing fails.
+     * @throws ErrorResponseException If the response indicates an error.
+     * @throws InvalidResponseException If the response is invalid.
      */
     public function getKeepAlive(callable $callback): void
     {
@@ -113,12 +116,14 @@ class StreamClient
     /**
      * Subscribe to news stream.
      *
-     * @param  callable $callback Callback function to handle the response.
-     *
-     * @throws InvalidResponseException If the response is invalid.
-     * @throws JsonException If JSON processing fails.
+     * @param callable $callback Callback function to handle the response.
      *
      * @return void
+     *
+     * @throws InvalidPayloadException If payload is not valid.
+     * @throws JsonException If JSON processing fails.
+     * @throws ErrorResponseException If the response indicates an error.
+     * @throws InvalidResponseException If the response is invalid.
      */
     public function getNews(callable $callback): void
     {
@@ -132,12 +137,14 @@ class StreamClient
     /**
      * Subscribe to profits stream.
      *
-     * @param  callable $callback Callback function to handle the response.
-     *
-     * @throws InvalidResponseException If the response is invalid.
-     * @throws JsonException If JSON processing fails.
+     * @param callable $callback Callback function to handle the response.
      *
      * @return void
+     *
+     * @throws InvalidPayloadException If payload is not valid.
+     * @throws JsonException If JSON processing fails.
+     * @throws ErrorResponseException If the response indicates an error.
+     * @throws InvalidResponseException If the response is invalid.
      */
     public function getProfits(callable $callback): void
     {
@@ -151,15 +158,17 @@ class StreamClient
     /**
      * Subscribe to tick prices stream.
      *
-     * @param  string       $symbol         Symbol for which to get the tick prices.
-     * @param  callable     $callback       Callback function to handle the response.
-     * @param  integer|null $minArrivalTime Minimal interval in milliseconds between updates (optional).
-     * @param  integer|null $maxLevel       Maximum level of the quote (optional).
-     *
-     * @throws InvalidResponseException If the response is invalid.
-     * @throws JsonException If JSON processing fails.
+     * @param string       $symbol         Symbol for which to get the tick prices.
+     * @param callable     $callback       Callback function to handle the response.
+     * @param integer|null $minArrivalTime Minimal interval in milliseconds between updates (optional).
+     * @param integer|null $maxLevel       Maximum level of the quote (optional).
      *
      * @return void
+     *
+     * @throws InvalidPayloadException If payload is not valid.
+     * @throws JsonException If JSON processing fails.
+     * @throws ErrorResponseException If the response indicates an error.
+     * @throws InvalidResponseException If the response is invalid.
      */
     public function getTickPrices(
         string $symbol,
@@ -177,12 +186,14 @@ class StreamClient
     /**
      * Subscribe to trades stream.
      *
-     * @param  callable $callback Callback function to handle the response.
+     * @param callable $callback Callback function to handle the response.
      *
-     * @throws InvalidResponseException If the response is invalid.
+     * @return void;
+     *
+     * @throws InvalidPayloadException If payload is not valid.
      * @throws JsonException If JSON processing fails.
-     *
-     * @return void
+     * @throws ErrorResponseException If the response indicates an error.
+     * @throws InvalidResponseException If the response is invalid.
      */
     public function getTrades(callable $callback): void
     {
@@ -196,12 +207,14 @@ class StreamClient
     /**
      * Subscribe to trade status stream.
      *
-     * @param  callable $callback Callback function to handle the response.
-     *
-     * @throws InvalidResponseException If the response is invalid.
-     * @throws JsonException If JSON processing fails.
+     * @param callable $callback Callback function to handle the response.
      *
      * @return void
+     *
+     * @throws InvalidPayloadException If payload is not valid.
+     * @throws JsonException If JSON processing fails.
+     * @throws ErrorResponseException If the response indicates an error.
+     * @throws InvalidResponseException If the response is invalid.
      */
     public function getTradeStatus(callable $callback): void
     {
@@ -219,7 +232,7 @@ class StreamClient
      */
     public function ping(): void
     {
-        $this->streamClient->text(new PingStreamPayload($this->streamSessionId));
+        $this->streamSocket->send(new PingStreamPayload($this->streamSessionId));
     }
 
     /**
@@ -227,37 +240,25 @@ class StreamClient
      *
      * @template T of AbstractStreamResponse
      *
-     * @param  AbstractStreamPayload  $payload       The payload to send.
-     * @param  class-string<T>|string $responseClass The response class to instantiate.
-     * @param  callable               $callback      Callback function to handle the response.
-     *
-     * @throws InvalidResponseException If the response is invalid.
-     * @throws JsonException If JSON processing fails.
+     * @param AbstractStreamPayload  $payload       The payload to send.
+     * @param class-string<T>|string $responseClass The response class to instantiate.
+     * @param callable               $callback      Callback function to handle the response.
      *
      * @return void
+     *
+     * @throws InvalidResponseException If the response is invalid.
+     * @throws InvalidPayloadException If payload is not valid.
+     * @throws JsonException If JSON processing fails.
+     * @throws ErrorResponseException If the response indicates an error.
      */
     protected function subscribe(AbstractStreamPayload $payload, string $responseClass, callable $callback): void
     {
-        $this->streaming = true;
+        $this->streamSocket->send($payload->toJson());
 
-        $this->streamClient->text($payload);
+        foreach ($this->streamSocket->listen() as $message) {
+            $response = $responseClass::instantiate($message);
 
-        // todo: think of different approach instead of infinite cycle, maybe use promises?
-        while ($this->streaming) {
-            $response = $responseClass::instantiate($this->streamClient->receive()->getContent());
-
-            // todo: we should perform a check for duplicated response, maybe by timestamp?
             call_user_func($callback, $response);
         }
-    }
-
-    /**
-     * Unsubscribe from the stream.
-     *
-     * @return void
-     */
-    public function unsubscribe(): void
-    {
-        $this->streaming = false;
     }
 }

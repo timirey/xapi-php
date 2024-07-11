@@ -32,8 +32,7 @@
         }
     ],
     "require": {
-        "php": "^8.1",
-        "phrity/websocket": "^3.0"
+        "php": "^8.1"
     },
     "require-dev": {
         "pestphp/pest": "^2.34",

@@ -2,24 +2,24 @@
 
 namespace Timirey\XApi\Tests\Commands\Traits;
 
+use Generator;
 use JsonException;
 use Mockery;
 use Mockery\MockInterface;
+use Timirey\XApi\Connections\StreamSocket;
+use Timirey\XApi\Enums\Host;
 use Timirey\XApi\Enums\StreamHost;
 use Timirey\XApi\Exceptions\InvalidPayloadException;
 use Timirey\XApi\Payloads\AbstractStreamPayload;
 use Timirey\XApi\StreamClient;
-use WebSocket\Client as WebSocketClient;
-use WebSocket\Message\Message;
 
 /**
  * Trait StreamClientMockeryTrait.
  *
  * Provides setup and utility methods for mocking the WebSocket stream client and handling API responses.
  *
- * @property MockInterface $streamClient
- * @property MockInterface $message
- * @property StreamClient $client
+ * @property MockInterface $streamSocket
+ * @property StreamClient $streamClient
  */
 trait StreamClientMockeryTrait
 {
@@ -28,8 +28,8 @@ trait StreamClientMockeryTrait
      *
      * This method should be called in the beforeEach() block of your tests.
      *
-     * @param  string     $streamSessionId Stream session ID.
-     * @param  StreamHost $host            Host URI.
+     * @param string     $streamSessionId Stream session ID.
+     * @param StreamHost $host            Host URI.
      *
      * @return void
      */
@@ -37,52 +37,60 @@ trait StreamClientMockeryTrait
         string $streamSessionId = 'streamSessionId',
         StreamHost $host = StreamHost::DEMO
     ): void {
-        $this->streamClient = Mockery::mock(WebSocketClient::class);
-        $this->message = Mockery::mock(Message::class);
+        $this->streamSocket = Mockery::mock(StreamSocket::class);
 
-        $this->client = new class ($streamSessionId, $host) extends StreamClient
-        {
+        $this->streamClient = new class ($streamSessionId, $host) extends StreamClient {
             /**
-             * Sets the WebSocket client.
+             * Override the constructor to prevent creating a new stream socket instance.
              *
-             * @param  WebSocketClient $client WebSocket client.
+             * @param string     $streamSessionId Stream session ID.
+             * @param StreamHost $host            WebSocket host URL.
+             *
+             * @noinspection PhpMissingParentConstructorInspection
+             */
+            public function __construct(protected string $streamSessionId, protected StreamHost $host)
+            {
+            }
+
+            /**
+             * Sets the stream socket client.
+             *
+             * @param StreamSocket $streamSocket Stream socket client.
              *
              * @return void
              */
-            public function setStreamClient(WebSocketClient $client): void
+            public function setStreamSocket(StreamSocket $streamSocket): void
             {
-                $this->streamClient = $client;
+                $this->streamSocket = $streamSocket;
             }
         };
 
-        $this->client->setStreamClient($this->streamClient);
+        $this->streamClient->setStreamSocket($this->streamSocket);
     }
 
     /**
      * Mocks the WebSocket response for a given payload.
      *
-     * @param  AbstractStreamPayload $payload  The payload to be sent.
-     * @param  array                 $response The mocked response data.
-     *
-     * @throws JsonException If encoding to JSON fails.
-     * @throws InvalidPayloadException If payload is missing or invalid.
+     * @param AbstractStreamPayload $payload  The payload to be sent.
+     * @param array                 $response The mocked response data.
      *
      * @return void
+     * @throws InvalidPayloadException If payload is missing or invalid.
+     *
+     * @throws JsonException If encoding to JSON fails.
      */
     public function mockStreamResponse(AbstractStreamPayload $payload, array $response): void
     {
-        $this->streamClient->shouldReceive('text')
+        $this->streamSocket->shouldReceive('send')
             ->once()
             ->with($payload->toJson());
 
         $mockResponse = json_encode($response);
 
-        $this->streamClient->shouldReceive('receive')
+        $this->streamSocket->shouldReceive('listen')
             ->once()
-            ->andReturn($this->message);
-
-        $this->message->shouldReceive('getContent')
-            ->once()
-            ->andReturn($mockResponse);
+            ->andReturn(call_user_func(static function () use ($mockResponse): Generator {
+                yield $mockResponse;
+            }));
     }
 }

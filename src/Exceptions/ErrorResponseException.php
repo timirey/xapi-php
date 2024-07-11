@@ -2,7 +2,7 @@
 
 namespace Timirey\XApi\Exceptions;
 
-use WebSocket\Exception\Exception;
+use Exception;
 
 /**
  * Custom error response exception.
