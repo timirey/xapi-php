@@ -143,8 +143,6 @@ $streamClient->getTickPrices(
          * @var TickStreamRecord $tickStreamRecord
          */
         $record = $tickPricesStreamResponse->tickStreamRecord;
-
-        print_r($record);
     }
 );
 
