@@ -3,17 +3,17 @@
 namespace Timirey\XApi\Enums;
 
 /**
- * Enum representing the WebSocket stream host URLs for xStation5 API.
+ * Enum representing the socket stream host URLs for xStation5 API.
  */
 enum StreamHost: string
 {
     /**
      * Demo account stream host URL.
      */
-    case DEMO = 'wss://ws.xtb.com/demoStream';
+     case DEMO = 'ssl://xapi.xtb.com:5125';
 
     /**
      * Real account stream host URL.
      */
-    case REAL = 'wss://ws.xtb.com/realStream';
+     case REAL = 'ssl://xapi.xtb.com:5113';
 }

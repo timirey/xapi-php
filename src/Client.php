@@ -3,12 +3,15 @@
 namespace Timirey\XApi;
 
 use DateTime;
+use Exception;
 use JsonException;
+use Timirey\XApi\Connections\Socket;
 use Timirey\XApi\Enums\Cmd;
 use Timirey\XApi\Enums\Host;
 use Timirey\XApi\Enums\Level;
 use Timirey\XApi\Exceptions\ErrorResponseException;
 use Timirey\XApi\Exceptions\InvalidResponseException;
+use Timirey\XApi\Exceptions\SocketException;
 use Timirey\XApi\Payloads\AbstractPayload;
 use Timirey\XApi\Payloads\Data\ChartLastInfoRecord;
 use Timirey\XApi\Payloads\Data\ChartRangeInfoRecord;
@@ -64,7 +67,6 @@ use Timirey\XApi\Responses\LogoutResponse;
 use Timirey\XApi\Responses\PingResponse;
 use Timirey\XApi\Responses\TradeTransactionResponse;
 use Timirey\XApi\Responses\TradeTransactionStatusResponse;
-use WebSocket\Client as WebSocketClient;
 
 /**
  * Client class for interacting with the xStation5 API.
@@ -72,20 +74,22 @@ use WebSocket\Client as WebSocketClient;
 class Client
 {
     /**
-     * @var WebSocketClient XTB WebSocket client instance.
+     * @var Socket Socket client instance.
      */
-    protected WebSocketClient $client;
+    protected Socket $socket;
 
     /**
      * Constructor for the Client class.
      *
-     * @param  integer $userId   User ID.
-     * @param  string  $password User password.
-     * @param  Host    $host     WebSocket host URL.
+     * @param integer $userId   User ID.
+     * @param string  $password User password.
+     * @param Host    $host     Host URL.
+     *
+     * @throws SocketException If socket is unable to init.
      */
     public function __construct(protected int $userId, protected string $password, protected Host $host)
     {
-        $this->client = new WebSocketClient($this->host->value);
+        $this->socket = new Socket($this->host->value);
     }
 
     /**
@@ -505,8 +509,8 @@ class Client
      */
     protected function request(AbstractPayload $payload, string $responseClass): AbstractResponse
     {
-        $this->client->text($payload);
+        $this->socket->send($payload);
 
-        return $responseClass::instantiate($this->client->receive()->getContent());
+        return $responseClass::instantiate($this->socket->receive());
     }
 }

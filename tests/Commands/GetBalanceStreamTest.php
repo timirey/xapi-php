@@ -34,11 +34,9 @@ test('getBalance stream command', function () {
 
     $this->mockStreamResponse($payload, $mockResponse);
 
-    $client = $this->client;
+    $streamClient = $this->streamClient;
 
-    $client->getBalance(function (GetBalanceStreamResponse $response) use ($client) {
+    $streamClient->getBalance(function (GetBalanceStreamResponse $response) {
         expect($response)->toBeInstanceOf(GetBalanceStreamResponse::class);
-
-        $client->unsubscribe();
     });
 });

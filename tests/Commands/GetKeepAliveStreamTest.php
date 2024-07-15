@@ -23,12 +23,10 @@ test('getKeepAlive stream command', function () {
 
     $this->mockStreamResponse($payload, $mockResponse);
 
-    $client = $this->client;
+    $streamClient = $this->streamClient;
 
-    $client->getKeepAlive(function (GetKeepAliveStreamResponse $response) use ($client) {
+    $streamClient->getKeepAlive(function (GetKeepAliveStreamResponse $response) {
         expect($response)->toBeInstanceOf(GetKeepAliveStreamResponse::class)
             ->and($response->keepAliveStreamRecord->timestamp)->toBeInstanceOf(DateTime::class);
-
-        $client->unsubscribe();
     });
 });

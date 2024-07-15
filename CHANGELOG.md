@@ -1,5 +1,11 @@
 # Release Notes
 
+## [2.0.0-rc2](https://github.com/timirey/xapi-php/compare/2.0.0-alpha...2.0.0-rc) - 2024-07-15
+
+* Removed WebSocket package dependency.
+* Instead of WebSocket it uses [php sockets](https://www.php.net/manual/en/book.sockets.php).
+* Updated tests.
+
 ## [2.0.0-rc](https://github.com/timirey/xapi-php/compare/2.0.0-alpha...2.0.0-rc) - 2024-07-09
 
 * Added documentation for streaming commands.

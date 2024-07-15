@@ -51,9 +51,9 @@ test('getTrades stream command', function () {
 
     $this->mockStreamResponse($payload, $mockResponse);
 
-    $client = $this->client;
+    $streamClient = $this->streamClient;
 
-    $client->getTrades(function (GetTradesStreamResponse $response) use ($client) {
+    $streamClient->getTrades(function (GetTradesStreamResponse $response) {
         expect($response)->toBeInstanceOf(GetTradesStreamResponse::class)
             ->and($response->tradeStreamRecord->cmd)->toBeInstanceOf(Cmd::class)
             ->and($response->tradeStreamRecord->state)->toBeInstanceOf(State::class)
@@ -61,7 +61,5 @@ test('getTrades stream command', function () {
             ->and($response->tradeStreamRecord->expiration)->toBeInstanceOf(DateTime::class)
             ->and($response->tradeStreamRecord->closeTime)->toBeInstanceOf(DateTime::class)
             ->and($response->tradeStreamRecord->openTime)->toBeInstanceOf(DateTime::class);
-
-        $client->unsubscribe();
     });
 });
