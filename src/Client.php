@@ -83,7 +83,7 @@ class Client
      *
      * @param integer $userId   User ID.
      * @param string  $password User password.
-     * @param Host    $host     WebSocket host URL.
+     * @param Host    $host     Host URL.
      *
      * @throws SocketException If socket is unable to init.
      */

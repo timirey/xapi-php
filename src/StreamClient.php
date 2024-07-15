@@ -43,7 +43,7 @@ class StreamClient
      * Constructor for the StreamClient class.
      *
      * @param string     $streamSessionId Stream session ID.
-     * @param StreamHost $host            WebSocket host URL.
+     * @param StreamHost $host            Host URL.
      *
      * @throws SocketException If socket is unable to init.
      */

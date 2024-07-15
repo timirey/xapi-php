@@ -3,7 +3,7 @@
 namespace Timirey\XApi\Enums;
 
 /**
- * Enum representing the WebSocket host URLs for xStation5 API.
+ * Enum representing the socket host URLs for xStation5 API.
  */
 enum Host: string
 {

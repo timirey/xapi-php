@@ -16,7 +16,7 @@ use Timirey\XApi\StreamClient;
 /**
  * Trait StreamClientMockeryTrait.
  *
- * Provides setup and utility methods for mocking the WebSocket stream client and handling API responses.
+ * Provides setup and utility methods for mocking the stream socket client and handling API responses.
  *
  * @property MockInterface $streamSocket
  * @property StreamClient $streamClient
@@ -24,7 +24,7 @@ use Timirey\XApi\StreamClient;
 trait StreamClientMockeryTrait
 {
     /**
-     * Sets up the mocked WebSocket stream client and message.
+     * Sets up the mocked stream socket client and message.
      *
      * This method should be called in the beforeEach() block of your tests.
      *
@@ -44,7 +44,7 @@ trait StreamClientMockeryTrait
              * Override the constructor to prevent creating a new stream socket instance.
              *
              * @param string     $streamSessionId Stream session ID.
-             * @param StreamHost $host            WebSocket host URL.
+             * @param StreamHost $host            Host URL.
              *
              * @noinspection PhpMissingParentConstructorInspection
              */
@@ -69,7 +69,7 @@ trait StreamClientMockeryTrait
     }
 
     /**
-     * Mocks the WebSocket response for a given payload.
+     * Mocks the socket response for a given payload.
      *
      * @param AbstractStreamPayload $payload  The payload to be sent.
      * @param array                 $response The mocked response data.
