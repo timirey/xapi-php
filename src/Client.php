@@ -11,6 +11,7 @@ use Timirey\XApi\Enums\Host;
 use Timirey\XApi\Enums\Level;
 use Timirey\XApi\Exceptions\ErrorResponseException;
 use Timirey\XApi\Exceptions\InvalidResponseException;
+use Timirey\XApi\Exceptions\SocketException;
 use Timirey\XApi\Payloads\AbstractPayload;
 use Timirey\XApi\Payloads\Data\ChartLastInfoRecord;
 use Timirey\XApi\Payloads\Data\ChartRangeInfoRecord;
@@ -84,7 +85,7 @@ class Client
      * @param string  $password User password.
      * @param Host    $host     WebSocket host URL.
      *
-     * @throws Exception Todo: add custom socket exception.
+     * @throws SocketException If socket is unable to init.
      */
     public function __construct(protected int $userId, protected string $password, protected Host $host)
     {

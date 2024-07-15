@@ -8,6 +8,7 @@ use Timirey\XApi\Enums\StreamHost;
 use Timirey\XApi\Exceptions\ErrorResponseException;
 use Timirey\XApi\Exceptions\InvalidPayloadException;
 use Timirey\XApi\Exceptions\InvalidResponseException;
+use Timirey\XApi\Exceptions\SocketException;
 use Timirey\XApi\Payloads\AbstractStreamPayload;
 use Timirey\XApi\Payloads\GetBalanceStreamPayload;
 use Timirey\XApi\Payloads\GetCandlesStreamPayload;
@@ -43,6 +44,8 @@ class StreamClient
      *
      * @param string     $streamSessionId Stream session ID.
      * @param StreamHost $host            WebSocket host URL.
+     *
+     * @throws SocketException If socket is unable to init.
      */
     public function __construct(protected string $streamSessionId, protected StreamHost $host)
     {
@@ -60,6 +63,7 @@ class StreamClient
      * @throws JsonException If JSON processing fails.
      * @throws ErrorResponseException If the response indicates an error.
      * @throws InvalidResponseException If the response is invalid.
+     * @throws SocketException If socket is empty.
      */
     public function getBalance(callable $callback): void
     {
@@ -82,6 +86,7 @@ class StreamClient
      * @throws JsonException If JSON processing fails.
      * @throws ErrorResponseException If the response indicates an error.
      * @throws InvalidResponseException If the response is invalid.
+     * @throws SocketException If socket is empty.
      */
     public function getCandles(string $symbol, callable $callback): void
     {
@@ -103,6 +108,7 @@ class StreamClient
      * @throws JsonException If JSON processing fails.
      * @throws ErrorResponseException If the response indicates an error.
      * @throws InvalidResponseException If the response is invalid.
+     * @throws SocketException If socket is empty.
      */
     public function getKeepAlive(callable $callback): void
     {
@@ -124,6 +130,7 @@ class StreamClient
      * @throws JsonException If JSON processing fails.
      * @throws ErrorResponseException If the response indicates an error.
      * @throws InvalidResponseException If the response is invalid.
+     * @throws SocketException If socket is empty.
      */
     public function getNews(callable $callback): void
     {
@@ -145,6 +152,7 @@ class StreamClient
      * @throws JsonException If JSON processing fails.
      * @throws ErrorResponseException If the response indicates an error.
      * @throws InvalidResponseException If the response is invalid.
+     * @throws SocketException If socket is empty.
      */
     public function getProfits(callable $callback): void
     {
@@ -169,6 +177,7 @@ class StreamClient
      * @throws JsonException If JSON processing fails.
      * @throws ErrorResponseException If the response indicates an error.
      * @throws InvalidResponseException If the response is invalid.
+     * @throws SocketException If socket is empty.
      */
     public function getTickPrices(
         string $symbol,
@@ -194,6 +203,7 @@ class StreamClient
      * @throws JsonException If JSON processing fails.
      * @throws ErrorResponseException If the response indicates an error.
      * @throws InvalidResponseException If the response is invalid.
+     * @throws SocketException If socket is empty.
      */
     public function getTrades(callable $callback): void
     {
@@ -215,6 +225,7 @@ class StreamClient
      * @throws JsonException If JSON processing fails.
      * @throws ErrorResponseException If the response indicates an error.
      * @throws InvalidResponseException If the response is invalid.
+     * @throws SocketException If socket is empty.
      */
     public function getTradeStatus(callable $callback): void
     {
@@ -250,6 +261,7 @@ class StreamClient
      * @throws InvalidPayloadException If payload is not valid.
      * @throws JsonException If JSON processing fails.
      * @throws ErrorResponseException If the response indicates an error.
+     * @throws SocketException If socket is empty.
      */
     protected function subscribe(AbstractStreamPayload $payload, string $responseClass, callable $callback): void
     {

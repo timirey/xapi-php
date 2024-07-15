@@ -3,6 +3,7 @@
 namespace Timirey\XApi\Connections;
 
 use Exception;
+use Timirey\XApi\Exceptions\SocketException;
 
 /**
  * Represents a socket connection for sending and receiving data.
@@ -20,6 +21,8 @@ class Socket
      * @param string     $address The address to connect to.
      * @param float|null $timeout The connection timeout in seconds.
      * @param integer    $flags   The flags to use for the connection.
+     *
+     * @throws SocketException If socket is unable to init.
      */
     public function __construct(
         string $address,
@@ -34,9 +37,9 @@ class Socket
             $flags
         );
 
-//        if ($this->socket === false) {
-//            throw new Exception("Unable to connect: $errorMessage ($errorCode)"); //todo: custom exception
-//        }
+        if ($this->socket === false) {
+            throw new SocketException("$errorCode: $errorMessage");
+        }
     }
 
     /**

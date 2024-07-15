@@ -3,6 +3,7 @@
 namespace Timirey\XApi\Connections;
 
 use Generator;
+use Timirey\XApi\Exceptions\SocketException;
 
 /**
  * Extends the Socket class to provide additional functionality for
@@ -14,6 +15,7 @@ class StreamSocket extends Socket
      * Listen to the stream socket and yield data as it is received.
      *
      * @return Generator Yields data received from the socket.
+     * @throws SocketException If socket is empty.
      */
     public function listen(): Generator
     {
@@ -24,5 +26,7 @@ class StreamSocket extends Socket
                 yield $response;
             }
         }
+
+        throw new SocketException('Unable to subscribe. Empty socket response.');
     }
 }
