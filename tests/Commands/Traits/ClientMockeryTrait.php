@@ -6,79 +6,84 @@ use JsonException;
 use Mockery;
 use Mockery\MockInterface;
 use Timirey\XApi\Client;
+use Timirey\XApi\Connections\Socket;
 use Timirey\XApi\Enums\Host;
 use Timirey\XApi\Payloads\AbstractPayload;
-use WebSocket\Client as WebSocketClient;
-use WebSocket\Message\Message;
 
 /**
  * Trait ClientTrait.
  *
- * Provides setup and utility methods for mocking the WebSocket client and handling API responses.
+ * Provides setup and utility methods for mocking the socket client and handling API responses.
  *
- * @property MockInterface $webSocketClient
- * @property MockInterface $message
+ * @property MockInterface $socket
  * @property Client $client
  */
 trait ClientMockeryTrait
 {
     /**
-     * Sets up the mocked WebSocket client and message.
+     * Sets up the mocked socket client.
      *
      * This method should be called in the beforeEach() block of your tests.
      *
-     * @param  integer $userId   User id.
-     * @param  string  $password Password.
-     * @param  Host    $host     Host URI.
+     * @param integer $userId   User id.
+     * @param string  $password Password.
+     * @param Host    $host     Host URI.
      *
      * @return void
      */
     public function mockClient(int $userId = 12345, string $password = 'password', Host $host = Host::DEMO): void
     {
-        $this->webSocketClient = Mockery::mock(WebSocketClient::class);
-        $this->message = Mockery::mock(Message::class);
+        $this->socket = Mockery::mock(Socket::class);
 
-        $this->client = new class ($userId, $password, $host) extends Client
-        {
+        $this->client = new class ($userId, $password, $host) extends Client {
             /**
-             * Sets the WebSocket client.
+             * Override the constructor to prevent creating a new Socket instance.
              *
-             * @param  WebSocketClient $client WebSocket client.
+             * @param integer $userId   User ID.
+             * @param string  $password User password.
+             * @param Host    $host     Socket host URL.
+             *
+             * @noinspection PhpMissingParentConstructorInspection
+             */
+            public function __construct(protected int $userId, protected string $password, protected Host $host)
+            {
+            }
+
+            /**
+             * Sets the socket client.
+             *
+             * @param Socket $socket Socket client.
              *
              * @return void
              */
-            public function setWebSocketClient(WebSocketClient $client): void
+            public function setSocket(Socket $socket): void
             {
-                $this->client = $client;
+                $this->socket = $socket;
             }
         };
 
-        $this->client->setWebSocketClient($this->webSocketClient);
+        $this->client->setSocket($this->socket);
     }
 
     /**
-     * Mocks the WebSocket response for a given payload.
+     * Mocks the socket response for a given payload.
      *
-     * @param  AbstractPayload $payload  The payload to be sent.
-     * @param  array           $response The mocked response data.
-     *
-     * @throws JsonException If encoding to JSON fails.
+     * @param AbstractPayload $payload  The payload to be sent.
+     * @param array           $response The mocked response data.
      *
      * @return void
+     * @throws JsonException If encoding to JSON fails.
+     *
      */
     public function mockResponse(AbstractPayload $payload, array $response): void
     {
-        $this->webSocketClient->shouldReceive('text')
+        $this->socket->shouldReceive('send')
             ->once()
             ->with($payload->toJson());
 
         $mockResponse = json_encode($response);
 
-        $this->webSocketClient->shouldReceive('receive')
-            ->once()
-            ->andReturn($this->message);
-
-        $this->message->shouldReceive('getContent')
+        $this->socket->shouldReceive('receive')
             ->once()
             ->andReturn($mockResponse);
     }

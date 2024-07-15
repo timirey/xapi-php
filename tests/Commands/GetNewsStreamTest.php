@@ -28,12 +28,10 @@ test('getNews stream command', function () {
 
     $this->mockStreamResponse($payload, $mockResponse);
 
-    $client = $this->client;
+    $streamClient = $this->streamClient;
 
-    $client->getNews(function (GetNewsStreamResponse $response) use ($client) {
+    $streamClient->getNews(function (GetNewsStreamResponse $response) {
         expect($response)->toBeInstanceOf(GetNewsStreamResponse::class)
             ->and($response->newsStreamRecord->time)->toBeInstanceOf(DateTime::class);
-
-        $client->unsubscribe();
     });
 });

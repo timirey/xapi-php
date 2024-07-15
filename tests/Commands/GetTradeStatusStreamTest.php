@@ -30,12 +30,10 @@ test('getTradeStatus stream command', function () {
 
     $this->mockStreamResponse($payload, $mockResponse);
 
-    $client = $this->client;
+    $streamClient = $this->streamClient;
 
-    $client->getTradeStatus(function (GetTradeStatusStreamResponse $response) use ($client) {
+    $streamClient->getTradeStatus(function (GetTradeStatusStreamResponse $response) {
         expect($response)->toBeInstanceOf(GetTradeStatusStreamResponse::class)
             ->and($response->tradeStatusStreamRecord->requestStatus)->toBeInstanceOf(RequestStatus::class);
-
-        $client->unsubscribe();
     });
 });

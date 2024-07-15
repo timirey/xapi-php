@@ -10,7 +10,7 @@
 
 This PHP library provides a comprehensive and user-friendly interface for interacting with the X-Trade Brokers (XTB)
 xStation5 Trading API. It supports a wide range of functionalities, including account management, trade execution,
-market data retrieval, and real-time streaming commands via WebSocket, making it an ideal tool for developers looking to
+market data retrieval, and real-time streaming commands via socket, making it an ideal tool for developers looking to
 integrate advanced trading features and live market data into their applications.
 
 ## Table of contents
@@ -135,7 +135,7 @@ $streamClient = new StreamClient(
     host: StreamHost::DEMO
 );
 
-// It is better practice to handle subscriptions through a separate worker, ex.: Laravel cron job.
+// Meant to be a daemon, run as separate process.
 $streamClient->getTickPrices(
     symbol: 'EURUSD',
     callback: static function (GetTickPricesStreamResponse $tickPricesStreamResponse): void {
@@ -143,47 +143,10 @@ $streamClient->getTickPrices(
          * @var TickStreamRecord $tickStreamRecord
          */
         $record = $tickPricesStreamResponse->tickStreamRecord;
-
-        print_r($record);
     }
 );
 
 // Unreachable code.
-```
-
-Currently, the only way to shut down the subscriber is to unsubscribe from the callback body, or exit the script
-externally.
-
-```PHP
-use Timirey\XApi\Responses\GetTickPricesStreamResponse;
-use Timirey\XApi\StreamClient;
-
-/**
- * @var int $tickCount
- */
-$tickCount = 0;
-
-/**
- * @var $streamClient StreamClient
- */
-$streamClient->getTickPrices(
-    symbol: 'EURUSD',
-    callback: static function (GetTickPricesStreamResponse $tickPricesStreamResponse) use ($streamClient): void {
-        $tickCount++;
-        
-        // If we got 5 tick prices, unsubscribe.
-        if ($tickCount > 5) {
-            $streamClient->unsubscribe();
-        }
-    }
-);
-
-// Reachable code.
-
-/**
- * @var LogoutResponse $logoutResponse
- */
-$logoutResponse = $client->logout();
 ```
 
 ## Available commands
