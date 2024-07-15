@@ -1,9 +1,5 @@
 # Release Notes
 
-## [2.0.1](https://github.com/timirey/xapi-php/compare/2.0.0...2.0.1) - 2024-07-15
-
-* Updated CHANGELOG.md.
-
 ## [2.0.0](https://github.com/timirey/xapi-php/compare/2.0.0-rc2...2.0.0) - 2024-07-15
 
 * Added stream commands.
