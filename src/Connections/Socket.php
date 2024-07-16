@@ -18,24 +18,13 @@ class Socket
     /**
      * Constructor to initialize and connect the socket.
      *
-     * @param string     $address The address to connect to.
-     * @param float|null $timeout The connection timeout in seconds.
-     * @param integer    $flags   The flags to use for the connection.
+     * @param string $address The address to connect to.
      *
      * @throws SocketException If socket is unable to init.
      */
-    public function __construct(
-        string $address,
-        ?float $timeout = null,
-        int $flags = STREAM_CLIENT_CONNECT
-    ) {
-        $this->socket = stream_socket_client(
-            $address,
-            $errorCode,
-            $errorMessage,
-            $timeout,
-            $flags
-        );
+    public function __construct(string $address)
+    {
+        $this->socket = stream_socket_client($address, $errorCode, $errorMessage);
 
         if ($this->socket === false) {
             throw new SocketException("$errorCode: $errorMessage");
@@ -45,26 +34,23 @@ class Socket
     /**
      * Sends data through the socket.
      *
-     * @param string       $payload The data to send.
-     * @param integer|null $length  The length of data to send. Defaults to the full length of the payload.
+     * @param string $payload The data to send.
      *
      * @return false|integer The number of bytes written, or false on failure.
      */
-    public function send(string $payload, ?int $length = null): false|int
+    public function send(string $payload): false|int
     {
-        return fwrite($this->socket, $payload, $length);
+        return fwrite($this->socket, $payload);
     }
 
     /**
      * Receives data from the socket.
      *
-     * @param integer $length The maximum number of bytes to read.
-     *
      * @return false|string The read data, or false on failure.
      */
-    public function receive(int $length = 4096): false|string
+    public function receive(): false|string
     {
-        return fread($this->socket, $length);
+        return fgets($this->socket);
     }
 
     /**
