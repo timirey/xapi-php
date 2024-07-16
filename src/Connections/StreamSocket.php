@@ -19,10 +19,14 @@ class StreamSocket extends Socket
      */
     public function listen(): Generator
     {
-        while ($response = $this->receive()) {
-            yield $response;
+        while (!feof($this->socket)) {
+            $response = $this->receive();
+
+            if ($response) {
+                yield $response;
+            }
         }
 
-        throw new SocketException('Unable to subscribe. Empty socket response.');
+        throw new SocketException('The socket stream has been closed unexpectedly.');
     }
 }
