@@ -23,7 +23,13 @@ class StreamSocket extends Socket
             $response = $this->receive();
 
             if (!empty($response)) {
-                yield $response;
+                $objects = explode(PHP_EOL, $response);
+
+                foreach ($objects as $object) {
+                    if (json_decode($object) !== null || json_last_error() === JSON_ERROR_NONE) {
+                        yield $object;
+                    }
+                }
             }
         }
 
