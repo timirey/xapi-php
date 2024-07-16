@@ -1,6 +1,11 @@
 # Release Notes
 
-## [2.0.1](https://github.com/timirey/xapi-php/compare/2.0.0...2.0.1) - 2024-07-15
+## [2.0.1](https://github.com/timirey/xapi-php/compare/2.0.1...3.0.0) - 2024-07-16
+
+* Add minimum support of 8.3 PHP.
+* Use json_validate() when parsing response.
+
+## [2.0.1](https://github.com/timirey/xapi-php/compare/2.0.0...2.0.1) - 2024-07-16
 
 * See issue [#32](https://github.com/timirey/xapi-php/issues/32).
 
