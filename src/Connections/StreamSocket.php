@@ -19,18 +19,8 @@ class StreamSocket extends Socket
      */
     public function listen(): Generator
     {
-        while (!feof($this->socket)) {
-            $response = $this->receive();
-
-            if (!empty($response)) {
-                $objects = explode(PHP_EOL, $response);
-
-                foreach ($objects as $object) {
-                    if (json_validate($object)) {
-                        yield $object;
-                    }
-                }
-            }
+        while ($response = $this->receive()) {
+            yield $response;
         }
 
         throw new SocketException('Unable to subscribe. Empty socket response.');

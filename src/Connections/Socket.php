@@ -11,6 +11,11 @@ use Timirey\XApi\Exceptions\SocketException;
 class Socket
 {
     /**
+     * @var string The delimiter for the socket messages.
+     */
+    protected const DELIMITER = "\n\n";
+
+    /**
      * @var false|resource The socket resource or false if failed to create.
      */
     protected $socket;
@@ -44,13 +49,25 @@ class Socket
     }
 
     /**
-     * Receives data from the socket.
+     * Receives data from the socket until the delimiter "\n\n" is encountered.
      *
      * @return false|string The read data, or false on failure.
      */
     public function receive(): false|string
     {
-        return fgets($this->socket);
+        $buffer = '';
+
+        while ($chunk = fgets($this->socket)) {
+            $buffer .= $chunk;
+
+            $position = strpos($buffer, static::DELIMITER);
+
+            if ($position !== false) {
+                return substr($buffer, 0, $position);
+            }
+        }
+
+        return false;
     }
 
     /**

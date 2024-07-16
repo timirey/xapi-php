@@ -1,6 +1,11 @@
 # Release Notes
 
-## [2.0.1](https://github.com/timirey/xapi-php/compare/2.0.1...3.0.0) - 2024-07-16
+## [4.0.0](https://github.com/timirey/xapi-php/compare/3.0.0..4.0.0) - 2024-07-16
+
+* Dropped minimum support to 8.1 PHP.
+* Added buffer to make sure it reads all the way down to "\n\n" guaranteed response separator.
+
+## [3.0.0](https://github.com/timirey/xapi-php/compare/2.0.1...3.0.0) - 2024-07-16
 
 * Add minimum support of 8.3 PHP.
 * Use json_validate() when parsing response.
