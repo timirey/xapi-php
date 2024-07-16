@@ -5,6 +5,7 @@
 <p align="center">
 <a href="https://github.com/timirey/xapi-php/actions"><img src="https://github.com/timirey/xapi-php/actions/workflows/tests.yml/badge.svg" alt="Tests"></a>
 <a href="https://packagist.org/packages/timirey/xapi-php"><img src="https://img.shields.io/packagist/v/timirey/xapi-php" alt="Latest Stable Version"></a>
+<a href="https://packagist.org/packages/timirey/xapi-php"><img src="https://img.shields.io/packagist/dt/timirey/xapi-php" alt="Total Downloads"></a>
 <a href="https://packagist.org/packages/timirey/xapi-php"><img src="https://img.shields.io/packagist/l/timirey/xapi-php" alt="License"></a>
 </p>
 
