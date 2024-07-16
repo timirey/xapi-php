@@ -26,7 +26,7 @@ class StreamSocket extends Socket
                 $objects = explode(PHP_EOL, $response);
 
                 foreach ($objects as $object) {
-                    if (json_decode($object) !== null || json_last_error() === JSON_ERROR_NONE) {
+                    if (json_validate($object)) {
                         yield $object;
                     }
                 }
