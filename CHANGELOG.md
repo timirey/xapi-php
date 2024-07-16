@@ -1,13 +1,9 @@
 # Release Notes
 
-## [2.0.1](https://github.com/timirey/xapi-php/compare/2.0.0...2.0.1) - 2024-07-15
-
-* Updated CHANGELOG.md.
-
-## [2.0.0](https://github.com/timirey/xapi-php/compare/2.0.0-rc2...2.0.0) - 2024-07-15
+## [2.0.0](https://github.com/timirey/xapi-php/compare/1.2.1...2.0.0) - 2024-07-15
 
 * Added stream commands.
-* Removed WebSocket dependency.
+* Removed WebSocket dependency (not it uses php native sockets).
 
 ## [2.0.0-rc2](https://github.com/timirey/xapi-php/compare/2.0.0-rc...2.0.0-rc2) - 2024-07-15
 
