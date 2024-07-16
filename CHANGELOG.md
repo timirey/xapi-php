@@ -1,5 +1,9 @@
 # Release Notes
 
+## [4.0.1](https://github.com/timirey/xapi-php/compare/4.0.0..4.0.1) - 2024-07-16
+
+* Fix stream listener by adding feof() check.
+
 ## [4.0.0](https://github.com/timirey/xapi-php/compare/3.0.0..4.0.0) - 2024-07-16
 
 * Dropped minimum support to 8.1 PHP.
