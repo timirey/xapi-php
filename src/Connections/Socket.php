@@ -26,7 +26,7 @@ class Socket
      */
     public function __construct(
         string $address,
-        ?float $timeout = null,
+        ?float $timeout = 120,
         int $flags = STREAM_CLIENT_CONNECT
     ) {
         $this->socket = stream_socket_client(
