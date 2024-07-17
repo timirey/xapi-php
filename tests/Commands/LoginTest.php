@@ -23,7 +23,7 @@ test('login command', function () {
 
     $this->mockResponse($payload, $mockResponse);
 
-    $response = $this->client->login();
+    $response = $this->client->login(12345, 'password');
 
     expect($response)->toBeInstanceOf(LoginResponse::class);
 });

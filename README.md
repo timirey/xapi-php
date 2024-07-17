@@ -84,12 +84,17 @@ use Timirey\XApi\Responses\LogoutResponse;
 /**
  * @var Client
  */
-$client = new Client(userId: 123456789, password: 'password', host: Host::DEMO);
+$client = new Client(
+    host: Host::DEMO
+);
 
 /**
  * @var LoginResponse $loginResponse
  */
-$loginResponse = $client->login();
+$loginResponse = $client->login(
+    userId: 123456789, 
+    password: 'password'
+);
 
 /**
  * @var GetCalendarResponse $getCalendarResponse
@@ -116,12 +121,17 @@ use Timirey\XApi\Client;
 /**
  * @var Client
  */
-$client = new Client(userId: 123456789, password: 'password', host: Host::DEMO);
+$client = new Client(
+    host: Host::DEMO
+);
 
 /**
  * @var LoginResponse $loginResponse
  */
-$loginResponse = $client->login();
+$loginResponse = $client->login(
+    userId: 123456789, 
+    password: 'password'
+);
 
 /**
  * @var string $streamSessionId
@@ -166,7 +176,10 @@ use Timirey\XApi\Client;
  * @var LoginResponse $response 
  * @var Client $client
  */
-$response = $client->login();
+$response = $client->login(
+    userId: 123456789, 
+    password: 'password'
+);
 ```
 
 ### [logout](http://developers.xstore.pro/documentation/current#logout)

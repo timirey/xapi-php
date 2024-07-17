@@ -81,13 +81,11 @@ class Client
     /**
      * Constructor for the Client class.
      *
-     * @param integer $userId   User ID.
-     * @param string  $password User password.
-     * @param Host    $host     Host URL.
+     * @param Host $host Host URL.
      *
      * @throws SocketException If socket is unable to init.
      */
-    public function __construct(protected int $userId, protected string $password, protected Host $host)
+    public function __construct(protected Host $host)
     {
         $this->socket = new Socket($this->host->value);
     }
@@ -95,15 +93,18 @@ class Client
     /**
      * Logs in to the xStation5 API.
      *
+     * @param integer $userId   User ID.
+     * @param string  $password User password.
+     *
      * @return LoginResponse The response from the login request.
      *
      * @throws ErrorResponseException If the response indicates an error.
      * @throws JsonException If the response cannot be processed.
      * @throws InvalidResponseException Thrown when the API response is invalid or incomplete.
      */
-    public function login(): LoginResponse
+    public function login(int $userId, string $password): LoginResponse
     {
-        return $this->request(new LoginPayload($this->userId, $this->password), LoginResponse::class);
+        return $this->request(new LoginPayload($userId, $password), LoginResponse::class);
     }
 
     /**

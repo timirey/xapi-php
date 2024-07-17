@@ -1,18 +1,22 @@
 # Release Notes
 
+## [5.0.0](https://github.com/timirey/xapi-php/compare/4.0.1..5.0.0) - 2024-07-17
+
+* Changed the way client inits, `$userId` and `$password` are directly sent in the payload.
+
 ## [4.0.1](https://github.com/timirey/xapi-php/compare/4.0.0..4.0.1) - 2024-07-16
 
-* Fix stream listener by adding feof() check.
+* Fix stream listener by adding `feof()` check.
 
 ## [4.0.0](https://github.com/timirey/xapi-php/compare/3.0.0..4.0.0) - 2024-07-16
 
 * Dropped minimum support to 8.1 PHP.
-* Added buffer to make sure it reads all the way down to "\n\n" guaranteed response separator.
+* Added buffer to make sure it reads all the way down to `"\n\n"` guaranteed response separator.
 
 ## [3.0.0](https://github.com/timirey/xapi-php/compare/2.0.1...3.0.0) - 2024-07-16
 
 * Add minimum support of 8.3 PHP.
-* Use json_validate() when parsing response.
+* Use `json_validate()` when parsing response.
 
 ## [2.0.1](https://github.com/timirey/xapi-php/compare/2.0.0...2.0.1) - 2024-07-16
 
