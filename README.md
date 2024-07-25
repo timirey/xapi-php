@@ -893,7 +893,7 @@ This package uses the PestPHP framework for testing.
 
 ## License
 
-This library is open-sourced software licensed under the [MIT license](LICENSE).
+This library is open-sourced software licensed under the [MIT license](https://github.com/timirey/xapi-php/blob/main/LICENSE.md).
 
 ## Reference
 
