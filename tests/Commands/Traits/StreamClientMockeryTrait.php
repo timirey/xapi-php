@@ -6,6 +6,7 @@ use Generator;
 use JsonException;
 use Mockery;
 use Mockery\MockInterface;
+use Override;
 use Timirey\XApi\Connections\SocketConnection;
 use Timirey\XApi\Enums\StreamHost;
 use Timirey\XApi\Exceptions\InvalidPayloadException;
@@ -44,6 +45,7 @@ trait StreamClientMockeryTrait
              *
              * @return void
              */
+            #[Override]
             protected function init(): void
             {
             }

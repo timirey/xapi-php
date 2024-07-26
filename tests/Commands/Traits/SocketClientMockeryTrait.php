@@ -5,6 +5,7 @@ namespace Timirey\XApi\Tests\Commands\Traits;
 use JsonException;
 use Mockery;
 use Mockery\MockInterface;
+use Override;
 use Timirey\XApi\SocketClient;
 use Timirey\XApi\Connections\SocketConnection;
 use Timirey\XApi\Enums\Host;
@@ -41,6 +42,7 @@ trait SocketClientMockeryTrait
              *
              * @return void
              */
+            #[Override]
             protected function init(): void
             {
             }
