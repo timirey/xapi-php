@@ -17,8 +17,10 @@ final class GetMarginTradePayload extends AbstractPayload
      */
     public function __construct(string $symbol, float $volume)
     {
-        $this->parameters['symbol'] = $symbol;
-        $this->parameters['volume'] = $volume;
+        $this->setParameters([
+            'symbol' => $symbol,
+            'volume' => $volume
+        ]);
     }
 
     /**

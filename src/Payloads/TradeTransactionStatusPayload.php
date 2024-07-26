@@ -16,7 +16,7 @@ final class TradeTransactionStatusPayload extends AbstractPayload
      */
     public function __construct(public int $order)
     {
-        $this->parameters['order'] = $order;
+        $this->setParameter('order', $this->order);
     }
 
     /**

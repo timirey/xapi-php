@@ -14,13 +14,15 @@ final class GetTradesHistoryPayload extends AbstractPayload
     /**
      * Constructor for GetTradesHistoryPayload.
      *
-     * @param  DateTime $start Start time for trade history retrieval.
-     * @param  DateTime $end   End time for trade history retrieval.
+     * @param DateTime $start Start time for trade history retrieval.
+     * @param DateTime $end   End time for trade history retrieval.
      */
     public function __construct(DateTime $start, DateTime $end)
     {
-        $this->parameters['start'] = DateTimeHelper::toMilliseconds($start);
-        $this->parameters['end'] = DateTimeHelper::toMilliseconds($end);
+        $this->setParameters([
+            'start' => DateTimeHelper::toMilliseconds($start),
+            'end' => DateTimeHelper::toMilliseconds($end),
+        ]);
     }
 
     /**

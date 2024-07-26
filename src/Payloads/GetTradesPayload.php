@@ -16,7 +16,7 @@ final class GetTradesPayload extends AbstractPayload
      */
     public function __construct(bool $openedOnly)
     {
-        $this->parameters['openedOnly'] = $openedOnly;
+        $this->setParameter('openedOnly', $openedOnly);
     }
 
     /**

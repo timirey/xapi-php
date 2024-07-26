@@ -17,7 +17,7 @@ final class GetChartRangeRequestPayload extends AbstractPayload
      */
     public function __construct(ChartRangeInfoRecord $chartRangeInfoRecord)
     {
-        $this->parameters['info'] = $chartRangeInfoRecord;
+        $this->setParameter('info', $chartRangeInfoRecord);
     }
 
     /**

@@ -23,14 +23,14 @@ final class GetTickPricesStreamPayload extends AbstractStreamPayload
     ) {
         parent::__construct($streamSessionId);
 
-        $this->parameters['symbol'] = $this->symbol;
+        $this->setParameter('symbol', $this->symbol);
 
         if ($this->minArrivalTime !== null) {
-            $this->parameters['minArrivalTime'] = $this->minArrivalTime;
+            $this->setParameter('minArrivalTime', $this->minArrivalTime);
         }
 
         if ($this->maxLevel !== null) {
-            $this->parameters['maxLevel'] = $this->maxLevel;
+            $this->setParameter('maxLevel', $this->maxLevel);
         }
     }
 

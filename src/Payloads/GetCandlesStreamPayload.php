@@ -17,7 +17,7 @@ final class GetCandlesStreamPayload extends AbstractStreamPayload
     {
         parent::__construct($streamSessionId);
 
-        $this->parameters['symbol'] = $this->symbol;
+        $this->setParameter('symbol', $this->symbol);
     }
 
     /**

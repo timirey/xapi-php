@@ -37,7 +37,7 @@ test('tradeTransaction command', function (): void {
     /**
      * @var TradeTransInfo $tradeTransInfoArgument
      */
-    $tradeTransInfoArgument = $payload->parameters['tradeTransInfo'];
+    $tradeTransInfoArgument = $payload->getParameter('tradeTransInfo');
 
     expect($tradeTransInfoArgument)->toBeInstanceOf(TradeTransInfo::class)
         ->and($tradeTransInfoArgument->cmd)->toBeInstanceOf(Cmd::class)

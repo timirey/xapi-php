@@ -14,13 +14,15 @@ final class GetNewsPayload extends AbstractPayload
     /**
      * Constructor for GetNewsPayload.
      *
-     * @param  DateTime $start Start time in milliseconds since epoch.
-     * @param  DateTime $end   End time in milliseconds since epoch.
+     * @param DateTime $start Start time in milliseconds since epoch.
+     * @param DateTime $end   End time in milliseconds since epoch.
      */
     public function __construct(DateTime $start, DateTime $end)
     {
-        $this->parameters['start'] = DateTimeHelper::toMilliseconds($start);
-        $this->parameters['end'] = DateTimeHelper::toMilliseconds($end);
+        $this->setParameters([
+            'start' => DateTimeHelper::toMilliseconds($start),
+            'end' => DateTimeHelper::toMilliseconds($end)
+        ]);
     }
 
     /**

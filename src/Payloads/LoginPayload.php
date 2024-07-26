@@ -12,13 +12,15 @@ final class LoginPayload extends AbstractPayload
     /**
      * Constructor for LoginPayload.
      *
-     * @param  integer $userId   User ID.
-     * @param  string  $password User password.
+     * @param integer $userId   User ID.
+     * @param string  $password User password.
      */
     public function __construct(int $userId, string $password)
     {
-        $this->parameters['userId'] = $userId;
-        $this->parameters['password'] = $password;
+        $this->setParameters([
+            'userId' => $userId,
+            'password' => $password
+        ]);
     }
 
     /**

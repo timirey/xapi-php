@@ -29,7 +29,7 @@ test('getChartLastRequest command', function (): void {
     /**
      * @var ChartLastInfoRecord $chartLastInfoRecordArgument
      */
-    $chartLastInfoRecordArgument = $payload->parameters['info'];
+    $chartLastInfoRecordArgument = $payload->getParameter('info');
     expect($chartLastInfoRecordArgument->period)->toBeInstanceOf(Period::class);
 
     $mockResponse = [
