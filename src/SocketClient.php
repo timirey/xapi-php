@@ -101,6 +101,7 @@ class SocketClient
      * @throws ErrorResponseException If the response indicates an error.
      * @throws JsonException If the response cannot be processed.
      * @throws InvalidResponseException Thrown when the API response is invalid or incomplete.
+     * @throws SocketException If socket is empty or not initialized.
      */
     public function login(int $userId, string $password): LoginResponse
     {
@@ -115,6 +116,7 @@ class SocketClient
      * @throws ErrorResponseException If the response indicates an error.
      * @throws JsonException If the response cannot be processed.
      * @throws InvalidResponseException Thrown when the API response is invalid or incomplete.
+     * @throws SocketException If socket is empty or not initialized.
      */
     public function logout(): LogoutResponse
     {
@@ -130,6 +132,7 @@ class SocketClient
      * @throws ErrorResponseException If the response indicates an error.
      * @throws JsonException If the response cannot be processed.
      * @throws InvalidResponseException Thrown when the API response is invalid or incomplete.
+     * @throws SocketException If socket is empty or not initialized.
      */
     public function getSymbol(string $symbol): GetSymbolResponse
     {
@@ -144,6 +147,7 @@ class SocketClient
      * @throws ErrorResponseException If the response indicates an error.
      * @throws JsonException If the response cannot be processed.
      * @throws InvalidResponseException Thrown when the API response is invalid or incomplete.
+     * @throws SocketException If socket is empty or not initialized.
      */
     public function getAllSymbols(): GetAllSymbolsResponse
     {
@@ -159,6 +163,7 @@ class SocketClient
      * @throws ErrorResponseException If the response indicates an error.
      * @throws JsonException If the response cannot be processed.
      * @throws InvalidResponseException Thrown when the API response is invalid or incomplete.
+     * @throws SocketException If socket is empty or not initialized.
      */
     public function tradeTransaction(TradeTransInfo $tradeTransInfo): TradeTransactionResponse
     {
@@ -174,6 +179,7 @@ class SocketClient
      * @throws ErrorResponseException If the response indicates an error.
      * @throws JsonException If the response cannot be processed.
      * @throws InvalidResponseException Thrown when the API response is invalid or incomplete.
+     * @throws SocketException If socket is empty or not initialized.
      */
     public function tradeTransactionStatus(int $order): TradeTransactionStatusResponse
     {
@@ -191,6 +197,7 @@ class SocketClient
      * @throws ErrorResponseException If the response indicates an error.
      * @throws JsonException If the response cannot be processed.
      * @throws InvalidResponseException Thrown when the API response is invalid or incomplete.
+     * @throws SocketException If socket is empty or not initialized.
      */
     public function ping(): PingResponse
     {
@@ -205,6 +212,7 @@ class SocketClient
      * @throws ErrorResponseException If the response indicates an error.
      * @throws JsonException If the response cannot be processed.
      * @throws InvalidResponseException Thrown when the API response is invalid or incomplete.
+     * @throws SocketException If socket is empty or not initialized.
      */
     public function getCalendar(): GetCalendarResponse
     {
@@ -220,6 +228,7 @@ class SocketClient
      * @throws ErrorResponseException If the response indicates an error.
      * @throws JsonException If the response cannot be processed.
      * @throws InvalidResponseException Thrown when the API response is invalid or incomplete.
+     * @throws SocketException If socket is empty or not initialized.
      */
     public function getChartLastRequest(ChartLastInfoRecord $chartLastInfoRecord): GetChartLastRequestResponse
     {
@@ -238,6 +247,7 @@ class SocketClient
      * @throws ErrorResponseException If the response indicates an error.
      * @throws JsonException If the response cannot be processed.
      * @throws InvalidResponseException Thrown when the API response is invalid or incomplete.
+     * @throws SocketException If socket is empty or not initialized.
      */
     public function getChartRangeRequest(ChartRangeInfoRecord $chartRangeInfoRecord): GetChartRangeRequestResponse
     {
@@ -257,6 +267,7 @@ class SocketClient
      * @throws ErrorResponseException If the response indicates an error.
      * @throws JsonException If the response cannot be processed.
      * @throws InvalidResponseException Thrown when the API response is invalid or incomplete.
+     * @throws SocketException If socket is empty or not initialized.
      */
     public function getCommissionDef(string $symbol, float $volume): GetCommissionDefResponse
     {
@@ -274,6 +285,7 @@ class SocketClient
      * @throws ErrorResponseException If the response indicates an error.
      * @throws JsonException If the response cannot be processed.
      * @throws InvalidResponseException Thrown when the API response is invalid or incomplete.
+     * @throws SocketException If socket is empty or not initialized.
      */
     public function getCurrentUserData(): GetCurrentUserDataResponse
     {
@@ -288,6 +300,7 @@ class SocketClient
      * @throws ErrorResponseException If the response indicates an error.
      * @throws JsonException If the response cannot be processed.
      * @throws InvalidResponseException Thrown when the API response is invalid or incomplete.
+     * @throws SocketException If socket is empty or not initialized.
      */
     public function getMarginLevel(): GetMarginLevelResponse
     {
@@ -304,6 +317,7 @@ class SocketClient
      * @throws ErrorResponseException If the response indicates an error.
      * @throws JsonException If the response cannot be processed.
      * @throws InvalidResponseException Thrown when the API response is invalid or incomplete.
+     * @throws SocketException If socket is empty or not initialized.
      */
     public function getMarginTrade(string $symbol, float $volume): GetMarginTradeResponse
     {
@@ -323,6 +337,7 @@ class SocketClient
      * @throws ErrorResponseException If the response indicates an error.
      * @throws JsonException If the response cannot be processed.
      * @throws InvalidResponseException Thrown when the API response is invalid or incomplete.
+     * @throws SocketException If socket is empty or not initialized.
      */
     public function getNews(DateTime $start, DateTime $end): GetNewsResponse
     {
@@ -339,6 +354,7 @@ class SocketClient
      * @throws ErrorResponseException If the response indicates an error.
      * @throws JsonException If the response cannot be processed.
      * @throws InvalidResponseException Thrown when the API response is invalid or incomplete.
+     * @throws SocketException If socket is empty or not initialized.
      */
     public function getIbsHistory(DateTime $start, DateTime $end): GetIbsHistoryResponse
     {
@@ -358,6 +374,7 @@ class SocketClient
      * @throws ErrorResponseException If the response indicates an error.
      * @throws JsonException If the response cannot be processed.
      * @throws InvalidResponseException Thrown when the API response is invalid or incomplete.
+     * @throws SocketException If socket is empty or not initialized.
      */
     public function getProfitCalculation(
         float $closePrice,
@@ -380,6 +397,7 @@ class SocketClient
      * @throws ErrorResponseException If the response indicates an error.
      * @throws JsonException If the response cannot be processed.
      * @throws InvalidResponseException Thrown when the API response is invalid or incomplete.
+     * @throws SocketException If socket is empty or not initialized.
      */
     public function getServerTime(): GetServerTimeResponse
     {
@@ -394,6 +412,7 @@ class SocketClient
      * @throws ErrorResponseException If the response indicates an error.
      * @throws JsonException If the response cannot be processed.
      * @throws InvalidResponseException Thrown when the API response is invalid or incomplete.
+     * @throws SocketException If socket is empty or not initialized.
      */
     public function getStepRules(): GetStepRulesResponse
     {
@@ -411,6 +430,7 @@ class SocketClient
      * @throws ErrorResponseException If the response indicates an error.
      * @throws JsonException If the response cannot be processed.
      * @throws InvalidResponseException Thrown when the API response is invalid or incomplete.
+     * @throws SocketException If socket is empty or not initialized.
      */
     public function getTickPrices(Level $level, array $symbols, DateTime $timestamp): GetTickPricesResponse
     {
@@ -429,6 +449,7 @@ class SocketClient
      * @throws ErrorResponseException If the response indicates an error.
      * @throws JsonException If the response cannot be processed.
      * @throws InvalidResponseException Thrown when the API response is invalid or incomplete.
+     * @throws SocketException If socket is empty or not initialized.
      */
     public function getTradeRecords(array $orders): GetTradeRecordsResponse
     {
@@ -444,6 +465,7 @@ class SocketClient
      * @throws ErrorResponseException If the response indicates an error.
      * @throws JsonException If the response cannot be processed.
      * @throws InvalidResponseException Thrown when the API response is invalid or incomplete.
+     * @throws SocketException If socket is empty or not initialized.
      */
     public function getTrades(bool $openedOnly): GetTradesResponse
     {
@@ -460,6 +482,7 @@ class SocketClient
      * @throws ErrorResponseException If the response indicates an error.
      * @throws JsonException If the response cannot be processed.
      * @throws InvalidResponseException Thrown when the API response is invalid or incomplete.
+     * @throws SocketException If socket is empty or not initialized.
      */
     public function getTradesHistory(DateTime $start, DateTime $end): GetTradesHistoryResponse
     {
@@ -475,6 +498,7 @@ class SocketClient
      * @throws ErrorResponseException If the response indicates an error.
      * @throws JsonException If the response cannot be processed.
      * @throws InvalidResponseException Thrown when the API response is invalid or incomplete.
+     * @throws SocketException If socket is empty or not initialized.
      */
     public function getTradingHours(array $symbols): GetTradingHoursResponse
     {
@@ -489,6 +513,7 @@ class SocketClient
      * @throws ErrorResponseException If the response indicates an error.
      * @throws JsonException If the response cannot be processed.
      * @throws InvalidResponseException Thrown when the API response is invalid or incomplete.
+     * @throws SocketException If socket is empty or not initialized.
      */
     public function getVersion(): GetVersionResponse
     {
