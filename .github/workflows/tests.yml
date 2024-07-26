@@ -26,7 +26,7 @@ jobs:
         run: vendor/bin/phpcs --severity=0
 
       - name: Run PHP Stan
-        run: vendor/bin/phpstan analyse src --level=6
+        run: vendor/bin/phpstan analyse src --level=8
 
       - name: Execute tests (Unit and Feature tests) via PHPUnit/Pest
         run: vendor/bin/pest
