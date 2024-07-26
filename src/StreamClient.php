@@ -273,7 +273,7 @@ class StreamClient
         foreach ($this->socket->listen() as $message) {
             $response = $responseClass::instantiate($message);
 
-            call_user_func($callback, $response);
+            $callback($response);
         }
     }
 
