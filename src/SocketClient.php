@@ -103,7 +103,7 @@ class SocketClient
      * @throws InvalidResponseException Thrown when the API response is invalid or incomplete.
      * @throws SocketException If socket is empty or not initialized.
      */
-    public function login(int $userId, string $password): LoginResponse
+    final public function login(int $userId, string $password): LoginResponse
     {
         return $this->request(new LoginPayload($userId, $password), LoginResponse::class);
     }
@@ -118,7 +118,7 @@ class SocketClient
      * @throws InvalidResponseException Thrown when the API response is invalid or incomplete.
      * @throws SocketException If socket is empty or not initialized.
      */
-    public function logout(): LogoutResponse
+    final public function logout(): LogoutResponse
     {
         return $this->request(new LogoutPayload(), LogoutResponse::class);
     }
@@ -134,7 +134,7 @@ class SocketClient
      * @throws InvalidResponseException Thrown when the API response is invalid or incomplete.
      * @throws SocketException If socket is empty or not initialized.
      */
-    public function getSymbol(string $symbol): GetSymbolResponse
+    final public function getSymbol(string $symbol): GetSymbolResponse
     {
         return $this->request(new GetSymbolPayload($symbol), GetSymbolResponse::class);
     }
@@ -149,7 +149,7 @@ class SocketClient
      * @throws InvalidResponseException Thrown when the API response is invalid or incomplete.
      * @throws SocketException If socket is empty or not initialized.
      */
-    public function getAllSymbols(): GetAllSymbolsResponse
+    final public function getAllSymbols(): GetAllSymbolsResponse
     {
         return $this->request(new GetAllSymbolsPayload(), GetAllSymbolsResponse::class);
     }
@@ -165,7 +165,7 @@ class SocketClient
      * @throws InvalidResponseException Thrown when the API response is invalid or incomplete.
      * @throws SocketException If socket is empty or not initialized.
      */
-    public function tradeTransaction(TradeTransInfo $tradeTransInfo): TradeTransactionResponse
+    final public function tradeTransaction(TradeTransInfo $tradeTransInfo): TradeTransactionResponse
     {
         return $this->request(new TradeTransactionPayload($tradeTransInfo), TradeTransactionResponse::class);
     }
@@ -181,7 +181,7 @@ class SocketClient
      * @throws InvalidResponseException Thrown when the API response is invalid or incomplete.
      * @throws SocketException If socket is empty or not initialized.
      */
-    public function tradeTransactionStatus(int $order): TradeTransactionStatusResponse
+    final public function tradeTransactionStatus(int $order): TradeTransactionStatusResponse
     {
         return $this->request(
             new TradeTransactionStatusPayload($order),
@@ -199,7 +199,7 @@ class SocketClient
      * @throws InvalidResponseException Thrown when the API response is invalid or incomplete.
      * @throws SocketException If socket is empty or not initialized.
      */
-    public function ping(): PingResponse
+    final public function ping(): PingResponse
     {
         return $this->request(new PingPayload(), PingResponse::class);
     }
@@ -214,7 +214,7 @@ class SocketClient
      * @throws InvalidResponseException Thrown when the API response is invalid or incomplete.
      * @throws SocketException If socket is empty or not initialized.
      */
-    public function getCalendar(): GetCalendarResponse
+    final public function getCalendar(): GetCalendarResponse
     {
         return $this->request(new GetCalendarPayload(), GetCalendarResponse::class);
     }
@@ -230,7 +230,7 @@ class SocketClient
      * @throws InvalidResponseException Thrown when the API response is invalid or incomplete.
      * @throws SocketException If socket is empty or not initialized.
      */
-    public function getChartLastRequest(ChartLastInfoRecord $chartLastInfoRecord): GetChartLastRequestResponse
+    final public function getChartLastRequest(ChartLastInfoRecord $chartLastInfoRecord): GetChartLastRequestResponse
     {
         return $this->request(
             new GetChartLastRequestPayload($chartLastInfoRecord),
@@ -249,7 +249,7 @@ class SocketClient
      * @throws InvalidResponseException Thrown when the API response is invalid or incomplete.
      * @throws SocketException If socket is empty or not initialized.
      */
-    public function getChartRangeRequest(ChartRangeInfoRecord $chartRangeInfoRecord): GetChartRangeRequestResponse
+    final public function getChartRangeRequest(ChartRangeInfoRecord $chartRangeInfoRecord): GetChartRangeRequestResponse
     {
         return $this->request(
             new GetChartRangeRequestPayload($chartRangeInfoRecord),
@@ -269,7 +269,7 @@ class SocketClient
      * @throws InvalidResponseException Thrown when the API response is invalid or incomplete.
      * @throws SocketException If socket is empty or not initialized.
      */
-    public function getCommissionDef(string $symbol, float $volume): GetCommissionDefResponse
+    final public function getCommissionDef(string $symbol, float $volume): GetCommissionDefResponse
     {
         return $this->request(
             new GetCommissionDefPayload($symbol, $volume),
@@ -287,7 +287,7 @@ class SocketClient
      * @throws InvalidResponseException Thrown when the API response is invalid or incomplete.
      * @throws SocketException If socket is empty or not initialized.
      */
-    public function getCurrentUserData(): GetCurrentUserDataResponse
+    final public function getCurrentUserData(): GetCurrentUserDataResponse
     {
         return $this->request(new GetCurrentUserDataPayload(), GetCurrentUserDataResponse::class);
     }
@@ -302,7 +302,7 @@ class SocketClient
      * @throws InvalidResponseException Thrown when the API response is invalid or incomplete.
      * @throws SocketException If socket is empty or not initialized.
      */
-    public function getMarginLevel(): GetMarginLevelResponse
+    final public function getMarginLevel(): GetMarginLevelResponse
     {
         return $this->request(new GetMarginLevelPayload(), GetMarginLevelResponse::class);
     }
@@ -319,7 +319,7 @@ class SocketClient
      * @throws InvalidResponseException Thrown when the API response is invalid or incomplete.
      * @throws SocketException If socket is empty or not initialized.
      */
-    public function getMarginTrade(string $symbol, float $volume): GetMarginTradeResponse
+    final public function getMarginTrade(string $symbol, float $volume): GetMarginTradeResponse
     {
         return $this->request(
             new GetMarginTradePayload($symbol, $volume),
@@ -339,7 +339,7 @@ class SocketClient
      * @throws InvalidResponseException Thrown when the API response is invalid or incomplete.
      * @throws SocketException If socket is empty or not initialized.
      */
-    public function getNews(DateTime $start, DateTime $end): GetNewsResponse
+    final public function getNews(DateTime $start, DateTime $end): GetNewsResponse
     {
         return $this->request(new GetNewsPayload($start, $end), GetNewsResponse::class);
     }
@@ -356,7 +356,7 @@ class SocketClient
      * @throws InvalidResponseException Thrown when the API response is invalid or incomplete.
      * @throws SocketException If socket is empty or not initialized.
      */
-    public function getIbsHistory(DateTime $start, DateTime $end): GetIbsHistoryResponse
+    final public function getIbsHistory(DateTime $start, DateTime $end): GetIbsHistoryResponse
     {
         return $this->request(new GetIbsHistoryPayload($start, $end), GetIbsHistoryResponse::class);
     }
@@ -376,7 +376,7 @@ class SocketClient
      * @throws InvalidResponseException Thrown when the API response is invalid or incomplete.
      * @throws SocketException If socket is empty or not initialized.
      */
-    public function getProfitCalculation(
+    final public function getProfitCalculation(
         float $closePrice,
         Cmd $cmd,
         float $openPrice,
@@ -399,7 +399,7 @@ class SocketClient
      * @throws InvalidResponseException Thrown when the API response is invalid or incomplete.
      * @throws SocketException If socket is empty or not initialized.
      */
-    public function getServerTime(): GetServerTimeResponse
+    final public function getServerTime(): GetServerTimeResponse
     {
         return $this->request(new GetServerTimePayload(), GetServerTimeResponse::class);
     }
@@ -414,7 +414,7 @@ class SocketClient
      * @throws InvalidResponseException Thrown when the API response is invalid or incomplete.
      * @throws SocketException If socket is empty or not initialized.
      */
-    public function getStepRules(): GetStepRulesResponse
+    final public function getStepRules(): GetStepRulesResponse
     {
         return $this->request(new GetStepRulesPayload(), GetStepRulesResponse::class);
     }
@@ -432,7 +432,7 @@ class SocketClient
      * @throws InvalidResponseException Thrown when the API response is invalid or incomplete.
      * @throws SocketException If socket is empty or not initialized.
      */
-    public function getTickPrices(Level $level, array $symbols, DateTime $timestamp): GetTickPricesResponse
+    final public function getTickPrices(Level $level, array $symbols, DateTime $timestamp): GetTickPricesResponse
     {
         return $this->request(
             new GetTickPricesPayload($level, $symbols, $timestamp),
@@ -451,7 +451,7 @@ class SocketClient
      * @throws InvalidResponseException Thrown when the API response is invalid or incomplete.
      * @throws SocketException If socket is empty or not initialized.
      */
-    public function getTradeRecords(array $orders): GetTradeRecordsResponse
+    final public function getTradeRecords(array $orders): GetTradeRecordsResponse
     {
         return $this->request(new GetTradeRecordsPayload($orders), GetTradeRecordsResponse::class);
     }
@@ -467,7 +467,7 @@ class SocketClient
      * @throws InvalidResponseException Thrown when the API response is invalid or incomplete.
      * @throws SocketException If socket is empty or not initialized.
      */
-    public function getTrades(bool $openedOnly): GetTradesResponse
+    final public function getTrades(bool $openedOnly): GetTradesResponse
     {
         return $this->request(new GetTradesPayload($openedOnly), GetTradesResponse::class);
     }
@@ -484,7 +484,7 @@ class SocketClient
      * @throws InvalidResponseException Thrown when the API response is invalid or incomplete.
      * @throws SocketException If socket is empty or not initialized.
      */
-    public function getTradesHistory(DateTime $start, DateTime $end): GetTradesHistoryResponse
+    final public function getTradesHistory(DateTime $start, DateTime $end): GetTradesHistoryResponse
     {
         return $this->request(new GetTradesHistoryPayload($start, $end), GetTradesHistoryResponse::class);
     }
@@ -500,7 +500,7 @@ class SocketClient
      * @throws InvalidResponseException Thrown when the API response is invalid or incomplete.
      * @throws SocketException If socket is empty or not initialized.
      */
-    public function getTradingHours(array $symbols): GetTradingHoursResponse
+    final public function getTradingHours(array $symbols): GetTradingHoursResponse
     {
         return $this->request(new GetTradingHoursPayload($symbols), GetTradingHoursResponse::class);
     }
@@ -515,7 +515,7 @@ class SocketClient
      * @throws InvalidResponseException Thrown when the API response is invalid or incomplete.
      * @throws SocketException If socket is empty or not initialized.
      */
-    public function getVersion(): GetVersionResponse
+    final public function getVersion(): GetVersionResponse
     {
         return $this->request(new GetVersionPayload(), GetVersionResponse::class);
     }

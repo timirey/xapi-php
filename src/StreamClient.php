@@ -65,7 +65,7 @@ class StreamClient
      * @throws InvalidResponseException If the response is invalid.
      * @throws SocketException If socket is empty or not initialized.
      */
-    public function getBalance(callable $callback): void
+    final public function getBalance(callable $callback): void
     {
         $this->subscribe(
             new GetBalanceStreamPayload($this->streamSessionId),
@@ -88,7 +88,7 @@ class StreamClient
      * @throws InvalidResponseException If the response is invalid.
      * @throws SocketException If socket is empty or not initialized.
      */
-    public function getCandles(string $symbol, callable $callback): void
+    final public function getCandles(string $symbol, callable $callback): void
     {
         $this->subscribe(
             new GetCandlesStreamPayload($this->streamSessionId, $symbol),
@@ -110,7 +110,7 @@ class StreamClient
      * @throws InvalidResponseException If the response is invalid.
      * @throws SocketException If socket is empty or not initialized.
      */
-    public function getKeepAlive(callable $callback): void
+    final public function getKeepAlive(callable $callback): void
     {
         $this->subscribe(
             new GetKeepAliveStreamPayload($this->streamSessionId),
@@ -132,7 +132,7 @@ class StreamClient
      * @throws InvalidResponseException If the response is invalid.
      * @throws SocketException If socket is empty or not initialized.
      */
-    public function getNews(callable $callback): void
+    final public function getNews(callable $callback): void
     {
         $this->subscribe(
             new GetNewsStreamPayload($this->streamSessionId),
@@ -154,7 +154,7 @@ class StreamClient
      * @throws InvalidResponseException If the response is invalid.
      * @throws SocketException If socket is empty or not initialized.
      */
-    public function getProfits(callable $callback): void
+    final public function getProfits(callable $callback): void
     {
         $this->subscribe(
             new GetProfitsStreamPayload($this->streamSessionId),
@@ -179,7 +179,7 @@ class StreamClient
      * @throws InvalidResponseException If the response is invalid.
      * @throws SocketException If socket is empty or not initialized.
      */
-    public function getTickPrices(
+    final public function getTickPrices(
         string $symbol,
         callable $callback,
         ?int $minArrivalTime = null,
@@ -205,7 +205,7 @@ class StreamClient
      * @throws InvalidResponseException If the response is invalid.
      * @throws SocketException If socket is empty or not initialized.
      */
-    public function getTrades(callable $callback): void
+    final public function getTrades(callable $callback): void
     {
         $this->subscribe(
             new GetTradesStreamPayload($this->streamSessionId),
@@ -227,7 +227,7 @@ class StreamClient
      * @throws InvalidResponseException If the response is invalid.
      * @throws SocketException If socket is empty or not initialized.
      */
-    public function getTradeStatus(callable $callback): void
+    final public function getTradeStatus(callable $callback): void
     {
         $this->subscribe(
             new GetTradeStatusStreamPayload($this->streamSessionId),
@@ -242,7 +242,7 @@ class StreamClient
      * @return void
      * @throws SocketException If socket is empty or not initialized.
      */
-    public function ping(): void
+    final public function ping(): void
     {
         $this->stream->send(new PingStreamPayload($this->streamSessionId));
     }
