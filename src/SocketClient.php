@@ -71,7 +71,7 @@ use Timirey\XApi\Responses\TradeTransactionStatusResponse;
 /**
  * Client class for interacting with the xStation5 API.
  */
-class Client
+class SocketClient
 {
     /**
      * @var Socket Socket client instance.

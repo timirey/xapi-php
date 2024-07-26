@@ -3,7 +3,7 @@
 namespace Timirey\XApi;
 
 use JsonException;
-use Timirey\XApi\Connections\StreamSocket;
+use Timirey\XApi\Connections\Stream;
 use Timirey\XApi\Enums\StreamHost;
 use Timirey\XApi\Exceptions\ErrorResponseException;
 use Timirey\XApi\Exceptions\InvalidPayloadException;
@@ -35,9 +35,9 @@ use Timirey\XApi\Responses\GetTradeStatusStreamResponse;
 class StreamClient
 {
     /**
-     * @var StreamSocket StreamSocket client instance.
+     * @var Stream Stream client instance.
      */
-    protected StreamSocket $streamSocket;
+    protected Stream $stream;
 
     /**
      * Constructor for the StreamClient class.
@@ -49,7 +49,7 @@ class StreamClient
      */
     public function __construct(protected string $streamSessionId, protected StreamHost $host)
     {
-        $this->streamSocket = new StreamSocket($this->host->value);
+        $this->stream = new Stream($this->host->value);
     }
 
     /**
@@ -243,7 +243,7 @@ class StreamClient
      */
     public function ping(): void
     {
-        $this->streamSocket->send(new PingStreamPayload($this->streamSessionId));
+        $this->stream->send(new PingStreamPayload($this->streamSessionId));
     }
 
     /**
@@ -265,9 +265,9 @@ class StreamClient
      */
     protected function subscribe(AbstractStreamPayload $payload, string $responseClass, callable $callback): void
     {
-        $this->streamSocket->send($payload->toJson());
+        $this->stream->send($payload->toJson());
 
-        foreach ($this->streamSocket->listen() as $message) {
+        foreach ($this->stream->listen() as $message) {
             $response = $responseClass::instantiate($message);
 
             call_user_func($callback, $response);

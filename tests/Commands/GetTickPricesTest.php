@@ -4,9 +4,9 @@ use Timirey\XApi\Enums\Level;
 use Timirey\XApi\Payloads\GetTickPricesPayload;
 use Timirey\XApi\Responses\Data\TickRecord;
 use Timirey\XApi\Responses\GetTickPricesResponse;
-use Timirey\XApi\Tests\Commands\Traits\ClientMockeryTrait;
+use Timirey\XApi\Tests\Commands\Traits\SocketClientMockeryTrait;
 
-uses(ClientMockeryTrait::class);
+uses(SocketClientMockeryTrait::class);
 
 beforeEach(function () {
     $this->mockClient();

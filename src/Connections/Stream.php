@@ -9,7 +9,7 @@ use Timirey\XApi\Exceptions\SocketException;
  * Extends the Socket class to provide additional functionality for
  * listening to data from a stream socket connection.
  */
-class StreamSocket extends Socket
+class Stream extends Socket
 {
     /**
      * Listen to the stream socket and yield data as it is received.
