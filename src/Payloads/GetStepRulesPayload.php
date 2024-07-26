@@ -16,8 +16,6 @@ class GetStepRulesPayload extends AbstractPayload
      */
     public function getCommand(): string
     {
-        $a = Day::TUESDAY;
-
         return 'getStepRules';
     }
 }

@@ -500,13 +500,16 @@ class SocketClient
      *
      * @template T of AbstractResponse
      *
-     * @param  AbstractPayload        $payload       The payload to send.
-     * @param  class-string<T>|string $responseClass The response class to instantiate.
-     * @return AbstractResponse|T The response instance.
+     * @param AbstractPayload        $payload       The payload to send.
+     * @param class-string<T>|string $responseClass The response class to instantiate.
+     *
+     * @return T The response instance.
      *
      * @throws ErrorResponseException If the response indicates an error.
-     * @throws JsonException If the response cannot be processed.
      * @throws InvalidResponseException Thrown when the API response is invalid or incomplete.
+     * @throws JsonException If the response cannot be processed.
+     *
+     * @phpstan-param class-string<T> $responseClass
      */
     protected function request(AbstractPayload $payload, string $responseClass): AbstractResponse
     {

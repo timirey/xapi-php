@@ -262,6 +262,8 @@ class StreamClient
      * @throws JsonException If JSON processing fails.
      * @throws ErrorResponseException If the response indicates an error.
      * @throws SocketException If socket is empty.
+     *
+     * @phpstan-param class-string<T> $responseClass
      */
     protected function subscribe(AbstractStreamPayload $payload, string $responseClass, callable $callback): void
     {
