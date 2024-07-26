@@ -22,11 +22,11 @@ abstract readonly class AbstractResponse
      * @throws JsonException If the response cannot be processed.
      * @throws InvalidResponseException Thrown when the API response is invalid or incomplete.
      */
-    public static function instantiate(string $json): static
+    public static function instantiate(string $json): self
     {
-        $data = self::parseJson($json);
+        $data = static::parseJson($json);
 
-        self::validate($data);
+        static::validate($data);
 
         return static::create($data);
     }
@@ -74,10 +74,5 @@ abstract readonly class AbstractResponse
      * @param  array<string, mixed> $response Validated response data.
      * @return static Instance of the response.
      */
-    protected static function create(array $response): self
-    {
-        // todo: duplicate maybe, instead of ignoring phpstan?
-        // @phpstan-ignore-next-line
-        return new static(...($response['returnData'] ?? $response));
-    }
+    abstract protected static function create(array $response): self;
 }
