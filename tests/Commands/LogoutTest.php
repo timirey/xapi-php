@@ -2,9 +2,9 @@
 
 use Timirey\XApi\Payloads\LogoutPayload;
 use Timirey\XApi\Responses\LogoutResponse;
-use Timirey\XApi\Tests\Commands\Traits\ClientMockeryTrait;
+use Timirey\XApi\Tests\Commands\Traits\SocketClientMockeryTrait;
 
-uses(ClientMockeryTrait::class);
+uses(SocketClientMockeryTrait::class);
 
 beforeEach(function () {
     $this->mockClient();

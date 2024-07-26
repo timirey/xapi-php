@@ -6,9 +6,9 @@ use Timirey\XApi\Responses\Data\QuotesRecord;
 use Timirey\XApi\Responses\Data\TradingHoursRecord;
 use Timirey\XApi\Responses\Data\TradingRecord;
 use Timirey\XApi\Responses\GetTradingHoursResponse;
-use Timirey\XApi\Tests\Commands\Traits\ClientMockeryTrait;
+use Timirey\XApi\Tests\Commands\Traits\SocketClientMockeryTrait;
 
-uses(ClientMockeryTrait::class);
+uses(SocketClientMockeryTrait::class);
 
 beforeEach(function () {
     $this->mockClient();

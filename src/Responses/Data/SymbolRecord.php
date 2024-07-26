@@ -11,7 +11,7 @@ use Timirey\XApi\Helpers\DateTimeHelper;
 /**
  * Class representing a symbol record.
  */
-class SymbolRecord
+final readonly class SymbolRecord
 {
     /**
      * @var QuoteId Source of price.
@@ -31,12 +31,12 @@ class SymbolRecord
     /**
      * @var DateTime|null Expiration time, null if not applicable.
      */
-    public ?DateTime $expiration = null;
+    public ?DateTime $expiration;
 
     /**
      * @var DateTime|null Starting time, null if not applicable.
      */
-    public ?DateTime $starting = null;
+    public ?DateTime $starting;
 
     /**
      * @var DateTime Ask & bid tick time.
@@ -156,13 +156,8 @@ class SymbolRecord
 
         $this->time = DateTimeHelper::fromMilliseconds($time);
 
-        if ($expiration !== null) {
-            $this->expiration = DateTimeHelper::fromMilliseconds($expiration);
-        }
-
-        if ($starting !== null) {
-            $this->starting = DateTimeHelper::fromMilliseconds($starting);
-        }
+        $this->expiration = $expiration !== null ? DateTimeHelper::fromMilliseconds($expiration) : null;
+        $this->starting = $starting !== null ? DateTimeHelper::fromMilliseconds($starting) : null;
 
         $this->swapRollover3Days = $swap_rollover3days;
     }

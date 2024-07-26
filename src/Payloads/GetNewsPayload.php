@@ -8,7 +8,7 @@ use Timirey\XApi\Helpers\DateTimeHelper;
 /**
  * Class that contains payload for the getNews command.
  */
-class GetNewsPayload extends AbstractPayload
+final class GetNewsPayload extends AbstractPayload
 {
     /**
      * Constructor for GetNewsPayload.

@@ -7,7 +7,7 @@ use Timirey\XApi\Responses\Data\SymbolRecord;
 /**
  * Class that contains response of the getAllSymbols command.
  */
-class GetAllSymbolsResponse extends AbstractResponse
+final readonly class GetAllSymbolsResponse extends AbstractResponse
 {
     /**
      * Constructor for GetAllSymbolsResponse.
@@ -21,12 +21,12 @@ class GetAllSymbolsResponse extends AbstractResponse
     /**
      * Create a response instance from the validated data.
      *
-     * @param  array $response Validated response data.
+     * @param  array<string, mixed> $response Validated response data.
      * @return static Instance of the response.
      */
-    protected static function create(array $response): static
+    protected static function create(array $response): self
     {
-        return new static(array_map(
+        return new self(array_map(
             static fn (array $symbolRecordData): SymbolRecord => new SymbolRecord(...$symbolRecordData),
             $response['returnData']
         ));

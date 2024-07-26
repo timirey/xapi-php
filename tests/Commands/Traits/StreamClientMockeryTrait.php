@@ -6,7 +6,7 @@ use Generator;
 use JsonException;
 use Mockery;
 use Mockery\MockInterface;
-use Timirey\XApi\Connections\StreamSocket;
+use Timirey\XApi\Connections\Stream;
 use Timirey\XApi\Enums\Host;
 use Timirey\XApi\Enums\StreamHost;
 use Timirey\XApi\Exceptions\InvalidPayloadException;
@@ -18,7 +18,7 @@ use Timirey\XApi\StreamClient;
  *
  * Provides setup and utility methods for mocking the stream socket client and handling API responses.
  *
- * @property MockInterface $streamSocket
+ * @property MockInterface $stream
  * @property StreamClient $streamClient
  */
 trait StreamClientMockeryTrait
@@ -37,7 +37,7 @@ trait StreamClientMockeryTrait
         string $streamSessionId = 'streamSessionId',
         StreamHost $host = StreamHost::DEMO
     ): void {
-        $this->streamSocket = Mockery::mock(StreamSocket::class);
+        $this->stream = Mockery::mock(Stream::class);
 
         $this->streamClient = new class ($streamSessionId, $host) extends StreamClient {
             /**
@@ -55,17 +55,17 @@ trait StreamClientMockeryTrait
             /**
              * Sets the stream socket client.
              *
-             * @param StreamSocket $streamSocket Stream socket client.
+             * @param Stream $stream Stream socket client.
              *
              * @return void
              */
-            public function setStreamSocket(StreamSocket $streamSocket): void
+            public function setStream(Stream $stream): void
             {
-                $this->streamSocket = $streamSocket;
+                $this->stream = $stream;
             }
         };
 
-        $this->streamClient->setStreamSocket($this->streamSocket);
+        $this->streamClient->setStream($this->stream);
     }
 
     /**
@@ -81,13 +81,13 @@ trait StreamClientMockeryTrait
      */
     public function mockStreamResponse(AbstractStreamPayload $payload, array $response): void
     {
-        $this->streamSocket->shouldReceive('send')
+        $this->stream->shouldReceive('send')
             ->once()
             ->with($payload->toJson());
 
         $mockResponse = json_encode($response);
 
-        $this->streamSocket->shouldReceive('listen')
+        $this->stream->shouldReceive('listen')
             ->once()
             ->andReturn(call_user_func(static function () use ($mockResponse): Generator {
                 yield $mockResponse;

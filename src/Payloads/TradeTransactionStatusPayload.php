@@ -5,7 +5,7 @@ namespace Timirey\XApi\Payloads;
 /**
  * Class that contains payload for the tradeTransactionStatus command.
  */
-class TradeTransactionStatusPayload extends AbstractPayload
+final class TradeTransactionStatusPayload extends AbstractPayload
 {
     /**
      * Constructor for TradeTransactionStatusPayload.

@@ -5,7 +5,7 @@ namespace Timirey\XApi\Responses\Data;
 /**
  * Class representing a trading hours record.
  */
-class TradingHoursRecord
+final readonly class TradingHoursRecord
 {
     /**
      * Constructor for TradingHoursRecord.

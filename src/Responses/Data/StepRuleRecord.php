@@ -5,7 +5,7 @@ namespace Timirey\XApi\Responses\Data;
 /**
  * Class representing a step rule record.
  */
-class StepRuleRecord
+final readonly class StepRuleRecord
 {
     /**
      * Constructor for StepRuleRecord.

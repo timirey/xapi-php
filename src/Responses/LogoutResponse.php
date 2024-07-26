@@ -5,6 +5,6 @@ namespace Timirey\XApi\Responses;
 /**
  * Class that contains the response of the logout command.
  */
-class LogoutResponse extends AbstractResponse
+final readonly class LogoutResponse extends AbstractResponse
 {
 }

@@ -5,9 +5,9 @@ namespace Timirey\XApi\Responses;
 use Timirey\XApi\Responses\Data\ProfitStreamRecord;
 
 /**
- * Class that contains the response of the getProfits stream command.
+ * final readonly class that contains the response of the getProfits stream command.
  */
-class GetProfitsStreamResponse extends AbstractStreamResponse
+final readonly class GetProfitsStreamResponse extends AbstractStreamResponse
 {
     /**
      * Constructor for the GetProfitsStreamResponse class.
@@ -24,8 +24,8 @@ class GetProfitsStreamResponse extends AbstractStreamResponse
      * @param  array<string, mixed> $response Validated response data.
      * @return static Instance of the response.
      */
-    protected static function create(array $response): static
+    protected static function create(array $response): self
     {
-        return new static(new ProfitStreamRecord(...$response['data']));
+        return new self(new ProfitStreamRecord(...$response['data']));
     }
 }

@@ -9,7 +9,7 @@ use Timirey\XApi\Helpers\DateTimeHelper;
 /**
  * Class representing a trading record.
  */
-class TradingRecord
+final readonly class TradingRecord
 {
     /**
      * @var Day Day of week.

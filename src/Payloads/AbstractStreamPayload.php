@@ -13,7 +13,7 @@ abstract class AbstractStreamPayload extends AbstractPayload
     /**
      * Constructor for AbstractStreamPayload.
      *
-     * @param  string $streamSessionId Stream session id.
+     * @param string $streamSessionId Stream session id.
      */
     public function __construct(string $streamSessionId)
     {
@@ -32,16 +32,16 @@ abstract class AbstractStreamPayload extends AbstractPayload
     {
         $payload['command'] = $this->getCommand();
 
-        if (! empty($this->parameters)) {
+        if (!empty($this->parameters)) {
             $payload = array_merge($payload, $this->parameters);
         }
 
-        if (! isset($payload['streamSessionId'])) {
+        if (!isset($payload['streamSessionId'])) {
             throw new InvalidPayloadException('The payload did not include a streamSessionId.');
         }
 
-        if (! is_string($payload['streamSessionId'])) {
-            throw new InvalidPayloadException('The streamSessionId provided in the payload is invalid.');
+        if (empty($payload['streamSessionId'])) {
+            throw new InvalidPayloadException('The streamSessionId provided in the payload is empty.');
         }
 
         return json_encode($payload, JSON_THROW_ON_ERROR);

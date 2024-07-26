@@ -75,16 +75,16 @@ composer require timirey/xapi-php
 Basic usage example.
 
 ```PHP
-use Timirey\XApi\Client;
+use Timirey\XApi\SocketClient;
 use Timirey\XApi\Enums\Host;
 use Timirey\XApi\Responses\GetCalendarResponse;
 use Timirey\XApi\Responses\LoginResponse;
 use Timirey\XApi\Responses\LogoutResponse;
 
 /**
- * @var Client
+ * @var SocketClient
  */
-$client = new Client(
+$client = new SocketClient(
     host: Host::DEMO
 );
 
@@ -116,12 +116,12 @@ use Timirey\XApi\Responses\LoginResponse;
 use Timirey\XApi\Enums\StreamHost;
 use Timirey\XApi\StreamClient;
 use Timirey\XApi\Enums\Host;
-use Timirey\XApi\Client;
+use Timirey\XApi\SocketClient;
 
 /**
- * @var Client
+ * @var SocketClient
  */
-$client = new Client(
+$client = new SocketClient(
     host: Host::DEMO
 );
 
@@ -170,11 +170,11 @@ Logs in to the xStation5 API.
 
 ```PHP
 use Timirey\XApi\Responses\LoginResponse;
-use Timirey\XApi\Client;
+use Timirey\XApi\SocketClient;
 
 /** 
  * @var LoginResponse $response 
- * @var Client $client
+ * @var SocketClient $client
  */
 $response = $client->login(
     userId: 123456789, 
@@ -188,11 +188,11 @@ Logs out from the xStation5 API.
 
 ```PHP
 use Timirey\XApi\Responses\LogoutResponse;
-use Timirey\XApi\Client;
+use Timirey\XApi\SocketClient;
 
 /** 
  * @var LogoutResponse $response
- * @var Client $client
+ * @var SocketClient $client
  */
 $response = $client->logout();
 ```
@@ -404,11 +404,11 @@ Retrieves information about all symbols.
 
 ```PHP
 use Timirey\XApi\Responses\GetAllSymbolsResponse;
-use Timirey\XApi\Client;
+use Timirey\XApi\SocketClient;
 
 /** 
  * @var GetAllSymbolsResponse $response 
- * @var Client $client
+ * @var SocketClient $client
  */
 $response = $client->getAllSymbols();
 ```
@@ -419,11 +419,11 @@ Returns a calendar with market events.
 
 ```PHP
 use Timirey\XApi\Responses\GetCalendarResponse;
-use Timirey\XApi\Client;
+use Timirey\XApi\SocketClient;
 
 /** 
  * @var GetCalendarResponse $response 
- * @var Client $client
+ * @var SocketClient $client
  */
 $response = $client->getCalendar();
 ```
@@ -434,7 +434,7 @@ Returns chart info from the start date to the current time.
 
 ```PHP
 use Timirey\XApi\Responses\GetChartLastRequestResponse;
-use Timirey\XApi\Client;
+use Timirey\XApi\SocketClient;
 use Timirey\XApi\Payloads\Data\ChartLastInfoRecord;
 use Timirey\XApi\Enums\Period;
 use DateTime;
@@ -447,7 +447,7 @@ $chartLastInfoRecord = new ChartLastInfoRecord(
 
 /** 
  * @var GetChartLastRequestResponse $response 
- * @var Client $client
+ * @var SocketClient $client
  */
 $response = $client->getChartLastRequest(
     chartLastInfoRecord: $chartLastInfoRecord
@@ -460,7 +460,7 @@ Returns chart info from the start date to the current time.
 
 ```PHP
 use Timirey\XApi\Responses\GetChartRangeRequestResponse;
-use Timirey\XApi\Client;
+use Timirey\XApi\SocketClient;
 use Timirey\XApi\Payloads\Data\ChartRangeInfoRecord;
 use Timirey\XApi\Enums\Period;
 use DateTime;
@@ -475,7 +475,7 @@ $chartRangeInfoRecord = new ChartRangeInfoRecord(
 
 /** 
  * @var GetChartRangeRequestResponse $response 
- * @var Client $client
+ * @var SocketClient $client
  */
 $response = $client->getChartRangeRequest(
     chartRangeInfoRecord: $chartRangeInfoRecord
@@ -488,11 +488,11 @@ Returns the calculation of commission and rate of exchange.
 
 ```PHP
 use Timirey\XApi\Responses\GetCommissionDefResponse;
-use Timirey\XApi\Client;
+use Timirey\XApi\SocketClient;
 
 /** 
  * @var GetCommissionDefResponse $response 
- * @var Client $client
+ * @var SocketClient $client
  */
 $response = $client->getCommissionDef(
     symbol: 'EURUSD',
@@ -506,11 +506,11 @@ Returns information about account currency and leverage.
 
 ```PHP
 use Timirey\XApi\Responses\GetCurrentUserDataResponse;
-use Timirey\XApi\Client;
+use Timirey\XApi\SocketClient;
 
 /** 
  * @var GetCurrentUserDataResponse $response 
- * @var Client $client
+ * @var SocketClient $client
  */
 $response = $client->getCurrentUserData();
 ```
@@ -521,12 +521,12 @@ Returns IBs data from the given time range.
 
 ```PHP
 use Timirey\XApi\Responses\GetIbsHistoryResponse;
-use Timirey\XApi\Client;
+use Timirey\XApi\SocketClient;
 use DateTime;
 
 /** 
  * @var GetIbsHistoryResponse $response 
- * @var Client $client
+ * @var SocketClient $client
  */
 $response = $client->getIbsHistory(
     start: new DateTime('-1 month'),
@@ -540,11 +540,11 @@ Returns various account indicators.
 
 ```PHP
 use Timirey\XApi\Responses\GetMarginLevelResponse;
-use Timirey\XApi\Client;
+use Timirey\XApi\SocketClient;
 
 /** 
  * @var GetMarginLevelResponse $response 
- * @var Client $client
+ * @var SocketClient $client
  */
 $response = $client->getMarginLevel();
 ```
@@ -555,11 +555,11 @@ Returns expected margin for a given instrument and volume.
 
 ```PHP
 use Timirey\XApi\Responses\GetMarginTradeResponse;
-use Timirey\XApi\Client;
+use Timirey\XApi\SocketClient;
 
 /** 
  * @var GetMarginTradeResponse $response 
- * @var Client $client
+ * @var SocketClient $client
  */
 $response = $client->getMarginTrade(
     symbol: 'EURPLN', 
@@ -573,12 +573,12 @@ Returns news from the trading server which were sent within a specified period.
 
 ```PHP
 use Timirey\XApi\Responses\GetNewsResponse;
-use Timirey\XApi\Client;
+use Timirey\XApi\SocketClient;
 use DateTime;
 
 /** 
  * @var GetNewsResponse $response 
- * @var Client $client
+ * @var SocketClient $client
  */
 $response = $client->getNews(
     start: new DateTime('-1 month'), 
@@ -592,12 +592,12 @@ Calculates estimated profit for given deal data.
 
 ```PHP
 use Timirey\XApi\Responses\GetProfitCalculationResponse;
-use Timirey\XApi\Client;
+use Timirey\XApi\SocketClient;
 use Timirey\XApi\Enums\Cmd;
 
 /** 
  * @var GetProfitCalculationResponse $response 
- * @var Client $client
+ * @var SocketClient $client
  */
 $response = $client->getProfitCalculation(
   closePrice: 1.3000, 
@@ -614,11 +614,11 @@ Returns the current time on the trading server.
 
 ```PHP
 use Timirey\XApi\Responses\GetServerTimeResponse;
-use Timirey\XApi\Client;
+use Timirey\XApi\SocketClient;
 
 /** 
  * @var GetServerTimeResponse $response 
- * @var Client $client
+ * @var SocketClient $client
  */
 $response = $client->getServerTime();
 ```
@@ -629,11 +629,11 @@ Returns a list of step rules for DMAs.
 
 ```PHP
 use Timirey\XApi\Responses\GetStepRulesResponse;
-use Timirey\XApi\Client;
+use Timirey\XApi\SocketClient;
 
 /** 
  * @var GetStepRulesResponse $response 
- * @var Client $client
+ * @var SocketClient $client
  */
 $response = $client->getStepRules();
 ```
@@ -644,11 +644,11 @@ Retrieves information about a specific symbol.
 
 ```PHP
 use Timirey\XApi\Responses\GetSymbolResponse;
-use Timirey\XApi\Client;
+use Timirey\XApi\SocketClient;
 
 /** 
  * @var GetSymbolResponse $response 
- * @var Client $client
+ * @var SocketClient $client
  */
 $response = $client->getSymbol(
     symbol: EURUSD
@@ -662,12 +662,12 @@ Returns an array of current quotations for given symbols.
 ```PHP
 use Timirey\XApi\Responses\GetTickPricesResponse;
 use Timirey\XApi\Enums\Level;
-use Timirey\XApi\Client;
+use Timirey\XApi\SocketClient;
 use DateTime;
 
 /**
  * @var GetTickPricesResponse $response
- * @var Client $client
+ * @var SocketClient $client
  */
 $response = $client->getTickPrices(
     level: Level::BASE, 
@@ -682,11 +682,11 @@ Returns an array of trades listed in orders argument.
 
 ```PHP
 use Timirey\XApi\Responses\GetTradeRecordsResponse;
-use Timirey\XApi\Client;
+use Timirey\XApi\SocketClient;
 
 /** 
  * @var GetTradeRecordsResponse $response 
- * @var Client $client
+ * @var SocketClient $client
  */
 $response = $client->getTradeRecords(
     orders: [7489839, 7489841]
@@ -699,11 +699,11 @@ Returns an array of user's trades.
 
 ```PHP
 use Timirey\XApi\Responses\GetTradesResponse;
-use Timirey\XApi\Client;
+use Timirey\XApi\SocketClient;
 
 /** 
  * @var GetTradesResponse $response 
- * @var Client $client
+ * @var SocketClient $client
  */
 $response = $client->getTrades(
     openedOnly: true
@@ -716,12 +716,12 @@ Returns an array of user's trades which were closed within a specified period.
 
 ```PHP
 use Timirey\XApi\Responses\GetTradesHistoryResponse;
-use Timirey\XApi\Client;
+use Timirey\XApi\SocketClient;
 use DateTime;
 
 /** 
  * @var GetTradesHistoryResponse $response 
- * @var Client $client
+ * @var SocketClient $client
  */
 $response = $client->getTradesHistory(
     start: new DateTime('last month'), 
@@ -735,11 +735,11 @@ Returns quotes and trading times.
 
 ```PHP
 use Timirey\XApi\Responses\GetTradingHoursResponse;
-use Timirey\XApi\Client;
+use Timirey\XApi\SocketClient;
 
 /** 
  * @var GetTradingHoursResponse $response 
- * @var Client $client
+ * @var SocketClient $client
  */
 $response = $client->getTradingHours(
     symbols: ['EURPLN', 'AGO.PL']
@@ -752,11 +752,11 @@ Returns the current API version.
 
 ```PHP
 use Timirey\XApi\Responses\GetVersionResponse;
-use Timirey\XApi\Client;
+use Timirey\XApi\SocketClient;
 
 /** 
  * @var GetVersionResponse $response 
- * @var Client $client
+ * @var SocketClient $client
  */
 $response = $client->getVersion();
 ```
@@ -767,11 +767,11 @@ Regularly calling this function is enough to refresh the internal state of all t
 
 ```PHP
 use Timirey\XApi\Responses\PingResponse;
-use Timirey\XApi\Client;
+use Timirey\XApi\SocketClient;
 
 /** 
  * @var PingResponse $response 
- * @var Client $client
+ * @var SocketClient $client
  */
 $response = $client->ping();
 ```
@@ -783,7 +783,7 @@ Starts a trade transaction.
 ```PHP
 use Timirey\XApi\Responses\TradeTransactionResponse;
 use Timirey\XApi\Payloads\Data\TradeTransInfo;
-use Timirey\XApi\Client;
+use Timirey\XApi\SocketClient;
 
 $tradeTransInfo = new TradeTransInfo(
     cmd: Cmd::BUY,
@@ -801,7 +801,7 @@ $tradeTransInfo = new TradeTransInfo(
 
 /** 
  * @var TradeTransactionResponse $response 
- * @var Client $client
+ * @var SocketClient $client
  */
 $response = $client->tradeTransaction(
     tradeTransInfo: $tradeTransInfo
@@ -814,11 +814,11 @@ Returns the current transaction status.
 
 ```PHP
 use Timirey\XApi\Responses\TradeTransactionStatusResponse;
-use Timirey\XApi\Client;
+use Timirey\XApi\SocketClient;
 
 /** 
  * @var TradeTransactionStatusResponse $response 
- * @var Client $client
+ * @var SocketClient $client
  */
 $response = $client->tradeTransactionStatus(
     order: 123456
@@ -836,12 +836,12 @@ Thrown when the API returns an error (e.g., invalid password). Provides error co
 ```PHP
 use Timirey\XApi\Exceptions\ResponseException;
 use Timirey\XApi\Enums\Host;
-use Timirey\XApi\Client;
+use Timirey\XApi\SocketClient;
 
 /** 
- * @var Client $client 
+ * @var SocketClient $client 
  */
-$client = new Client(
+$client = new SocketClient(
     userId: 123456789, 
     password: 'invalidPassword', 
     host: Host::DEMO
@@ -865,12 +865,12 @@ Thrown when a request fails and the API does not return a proper error response 
 ```PHP
 use \Timirey\XApi\Exceptions\InvalidResponseException;
 use Timirey\XApi\Enums\Host;
-use Timirey\XApi\Client;
+use Timirey\XApi\SocketClient;
 
 /** 
- * @var Client $client 
+ * @var SocketClient $client 
  */
-$client = new Client(
+$client = new SocketClient(
     userId: 123456789, 
     password: 'password', 
     host: Host::DEMO

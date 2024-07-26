@@ -5,7 +5,7 @@ namespace Timirey\XApi\Payloads;
 /**
  * Class that contains payload for the getAllSymbols command.
  */
-class GetAllSymbolsPayload extends AbstractPayload
+final class GetAllSymbolsPayload extends AbstractPayload
 {
     /**
      * Get the command.

@@ -9,7 +9,7 @@ use Timirey\XApi\Helpers\DateTimeHelper;
 /**
  * Class representing the candle record data in the streaming response.
  */
-class CandleStreamRecord
+final readonly class CandleStreamRecord
 {
     /**
      * @var QuoteId Source of price.

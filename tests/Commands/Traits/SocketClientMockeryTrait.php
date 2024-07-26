@@ -5,7 +5,7 @@ namespace Timirey\XApi\Tests\Commands\Traits;
 use JsonException;
 use Mockery;
 use Mockery\MockInterface;
-use Timirey\XApi\Client;
+use Timirey\XApi\SocketClient;
 use Timirey\XApi\Connections\Socket;
 use Timirey\XApi\Enums\Host;
 use Timirey\XApi\Payloads\AbstractPayload;
@@ -16,9 +16,9 @@ use Timirey\XApi\Payloads\AbstractPayload;
  * Provides setup and utility methods for mocking the socket client and handling API responses.
  *
  * @property MockInterface $socket
- * @property Client $client
+ * @property SocketClient $client
  */
-trait ClientMockeryTrait
+trait SocketClientMockeryTrait
 {
     /**
      * Sets up the mocked socket client.
@@ -35,7 +35,7 @@ trait ClientMockeryTrait
     {
         $this->socket = Mockery::mock(Socket::class);
 
-        $this->client = new class ($userId, $password, $host) extends Client {
+        $this->client = new class ($userId, $password, $host) extends SocketClient {
             /**
              * Override the constructor to prevent creating a new Socket instance.
              *
