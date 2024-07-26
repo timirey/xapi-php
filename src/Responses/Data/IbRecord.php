@@ -9,7 +9,7 @@ use Timirey\XApi\Helpers\DateTimeHelper;
 /**
  * Class representing an IB record.
  */
-readonly class IbRecord
+final readonly class IbRecord
 {
     /**
      * @var Side|null Operation code or null if not allowed to view.
@@ -34,7 +34,7 @@ readonly class IbRecord
      * @param  integer|null $timestamp  Time the record was created or null if not allowed to view.
      * @param  float|null   $volume     Volume in lots or null if not allowed to view.
      */
-    final public function __construct(
+    public function __construct(
         public ?float $closePrice,
         public ?string $login,
         public ?float $nominal,

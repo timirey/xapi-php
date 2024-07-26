@@ -7,14 +7,14 @@ use Timirey\XApi\Responses\Data\BalanceStreamRecord;
 /**
  * Class that contains the response of the getBalance stream command.
  */
-readonly class GetBalanceStreamResponse extends AbstractStreamResponse
+final readonly class GetBalanceStreamResponse extends AbstractStreamResponse
 {
     /**
      * Constructor for the GetBalanceStreamResponse class.
      *
      * @param  BalanceStreamRecord $balanceStreamRecord Balance record data.
      */
-    final public function __construct(public BalanceStreamRecord $balanceStreamRecord)
+    public function __construct(public BalanceStreamRecord $balanceStreamRecord)
     {
     }
 
@@ -24,8 +24,8 @@ readonly class GetBalanceStreamResponse extends AbstractStreamResponse
      * @param  array<string, mixed> $response Validated response data.
      * @return static Instance of the response.
      */
-    protected static function create(array $response): static
+    protected static function create(array $response): self
     {
-        return new static(new BalanceStreamRecord(...$response['data']));
+        return new self(new BalanceStreamRecord(...$response['data']));
     }
 }

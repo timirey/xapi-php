@@ -5,7 +5,7 @@ namespace Timirey\XApi\Payloads;
 /**
  * Class representing the payload for the getCandles stream command.
  */
-class GetCandlesStreamPayload extends AbstractStreamPayload
+final class GetCandlesStreamPayload extends AbstractStreamPayload
 {
     /**
      * @param  string $streamSessionId Stream session ID.

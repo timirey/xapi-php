@@ -7,7 +7,7 @@ use Timirey\XApi\Payloads\Data\ChartLastInfoRecord;
 /**
  * Class that contains payload for the getChartLastRequest command.
  */
-class GetChartLastRequestPayload extends AbstractPayload
+final class GetChartLastRequestPayload extends AbstractPayload
 {
     /**
      * Constructor for GetChartLastRequestPayload.

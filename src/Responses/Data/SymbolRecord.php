@@ -11,7 +11,7 @@ use Timirey\XApi\Helpers\DateTimeHelper;
 /**
  * Class representing a symbol record.
  */
-readonly class SymbolRecord
+final readonly class SymbolRecord
 {
     /**
      * @var QuoteId Source of price.
@@ -100,7 +100,7 @@ readonly class SymbolRecord
      * @param  boolean      $shortSelling       Indicates whether short selling is allowed on the instrument.
      * @param  boolean      $currencyPair       Indicates whether the symbol represents a currency pair.
      */
-    final public function __construct(
+    public function __construct(
         public string $symbol,
         public string $currency,
         public string $categoryName,

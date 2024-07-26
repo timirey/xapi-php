@@ -8,7 +8,7 @@ use Timirey\XApi\Helpers\DateTimeHelper;
 /**
  * Class representing a rate information record.
  */
-readonly class RateInfoRecord
+final readonly class RateInfoRecord
 {
     /**
      * @var DateTime Candle start time in CET / CEST time zone.
@@ -26,7 +26,7 @@ readonly class RateInfoRecord
      * @param  float   $open      Open price (in base currency * 10 to the power of digits).
      * @param  float   $vol       Volume in lots.
      */
-    final public function __construct(
+    public function __construct(
         public float $close,
         int $ctm,
         public string $ctmString,

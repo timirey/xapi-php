@@ -7,14 +7,14 @@ use Timirey\XApi\Responses\Data\TradeRecord;
 /**
  * Class that contains the response of the getTrades command.
  */
-readonly class GetTradesResponse extends AbstractResponse
+final readonly class GetTradesResponse extends AbstractResponse
 {
     /**
      * Constructor for GetTradesResponse.
      *
      * @param TradeRecord[] $tradeRecords TradeRecord instances.
      */
-    final public function __construct(public array $tradeRecords)
+    public function __construct(public array $tradeRecords)
     {
     }
 
@@ -24,9 +24,9 @@ readonly class GetTradesResponse extends AbstractResponse
      * @param array<string, mixed> $response Validated response data.
      * @return static Instance of the response.
      */
-    protected static function create(array $response): static
+    protected static function create(array $response): self
     {
-        return new static(array_map(
+        return new self(array_map(
             static fn(array $tradeRecordData): TradeRecord => new TradeRecord(...$tradeRecordData),
             $response['returnData']
         ));

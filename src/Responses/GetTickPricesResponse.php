@@ -7,14 +7,14 @@ use Timirey\XApi\Responses\Data\TickRecord;
 /**
  * Class that contains the response of the getTickPrices command.
  */
-readonly class GetTickPricesResponse extends AbstractResponse
+final readonly class GetTickPricesResponse extends AbstractResponse
 {
     /**
      * Constructor for GetTickPricesResponse.
      *
      * @param  TickRecord[] $quotations TickRecord instances, aka Quotations.
      */
-    final public function __construct(public array $quotations)
+    public function __construct(public array $quotations)
     {
     }
 
@@ -24,9 +24,9 @@ readonly class GetTickPricesResponse extends AbstractResponse
      * @param  array<string, mixed> $response Validated response data.
      * @return static Instance of the response.
      */
-    protected static function create(array $response): static
+    protected static function create(array $response): self
     {
-        return new static(array_map(
+        return new self(array_map(
             static fn (array $tickRecordData): TickRecord => new TickRecord(...$tickRecordData),
             $response['returnData']['quotations']
         ));

@@ -5,7 +5,7 @@ namespace Timirey\XApi\Payloads;
 /**
  * Class that contains payload for the ping command.
  */
-class PingPayload extends AbstractPayload
+final class PingPayload extends AbstractPayload
 {
     /**
      * Get the command.

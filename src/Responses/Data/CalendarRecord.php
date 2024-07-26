@@ -9,7 +9,7 @@ use Timirey\XApi\Helpers\DateTimeHelper;
 /**
  * Class representing a calendar record.
  */
-readonly class CalendarRecord
+final readonly class CalendarRecord
 {
     /**
      * @var Impact Impact on market.
@@ -33,7 +33,7 @@ readonly class CalendarRecord
      * @param  integer $time     Time when the information will be released.
      * @param  string  $title    Name of the indicator for which values will be released.
      */
-    final public function __construct(
+    public function __construct(
         public string $country,
         public string $current,
         public string $forecast,

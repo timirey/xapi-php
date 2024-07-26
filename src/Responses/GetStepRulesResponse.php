@@ -8,14 +8,14 @@ use Timirey\XApi\Responses\Data\StepRuleRecord;
 /**
  * Class that contains the response of the getStepRules command.
  */
-readonly class GetStepRulesResponse extends AbstractResponse
+final readonly class GetStepRulesResponse extends AbstractResponse
 {
     /**
      * Constructor for GetStepRulesResponse.
      *
      * @param  StepRuleRecord[] $stepRuleRecords StepRuleRecord instances.
      */
-    final public function __construct(public array $stepRuleRecords)
+    public function __construct(public array $stepRuleRecords)
     {
     }
 
@@ -25,9 +25,9 @@ readonly class GetStepRulesResponse extends AbstractResponse
      * @param array<string, mixed> $response Validated response data.
      * @return static Instance of the response.
      */
-    protected static function create(array $response): static
+    protected static function create(array $response): self
     {
-        return new static(array_map(
+        return new self(array_map(
             static fn (array $stepRuleRecordData): StepRuleRecord => new StepRuleRecord(
                 $stepRuleRecordData['id'],
                 $stepRuleRecordData['name'],

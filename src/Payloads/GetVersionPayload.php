@@ -5,7 +5,7 @@ namespace Timirey\XApi\Payloads;
 /**
  * Class that contains payload for the getVersion command.
  */
-class GetVersionPayload extends AbstractPayload
+final class GetVersionPayload extends AbstractPayload
 {
     /**
      * Get the command.

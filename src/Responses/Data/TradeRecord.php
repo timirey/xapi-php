@@ -9,7 +9,7 @@ use Timirey\XApi\Helpers\DateTimeHelper;
 /**
  * Class representing a trade record.
  */
-readonly class TradeRecord
+final readonly class TradeRecord
 {
     /**
      * @var Cmd Operation code.
@@ -66,7 +66,7 @@ readonly class TradeRecord
      * @param  float        $tp               Zero if take profit is not set (in base currency).
      * @param  float        $volume           Volume in lots.
      */
-    final public function __construct(
+    public function __construct(
         public float $close_price,
         ?int $close_time,
         public ?string $close_timeString,

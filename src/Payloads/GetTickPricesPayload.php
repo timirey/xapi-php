@@ -9,7 +9,7 @@ use Timirey\XApi\Helpers\DateTimeHelper;
 /**
  * Class that contains payload for the getTickPrices command.
  */
-class GetTickPricesPayload extends AbstractPayload
+final class GetTickPricesPayload extends AbstractPayload
 {
     /**
      * Constructor for GetTickPricesPayload.

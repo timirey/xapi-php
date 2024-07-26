@@ -7,7 +7,7 @@ use Timirey\XApi\Payloads\Data\ChartRangeInfoRecord;
 /**
  * Class that contains payload for the getChartRangeRequest command.
  */
-class GetChartRangeRequestPayload extends AbstractPayload
+final class GetChartRangeRequestPayload extends AbstractPayload
 {
     /**
      * Constructor for GetChartRangeRequestPayload.

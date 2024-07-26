@@ -5,7 +5,7 @@ namespace Timirey\XApi\Payloads;
 /**
  * Class representing the payload for the getProfits stream command.
  */
-class GetProfitsStreamPayload extends AbstractStreamPayload
+final class GetProfitsStreamPayload extends AbstractStreamPayload
 {
     /**
      * Returns the command name for the payload.

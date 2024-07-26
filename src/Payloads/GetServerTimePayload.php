@@ -5,7 +5,7 @@ namespace Timirey\XApi\Payloads;
 /**
  * Class that contains payload for the getServerTime command.
  */
-class GetServerTimePayload extends AbstractPayload
+final class GetServerTimePayload extends AbstractPayload
 {
     /**
      * Get the command.

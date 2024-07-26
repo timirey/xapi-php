@@ -5,7 +5,7 @@ namespace Timirey\XApi\Responses\Data;
 /**
  * Class representing a trading hours record.
  */
-readonly class TradingHoursRecord
+final readonly class TradingHoursRecord
 {
     /**
      * Constructor for TradingHoursRecord.
@@ -14,7 +14,7 @@ readonly class TradingHoursRecord
      * @param  string          $symbol  Symbol.
      * @param  TradingRecord[] $trading Array of trading records.
      */
-    final public function __construct(public array $quotes, public string $symbol, public array $trading)
+    public function __construct(public array $quotes, public string $symbol, public array $trading)
     {
     }
 }

@@ -7,14 +7,14 @@ use Timirey\XApi\Responses\Data\CalendarRecord;
 /**
  * Class that contains the response of the getCalendar command.
  */
-readonly class GetCalendarResponse extends AbstractResponse
+final readonly class GetCalendarResponse extends AbstractResponse
 {
     /**
      * Constructor for GetCalendarResponse.
      *
      * @param  CalendarRecord[] $calendarRecords CalendarRecord instances.
      */
-    final public function __construct(public array $calendarRecords)
+    public function __construct(public array $calendarRecords)
     {
     }
 
@@ -24,9 +24,9 @@ readonly class GetCalendarResponse extends AbstractResponse
      * @param  array<string, mixed> $response Validated response data.
      * @return static Instance of the response.
      */
-    protected static function create(array $response): static
+    protected static function create(array $response): self
     {
-        return new static(array_map(
+        return new self(array_map(
             static fn (array $calendarRecordData): CalendarRecord => new CalendarRecord(...$calendarRecordData),
             $response['returnData']
         ));

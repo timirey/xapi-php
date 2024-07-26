@@ -9,7 +9,7 @@ use Timirey\XApi\Helpers\DateTimeHelper;
 /**
  * Class representing the candle record data in the streaming response.
  */
-readonly class CandleStreamRecord
+final readonly class CandleStreamRecord
 {
     /**
      * @var QuoteId Source of price.
@@ -34,7 +34,7 @@ readonly class CandleStreamRecord
      * @param  string  $symbol    Symbol.
      * @param  float   $vol       Volume in lots.
      */
-    final public function __construct(
+    public function __construct(
         public float $close,
         int $ctm,
         public string $ctmString,

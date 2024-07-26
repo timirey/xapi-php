@@ -7,14 +7,14 @@ use Timirey\XApi\Responses\Data\KeepAliveStreamRecord;
 /**
  * Class that contains the response of the getKeepAlive stream command.
  */
-readonly class GetKeepAliveStreamResponse extends AbstractStreamResponse
+final readonly class GetKeepAliveStreamResponse extends AbstractStreamResponse
 {
     /**
      * Constructor for the GetKeepAliveStreamResponse class.
      *
      * @param  KeepAliveStreamRecord $keepAliveStreamRecord Keep alive record data.
      */
-    final public function __construct(public KeepAliveStreamRecord $keepAliveStreamRecord)
+    public function __construct(public KeepAliveStreamRecord $keepAliveStreamRecord)
     {
     }
 
@@ -24,8 +24,8 @@ readonly class GetKeepAliveStreamResponse extends AbstractStreamResponse
      * @param  array<string, mixed> $response Validated response data.
      * @return static Instance of the response.
      */
-    protected static function create(array $response): static
+    protected static function create(array $response): self
     {
-        return new static(new KeepAliveStreamRecord(...$response['data']));
+        return new self(new KeepAliveStreamRecord(...$response['data']));
     }
 }

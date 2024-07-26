@@ -5,7 +5,7 @@ namespace Timirey\XApi\Payloads;
 /**
  * Class that contains payload for the getTradeRecords command.
  */
-class GetTradeRecordsPayload extends AbstractPayload
+final class GetTradeRecordsPayload extends AbstractPayload
 {
     /**
      * Constructor for GetTradeRecordsPayload.

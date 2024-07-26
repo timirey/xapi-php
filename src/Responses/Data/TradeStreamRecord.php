@@ -11,7 +11,7 @@ use Timirey\XApi\Helpers\DateTimeHelper;
 /**
  * Class representing the trade record data in the streaming response.
  */
-readonly class TradeStreamRecord
+final readonly class TradeStreamRecord
 {
     /**
      * @var Cmd Operation code.
@@ -86,7 +86,7 @@ readonly class TradeStreamRecord
      * @param integer      $type          Trade type.
      * @param float        $volume        Volume in lots.
      */
-    final public function __construct(
+    public function __construct(
         float $close_price,
         ?int $close_time,
         public bool $closed,

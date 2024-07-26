@@ -7,7 +7,7 @@ use Timirey\XApi\Enums\RequestStatus;
 /**
  * Class representing the trade status record data in the streaming response.
  */
-readonly class TradeStatusStreamRecord
+final readonly class TradeStatusStreamRecord
 {
     /**
      * @var RequestStatus Request status.
@@ -23,7 +23,7 @@ readonly class TradeStatusStreamRecord
      * @param  float       $price         Price in base currency.
      * @param  integer     $requestStatus Request status code.
      */
-    final public function __construct(
+    public function __construct(
         public string $customComment,
         public ?string $message,
         public int $order,

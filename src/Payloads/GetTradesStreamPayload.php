@@ -5,7 +5,7 @@ namespace Timirey\XApi\Payloads;
 /**
  * Class representing the payload for the getTrades stream command.
  */
-class GetTradesStreamPayload extends AbstractStreamPayload
+final class GetTradesStreamPayload extends AbstractStreamPayload
 {
     /**
      * Returns the command name for the payload.

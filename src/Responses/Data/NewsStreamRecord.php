@@ -8,7 +8,7 @@ use Timirey\XApi\Helpers\DateTimeHelper;
 /**
  * Class representing the news record data in the streaming response.
  */
-readonly class NewsStreamRecord
+final readonly class NewsStreamRecord
 {
     /**
      * @var DateTime Timestamp.
@@ -23,7 +23,7 @@ readonly class NewsStreamRecord
      * @param  integer $time  Time of the news.
      * @param  string  $title Title of the news.
      */
-    final public function __construct(
+    public function __construct(
         public string $body,
         public string $key,
         int $time,

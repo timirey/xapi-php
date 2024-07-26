@@ -7,7 +7,7 @@ use Timirey\XApi\Responses\Data\RateInfoRecord;
 /**
  * Class that contains response of the getChartLastRequest command.
  */
-readonly class GetChartLastRequestResponse extends AbstractResponse
+final readonly class GetChartLastRequestResponse extends AbstractResponse
 {
     /**
      * Constructor for GetChartLastRequestResponse.
@@ -15,7 +15,7 @@ readonly class GetChartLastRequestResponse extends AbstractResponse
      * @param  integer          $digits          The number of decimal places for price values.
      * @param  RateInfoRecord[] $rateInfoRecords An array of rate information records.
      */
-    final public function __construct(public int $digits, public array $rateInfoRecords)
+    public function __construct(public int $digits, public array $rateInfoRecords)
     {
     }
 
@@ -25,9 +25,9 @@ readonly class GetChartLastRequestResponse extends AbstractResponse
      * @param  array<string, mixed> $response Validated response data.
      * @return static Instance of the response.
      */
-    protected static function create(array $response): static
+    protected static function create(array $response): self
     {
-        return new static(
+        return new self(
             $response['returnData']['digits'],
             array_map(
                 static fn (array $rateInfoRecordData): RateInfoRecord => new RateInfoRecord(...$rateInfoRecordData),

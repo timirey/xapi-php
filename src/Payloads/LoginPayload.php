@@ -5,7 +5,7 @@ namespace Timirey\XApi\Payloads;
 /**
  * Class that contains payload for the login command.
  */
-class LoginPayload extends AbstractPayload
+final class LoginPayload extends AbstractPayload
 {
     /**
      * Constructor for LoginPayload.

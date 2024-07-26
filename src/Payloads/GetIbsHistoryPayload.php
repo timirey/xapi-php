@@ -8,7 +8,7 @@ use Timirey\XApi\Helpers\DateTimeHelper;
 /**
  * Class that contains payload for the getIbsHistory command.
  */
-class GetIbsHistoryPayload extends AbstractPayload
+final class GetIbsHistoryPayload extends AbstractPayload
 {
     /**
      * Constructor for GetIbsHistoryPayload.

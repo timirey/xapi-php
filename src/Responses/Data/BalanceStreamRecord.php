@@ -5,7 +5,7 @@ namespace Timirey\XApi\Responses\Data;
 /**
  * Class representing the balance record data in the streaming response.
  */
-readonly class BalanceStreamRecord
+final readonly class BalanceStreamRecord
 {
     /**
      * @var float FX equity.
@@ -26,7 +26,7 @@ readonly class BalanceStreamRecord
      * @param  float $stockLock      Stock lock.
      * @param  float $cashStockValue Cash stock value.
      */
-    final public function __construct(
+    public function __construct(
         public float $balance,
         public float $margin,
         float $equityFX,

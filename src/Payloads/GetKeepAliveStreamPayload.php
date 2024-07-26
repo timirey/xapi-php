@@ -5,7 +5,7 @@ namespace Timirey\XApi\Payloads;
 /**
  * Class representing the payload for the getKeepAlive stream command.
  */
-class GetKeepAliveStreamPayload extends AbstractStreamPayload
+final class GetKeepAliveStreamPayload extends AbstractStreamPayload
 {
     /**
      * Returns the command name for the payload.

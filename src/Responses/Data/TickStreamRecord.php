@@ -9,7 +9,7 @@ use Timirey\XApi\Helpers\DateTimeHelper;
 /**
  * Class representing the tick record data in the streaming response.
  */
-readonly class TickStreamRecord
+final readonly class TickStreamRecord
 {
     /**
      * @var DateTime Timestamp.
@@ -37,7 +37,7 @@ readonly class TickStreamRecord
      * @param  string       $symbol      Symbol.
      * @param  integer      $timestamp   Timestamp.
      */
-    final public function __construct(
+    public function __construct(
         public float $ask,
         public ?int $askVolume,
         public float $bid,

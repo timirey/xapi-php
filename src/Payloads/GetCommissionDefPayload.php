@@ -5,7 +5,7 @@ namespace Timirey\XApi\Payloads;
 /**
  * Class that contains payload for the getCommissionDef command.
  */
-class GetCommissionDefPayload extends AbstractPayload
+final class GetCommissionDefPayload extends AbstractPayload
 {
     /**
      * Constructor for GetCommissionDefPayload.

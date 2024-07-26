@@ -7,7 +7,7 @@ use Timirey\XApi\Enums\Cmd;
 /**
  * Class that contains payload for the getProfitCalculation command.
  */
-class GetProfitCalculationPayload extends AbstractPayload
+final class GetProfitCalculationPayload extends AbstractPayload
 {
     /**
      * Constructor for GetProfitCalculationPayload.

@@ -9,7 +9,7 @@ use Timirey\XApi\Helpers\DateTimeHelper;
 /**
  * Class representing a quotes record.
  */
-readonly class QuotesRecord
+final readonly class QuotesRecord
 {
     /**
      * @var Day Day of week.
@@ -33,7 +33,7 @@ readonly class QuotesRecord
      * @param  integer $fromT Start time in ms from 00:00 CET / CEST time zone.
      * @param  integer $toT   End time in ms from 00:00 CET / CEST time zone.
      */
-    final public function __construct(int $day, int $fromT, int $toT)
+    public function __construct(int $day, int $fromT, int $toT)
     {
         $this->day = Day::from($day);
         $this->fromT = DateTimeHelper::fromMilliseconds($fromT);

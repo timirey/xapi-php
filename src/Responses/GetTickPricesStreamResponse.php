@@ -7,14 +7,14 @@ use Timirey\XApi\Responses\Data\TickStreamRecord;
 /**
  * Class that contains the response of the getTickPrices stream command.
  */
-readonly class GetTickPricesStreamResponse extends AbstractStreamResponse
+final readonly class GetTickPricesStreamResponse extends AbstractStreamResponse
 {
     /**
      * Constructor for the GetTickPricesStreamResponse class.
      *
      * @param  TickStreamRecord $tickStreamRecord Tick record data.
      */
-    final public function __construct(public TickStreamRecord $tickStreamRecord)
+    public function __construct(public TickStreamRecord $tickStreamRecord)
     {
     }
 
@@ -24,8 +24,8 @@ readonly class GetTickPricesStreamResponse extends AbstractStreamResponse
      * @param  array<string, mixed> $response Validated response data.
      * @return static Instance of the response.
      */
-    protected static function create(array $response): static
+    protected static function create(array $response): self
     {
-        return new static(new TickStreamRecord(...$response['data']));
+        return new self(new TickStreamRecord(...$response['data']));
     }
 }

@@ -8,7 +8,7 @@ use Timirey\XApi\Helpers\DateTimeHelper;
 /**
  * Class representing a news topic record.
  */
-readonly class NewsTopicRecord
+final readonly class NewsTopicRecord
 {
     /**
      * @var DateTime Time in date time.
@@ -30,7 +30,7 @@ readonly class NewsTopicRecord
      * @param  string  $timeString Time string.
      * @param  string  $title      News title.
      */
-    final public function __construct(
+    public function __construct(
         public string $body,
         int $bodylen,
         public string $key,
