@@ -7,7 +7,7 @@ use Timirey\XApi\Enums\RequestStatus;
 /**
  * Class that contains response of the tradeTransactionStatus command.
  */
-class TradeTransactionStatusResponse extends AbstractResponse
+readonly class TradeTransactionStatusResponse extends AbstractResponse
 {
     /**
      * @var RequestStatus Request status code.
@@ -24,7 +24,7 @@ class TradeTransactionStatusResponse extends AbstractResponse
      * @param  integer     $order         Unique order number.
      * @param  integer     $requestStatus Request status code.
      */
-    public function __construct(
+    final public function __construct(
         public float $ask,
         public float $bid,
         public ?string $customComment,

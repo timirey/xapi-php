@@ -8,7 +8,7 @@ use Timirey\XApi\Helpers\DateTimeHelper;
 /**
  * Class that contains the response of the getServerTime command.
  */
-class GetServerTimeResponse extends AbstractResponse
+readonly class GetServerTimeResponse extends AbstractResponse
 {
     /**
      * @var DateTime Time in date time.
@@ -21,7 +21,7 @@ class GetServerTimeResponse extends AbstractResponse
      * @param  integer $time       Time in date time in ms.
      * @param  string  $timeString Time described in form set on server (local time of server).
      */
-    public function __construct(int $time, public string $timeString)
+    final public function __construct(int $time, public string $timeString)
     {
         $this->time = DateTimeHelper::fromMilliseconds($time);
     }

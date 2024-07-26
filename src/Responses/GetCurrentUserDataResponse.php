@@ -5,7 +5,7 @@ namespace Timirey\XApi\Responses;
 /**
  * Class that contains the response of the getCurrentUserData command.
  */
-class GetCurrentUserDataResponse extends AbstractResponse
+readonly class GetCurrentUserDataResponse extends AbstractResponse
 {
     /**
      * Constructor for GetCurrentUserDataResponse.
@@ -19,7 +19,7 @@ class GetCurrentUserDataResponse extends AbstractResponse
      * @param  string|null $spreadType         Spread type, null if not applicable.
      * @param  boolean     $trailingStop       Indicates whether this account is enabled to use trailing stop.
      */
-    public function __construct(
+    final public function __construct(
         public int $companyUnit,
         public string $currency,
         public string $group,

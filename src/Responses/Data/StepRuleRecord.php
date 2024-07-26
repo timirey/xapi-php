@@ -5,7 +5,7 @@ namespace Timirey\XApi\Responses\Data;
 /**
  * Class representing a step rule record.
  */
-class StepRuleRecord
+readonly class StepRuleRecord
 {
     /**
      * Constructor for StepRuleRecord.
@@ -14,7 +14,7 @@ class StepRuleRecord
      * @param  string       $name        Step rule name.
      * @param  StepRecord[] $stepRecords Array of STEP_RECORD.
      */
-    public function __construct(public int $id, public string $name, public array $stepRecords)
+    final public function __construct(public int $id, public string $name, public array $stepRecords)
     {
     }
 }

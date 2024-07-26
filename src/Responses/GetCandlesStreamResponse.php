@@ -7,14 +7,14 @@ use Timirey\XApi\Responses\Data\CandleStreamRecord;
 /**
  * Class that contains the response of the getCandles stream command.
  */
-class GetCandlesStreamResponse extends AbstractStreamResponse
+readonly class GetCandlesStreamResponse extends AbstractStreamResponse
 {
     /**
      * Constructor for the GetCandlesStreamResponse class.
      *
      * @param  CandleStreamRecord $candleStreamRecord Candle record data.
      */
-    public function __construct(public CandleStreamRecord $candleStreamRecord)
+    final public function __construct(public CandleStreamRecord $candleStreamRecord)
     {
     }
 

@@ -5,14 +5,14 @@ namespace Timirey\XApi\Responses;
 /**
  * Class that contains response of the tradeTransaction command.
  */
-class TradeTransactionResponse extends AbstractResponse
+readonly class TradeTransactionResponse extends AbstractResponse
 {
     /**
      * Constructor for TradeTransactionResponse.
      *
      * @param  integer $order Unique order number.
      */
-    public function __construct(public int $order)
+    final public function __construct(public int $order)
     {
     }
 }

@@ -9,21 +9,21 @@ use Timirey\XApi\Responses\Data\TradingRecord;
 /**
  * Class that contains the response of the getTradingHours command.
  */
-class GetTradingHoursResponse extends AbstractResponse
+readonly class GetTradingHoursResponse extends AbstractResponse
 {
     /**
      * Constructor for GetTradingHoursResponse.
      *
      * @param  TradingHoursRecord[] $tradingHoursRecords TradingHoursRecord instances.
      */
-    public function __construct(public array $tradingHoursRecords)
+    final public function __construct(public array $tradingHoursRecords)
     {
     }
 
     /**
      * Create a response instance from the validated data.
      *
-     * @param  array $response Validated response data.
+     * @param  array<string, mixed> $response Validated response data.
      * @return static Instance of the response.
      */
     protected static function create(array $response): static

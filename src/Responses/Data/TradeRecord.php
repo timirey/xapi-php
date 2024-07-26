@@ -9,7 +9,7 @@ use Timirey\XApi\Helpers\DateTimeHelper;
 /**
  * Class representing a trade record.
  */
-class TradeRecord
+readonly class TradeRecord
 {
     /**
      * @var Cmd Operation code.
@@ -19,7 +19,7 @@ class TradeRecord
     /**
      * @var DateTime|null Null if order is not closed.
      */
-    public ?DateTime $close_time = null;
+    public ?DateTime $close_time;
 
     /**
      * @var DateTime Open time.
@@ -29,7 +29,7 @@ class TradeRecord
     /**
      * @var DateTime|null Null if order is not closed.
      */
-    public ?DateTime $expiration = null;
+    public ?DateTime $expiration;
 
     /**
      * @var DateTime Timestamp.
@@ -66,7 +66,7 @@ class TradeRecord
      * @param  float        $tp               Zero if take profit is not set (in base currency).
      * @param  float        $volume           Volume in lots.
      */
-    public function __construct(
+    final public function __construct(
         public float $close_price,
         ?int $close_time,
         public ?string $close_timeString,
@@ -99,12 +99,7 @@ class TradeRecord
         $this->open_time = DateTimeHelper::fromMilliseconds($open_time);
         $this->timestamp = DateTimeHelper::fromMilliseconds($timestamp);
 
-        if ($close_time !== null) {
-            $this->close_time = DateTimeHelper::fromMilliseconds($close_time);
-        }
-
-        if ($expiration !== null) {
-            $this->expiration = DateTimeHelper::fromMilliseconds($expiration);
-        }
+        $this->close_time = $close_time !== null ? DateTimeHelper::fromMilliseconds($close_time) : null;
+        $this->expiration = $expiration !== null ? DateTimeHelper::fromMilliseconds($expiration) : null;
     }
 }

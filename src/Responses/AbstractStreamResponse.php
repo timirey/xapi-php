@@ -10,7 +10,7 @@ use Timirey\XApi\Exceptions\InvalidResponseException;
 /**
  * Abstract class for streaming responses.
  */
-abstract class AbstractStreamResponse
+abstract readonly class AbstractStreamResponse
 {
     /**
      * Create an instance from JSON.
@@ -72,6 +72,7 @@ abstract class AbstractStreamResponse
      */
     protected static function create(array $response): static
     {
+        // @phpstan-ignore-next-line
         return new static(...($response['data'] ?? $response));
     }
 }

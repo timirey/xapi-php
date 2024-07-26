@@ -8,7 +8,7 @@ use Timirey\XApi\Helpers\DateTimeHelper;
 /**
  * Class representing the keep alive record data in the streaming response.
  */
-class KeepAliveStreamRecord
+readonly class KeepAliveStreamRecord
 {
     /**
      * @var DateTime Timestamp.
@@ -20,7 +20,7 @@ class KeepAliveStreamRecord
      *
      * @param  integer $timestamp Current timestamp.
      */
-    public function __construct(int $timestamp)
+    final public function __construct(int $timestamp)
     {
         $this->timestamp = DateTimeHelper::fromMilliseconds($timestamp);
     }

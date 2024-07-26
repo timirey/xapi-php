@@ -403,9 +403,9 @@ class SocketClient
     /**
      * Retrieves an array of current quotations for given symbols.
      *
-     * @param  Level    $level     The price level.
-     * @param  array    $symbols   Array of symbol names.
-     * @param  DateTime $timestamp The time from which the most recent tick should be looked for.
+     * @param  Level              $level     The price level.
+     * @param  array<int, string> $symbols   Array of symbol names.
+     * @param  DateTime           $timestamp The time from which the most recent tick should be looked for.
      * @return GetTickPricesResponse The response containing tick prices.
      *
      * @throws ErrorResponseException If the response indicates an error.
@@ -423,7 +423,7 @@ class SocketClient
     /**
      * Retrieves an array of trades listed in the orders argument.
      *
-     * @param  array $orders Array of order IDs.
+     * @param  array<int, int> $orders Array of order IDs.
      * @return GetTradeRecordsResponse The response containing trade records.
      *
      * @throws ErrorResponseException If the response indicates an error.
@@ -469,7 +469,7 @@ class SocketClient
     /**
      * Returns quotes and trading times.
      *
-     * @param  array $symbols Array of symbol names (Strings).
+     * @param  array<int, string> $symbols Array of symbol names (Strings).
      * @return GetTradingHoursResponse The response containing trading hours.
      *
      * @throws ErrorResponseException If the response indicates an error.

@@ -11,7 +11,7 @@ use Timirey\XApi\Helpers\DateTimeHelper;
 /**
  * Class representing the trade record data in the streaming response.
  */
-class TradeStreamRecord
+readonly class TradeStreamRecord
 {
     /**
      * @var Cmd Operation code.
@@ -31,12 +31,12 @@ class TradeStreamRecord
     /**
      * @var DateTime|null Expiration timestamp.
      */
-    public ?DateTime $expiration = null;
+    public ?DateTime $expiration;
 
     /**
      * @var DateTime|null Close timestamp.
      */
-    public ?DateTime $closeTime = null;
+    public ?DateTime $closeTime;
 
     /**
      * @var DateTime Open timestamp.
@@ -61,32 +61,32 @@ class TradeStreamRecord
     /**
      * Constructor for the TradeStreamRecord class.
      *
-     * @param  float        $close_price   Close price.
-     * @param  integer|null $close_time    Close time.
-     * @param  boolean      $closed        Closed status.
-     * @param  integer      $cmd           Operation code.
-     * @param  string       $comment       Comment.
-     * @param  float        $commission    Commission.
-     * @param  string       $customComment Custom comment.
-     * @param  integer      $digits        Number of decimal places.
-     * @param  integer|null $expiration    Expiration time.
-     * @param  float        $margin_rate   Margin rate.
-     * @param  integer      $offset        Trailing offset.
-     * @param  float        $open_price    Open price.
-     * @param  integer      $open_time     Open time.
-     * @param  integer      $order         Order number.
-     * @param  integer      $order2        Transaction ID.
-     * @param  integer      $position      Position number.
-     * @param  float        $profit        Profit.
-     * @param  float        $sl            Stop loss.
-     * @param  string       $state         Trade state.
-     * @param  float        $storage       Storage.
-     * @param  string       $symbol        Symbol.
-     * @param  float        $tp            Take profit.
-     * @param  integer      $type          Trade type.
-     * @param  float        $volume        Volume in lots.
+     * @param float        $close_price   Close price.
+     * @param integer|null $close_time    Close time.
+     * @param boolean      $closed        Closed status.
+     * @param integer      $cmd           Operation code.
+     * @param string       $comment       Comment.
+     * @param float        $commission    Commission.
+     * @param string       $customComment Custom comment.
+     * @param integer      $digits        Number of decimal places.
+     * @param integer|null $expiration    Expiration time.
+     * @param float        $margin_rate   Margin rate.
+     * @param integer      $offset        Trailing offset.
+     * @param float        $open_price    Open price.
+     * @param integer      $open_time     Open time.
+     * @param integer      $order         Order number.
+     * @param integer      $order2        Transaction ID.
+     * @param integer      $position      Position number.
+     * @param float        $profit        Profit.
+     * @param float        $sl            Stop loss.
+     * @param string       $state         Trade state.
+     * @param float        $storage       Storage.
+     * @param string       $symbol        Symbol.
+     * @param float        $tp            Take profit.
+     * @param integer      $type          Trade type.
+     * @param float        $volume        Volume in lots.
      */
-    public function __construct(
+    final public function __construct(
         float $close_price,
         ?int $close_time,
         public bool $closed,
@@ -118,13 +118,8 @@ class TradeStreamRecord
 
         $this->openTime = DateTimeHelper::fromMilliseconds($open_time);
 
-        if ($close_time !== null) {
-            $this->closeTime = DateTimeHelper::fromMilliseconds($close_time);
-        }
-
-        if ($expiration !== null) {
-            $this->expiration = DateTimeHelper::fromMilliseconds($expiration);
-        }
+        $this->closeTime = $close_time ? DateTimeHelper::fromMilliseconds($close_time) : null;
+        $this->expiration = $expiration ? DateTimeHelper::fromMilliseconds($expiration) : null;
 
         $this->openPrice = $open_price;
         $this->closePrice = $close_price;

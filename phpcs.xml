@@ -3,9 +3,7 @@
     <description>PSR-12</description>
 
     <!-- Set the coding standard to PSR-12 -->
-    <rule ref="PSR12">
-        <severity>6</severity>
-    </rule>
+    <rule ref="PSR12"/>
 
     <!-- Add custom rules for PHPDoc -->
     <rule ref="Squiz.Commenting.ClassComment"/>

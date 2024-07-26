@@ -9,17 +9,17 @@ use Timirey\XApi\Helpers\DateTimeHelper;
 /**
  * Class representing an IB record.
  */
-class IbRecord
+readonly class IbRecord
 {
     /**
      * @var Side|null Operation code or null if not allowed to view.
      */
-    public ?Side $side = null;
+    public ?Side $side;
 
     /**
      * @var DateTime|null Time the record was created or null if not allowed to view.
      */
-    public ?DateTime $timestamp = null;
+    public ?DateTime $timestamp;
 
     /**
      * Constructor for IbRecord.
@@ -34,7 +34,7 @@ class IbRecord
      * @param  integer|null $timestamp  Time the record was created or null if not allowed to view.
      * @param  float|null   $volume     Volume in lots or null if not allowed to view.
      */
-    public function __construct(
+    final public function __construct(
         public ?float $closePrice,
         public ?string $login,
         public ?float $nominal,
@@ -45,12 +45,7 @@ class IbRecord
         ?int $timestamp,
         public ?float $volume
     ) {
-        if ($side !== null) {
-            $this->side = Side::from($side);
-        }
-
-        if ($timestamp !== null) {
-            $this->timestamp = DateTimeHelper::fromMilliseconds($timestamp);
-        }
+        $this->side = $side !== null ? Side::from($side) : null;
+        $this->timestamp = $timestamp !== null ? DateTimeHelper::fromMilliseconds($timestamp) : null;
     }
 }

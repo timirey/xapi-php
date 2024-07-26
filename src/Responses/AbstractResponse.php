@@ -10,7 +10,7 @@ use Timirey\XApi\Exceptions\InvalidResponseException;
 /**
  * Abstract class for responses.
  */
-abstract class AbstractResponse
+abstract readonly class AbstractResponse
 {
     /**
      * Create an instance from JSON.
@@ -76,6 +76,8 @@ abstract class AbstractResponse
      */
     protected static function create(array $response): static
     {
+        // todo: duplicate maybe, instead of ignoring phpstan?
+        // @phpstan-ignore-next-line
         return new static(...($response['returnData'] ?? $response));
     }
 }

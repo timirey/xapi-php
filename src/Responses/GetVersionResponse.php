@@ -5,14 +5,14 @@ namespace Timirey\XApi\Responses;
 /**
  * Class that contains the response of the getVersion command.
  */
-class GetVersionResponse extends AbstractResponse
+readonly class GetVersionResponse extends AbstractResponse
 {
     /**
      * Constructor for GetVersionResponse.
      *
      * @param  string $version Current API version.
      */
-    public function __construct(public string $version)
+    final public function __construct(public string $version)
     {
     }
 }

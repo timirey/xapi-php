@@ -7,14 +7,14 @@ use Timirey\XApi\Responses\Data\BalanceStreamRecord;
 /**
  * Class that contains the response of the getBalance stream command.
  */
-class GetBalanceStreamResponse extends AbstractStreamResponse
+readonly class GetBalanceStreamResponse extends AbstractStreamResponse
 {
     /**
      * Constructor for the GetBalanceStreamResponse class.
      *
      * @param  BalanceStreamRecord $balanceStreamRecord Balance record data.
      */
-    public function __construct(public BalanceStreamRecord $balanceStreamRecord)
+    final public function __construct(public BalanceStreamRecord $balanceStreamRecord)
     {
     }
 

@@ -7,21 +7,21 @@ use Timirey\XApi\Responses\Data\SymbolRecord;
 /**
  * Class that contains response of the getSymbol command.
  */
-class GetSymbolResponse extends AbstractResponse
+readonly class GetSymbolResponse extends AbstractResponse
 {
     /**
      * Constructor for GetSymbolResponse.
      *
      * @param  SymbolRecord $symbolRecord SymbolRecord instance.
      */
-    public function __construct(public SymbolRecord $symbolRecord)
+    final public function __construct(public SymbolRecord $symbolRecord)
     {
     }
 
     /**
      * Create a response instance from the validated data.
      *
-     * @param  array $response Validated response data.
+     * @param  array<string, mixed> $response Validated response data.
      * @return static Instance of the response.
      */
     protected static function create(array $response): static

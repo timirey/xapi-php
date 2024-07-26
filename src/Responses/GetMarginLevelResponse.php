@@ -5,7 +5,7 @@ namespace Timirey\XApi\Responses;
 /**
  * Class that contains the response of the getMarginLevel command.
  */
-class GetMarginLevelResponse extends AbstractResponse
+readonly class GetMarginLevelResponse extends AbstractResponse
 {
     /**
      * Constructor for GetMarginLevelResponse.
@@ -18,7 +18,7 @@ class GetMarginLevelResponse extends AbstractResponse
      * @param  float  $marginFree  Free margin in account currency.
      * @param  float  $marginLevel Margin level percentage.
      */
-    public function __construct(
+    final public function __construct(
         public float $balance,
         public float $credit,
         public string $currency,

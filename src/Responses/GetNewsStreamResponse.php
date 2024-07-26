@@ -7,14 +7,14 @@ use Timirey\XApi\Responses\Data\NewsStreamRecord;
 /**
  * Class that contains the response of the getNews stream command.
  */
-class GetNewsStreamResponse extends AbstractStreamResponse
+readonly class GetNewsStreamResponse extends AbstractStreamResponse
 {
     /**
      * Constructor for the GetNewsStreamResponse class.
      *
      * @param  NewsStreamRecord $newsStreamRecord News record data.
      */
-    public function __construct(public NewsStreamRecord $newsStreamRecord)
+    final public function __construct(public NewsStreamRecord $newsStreamRecord)
     {
     }
 

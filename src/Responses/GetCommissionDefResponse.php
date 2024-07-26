@@ -5,7 +5,7 @@ namespace Timirey\XApi\Responses;
 /**
  * Class that contains the response of the login command.
  */
-class GetCommissionDefResponse extends AbstractResponse
+readonly class GetCommissionDefResponse extends AbstractResponse
 {
     /**
      * Constructor for LoginResponse.
@@ -14,7 +14,7 @@ class GetCommissionDefResponse extends AbstractResponse
      * @param  float|null $rateOfExchange Rate of exchange between account currency and instrument base currency,
      *                                    could be null if not applicable.
      */
-    public function __construct(public float $commission, public ?float $rateOfExchange)
+    final public function __construct(public float $commission, public ?float $rateOfExchange)
     {
     }
 }

@@ -7,14 +7,14 @@ use Timirey\XApi\Responses\Data\TradeStatusStreamRecord;
 /**
  * Class that contains the response of the getTradeStatus stream command.
  */
-class GetTradeStatusStreamResponse extends AbstractStreamResponse
+readonly class GetTradeStatusStreamResponse extends AbstractStreamResponse
 {
     /**
      * Constructor for the GetTradeStatusStreamResponse class.
      *
      * @param  TradeStatusStreamRecord $tradeStatusStreamRecord Trade status record data.
      */
-    public function __construct(public TradeStatusStreamRecord $tradeStatusStreamRecord)
+    final public function __construct(public TradeStatusStreamRecord $tradeStatusStreamRecord)
     {
     }
 

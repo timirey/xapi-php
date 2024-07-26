@@ -5,16 +5,16 @@ namespace Timirey\XApi\Responses;
 use Timirey\XApi\Responses\Data\ProfitStreamRecord;
 
 /**
- * Class that contains the response of the getProfits stream command.
+ * readonly class that contains the response of the getProfits stream command.
  */
-class GetProfitsStreamResponse extends AbstractStreamResponse
+readonly class GetProfitsStreamResponse extends AbstractStreamResponse
 {
     /**
      * Constructor for the GetProfitsStreamResponse class.
      *
      * @param  ProfitStreamRecord $profitStreamRecord Profit record data.
      */
-    public function __construct(public ProfitStreamRecord $profitStreamRecord)
+    final public function __construct(public ProfitStreamRecord $profitStreamRecord)
     {
     }
 

@@ -9,7 +9,7 @@ use Timirey\XApi\Helpers\DateTimeHelper;
 /**
  * Class representing a tick record.
  */
-class TickRecord
+readonly class TickRecord
 {
     /**
      * @var Level Price level.
@@ -37,7 +37,7 @@ class TickRecord
      * @param  string       $symbol      Symbol.
      * @param  integer      $timestamp   Timestamp.
      */
-    public function __construct(
+    final public function __construct(
         public float $ask,
         public ?int $askVolume,
         public float $bid,
