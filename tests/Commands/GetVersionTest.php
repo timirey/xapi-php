@@ -14,7 +14,7 @@ afterEach(function () {
     Mockery::close();
 });
 
-test('getVersion command', function () {
+test('getVersion command', function (): void {
     $payload = new GetVersionPayload();
     $mockResponse = [
         'status' => true,

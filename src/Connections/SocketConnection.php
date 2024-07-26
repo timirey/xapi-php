@@ -2,13 +2,15 @@
 
 namespace Timirey\XApi\Connections;
 
-use Exception;
+use Generator;
+use Override;
 use Timirey\XApi\Exceptions\SocketException;
+use Timirey\XApi\Interfaces\ConnectionInterface;
 
 /**
  * Represents a socket connection for sending and receiving data.
  */
-class Socket
+class SocketConnection implements ConnectionInterface
 {
     /**
      * @var string The delimiter for the socket messages.
@@ -27,13 +29,27 @@ class Socket
      *
      * @throws SocketException If socket is unable to init.
      */
-    public function __construct(string $address)
+    public function __construct(protected string $address)
     {
-        $this->socket = stream_socket_client($address, $errorCode, $errorMessage);
+        $this->open();
+    }
+
+    /**
+     * Opens the socket connection.
+     *
+     * @return boolean True on success, false on failure.
+     * @throws SocketException If socket is not initialized.
+     */
+    #[Override]
+    public function open(): bool
+    {
+        $this->socket = stream_socket_client($this->address, $errorCode, $errorMessage);
 
         if ($this->socket === false) {
             throw new SocketException("$errorCode: $errorMessage");
         }
+
+        return true;
     }
 
     /**
@@ -44,6 +60,7 @@ class Socket
      * @return false|integer The number of bytes written, or false on failure.
      * @throws SocketException If socket is not initialized.
      */
+    #[Override]
     public function send(string $payload): false|int
     {
         if ($this->socket === false) {
@@ -59,6 +76,7 @@ class Socket
      * @return string The read data, or false on failure.
      * @throws SocketException If socket is not initialized.
      */
+    #[Override]
     public function receive(): string
     {
         if ($this->socket === false) {
@@ -81,11 +99,36 @@ class Socket
     }
 
     /**
+     * Listen to the stream socket and yield data as it is received.
+     *
+     * @return Generator Yields data received from the socket.
+     * @throws SocketException If socket is empty or not initialized.
+     */
+    #[Override]
+    public function listen(): Generator
+    {
+        if ($this->socket === false) {
+            throw new SocketException('The socket is not initialized.');
+        }
+
+        while (!feof($this->socket)) {
+            $response = $this->receive();
+
+            if ($response) {
+                yield $response;
+            }
+        }
+
+        throw new SocketException('The socket stream has been closed unexpectedly.');
+    }
+
+    /**
      * Closes the socket connection.
      *
      * @return boolean True on success, false on failure.
      * @throws SocketException If socket is not initialized.
      */
+    #[Override]
     public function close(): bool
     {
         if ($this->socket === false) {

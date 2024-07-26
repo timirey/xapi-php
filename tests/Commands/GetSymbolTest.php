@@ -17,7 +17,7 @@ afterEach(function () {
     Mockery::close();
 });
 
-test('getSymbol command', function () {
+test('getSymbol command', function (): void {
     $payload = new GetSymbolPayload('EURUSD');
     $mockResponse = [
         'status' => true,

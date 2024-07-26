@@ -16,7 +16,7 @@ afterEach(function () {
     Mockery::close();
 });
 
-test('getIbsHistory command', function () {
+test('getIbsHistory command', function (): void {
     $start = new DateTime('-1 month');
     $end = new DateTime();
 

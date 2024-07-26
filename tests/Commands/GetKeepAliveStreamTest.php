@@ -7,25 +7,23 @@ use Timirey\XApi\Tests\Commands\Traits\StreamClientMockeryTrait;
 uses(StreamClientMockeryTrait::class);
 
 beforeEach(function () {
-    $this->mockStreamClient();
+    $this->mockClient();
 });
 
 afterEach(function () {
     Mockery::close();
 });
 
-test('getKeepAlive stream command', function () {
+test('getKeepAlive stream command', function (): void {
     $payload = new GetKeepAliveStreamPayload('streamSessionId');
     $mockResponse = [
         'command' => 'keepAlive',
         'data' => ['timestamp' => 1362944112000],
     ];
 
-    $this->mockStreamResponse($payload, $mockResponse);
+    $this->mockResponse($payload, $mockResponse);
 
-    $streamClient = $this->streamClient;
-
-    $streamClient->getKeepAlive(function (GetKeepAliveStreamResponse $response) {
+    $this->client->getKeepAlive(static function (GetKeepAliveStreamResponse $response): void {
         expect($response)->toBeInstanceOf(GetKeepAliveStreamResponse::class)
             ->and($response->keepAliveStreamRecord->timestamp)->toBeInstanceOf(DateTime::class);
     });

@@ -14,7 +14,7 @@ afterEach(function () {
     Mockery::close();
 });
 
-test('getCommissionDef command', function () {
+test('getCommissionDef command', function (): void {
     $payload = new GetCommissionDefPayload('EURUSD', 1.0);
 
     $mockResponse = [

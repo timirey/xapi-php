@@ -14,7 +14,7 @@ afterEach(function () {
     Mockery::close();
 });
 
-test('ping command', function () {
+test('ping command', function (): void {
     $payload = new PingPayload();
     $mockResponse = ['status' => true];
 

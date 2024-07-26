@@ -9,15 +9,15 @@ use Timirey\XApi\Tests\Commands\Traits\StreamClientMockeryTrait;
 
 uses(StreamClientMockeryTrait::class);
 
-beforeEach(function () {
-    $this->mockStreamClient();
+beforeEach(function (): void {
+    $this->mockClient();
 });
 
-afterEach(function () {
+afterEach(function (): void {
     Mockery::close();
 });
 
-test('getTrades stream command', function () {
+test('getTrades stream command', function (): void {
     $payload = new GetTradesStreamPayload('streamSessionId');
     $mockResponse = [
         'command' => 'trade',
@@ -49,11 +49,9 @@ test('getTrades stream command', function () {
         ],
     ];
 
-    $this->mockStreamResponse($payload, $mockResponse);
+    $this->mockResponse($payload, $mockResponse);
 
-    $streamClient = $this->streamClient;
-
-    $streamClient->getTrades(function (GetTradesStreamResponse $response) {
+    $this->client->getTrades(static function (GetTradesStreamResponse $response): void {
         expect($response)->toBeInstanceOf(GetTradesStreamResponse::class)
             ->and($response->tradeStreamRecord->cmd)->toBeInstanceOf(Cmd::class)
             ->and($response->tradeStreamRecord->state)->toBeInstanceOf(State::class)

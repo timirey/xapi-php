@@ -3,7 +3,7 @@
 namespace Timirey\XApi;
 
 use JsonException;
-use Timirey\XApi\Connections\Stream;
+use Timirey\XApi\Connections\SocketConnection;
 use Timirey\XApi\Enums\StreamHost;
 use Timirey\XApi\Exceptions\ErrorResponseException;
 use Timirey\XApi\Exceptions\InvalidPayloadException;
@@ -35,9 +35,9 @@ use Timirey\XApi\Responses\GetTradeStatusStreamResponse;
 class StreamClient
 {
     /**
-     * @var Stream Stream client instance.
+     * @var SocketConnection Stream connection instance.
      */
-    protected Stream $stream;
+    protected SocketConnection $socket;
 
     /**
      * Constructor for the StreamClient class.
@@ -49,7 +49,7 @@ class StreamClient
      */
     public function __construct(protected string $streamSessionId, protected StreamHost $host)
     {
-        $this->stream = new Stream($this->host->value);
+        $this->init();
     }
 
     /**
@@ -244,7 +244,7 @@ class StreamClient
      */
     final public function ping(): void
     {
-        $this->stream->send(new PingStreamPayload($this->streamSessionId));
+        $this->socket->send(new PingStreamPayload($this->streamSessionId));
     }
 
     /**
@@ -268,12 +268,23 @@ class StreamClient
      */
     protected function subscribe(AbstractStreamPayload $payload, string $responseClass, callable $callback): void
     {
-        $this->stream->send($payload->toJson());
+        $this->socket->send($payload->toJson());
 
-        foreach ($this->stream->listen() as $message) {
+        foreach ($this->socket->listen() as $message) {
             $response = $responseClass::instantiate($message);
 
             call_user_func($callback, $response);
         }
+    }
+
+    /**
+     * Creates new stream socket.
+     *
+     * @return void
+     * @throws SocketException If socket is empty or not initialized.
+     */
+    protected function init(): void
+    {
+        $this->socket = new SocketConnection($this->host->value);
     }
 }

@@ -5,7 +5,7 @@ namespace Timirey\XApi;
 use DateTime;
 use Exception;
 use JsonException;
-use Timirey\XApi\Connections\Socket;
+use Timirey\XApi\Connections\SocketConnection;
 use Timirey\XApi\Enums\Cmd;
 use Timirey\XApi\Enums\Host;
 use Timirey\XApi\Enums\Level;
@@ -74,9 +74,9 @@ use Timirey\XApi\Responses\TradeTransactionStatusResponse;
 class SocketClient
 {
     /**
-     * @var Socket Socket client instance.
+     * @var SocketConnection Socket client instance.
      */
-    protected Socket $socket;
+    protected SocketConnection $socket;
 
     /**
      * Constructor for the Client class.
@@ -87,7 +87,7 @@ class SocketClient
      */
     public function __construct(protected Host $host)
     {
-        $this->socket = new Socket($this->host->value);
+        $this->init();
     }
 
     /**
@@ -542,5 +542,16 @@ class SocketClient
         $this->socket->send($payload);
 
         return $responseClass::instantiate($this->socket->receive());
+    }
+
+    /**
+     * Creates socket.
+     *
+     * @return void
+     * @throws SocketException If socket is empty or not initialized.
+     */
+    protected function init(): void
+    {
+        $this->socket = new SocketConnection($this->host->value);
     }
 }

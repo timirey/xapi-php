@@ -5,8 +5,9 @@ namespace Timirey\XApi\Tests\Commands\Traits;
 use JsonException;
 use Mockery;
 use Mockery\MockInterface;
+use Override;
 use Timirey\XApi\SocketClient;
-use Timirey\XApi\Connections\Socket;
+use Timirey\XApi\Connections\SocketConnection;
 use Timirey\XApi\Enums\Host;
 use Timirey\XApi\Payloads\AbstractPayload;
 
@@ -33,30 +34,27 @@ trait SocketClientMockeryTrait
      */
     public function mockClient(int $userId = 12345, string $password = 'password', Host $host = Host::DEMO): void
     {
-        $this->socket = Mockery::mock(Socket::class);
+        $this->socket = Mockery::mock(SocketConnection::class);
 
-        $this->client = new class ($userId, $password, $host) extends SocketClient {
+        $this->client = new class ($host) extends SocketClient {
             /**
-             * Override the constructor to prevent creating a new Socket instance.
+             * Creates a new socket.
              *
-             * @param integer $userId   User ID.
-             * @param string  $password User password.
-             * @param Host    $host     Socket host URL.
-             *
-             * @noinspection PhpMissingParentConstructorInspection
+             * @return void
              */
-            public function __construct(protected int $userId, protected string $password, protected Host $host)
+            #[Override]
+            protected function init(): void
             {
             }
 
             /**
              * Sets the socket client.
              *
-             * @param Socket $socket Socket client.
+             * @param SocketConnection $socket Socket client.
              *
              * @return void
              */
-            public function setSocket(Socket $socket): void
+            public function setSocket(SocketConnection $socket): void
             {
                 $this->socket = $socket;
             }
@@ -81,7 +79,7 @@ trait SocketClientMockeryTrait
             ->once()
             ->with($payload->toJson());
 
-        $mockResponse = json_encode($response);
+        $mockResponse = json_encode($response, JSON_THROW_ON_ERROR);
 
         $this->socket->shouldReceive('receive')
             ->once()

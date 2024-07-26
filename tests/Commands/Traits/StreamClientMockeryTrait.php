@@ -6,8 +6,8 @@ use Generator;
 use JsonException;
 use Mockery;
 use Mockery\MockInterface;
-use Timirey\XApi\Connections\Stream;
-use Timirey\XApi\Enums\Host;
+use Override;
+use Timirey\XApi\Connections\SocketConnection;
 use Timirey\XApi\Enums\StreamHost;
 use Timirey\XApi\Exceptions\InvalidPayloadException;
 use Timirey\XApi\Payloads\AbstractStreamPayload;
@@ -18,8 +18,8 @@ use Timirey\XApi\StreamClient;
  *
  * Provides setup and utility methods for mocking the stream socket client and handling API responses.
  *
- * @property MockInterface $stream
- * @property StreamClient $streamClient
+ * @property MockInterface $socket
+ * @property StreamClient $client
  */
 trait StreamClientMockeryTrait
 {
@@ -33,39 +33,37 @@ trait StreamClientMockeryTrait
      *
      * @return void
      */
-    public function mockStreamClient(
+    public function mockClient(
         string $streamSessionId = 'streamSessionId',
         StreamHost $host = StreamHost::DEMO
     ): void {
-        $this->stream = Mockery::mock(Stream::class);
+        $this->socket = Mockery::mock(SocketConnection::class);
 
-        $this->streamClient = new class ($streamSessionId, $host) extends StreamClient {
+        $this->client = new class ($streamSessionId, $host) extends StreamClient {
             /**
-             * Override the constructor to prevent creating a new stream socket instance.
-             *
-             * @param string     $streamSessionId Stream session ID.
-             * @param StreamHost $host            Host URL.
-             *
-             * @noinspection PhpMissingParentConstructorInspection
-             */
-            public function __construct(protected string $streamSessionId, protected StreamHost $host)
-            {
-            }
-
-            /**
-             * Sets the stream socket client.
-             *
-             * @param Stream $stream Stream socket client.
+             * Creates new stream socket.
              *
              * @return void
              */
-            public function setStream(Stream $stream): void
+            #[Override]
+            protected function init(): void
             {
-                $this->stream = $stream;
+            }
+
+            /**
+             * Sets the socket client.
+             *
+             * @param SocketConnection $socket Socket client.
+             *
+             * @return void
+             */
+            public function setSocket(SocketConnection $socket): void
+            {
+                $this->socket = $socket;
             }
         };
 
-        $this->streamClient->setStream($this->stream);
+        $this->client->setSocket($this->socket);
     }
 
     /**
@@ -79,15 +77,15 @@ trait StreamClientMockeryTrait
      *
      * @throws JsonException If encoding to JSON fails.
      */
-    public function mockStreamResponse(AbstractStreamPayload $payload, array $response): void
+    public function mockResponse(AbstractStreamPayload $payload, array $response): void
     {
-        $this->stream->shouldReceive('send')
+        $this->socket->shouldReceive('send')
             ->once()
             ->with($payload->toJson());
 
-        $mockResponse = json_encode($response);
+        $mockResponse = json_encode($response, JSON_THROW_ON_ERROR);
 
-        $this->stream->shouldReceive('listen')
+        $this->socket->shouldReceive('listen')
             ->once()
             ->andReturn(call_user_func(static function () use ($mockResponse): Generator {
                 yield $mockResponse;
