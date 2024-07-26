@@ -15,10 +15,14 @@ class Stream extends Socket
      * Listen to the stream socket and yield data as it is received.
      *
      * @return Generator Yields data received from the socket.
-     * @throws SocketException If socket is empty.
+     * @throws SocketException If socket is empty or not initialized.
      */
     public function listen(): Generator
     {
+        if ($this->socket === false) {
+            throw new SocketException('The socket is not initialized.');
+        }
+
         while (!feof($this->socket)) {
             $response = $this->receive();
 

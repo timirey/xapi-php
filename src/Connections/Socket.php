@@ -13,7 +13,7 @@ class Socket
     /**
      * @var string The delimiter for the socket messages.
      */
-    protected const DELIMITER = "\n\n";
+    protected const string DELIMITER = "\n\n";
 
     /**
      * @var false|resource The socket resource or false if failed to create.
@@ -42,19 +42,29 @@ class Socket
      * @param string $payload The data to send.
      *
      * @return false|integer The number of bytes written, or false on failure.
+     * @throws SocketException If socket is not initialized.
      */
     public function send(string $payload): false|int
     {
+        if ($this->socket === false) {
+            throw new SocketException('The socket is not initialized.');
+        }
+
         return fwrite($this->socket, $payload);
     }
 
     /**
      * Receives data from the socket until the delimiter "\n\n" is encountered.
      *
-     * @return false|string The read data, or false on failure.
+     * @return string The read data, or false on failure.
+     * @throws SocketException If socket is not initialized.
      */
-    public function receive(): false|string
+    public function receive(): string
     {
+        if ($this->socket === false) {
+            throw new SocketException('The socket is not initialized.');
+        }
+
         $buffer = '';
 
         while ($chunk = fgets($this->socket)) {
@@ -67,16 +77,21 @@ class Socket
             }
         }
 
-        return false;
+        throw new SocketException('Failed to receive data from the socket.');
     }
 
     /**
      * Closes the socket connection.
      *
      * @return boolean True on success, false on failure.
+     * @throws SocketException If socket is not initialized.
      */
     public function close(): bool
     {
+        if ($this->socket === false) {
+            throw new SocketException('The socket is not initialized.');
+        }
+
         return fclose($this->socket);
     }
 }

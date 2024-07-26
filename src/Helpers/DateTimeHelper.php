@@ -2,6 +2,7 @@
 
 namespace Timirey\XApi\Helpers;
 
+use DateError;
 use DateTime;
 
 /**
@@ -17,7 +18,13 @@ class DateTimeHelper
      */
     public static function fromMilliseconds(int $timestamp): DateTime
     {
-        return DateTime::createFromFormat('U.u', sprintf('%d.%03d', $timestamp / 1000, $timestamp % 1000));
+        $dateTime = DateTime::createFromFormat('U.u', sprintf('%d.%03d', $timestamp / 1000, $timestamp % 1000));
+
+        if ($dateTime === false) {
+            throw new DateError('Could not parse datetime from milliseconds.');
+        }
+
+        return $dateTime;
     }
 
     /**

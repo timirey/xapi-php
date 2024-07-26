@@ -12,7 +12,7 @@ abstract class AbstractPayload
     /**
      * Array of parameters used in payload.
      *
-     * @var array<string>
+     * @var array<string, mixed>
      */
     public array $parameters = [];
 
