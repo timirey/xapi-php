@@ -7,7 +7,7 @@ use Timirey\XApi\Enums\RequestStatus;
 /**
  * Class that contains response of the tradeTransactionStatus command.
  */
-class TradeTransactionStatusResponse extends AbstractResponse
+final readonly class TradeTransactionStatusResponse extends AbstractResponse
 {
     /**
      * @var RequestStatus Request status code.

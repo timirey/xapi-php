@@ -7,7 +7,7 @@ use Timirey\XApi\Responses\Data\NewsStreamRecord;
 /**
  * Class that contains the response of the getNews stream command.
  */
-class GetNewsStreamResponse extends AbstractStreamResponse
+final readonly class GetNewsStreamResponse extends AbstractStreamResponse
 {
     /**
      * Constructor for the GetNewsStreamResponse class.
@@ -24,8 +24,8 @@ class GetNewsStreamResponse extends AbstractStreamResponse
      * @param  array<string, mixed> $response Validated response data.
      * @return static Instance of the response.
      */
-    protected static function create(array $response): static
+    protected static function create(array $response): self
     {
-        return new static(new NewsStreamRecord(...$response['data']));
+        return new self(new NewsStreamRecord(...$response['data']));
     }
 }

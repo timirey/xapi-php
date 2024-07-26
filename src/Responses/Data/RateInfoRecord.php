@@ -8,7 +8,7 @@ use Timirey\XApi\Helpers\DateTimeHelper;
 /**
  * Class representing a rate information record.
  */
-class RateInfoRecord
+final readonly class RateInfoRecord
 {
     /**
      * @var DateTime Candle start time in CET / CEST time zone.

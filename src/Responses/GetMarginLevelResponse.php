@@ -5,7 +5,7 @@ namespace Timirey\XApi\Responses;
 /**
  * Class that contains the response of the getMarginLevel command.
  */
-class GetMarginLevelResponse extends AbstractResponse
+final readonly class GetMarginLevelResponse extends AbstractResponse
 {
     /**
      * Constructor for GetMarginLevelResponse.

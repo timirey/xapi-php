@@ -5,7 +5,7 @@ namespace Timirey\XApi\Responses\Data;
 /**
  * Class representing the profit record data in the streaming response.
  */
-class ProfitStreamRecord
+final readonly class ProfitStreamRecord
 {
     /**
      * Constructor for the ProfitStreamRecord class.

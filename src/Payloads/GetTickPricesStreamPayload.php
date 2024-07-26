@@ -5,7 +5,7 @@ namespace Timirey\XApi\Payloads;
 /**
  * Class representing the payload for the getTickPrices stream command.
  */
-class GetTickPricesStreamPayload extends AbstractStreamPayload
+final class GetTickPricesStreamPayload extends AbstractStreamPayload
 {
     /**
      * @param  string       $streamSessionId Stream session ID.

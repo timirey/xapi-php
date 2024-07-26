@@ -5,7 +5,7 @@ namespace Timirey\XApi\Responses;
 /**
  * Class that contains the response of the getVersion command.
  */
-class GetVersionResponse extends AbstractResponse
+final readonly class GetVersionResponse extends AbstractResponse
 {
     /**
      * Constructor for GetVersionResponse.

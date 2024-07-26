@@ -9,7 +9,7 @@ use Timirey\XApi\Helpers\DateTimeHelper;
 /**
  * Class representing a calendar record.
  */
-class CalendarRecord
+final readonly class CalendarRecord
 {
     /**
      * @var Impact Impact on market.

@@ -5,7 +5,7 @@ namespace Timirey\XApi\Responses;
 /**
  * Class that contains the response of the login command.
  */
-class GetCommissionDefResponse extends AbstractResponse
+final readonly class GetCommissionDefResponse extends AbstractResponse
 {
     /**
      * Constructor for LoginResponse.

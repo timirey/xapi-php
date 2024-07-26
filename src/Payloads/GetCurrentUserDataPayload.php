@@ -5,7 +5,7 @@ namespace Timirey\XApi\Payloads;
 /**
  * Class that contains payload for the getCurrentUserData command.
  */
-class GetCurrentUserDataPayload extends AbstractPayload
+final class GetCurrentUserDataPayload extends AbstractPayload
 {
     /**
      * Get the command.

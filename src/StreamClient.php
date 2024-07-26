@@ -3,7 +3,7 @@
 namespace Timirey\XApi;
 
 use JsonException;
-use Timirey\XApi\Connections\StreamSocket;
+use Timirey\XApi\Connections\Stream;
 use Timirey\XApi\Enums\StreamHost;
 use Timirey\XApi\Exceptions\ErrorResponseException;
 use Timirey\XApi\Exceptions\InvalidPayloadException;
@@ -35,9 +35,9 @@ use Timirey\XApi\Responses\GetTradeStatusStreamResponse;
 class StreamClient
 {
     /**
-     * @var StreamSocket StreamSocket client instance.
+     * @var Stream Stream client instance.
      */
-    protected StreamSocket $streamSocket;
+    protected Stream $stream;
 
     /**
      * Constructor for the StreamClient class.
@@ -49,7 +49,7 @@ class StreamClient
      */
     public function __construct(protected string $streamSessionId, protected StreamHost $host)
     {
-        $this->streamSocket = new StreamSocket($this->host->value);
+        $this->stream = new Stream($this->host->value);
     }
 
     /**
@@ -63,7 +63,7 @@ class StreamClient
      * @throws JsonException If JSON processing fails.
      * @throws ErrorResponseException If the response indicates an error.
      * @throws InvalidResponseException If the response is invalid.
-     * @throws SocketException If socket is empty.
+     * @throws SocketException If socket is empty or not initialized.
      */
     public function getBalance(callable $callback): void
     {
@@ -86,7 +86,7 @@ class StreamClient
      * @throws JsonException If JSON processing fails.
      * @throws ErrorResponseException If the response indicates an error.
      * @throws InvalidResponseException If the response is invalid.
-     * @throws SocketException If socket is empty.
+     * @throws SocketException If socket is empty or not initialized.
      */
     public function getCandles(string $symbol, callable $callback): void
     {
@@ -108,7 +108,7 @@ class StreamClient
      * @throws JsonException If JSON processing fails.
      * @throws ErrorResponseException If the response indicates an error.
      * @throws InvalidResponseException If the response is invalid.
-     * @throws SocketException If socket is empty.
+     * @throws SocketException If socket is empty or not initialized.
      */
     public function getKeepAlive(callable $callback): void
     {
@@ -130,7 +130,7 @@ class StreamClient
      * @throws JsonException If JSON processing fails.
      * @throws ErrorResponseException If the response indicates an error.
      * @throws InvalidResponseException If the response is invalid.
-     * @throws SocketException If socket is empty.
+     * @throws SocketException If socket is empty or not initialized.
      */
     public function getNews(callable $callback): void
     {
@@ -152,7 +152,7 @@ class StreamClient
      * @throws JsonException If JSON processing fails.
      * @throws ErrorResponseException If the response indicates an error.
      * @throws InvalidResponseException If the response is invalid.
-     * @throws SocketException If socket is empty.
+     * @throws SocketException If socket is empty or not initialized.
      */
     public function getProfits(callable $callback): void
     {
@@ -177,7 +177,7 @@ class StreamClient
      * @throws JsonException If JSON processing fails.
      * @throws ErrorResponseException If the response indicates an error.
      * @throws InvalidResponseException If the response is invalid.
-     * @throws SocketException If socket is empty.
+     * @throws SocketException If socket is empty or not initialized.
      */
     public function getTickPrices(
         string $symbol,
@@ -203,7 +203,7 @@ class StreamClient
      * @throws JsonException If JSON processing fails.
      * @throws ErrorResponseException If the response indicates an error.
      * @throws InvalidResponseException If the response is invalid.
-     * @throws SocketException If socket is empty.
+     * @throws SocketException If socket is empty or not initialized.
      */
     public function getTrades(callable $callback): void
     {
@@ -225,7 +225,7 @@ class StreamClient
      * @throws JsonException If JSON processing fails.
      * @throws ErrorResponseException If the response indicates an error.
      * @throws InvalidResponseException If the response is invalid.
-     * @throws SocketException If socket is empty.
+     * @throws SocketException If socket is empty or not initialized.
      */
     public function getTradeStatus(callable $callback): void
     {
@@ -240,10 +240,11 @@ class StreamClient
      * Send a ping command to the xStation5 API.
      *
      * @return void
+     * @throws SocketException If socket is empty or not initialized.
      */
     public function ping(): void
     {
-        $this->streamSocket->send(new PingStreamPayload($this->streamSessionId));
+        $this->stream->send(new PingStreamPayload($this->streamSessionId));
     }
 
     /**
@@ -261,13 +262,15 @@ class StreamClient
      * @throws InvalidPayloadException If payload is not valid.
      * @throws JsonException If JSON processing fails.
      * @throws ErrorResponseException If the response indicates an error.
-     * @throws SocketException If socket is empty.
+     * @throws SocketException If socket is empty or not initialized.
+     *
+     * @phpstan-param class-string<T> $responseClass
      */
     protected function subscribe(AbstractStreamPayload $payload, string $responseClass, callable $callback): void
     {
-        $this->streamSocket->send($payload->toJson());
+        $this->stream->send($payload->toJson());
 
-        foreach ($this->streamSocket->listen() as $message) {
+        foreach ($this->stream->listen() as $message) {
             $response = $responseClass::instantiate($message);
 
             call_user_func($callback, $response);

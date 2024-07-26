@@ -5,7 +5,7 @@ namespace Timirey\XApi\Payloads;
 /**
  * Class that contains payload for the logout command.
  */
-class LogoutPayload extends AbstractPayload
+final class LogoutPayload extends AbstractPayload
 {
     /**
      * Get the command.

@@ -7,7 +7,7 @@ use Timirey\XApi\Payloads\Data\TradeTransInfo;
 /**
  * Class that contains payload for the tradeTransaction command.
  */
-class TradeTransactionPayload extends AbstractPayload
+final class TradeTransactionPayload extends AbstractPayload
 {
     /**
      * Constructor for TradeTransactionPayload.

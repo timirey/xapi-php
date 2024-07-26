@@ -9,7 +9,7 @@ use Timirey\XApi\Helpers\DateTimeHelper;
 /**
  * Class representing a tick record.
  */
-class TickRecord
+final readonly class TickRecord
 {
     /**
      * @var Level Price level.

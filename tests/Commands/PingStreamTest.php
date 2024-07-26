@@ -16,7 +16,7 @@ afterEach(function () {
 test('ping stream command', function () {
     $payload = new PingStreamPayload('streamSessionId');
 
-    $this->streamSocket->shouldReceive('send')
+    $this->stream->shouldReceive('send')
         ->once()
         ->with($payload->toJson());
 

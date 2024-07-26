@@ -4,9 +4,9 @@ use Timirey\XApi\Payloads\GetStepRulesPayload;
 use Timirey\XApi\Responses\Data\StepRecord;
 use Timirey\XApi\Responses\Data\StepRuleRecord;
 use Timirey\XApi\Responses\GetStepRulesResponse;
-use Timirey\XApi\Tests\Commands\Traits\ClientMockeryTrait;
+use Timirey\XApi\Tests\Commands\Traits\SocketClientMockeryTrait;
 
-uses(ClientMockeryTrait::class);
+uses(SocketClientMockeryTrait::class);
 
 beforeEach(function () {
     $this->mockClient();

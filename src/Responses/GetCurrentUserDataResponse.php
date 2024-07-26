@@ -5,7 +5,7 @@ namespace Timirey\XApi\Responses;
 /**
  * Class that contains the response of the getCurrentUserData command.
  */
-class GetCurrentUserDataResponse extends AbstractResponse
+final readonly class GetCurrentUserDataResponse extends AbstractResponse
 {
     /**
      * Constructor for GetCurrentUserDataResponse.

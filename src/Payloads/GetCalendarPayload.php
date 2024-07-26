@@ -5,7 +5,7 @@ namespace Timirey\XApi\Payloads;
 /**
  * Class that contains payload for the getCalendar command.
  */
-class GetCalendarPayload extends AbstractPayload
+final class GetCalendarPayload extends AbstractPayload
 {
     /**
      * Get the command.

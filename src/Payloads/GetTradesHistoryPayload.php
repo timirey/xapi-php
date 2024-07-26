@@ -8,7 +8,7 @@ use Timirey\XApi\Helpers\DateTimeHelper;
 /**
  * Class that contains payload for the getTradesHistory command.
  */
-class GetTradesHistoryPayload extends AbstractPayload
+final class GetTradesHistoryPayload extends AbstractPayload
 {
     /**
      * Constructor for GetTradesHistoryPayload.

@@ -5,7 +5,7 @@ namespace Timirey\XApi\Payloads;
 /**
  * Class that contains payload for the getMarginTrade command.
  */
-class GetMarginTradePayload extends AbstractPayload
+final class GetMarginTradePayload extends AbstractPayload
 {
     /**
      * Constructor for GetMarginTradePayload.

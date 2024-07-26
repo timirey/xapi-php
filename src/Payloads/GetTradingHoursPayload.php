@@ -5,12 +5,12 @@ namespace Timirey\XApi\Payloads;
 /**
  * Class that contains payload for the getTradingHours command.
  */
-class GetTradingHoursPayload extends AbstractPayload
+final class GetTradingHoursPayload extends AbstractPayload
 {
     /**
      * Constructor for GetTradingHoursPayload.
      *
-     * @param  array $symbols Array of symbol names.
+     * @param array<int, string> $symbols Array of symbol names.
      */
     public function __construct(array $symbols)
     {

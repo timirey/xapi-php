@@ -3,9 +3,9 @@
 use Timirey\XApi\Enums\RequestStatus;
 use Timirey\XApi\Payloads\TradeTransactionStatusPayload;
 use Timirey\XApi\Responses\TradeTransactionStatusResponse;
-use Timirey\XApi\Tests\Commands\Traits\ClientMockeryTrait;
+use Timirey\XApi\Tests\Commands\Traits\SocketClientMockeryTrait;
 
-uses(ClientMockeryTrait::class);
+uses(SocketClientMockeryTrait::class);
 
 beforeEach(function () {
     $this->mockClient();

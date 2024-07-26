@@ -7,7 +7,7 @@ use Timirey\XApi\Responses\Data\IbRecord;
 /**
  * Class that contains the response of the getIbsHistory command.
  */
-class GetIbsHistoryResponse extends AbstractResponse
+final readonly class GetIbsHistoryResponse extends AbstractResponse
 {
     /**
      * Constructor for GetIbsHistoryResponse.
@@ -21,12 +21,12 @@ class GetIbsHistoryResponse extends AbstractResponse
     /**
      * Create a response instance from the validated data.
      *
-     * @param  array $response Validated response data.
+     * @param  array<string, mixed> $response Validated response data.
      * @return static Instance of the response.
      */
-    protected static function create(array $response): static
+    protected static function create(array $response): self
     {
-        return new static(array_map(
+        return new self(array_map(
             static fn (array $ibRecordData): IbRecord => new IbRecord(...$ibRecordData),
             $response['returnData']
         ));
