@@ -2,6 +2,8 @@
 
 namespace Timirey\XApi\Payloads;
 
+use Override;
+
 /**
  * Class that contains payload for the getCommissionDef command.
  */
@@ -24,6 +26,7 @@ final class GetCommissionDefPayload extends AbstractPayload
      *
      * @return string Command name.
      */
+    #[Override]
     public function getCommand(): string
     {
         return 'getCommissionDef';

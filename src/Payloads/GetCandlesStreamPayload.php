@@ -2,6 +2,8 @@
 
 namespace Timirey\XApi\Payloads;
 
+use Override;
+
 /**
  * Class representing the payload for the getCandles stream command.
  */
@@ -23,6 +25,7 @@ final class GetCandlesStreamPayload extends AbstractStreamPayload
      *
      * @return string Command name.
      */
+    #[Override]
     public function getCommand(): string
     {
         return 'getCandles';

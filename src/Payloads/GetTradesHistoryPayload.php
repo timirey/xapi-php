@@ -3,6 +3,7 @@
 namespace Timirey\XApi\Payloads;
 
 use DateTime;
+use Override;
 use Timirey\XApi\Helpers\DateTimeHelper;
 
 /**
@@ -27,6 +28,7 @@ final class GetTradesHistoryPayload extends AbstractPayload
      *
      * @return string Command name.
      */
+    #[Override]
     public function getCommand(): string
     {
         return 'getTradesHistory';

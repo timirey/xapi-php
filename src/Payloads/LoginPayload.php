@@ -2,6 +2,8 @@
 
 namespace Timirey\XApi\Payloads;
 
+use Override;
+
 /**
  * Class that contains payload for the login command.
  */
@@ -24,6 +26,7 @@ final class LoginPayload extends AbstractPayload
      *
      * @return string Command name.
      */
+    #[Override]
     public function getCommand(): string
     {
         return 'login';

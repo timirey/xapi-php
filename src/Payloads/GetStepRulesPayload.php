@@ -2,6 +2,7 @@
 
 namespace Timirey\XApi\Payloads;
 
+use Override;
 use Timirey\XApi\Enums\Day;
 
 /**
@@ -14,6 +15,7 @@ final class GetStepRulesPayload extends AbstractPayload
      *
      * @return string Command name.
      */
+    #[Override]
     public function getCommand(): string
     {
         return 'getStepRules';

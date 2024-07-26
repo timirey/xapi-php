@@ -2,6 +2,8 @@
 
 namespace Timirey\XApi\Payloads;
 
+use Override;
+
 /**
  * Class that contains payload for the tradeTransactionStatus command.
  */
@@ -22,6 +24,7 @@ final class TradeTransactionStatusPayload extends AbstractPayload
      *
      * @return string Command name.
      */
+    #[Override]
     public function getCommand(): string
     {
         return 'tradeTransactionStatus';

@@ -2,6 +2,7 @@
 
 namespace Timirey\XApi\Payloads;
 
+use Override;
 use Timirey\XApi\Payloads\Data\ChartRangeInfoRecord;
 
 /**
@@ -24,6 +25,7 @@ final class GetChartRangeRequestPayload extends AbstractPayload
      *
      * @return string Command name.
      */
+    #[Override]
     public function getCommand(): string
     {
         return 'getChartRangeRequest';

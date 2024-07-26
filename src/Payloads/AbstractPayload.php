@@ -3,11 +3,13 @@
 namespace Timirey\XApi\Payloads;
 
 use JsonException;
+use Override;
+use Timirey\XApi\Interfaces\PayloadInterface;
 
 /**
  * Abstract class for payloads.
  */
-abstract class AbstractPayload
+abstract class AbstractPayload implements PayloadInterface
 {
     /**
      * Array of parameters used in payload.
@@ -17,19 +19,13 @@ abstract class AbstractPayload
     public array $parameters = [];
 
     /**
-     * Get the command.
-     *
-     * @return string Command name.
-     */
-    abstract public function getCommand(): string;
-
-    /**
      * Convert the object to JSON.
      *
      * @return string JSON representation of the payload.
      *
      * @throws JsonException If encoding to JSON fails.
      */
+    #[Override]
     public function toJson(): string
     {
         $payload['command'] = $this->getCommand();
@@ -48,6 +44,7 @@ abstract class AbstractPayload
      *
      * @throws JsonException If encoding to JSON fails.
      */
+    #[Override]
     public function __toString(): string
     {
         return $this->toJson();

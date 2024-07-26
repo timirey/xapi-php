@@ -2,6 +2,8 @@
 
 namespace Timirey\XApi\Payloads;
 
+use Override;
+
 /**
  * Class representing the payload for the getProfits stream command.
  */
@@ -12,6 +14,7 @@ final class GetProfitsStreamPayload extends AbstractStreamPayload
      *
      * @return string Command name.
      */
+    #[Override]
     public function getCommand(): string
     {
         return 'getProfits';

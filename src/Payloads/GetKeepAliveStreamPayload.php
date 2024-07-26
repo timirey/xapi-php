@@ -2,6 +2,8 @@
 
 namespace Timirey\XApi\Payloads;
 
+use Override;
+
 /**
  * Class representing the payload for the getKeepAlive stream command.
  */
@@ -12,6 +14,7 @@ final class GetKeepAliveStreamPayload extends AbstractStreamPayload
      *
      * @return string Command name.
      */
+    #[Override]
     public function getCommand(): string
     {
         return 'getKeepAlive';
