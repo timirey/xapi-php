@@ -25,7 +25,7 @@ final class GetTradesPayload extends AbstractPayload
      * @return string Command name.
      */
     #[Override]
-    public function getCommand(): string
+    protected function getCommand(): string
     {
         return 'getTrades';
     }

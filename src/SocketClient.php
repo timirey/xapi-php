@@ -12,7 +12,6 @@ use Timirey\XApi\Enums\Level;
 use Timirey\XApi\Exceptions\ErrorResponseException;
 use Timirey\XApi\Exceptions\InvalidResponseException;
 use Timirey\XApi\Exceptions\SocketException;
-use Timirey\XApi\Interfaces\PayloadInterface;
 use Timirey\XApi\Payloads\AbstractPayload;
 use Timirey\XApi\Payloads\Data\ChartLastInfoRecord;
 use Timirey\XApi\Payloads\Data\ChartRangeInfoRecord;
@@ -526,7 +525,7 @@ class SocketClient
      *
      * @template T of AbstractResponse
      *
-     * @param PayloadInterface       $payload       The payload to send.
+     * @param AbstractPayload        $payload       The payload to send.
      * @param class-string<T>|string $responseClass The response class to instantiate.
      *
      * @return T The response instance.
@@ -538,7 +537,7 @@ class SocketClient
      *
      * @phpstan-param class-string<T> $responseClass
      */
-    protected function request(PayloadInterface $payload, string $responseClass): AbstractResponse
+    protected function request(AbstractPayload $payload, string $responseClass): AbstractResponse
     {
         $this->socket->send($payload);
 

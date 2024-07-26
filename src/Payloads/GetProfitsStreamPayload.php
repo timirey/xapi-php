@@ -15,7 +15,7 @@ final class GetProfitsStreamPayload extends AbstractStreamPayload
      * @return string Command name.
      */
     #[Override]
-    public function getCommand(): string
+    protected function getCommand(): string
     {
         return 'getProfits';
     }

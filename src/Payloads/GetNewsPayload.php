@@ -29,7 +29,7 @@ final class GetNewsPayload extends AbstractPayload
      * @return string Command name.
      */
     #[Override]
-    public function getCommand(): string
+    protected function getCommand(): string
     {
         return 'getNews';
     }

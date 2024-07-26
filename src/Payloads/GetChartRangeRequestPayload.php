@@ -26,7 +26,7 @@ final class GetChartRangeRequestPayload extends AbstractPayload
      * @return string Command name.
      */
     #[Override]
-    public function getCommand(): string
+    protected function getCommand(): string
     {
         return 'getChartRangeRequest';
     }
