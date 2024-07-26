@@ -508,6 +508,7 @@ class SocketClient
      * @throws ErrorResponseException If the response indicates an error.
      * @throws InvalidResponseException Thrown when the API response is invalid or incomplete.
      * @throws JsonException If the response cannot be processed.
+     * @throws SocketException If socket is empty or not initialized.
      *
      * @phpstan-param class-string<T> $responseClass
      */

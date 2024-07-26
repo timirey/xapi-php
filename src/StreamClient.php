@@ -240,6 +240,7 @@ class StreamClient
      * Send a ping command to the xStation5 API.
      *
      * @return void
+     * @throws SocketException If socket is empty or not initialized.
      */
     public function ping(): void
     {
