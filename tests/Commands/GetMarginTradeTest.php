@@ -14,7 +14,7 @@ afterEach(function () {
     Mockery::close();
 });
 
-test('getMarginTrade command', function () {
+test('getMarginTrade command', function (): void {
     $payload = new GetMarginTradePayload('EURPLN', 1.0);
 
     $mockResponse = [

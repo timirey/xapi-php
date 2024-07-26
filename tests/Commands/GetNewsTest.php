@@ -15,7 +15,7 @@ afterEach(function () {
     Mockery::close();
 });
 
-test('getNews command', function () {
+test('getNews command', function (): void {
     $start = new DateTime('-1 month');
     $end = new DateTime();
 

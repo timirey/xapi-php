@@ -7,14 +7,14 @@ use Timirey\XApi\Tests\Commands\Traits\StreamClientMockeryTrait;
 uses(StreamClientMockeryTrait::class);
 
 beforeEach(function () {
-    $this->mockStreamClient();
+    $this->mockClient();
 });
 
 afterEach(function () {
     Mockery::close();
 });
 
-test('getNews stream command', function () {
+test('getNews stream command', function (): void {
     $payload = new GetNewsStreamPayload('streamSessionId');
     $mockResponse = [
         'command' => 'news',
@@ -26,11 +26,9 @@ test('getNews stream command', function () {
         ],
     ];
 
-    $this->mockStreamResponse($payload, $mockResponse);
+    $this->mockResponse($payload, $mockResponse);
 
-    $streamClient = $this->streamClient;
-
-    $streamClient->getNews(function (GetNewsStreamResponse $response) {
+    $this->client->getNews(static function (GetNewsStreamResponse $response): void {
         expect($response)->toBeInstanceOf(GetNewsStreamResponse::class)
             ->and($response->newsStreamRecord->time)->toBeInstanceOf(DateTime::class);
     });

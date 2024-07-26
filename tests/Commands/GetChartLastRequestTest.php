@@ -17,7 +17,7 @@ afterEach(function () {
     Mockery::close();
 });
 
-test('getChartLastRequest command', function () {
+test('getChartLastRequest command', function (): void {
     $chartLastInfoRecord = new ChartLastInfoRecord(
         period: Period::PERIOD_M1,
         start: new DateTime(),

@@ -17,7 +17,7 @@ afterEach(function () {
     Mockery::close();
 });
 
-test('getChartRangeRequest command', function () {
+test('getChartRangeRequest command', function (): void {
     $chartRangeInfoRecord = new ChartRangeInfoRecord(
         period: Period::PERIOD_H1,
         start: new DateTime('-1 month'),

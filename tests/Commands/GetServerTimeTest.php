@@ -14,7 +14,7 @@ afterEach(function () {
     Mockery::close();
 });
 
-test('getServerTime command', function () {
+test('getServerTime command', function (): void {
     $payload = new GetServerTimePayload();
 
     $mockResponse = [

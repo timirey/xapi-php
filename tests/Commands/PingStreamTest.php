@@ -6,19 +6,19 @@ use Timirey\XApi\Tests\Commands\Traits\StreamClientMockeryTrait;
 uses(StreamClientMockeryTrait::class);
 
 beforeEach(function () {
-    $this->mockStreamClient();
+    $this->mockClient();
 });
 
 afterEach(function () {
     Mockery::close();
 });
 
-test('ping stream command', function () {
+test('ping stream command', function (): void {
     $payload = new PingStreamPayload('streamSessionId');
 
-    $this->stream->shouldReceive('send')
+    $this->socket->shouldReceive('send')
         ->once()
         ->with($payload->toJson());
 
-    $this->streamClient->ping();
+    $this->client->ping();
 });

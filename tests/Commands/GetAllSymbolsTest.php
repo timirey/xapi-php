@@ -17,7 +17,7 @@ afterEach(function () {
     Mockery::close();
 });
 
-test('getAllSymbols command', function () {
+test('getAllSymbols command', function (): void {
     $payload = new GetAllSymbolsPayload();
     $mockResponse = [
         'status' => true,

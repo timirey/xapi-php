@@ -16,7 +16,7 @@ afterEach(function () {
     Mockery::close();
 });
 
-test('getStepRules command', function () {
+test('getStepRules command', function (): void {
     $payload = new GetStepRulesPayload();
 
     $mockResponse = [

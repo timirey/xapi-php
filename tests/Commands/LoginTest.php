@@ -14,7 +14,7 @@ afterEach(function () {
     Mockery::close();
 });
 
-test('login command', function () {
+test('login command', function (): void {
     $payload = new LoginPayload(12345, 'password');
     $mockResponse = [
         'status' => true,

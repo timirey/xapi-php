@@ -17,7 +17,7 @@ afterEach(function () {
     Mockery::close();
 });
 
-test('tradeTransaction command', function () {
+test('tradeTransaction command', function (): void {
     $tradeTransInfo = new TradeTransInfo(
         cmd: Cmd::BUY,
         customComment: 'Test trade',

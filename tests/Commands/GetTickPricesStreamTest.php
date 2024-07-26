@@ -8,14 +8,14 @@ use Timirey\XApi\Tests\Commands\Traits\StreamClientMockeryTrait;
 uses(StreamClientMockeryTrait::class);
 
 beforeEach(function () {
-    $this->mockStreamClient();
+    $this->mockClient();
 });
 
 afterEach(function () {
     Mockery::close();
 });
 
-test('getTickPrices stream command', function () {
+test('getTickPrices stream command', function (): void {
     $payload = new GetTickPricesStreamPayload('streamSessionId', 'EURUSD', 5000, 2);
     $mockResponse = [
         'command' => 'tickPrices',
@@ -35,11 +35,9 @@ test('getTickPrices stream command', function () {
         ],
     ];
 
-    $this->mockStreamResponse($payload, $mockResponse);
+    $this->mockResponse($payload, $mockResponse);
 
-    $streamClient = $this->streamClient;
-
-    $streamClient->getTickPrices('EURUSD', function (GetTickPricesStreamResponse $response) {
+    $this->client->getTickPrices('EURUSD', static function (GetTickPricesStreamResponse $response): void {
         expect($response)->toBeInstanceOf(GetTickPricesStreamResponse::class)
             ->and($response->tickStreamRecord->quoteId)->toBeInstanceOf(QuoteId::class)
             ->and($response->tickStreamRecord->timestamp)->toBeInstanceOf(DateTime::class);

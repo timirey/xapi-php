@@ -14,7 +14,7 @@ afterEach(function () {
     Mockery::close();
 });
 
-test('getMarginLevel command', function () {
+test('getMarginLevel command', function (): void {
     $payload = new GetMarginLevelPayload();
 
     $mockResponse = [
