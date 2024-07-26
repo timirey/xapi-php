@@ -2,6 +2,7 @@
 
 namespace Timirey\XApi\Payloads;
 
+use Override;
 use Timirey\XApi\Payloads\Data\TradeTransInfo;
 
 /**
@@ -24,7 +25,8 @@ final class TradeTransactionPayload extends AbstractPayload
      *
      * @return string Command name.
      */
-    public function getCommand(): string
+    #[Override]
+    protected function getCommand(): string
     {
         return 'tradeTransaction';
     }

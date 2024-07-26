@@ -10,7 +10,7 @@ use Timirey\XApi\Interfaces\ConnectionInterface;
 /**
  * Represents a socket connection for sending and receiving data.
  */
-class SocketConnection implements ConnectionInterface
+final class SocketConnection implements ConnectionInterface
 {
     /**
      * @var string The delimiter for the socket messages.

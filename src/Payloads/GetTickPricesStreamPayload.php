@@ -2,6 +2,8 @@
 
 namespace Timirey\XApi\Payloads;
 
+use Override;
+
 /**
  * Class representing the payload for the getTickPrices stream command.
  */
@@ -37,7 +39,8 @@ final class GetTickPricesStreamPayload extends AbstractStreamPayload
      *
      * @return string Command name.
      */
-    public function getCommand(): string
+    #[Override]
+    protected function getCommand(): string
     {
         return 'getTickPrices';
     }

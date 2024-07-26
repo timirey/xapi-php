@@ -3,6 +3,7 @@
 namespace Timirey\XApi\Payloads;
 
 use DateTime;
+use Override;
 use Timirey\XApi\Helpers\DateTimeHelper;
 
 /**
@@ -27,7 +28,8 @@ final class GetIbsHistoryPayload extends AbstractPayload
      *
      * @return string Command name.
      */
-    public function getCommand(): string
+    #[Override]
+    protected function getCommand(): string
     {
         return 'getIbsHistory';
     }

@@ -17,13 +17,6 @@ abstract class AbstractPayload
     public array $parameters = [];
 
     /**
-     * Get the command.
-     *
-     * @return string Command name.
-     */
-    abstract public function getCommand(): string;
-
-    /**
      * Convert the object to JSON.
      *
      * @return string JSON representation of the payload.
@@ -52,4 +45,11 @@ abstract class AbstractPayload
     {
         return $this->toJson();
     }
+
+    /**
+     * Get the command.
+     *
+     * @return string Command name.
+     */
+    abstract protected function getCommand(): string;
 }

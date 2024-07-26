@@ -3,6 +3,7 @@
 namespace Timirey\XApi\Payloads;
 
 use JsonException;
+use Override;
 use Timirey\XApi\Exceptions\InvalidPayloadException;
 
 /**
@@ -28,6 +29,7 @@ abstract class AbstractStreamPayload extends AbstractPayload
      * @throws JsonException If encoding to JSON fails.
      * @throws InvalidPayloadException If payload is not valid.
      */
+    #[Override]
     public function toJson(): string
     {
         $payload['command'] = $this->getCommand();

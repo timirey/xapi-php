@@ -3,6 +3,7 @@
 namespace Timirey\XApi\Payloads;
 
 use DateTime;
+use Override;
 use Timirey\XApi\Enums\Level;
 use Timirey\XApi\Helpers\DateTimeHelper;
 
@@ -30,7 +31,8 @@ final class GetTickPricesPayload extends AbstractPayload
      *
      * @return string Command name.
      */
-    public function getCommand(): string
+    #[Override]
+    protected function getCommand(): string
     {
         return 'getTickPrices';
     }
