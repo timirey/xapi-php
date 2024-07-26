@@ -18,7 +18,7 @@ abstract class AbstractStreamPayload extends AbstractPayload
      */
     public function __construct(string $streamSessionId)
     {
-        $this->parameters['streamSessionId'] = $streamSessionId;
+        $this->setParameter('streamSessionId', $streamSessionId);
     }
 
     /**
@@ -34,8 +34,10 @@ abstract class AbstractStreamPayload extends AbstractPayload
     {
         $payload['command'] = $this->getCommand();
 
-        if (!empty($this->parameters)) {
-            $payload = array_merge($payload, $this->parameters);
+        $parameters = $this->getParameters();
+
+        if (!empty($parameters)) {
+            $payload = array_merge($payload, $parameters);
         }
 
         if (!isset($payload['streamSessionId'])) {

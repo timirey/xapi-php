@@ -31,7 +31,7 @@ test('getChartRangeRequest command', function (): void {
     /**
      * @var ChartRangeInfoRecord $chartRangeRequestArgument
      */
-    $chartRangeRequestArgument = $payload->parameters['info'];
+    $chartRangeRequestArgument = $payload->getParameter('info');
     expect($chartRangeRequestArgument->period)->toBeInstanceOf(Period::class);
 
     $mockResponse = [

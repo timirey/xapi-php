@@ -5,12 +5,11 @@ namespace Timirey\XApi\Connections;
 use Generator;
 use Override;
 use Timirey\XApi\Exceptions\SocketException;
-use Timirey\XApi\Interfaces\ConnectionInterface;
 
 /**
  * Represents a socket connection for sending and receiving data.
  */
-final class SocketConnection implements ConnectionInterface
+class SocketConnection
 {
     /**
      * @var string The delimiter for the socket messages.
@@ -40,7 +39,6 @@ final class SocketConnection implements ConnectionInterface
      * @return boolean True on success, false on failure.
      * @throws SocketException If socket is not initialized.
      */
-    #[Override]
     public function open(): bool
     {
         $this->socket = stream_socket_client($this->address, $errorCode, $errorMessage);
@@ -60,7 +58,6 @@ final class SocketConnection implements ConnectionInterface
      * @return false|integer The number of bytes written, or false on failure.
      * @throws SocketException If socket is not initialized.
      */
-    #[Override]
     public function send(string $payload): false|int
     {
         if ($this->socket === false) {
@@ -76,7 +73,6 @@ final class SocketConnection implements ConnectionInterface
      * @return string The read data, or false on failure.
      * @throws SocketException If socket is not initialized.
      */
-    #[Override]
     public function receive(): string
     {
         if ($this->socket === false) {
@@ -104,7 +100,6 @@ final class SocketConnection implements ConnectionInterface
      * @return Generator Yields data received from the socket.
      * @throws SocketException If socket is empty or not initialized.
      */
-    #[Override]
     public function listen(): Generator
     {
         if ($this->socket === false) {
@@ -128,7 +123,6 @@ final class SocketConnection implements ConnectionInterface
      * @return boolean True on success, false on failure.
      * @throws SocketException If socket is not initialized.
      */
-    #[Override]
     public function close(): bool
     {
         if ($this->socket === false) {
