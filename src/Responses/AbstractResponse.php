@@ -88,5 +88,9 @@ abstract readonly class AbstractResponse
      * @param array<string, mixed> $response Validated response data.
      * @return static Instance of the response.
      */
-    abstract protected static function create(array $response): self;
+    protected static function create(array $response): self
+    {
+        /** @phpstan-ignore-next-line */
+        return new static(...$response);
+    }
 }
