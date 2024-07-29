@@ -103,9 +103,9 @@ class SocketClient
      * @throws InvalidResponseException Thrown when the API response is invalid or incomplete.
      * @throws SocketException If socket is empty or not initialized.
      */
-    final public function login(int $userId, string $password): LoginResponse
+    final public function login(int $userId, string $password, ?string $appName = null): LoginResponse //todo: add $appName
     {
-        return $this->request(new LoginPayload($userId, $password), LoginResponse::class);
+        return $this->request(new LoginPayload($userId, $password, $appName), LoginResponse::class);
     }
 
     /**
@@ -552,6 +552,6 @@ class SocketClient
      */
     protected function init(): void
     {
-        $this->socket = new SocketConnection($this->host->value);
+        $this->socket = new SocketConnection($this->host->getRequestHost());
     }
 }

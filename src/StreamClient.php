@@ -4,7 +4,7 @@ namespace Timirey\XApi;
 
 use JsonException;
 use Timirey\XApi\Connections\SocketConnection;
-use Timirey\XApi\Enums\StreamHost;
+use Timirey\XApi\Enums\Host;
 use Timirey\XApi\Exceptions\ErrorResponseException;
 use Timirey\XApi\Exceptions\InvalidPayloadException;
 use Timirey\XApi\Exceptions\InvalidResponseException;
@@ -42,12 +42,12 @@ class StreamClient
     /**
      * Constructor for the StreamClient class.
      *
-     * @param string     $streamSessionId Stream session ID.
-     * @param StreamHost $host            Host URL.
+     * @param string $streamSessionId Stream session ID.
+     * @param Host   $host            Host URL.
      *
      * @throws SocketException If socket is unable to init.
      */
-    public function __construct(protected string $streamSessionId, protected StreamHost $host)
+    public function __construct(protected string $streamSessionId, protected Host $host)
     {
         $this->init();
     }
@@ -285,6 +285,6 @@ class StreamClient
      */
     protected function init(): void
     {
-        $this->socket = new SocketConnection($this->host->value);
+        $this->socket = new SocketConnection($this->host->getStreamHost());
     }
 }

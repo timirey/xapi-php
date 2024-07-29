@@ -15,7 +15,7 @@ afterEach(function () {
 });
 
 test('login command', function (): void {
-    $payload = new LoginPayload(12345, 'password');
+    $payload = new LoginPayload(12345, 'password', 'Hello World');
     $mockResponse = [
         'status' => true,
         'streamSessionId' => 'streamSessionId',
@@ -23,7 +23,7 @@ test('login command', function (): void {
 
     $this->mockResponse($payload, $mockResponse);
 
-    $response = $this->client->login(12345, 'password');
+    $response = $this->client->login(12345, 'password', 'Hello World');
 
     expect($response)->toBeInstanceOf(LoginResponse::class);
 });

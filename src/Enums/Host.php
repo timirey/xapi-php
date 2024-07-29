@@ -3,17 +3,47 @@
 namespace Timirey\XApi\Enums;
 
 /**
- * Enum representing the socket host URLs for xStation5 API.
+ * Enum representing the account types for xStation5 API.
  */
 enum Host: string
 {
     /**
-     * Demo account host URL.
+     * Demo account type.
+     *
+     * @var string
      */
-    case DEMO = 'ssl://xapi.xtb.com:5124';
+    case DEMO = 'demo';
 
     /**
-     * Real account host URL.
+     * Real account type.
+     *
+     * @var string
      */
-    case REAL = 'ssl://xapi.xtb.com:5112';
+    case REAL = 'real';
+
+    /**
+     * Get the request host URL based on the type.
+     *
+     * @return string The request host URL.
+     */
+    public function getRequestHost(): string
+    {
+        return match ($this) {
+            self::DEMO => 'ssl://xapi.xtb.com:5124',
+            self::REAL => 'ssl://xapi.xtb.com:5112',
+        };
+    }
+
+    /**
+     * Get the stream host URL based on the type.
+     *
+     * @return string The stream host URL.
+     */
+    public function getStreamHost(): string
+    {
+        return match ($this) {
+            self::DEMO => 'ssl://xapi.xtb.com:5125',
+            self::REAL => 'ssl://xapi.xtb.com:5113',
+        };
+    }
 }

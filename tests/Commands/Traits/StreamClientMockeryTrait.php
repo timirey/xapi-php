@@ -8,7 +8,7 @@ use Mockery;
 use Mockery\MockInterface;
 use Override;
 use Timirey\XApi\Connections\SocketConnection;
-use Timirey\XApi\Enums\StreamHost;
+use Timirey\XApi\Enums\Host;
 use Timirey\XApi\Exceptions\InvalidPayloadException;
 use Timirey\XApi\Payloads\AbstractStreamPayload;
 use Timirey\XApi\StreamClient;
@@ -28,14 +28,14 @@ trait StreamClientMockeryTrait
      *
      * This method should be called in the beforeEach() block of your tests.
      *
-     * @param string     $streamSessionId Stream session ID.
-     * @param StreamHost $host            Host URI.
+     * @param string $streamSessionId Stream session ID.
+     * @param Host   $host            Host URI.
      *
      * @return void
      */
     public function mockClient(
         string $streamSessionId = 'streamSessionId',
-        StreamHost $host = StreamHost::DEMO
+        Host $host = Host::DEMO
     ): void {
         $this->socket = Mockery::mock(SocketConnection::class);
 
