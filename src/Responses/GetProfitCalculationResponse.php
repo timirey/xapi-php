@@ -27,6 +27,6 @@ final readonly class GetProfitCalculationResponse extends AbstractResponse
     #[Override]
     protected static function create(array $response): self
     {
-        return new self(...$response['returnData']);
+        return new self(...$response);
     }
 }

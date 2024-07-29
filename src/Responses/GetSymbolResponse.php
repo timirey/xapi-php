@@ -26,6 +26,6 @@ final readonly class GetSymbolResponse extends AbstractResponse
      */
     protected static function create(array $response): self
     {
-        return new self(new SymbolRecord(...$response['returnData']));
+        return new self(new SymbolRecord(...$response));
     }
 }

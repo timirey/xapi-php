@@ -36,7 +36,7 @@ final readonly class GetStepRulesResponse extends AbstractResponse
                     $stepRuleRecordData['steps']
                 )
             ),
-            $response['returnData']
+            $response
         ));
     }
 }

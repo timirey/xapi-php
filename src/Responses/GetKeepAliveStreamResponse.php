@@ -26,6 +26,6 @@ final readonly class GetKeepAliveStreamResponse extends AbstractStreamResponse
      */
     protected static function create(array $response): self
     {
-        return new self(new KeepAliveStreamRecord(...$response['data']));
+        return new self(new KeepAliveStreamRecord(...$response));
     }
 }

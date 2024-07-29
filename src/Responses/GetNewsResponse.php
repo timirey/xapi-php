@@ -28,7 +28,7 @@ final readonly class GetNewsResponse extends AbstractResponse
     {
         return new self(array_map(
             static fn (array $newsTopicRecordData): NewsTopicRecord => new NewsTopicRecord(...$newsTopicRecordData),
-            $response['returnData']
+            $response
         ));
     }
 }

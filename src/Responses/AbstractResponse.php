@@ -15,7 +15,7 @@ abstract readonly class AbstractResponse
     /**
      * Create an instance from JSON.
      *
-     * @param  string $json JSON string.
+     * @param string $json JSON string.
      * @return static Instance of the response.
      *
      * @throws ErrorResponseException If the response indicates an error.
@@ -28,13 +28,15 @@ abstract readonly class AbstractResponse
 
         static::validate($data);
 
+        static::mutate($data);
+
         return static::create($data);
     }
 
     /**
      * Decode JSON string.
      *
-     * @param  string $json JSON string.
+     * @param string $json JSON string.
      * @return array<string, mixed> Decoded JSON data.
      *
      * @throws InvalidArgumentException If the JSON is invalid.
@@ -48,16 +50,16 @@ abstract readonly class AbstractResponse
     /**
      * Validate the response data.
      *
-     * @param  array<string, mixed> $response Response data.
-     *
-     * @throws ErrorResponseException If the response indicates an error or status is missing.
-     * @throws InvalidResponseException If the response cannot be processed.
+     * @param array<string, mixed> $response Response data.
      *
      * @return void
+     * @throws InvalidResponseException If the response cannot be processed.
+     *
+     * @throws ErrorResponseException If the response indicates an error or status is missing.
      */
     protected static function validate(array &$response): void
     {
-        if (! isset($response['status'])) {
+        if (!isset($response['status'])) {
             throw new InvalidResponseException('The response did not include a status.');
         }
 
@@ -69,9 +71,21 @@ abstract readonly class AbstractResponse
     }
 
     /**
+     * Mutate the response data to simplify its structure.
+     *
+     * @param array<string, mixed> $response Response data.
+     *
+     * @return void
+     */
+    protected static function mutate(array &$response): void
+    {
+        $response = $response['data'] ?? $response['returnData'] ?? $response;
+    }
+
+    /**
      * Create a response instance from the validated data.
      *
-     * @param  array<string, mixed> $response Validated response data.
+     * @param array<string, mixed> $response Validated response data.
      * @return static Instance of the response.
      */
     abstract protected static function create(array $response): self;

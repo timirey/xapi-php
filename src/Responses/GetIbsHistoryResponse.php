@@ -28,7 +28,7 @@ final readonly class GetIbsHistoryResponse extends AbstractResponse
     {
         return new self(array_map(
             static fn (array $ibRecordData): IbRecord => new IbRecord(...$ibRecordData),
-            $response['returnData']
+            $response
         ));
     }
 }

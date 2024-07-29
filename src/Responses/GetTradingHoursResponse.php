@@ -40,7 +40,7 @@ final readonly class GetTradingHoursResponse extends AbstractResponse
                     $tradingHoursRecordData['trading']
                 )
             ),
-            $response['returnData']
+            $response
         ));
     }
 }

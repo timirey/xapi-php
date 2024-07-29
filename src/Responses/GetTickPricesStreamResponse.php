@@ -26,6 +26,6 @@ final readonly class GetTickPricesStreamResponse extends AbstractStreamResponse
      */
     protected static function create(array $response): self
     {
-        return new self(new TickStreamRecord(...$response['data']));
+        return new self(new TickStreamRecord(...$response));
     }
 }

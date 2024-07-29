@@ -28,7 +28,7 @@ final readonly class GetCalendarResponse extends AbstractResponse
     {
         return new self(array_map(
             static fn (array $calendarRecordData): CalendarRecord => new CalendarRecord(...$calendarRecordData),
-            $response['returnData']
+            $response
         ));
     }
 }

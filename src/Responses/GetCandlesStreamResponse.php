@@ -26,6 +26,6 @@ final readonly class GetCandlesStreamResponse extends AbstractStreamResponse
      */
     protected static function create(array $response): self
     {
-        return new self(new CandleStreamRecord(...$response['data']));
+        return new self(new CandleStreamRecord(...$response));
     }
 }

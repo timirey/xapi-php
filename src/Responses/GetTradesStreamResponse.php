@@ -26,6 +26,6 @@ final readonly class GetTradesStreamResponse extends AbstractStreamResponse
      */
     protected static function create(array $response): self
     {
-        return new self(new TradeStreamRecord(...$response['data']));
+        return new self(new TradeStreamRecord(...$response));
     }
 }

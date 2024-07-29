@@ -26,6 +26,6 @@ final readonly class GetBalanceStreamResponse extends AbstractStreamResponse
      */
     protected static function create(array $response): self
     {
-        return new self(new BalanceStreamRecord(...$response['data']));
+        return new self(new BalanceStreamRecord(...$response));
     }
 }

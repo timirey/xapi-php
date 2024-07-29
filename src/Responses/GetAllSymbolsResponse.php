@@ -28,7 +28,7 @@ final readonly class GetAllSymbolsResponse extends AbstractResponse
     {
         return new self(array_map(
             static fn (array $symbolRecordData): SymbolRecord => new SymbolRecord(...$symbolRecordData),
-            $response['returnData']
+            $response
         ));
     }
 }

@@ -28,7 +28,7 @@ final readonly class GetTradesHistoryResponse extends AbstractResponse
     {
         return new self(array_map(
             static fn (array $tradeData): TradeRecord => new TradeRecord(...$tradeData),
-            $response['returnData']
+            $response
         ));
     }
 }

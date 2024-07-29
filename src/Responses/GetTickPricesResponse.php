@@ -28,7 +28,7 @@ final readonly class GetTickPricesResponse extends AbstractResponse
     {
         return new self(array_map(
             static fn (array $tickRecordData): TickRecord => new TickRecord(...$tickRecordData),
-            $response['returnData']['quotations']
+            $response['quotations']
         ));
     }
 }

@@ -28,10 +28,10 @@ final readonly class GetChartLastRequestResponse extends AbstractResponse
     protected static function create(array $response): self
     {
         return new self(
-            $response['returnData']['digits'],
+            $response['digits'],
             array_map(
                 static fn (array $rateInfoRecordData): RateInfoRecord => new RateInfoRecord(...$rateInfoRecordData),
-                $response['returnData']['rateInfos']
+                $response['rateInfos']
             )
         );
     }
