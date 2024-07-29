@@ -2,6 +2,7 @@
 
 namespace Timirey\XApi\Responses;
 
+use Override;
 use Timirey\XApi\Responses\Data\IbRecord;
 
 /**
@@ -24,6 +25,7 @@ final readonly class GetIbsHistoryResponse extends AbstractResponse
      * @param  array<string, mixed> $response Validated response data.
      * @return static Instance of the response.
      */
+    #[Override]
     protected static function create(array $response): self
     {
         return new self(array_map(

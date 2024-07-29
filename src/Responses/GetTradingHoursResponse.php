@@ -2,6 +2,7 @@
 
 namespace Timirey\XApi\Responses;
 
+use Override;
 use Timirey\XApi\Responses\Data\QuotesRecord;
 use Timirey\XApi\Responses\Data\TradingHoursRecord;
 use Timirey\XApi\Responses\Data\TradingRecord;
@@ -26,6 +27,7 @@ final readonly class GetTradingHoursResponse extends AbstractResponse
      * @param  array<string, mixed> $response Validated response data.
      * @return self Instance of the response.
      */
+    #[Override]
     protected static function create(array $response): self
     {
         return new self(array_map(
