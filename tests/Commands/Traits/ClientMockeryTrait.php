@@ -96,10 +96,6 @@ trait ClientMockeryTrait
      */
     public function mockResponse(AbstractPayload $payload, array $response): void
     {
-        $this->request->shouldReceive('isConnected')
-            ->once()
-            ->andReturn(true);
-
         $this->request->shouldReceive('send')
             ->once()
             ->with($payload->toJson());
@@ -124,10 +120,6 @@ trait ClientMockeryTrait
      */
     public function mockStreamResponse(AbstractStreamPayload $payload, array $response): void
     {
-        $this->request->shouldReceive('isConnected')
-            ->once()
-            ->andReturn(true);
-
         $this->stream->shouldReceive('send')
             ->once()
             ->with($payload->toJson());

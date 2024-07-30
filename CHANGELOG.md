@@ -1,5 +1,10 @@
 # Release Notes
 
+## [6.0.3](https://github.com/timirey/xapi-php/compare/6.0.2..6.0.3) - 2024-07-30
+
+- Remove `isConnected()` from `SocketConnection::class`.
+- Updated GitHub workflows for better checks.
+
 ## [6.0.2](https://github.com/timirey/xapi-php/compare/6.0.1..6.0.2) - 2024-07-30
 
 - Catch exceptions from `stream_socket_client()`.
