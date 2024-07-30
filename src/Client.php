@@ -132,14 +132,15 @@ class Client
     /**
      * Logs in to the xStation5 API.
      *
-     * @param integer $userId   User ID.
-     * @param string  $password User password.
+     * @param integer     $userId   User ID.
+     * @param string      $password User password.
+     * @param string|null $appName  Application name.
      *
      * @return LoginResponse The response from the login request.
      *
      * @throws ErrorResponseException If the response indicates an error.
-     * @throws JsonException If the response cannot be processed.
      * @throws InvalidResponseException Thrown when the API response is invalid or incomplete.
+     * @throws JsonException If the response cannot be processed.
      * @throws SocketException If socket is empty or not initialized.
      */
     final public function login(int $userId, string $password, ?string $appName = null): LoginResponse
@@ -748,6 +749,8 @@ class Client
     /**
      * Establishes connection to the xStation5 API.
      *
+     * @return void
+     *
      * @throws ErrorResponseException If the response indicates an error.
      * @throws JsonException If the response cannot be processed.
      * @throws InvalidResponseException If the response is invalid or incomplete.
@@ -823,6 +826,8 @@ class Client
     /**
      * Ensures the request connection is established.
      *
+     * @return void
+     *
      * @throws ErrorResponseException If the response indicates an error.
      * @throws InvalidResponseException If the API response is invalid or incomplete.
      * @throws JsonException If the response cannot be processed.
@@ -837,6 +842,8 @@ class Client
 
     /**
      * Ensures the stream connection is established.
+     *
+     * @return void
      *
      * @throws ErrorResponseException If the response indicates an error.
      * @throws InvalidResponseException If the API response is invalid or incomplete.

@@ -48,6 +48,8 @@ trait ClientMockeryTrait
         $this->client = new class ($userId, $password, $host, $appName) extends Client {
             /**
              * Establishes connection to the xStation5 API.
+             *
+             * @return void
              */
             #[Override]
             protected function connect(): void
