@@ -21,9 +21,7 @@ final class TradeTransactionPayload extends AbstractPayload
     }
 
     /**
-     * Get the command.
-     *
-     * @return string Command name.
+     * @inheritdoc
      */
     #[Override]
     protected function getCommand(): string

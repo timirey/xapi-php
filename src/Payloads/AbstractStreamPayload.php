@@ -2,7 +2,6 @@
 
 namespace Timirey\XApi\Payloads;
 
-use JsonException;
 use Override;
 use Timirey\XApi\Exceptions\InvalidPayloadException;
 
@@ -22,12 +21,7 @@ abstract class AbstractStreamPayload extends AbstractPayload
     }
 
     /**
-     * Convert the object to JSON.
-     *
-     * @return string JSON representation of the payload.
-     *
-     * @throws JsonException If encoding to JSON fails.
-     * @throws InvalidPayloadException If payload is not valid.
+     * @inheritdoc
      */
     #[Override]
     public function toJson(): string

@@ -8,16 +8,12 @@ namespace Timirey\XApi\Enums;
 enum Host: string
 {
     /**
-     * Demo account type.
-     *
-     * @var string
+     * @const Demo account type.
      */
     case DEMO = 'demo';
 
     /**
-     * Real account type.
-     *
-     * @var string
+     * @const Real account type.
      */
     case REAL = 'real';
 

@@ -10,9 +10,7 @@ use Override;
 final class PingStreamPayload extends AbstractStreamPayload
 {
     /**
-     * Returns the command name for the payload.
-     *
-     * @return string Command name.
+     * @inheritdoc
      */
     #[Override]
     protected function getCommand(): string

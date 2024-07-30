@@ -23,7 +23,7 @@ jobs:
         run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
 
       - name: Run PHP CodeSniffer
-        run: vendor/bin/phpcs --severity=6
+        run: vendor/bin/phpcs --severity=6 # change to 1
 
       - name: Run PHP Stan
         run: vendor/bin/phpstan analyse src --level=8

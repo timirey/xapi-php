@@ -11,13 +11,7 @@ use Timirey\XApi\Exceptions\InvalidResponseException;
 abstract readonly class AbstractStreamResponse extends AbstractResponse
 {
     /**
-     * Validate the response data.
-     *
-     * @param  array<string, mixed> $response Response data.
-     *
-     * @throws InvalidResponseException If the response is invalid or incomplete.
-     *
-     * @return void
+     * @inheritdoc
      */
     #[Override]
     protected static function validate(array &$response): void

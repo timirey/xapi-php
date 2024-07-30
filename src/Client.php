@@ -88,19 +88,7 @@ use Timirey\XApi\Responses\TradeTransactionResponse;
 use Timirey\XApi\Responses\TradeTransactionStatusResponse;
 
 /**
- * Class Client
- *
  * A client for interacting with the xStation5 API.
- *
- * @package Timirey\XApi
- *
- * @property SocketConnection $request Connection for sending requests.
- * @property SocketConnection $stream Connection for handling streaming data.
- * @property string $streamSessionId Session ID for the streaming connection.
- * @property int $userId User ID for login.
- * @property string $password User password for login.
- * @property Host $host Host configuration.
- * @property string|null $appName Optional application name.
  */
 class Client
 {
