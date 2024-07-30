@@ -14,7 +14,7 @@ afterEach(function () {
     Mockery::close();
 });
 
-test('getCurrentUserData command', function () {
+test('getCurrentUserData command', function (): void {
     $payload = new GetCurrentUserDataPayload();
 
     $mockResponse = [

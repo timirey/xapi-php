@@ -3,12 +3,13 @@
 namespace Timirey\XApi\Payloads;
 
 use DateTime;
+use Override;
 use Timirey\XApi\Helpers\DateTimeHelper;
 
 /**
  * Class that contains payload for the getIbsHistory command.
  */
-class GetIbsHistoryPayload extends AbstractPayload
+final class GetIbsHistoryPayload extends AbstractPayload
 {
     /**
      * Constructor for GetIbsHistoryPayload.
@@ -18,16 +19,17 @@ class GetIbsHistoryPayload extends AbstractPayload
      */
     public function __construct(DateTime $start, DateTime $end)
     {
-        $this->parameters['start'] = DateTimeHelper::toMilliseconds($start);
-        $this->parameters['end'] = DateTimeHelper::toMilliseconds($end);
+        $this->setParameters([
+            'start' => DateTimeHelper::toMilliseconds($start),
+            'end' => DateTimeHelper::toMilliseconds($end)
+        ]);
     }
 
     /**
-     * Get the command.
-     *
-     * @return string Command name.
+     * @inheritdoc
      */
-    public function getCommand(): string
+    #[Override]
+    protected function getCommand(): string
     {
         return 'getIbsHistory';
     }

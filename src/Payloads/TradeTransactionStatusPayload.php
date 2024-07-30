@@ -2,10 +2,12 @@
 
 namespace Timirey\XApi\Payloads;
 
+use Override;
+
 /**
  * Class that contains payload for the tradeTransactionStatus command.
  */
-class TradeTransactionStatusPayload extends AbstractPayload
+final class TradeTransactionStatusPayload extends AbstractPayload
 {
     /**
      * Constructor for TradeTransactionStatusPayload.
@@ -14,15 +16,14 @@ class TradeTransactionStatusPayload extends AbstractPayload
      */
     public function __construct(public int $order)
     {
-        $this->parameters['order'] = $order;
+        $this->setParameter('order', $this->order);
     }
 
     /**
-     * Get the command.
-     *
-     * @return string Command name.
+     * @inheritdoc
      */
-    public function getCommand(): string
+    #[Override]
+    protected function getCommand(): string
     {
         return 'tradeTransactionStatus';
     }

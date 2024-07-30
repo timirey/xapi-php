@@ -5,7 +5,7 @@ namespace Timirey\XApi\Responses;
 /**
  * Class that contains the response of the getMarginTrade command.
  */
-class GetMarginTradeResponse extends AbstractResponse
+final readonly class GetMarginTradeResponse extends AbstractResponse
 {
     /**
      * Constructor for GetMarginTradeResponse.

@@ -17,7 +17,7 @@ afterEach(function () {
     Mockery::close();
 });
 
-test('getChartRangeRequest command', function () {
+test('getChartRangeRequest command', function (): void {
     $chartRangeInfoRecord = new ChartRangeInfoRecord(
         period: Period::PERIOD_H1,
         start: new DateTime('-1 month'),
@@ -31,7 +31,7 @@ test('getChartRangeRequest command', function () {
     /**
      * @var ChartRangeInfoRecord $chartRangeRequestArgument
      */
-    $chartRangeRequestArgument = $payload->parameters['info'];
+    $chartRangeRequestArgument = $payload->getParameter('info');
     expect($chartRangeRequestArgument->period)->toBeInstanceOf(Period::class);
 
     $mockResponse = [

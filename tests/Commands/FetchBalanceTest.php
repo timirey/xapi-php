@@ -1,21 +1,21 @@
 <?php
 
-use Timirey\XApi\Payloads\GetBalanceStreamPayload;
-use Timirey\XApi\Responses\GetBalanceStreamResponse;
-use Timirey\XApi\Tests\Commands\Traits\StreamClientMockeryTrait;
+use Timirey\XApi\Payloads\FetchBalancePayload;
+use Timirey\XApi\Responses\FetchBalanceResponse;
+use Timirey\XApi\Tests\Commands\Traits\ClientMockeryTrait;
 
-uses(StreamClientMockeryTrait::class);
+uses(ClientMockeryTrait::class);
 
 beforeEach(function () {
-    $this->mockStreamClient();
+    $this->mockClient();
 });
 
 afterEach(function () {
     Mockery::close();
 });
 
-test('getBalance stream command', function () {
-    $payload = new GetBalanceStreamPayload('streamSessionId');
+test('fetchBalance stream command', function (): void {
+    $payload = new FetchBalancePayload('streamSessionId');
     $mockResponse = [
         'command' => 'balance',
         'data' => [
@@ -34,9 +34,7 @@ test('getBalance stream command', function () {
 
     $this->mockStreamResponse($payload, $mockResponse);
 
-    $streamClient = $this->streamClient;
-
-    $streamClient->getBalance(function (GetBalanceStreamResponse $response) {
-        expect($response)->toBeInstanceOf(GetBalanceStreamResponse::class);
+    $this->client->fetchBalance(static function (FetchBalanceResponse $response): void {
+        expect($response)->toBeInstanceOf(FetchBalanceResponse::class);
     });
 });

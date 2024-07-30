@@ -1,22 +1,22 @@
 <?php
 
 use Timirey\XApi\Enums\QuoteId;
-use Timirey\XApi\Payloads\GetTickPricesStreamPayload;
-use Timirey\XApi\Responses\GetTickPricesStreamResponse;
-use Timirey\XApi\Tests\Commands\Traits\StreamClientMockeryTrait;
+use Timirey\XApi\Payloads\FetchTickPricesPayload;
+use Timirey\XApi\Responses\FetchTickPricesResponse;
+use Timirey\XApi\Tests\Commands\Traits\ClientMockeryTrait;
 
-uses(StreamClientMockeryTrait::class);
+uses(ClientMockeryTrait::class);
 
 beforeEach(function () {
-    $this->mockStreamClient();
+    $this->mockClient();
 });
 
 afterEach(function () {
     Mockery::close();
 });
 
-test('getTickPrices stream command', function () {
-    $payload = new GetTickPricesStreamPayload('streamSessionId', 'EURUSD', 5000, 2);
+test('fetchTickPrices stream command', function (): void {
+    $payload = new FetchTickPricesPayload('streamSessionId', 'EURUSD', 5000, 2);
     $mockResponse = [
         'command' => 'tickPrices',
         'data' => [
@@ -37,10 +37,8 @@ test('getTickPrices stream command', function () {
 
     $this->mockStreamResponse($payload, $mockResponse);
 
-    $streamClient = $this->streamClient;
-
-    $streamClient->getTickPrices('EURUSD', function (GetTickPricesStreamResponse $response) {
-        expect($response)->toBeInstanceOf(GetTickPricesStreamResponse::class)
+    $this->client->fetchTickPrices('EURUSD', static function (FetchTickPricesResponse $response): void {
+        expect($response)->toBeInstanceOf(FetchTickPricesResponse::class)
             ->and($response->tickStreamRecord->quoteId)->toBeInstanceOf(QuoteId::class)
             ->and($response->tickStreamRecord->timestamp)->toBeInstanceOf(DateTime::class);
     }, 5000, 2);

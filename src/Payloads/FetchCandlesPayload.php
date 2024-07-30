@@ -2,12 +2,16 @@
 
 namespace Timirey\XApi\Payloads;
 
+use Override;
+
 /**
- * Class representing the payload for the getCandles stream command.
+ * Class representing the payload for the fetchCandles stream command.
  */
-class GetCandlesStreamPayload extends AbstractStreamPayload
+final class FetchCandlesPayload extends AbstractStreamPayload
 {
     /**
+     * Constructor for FetchCandlesPayload class.
+     *
      * @param  string $streamSessionId Stream session ID.
      * @param  string $symbol          Symbol for which to get the candles.
      */
@@ -15,15 +19,14 @@ class GetCandlesStreamPayload extends AbstractStreamPayload
     {
         parent::__construct($streamSessionId);
 
-        $this->parameters['symbol'] = $this->symbol;
+        $this->setParameter('symbol', $this->symbol);
     }
 
     /**
-     * Returns the command name for the payload.
-     *
-     * @return string Command name.
+     * @inheritdoc
      */
-    public function getCommand(): string
+    #[Override]
+    protected function getCommand(): string
     {
         return 'getCandles';
     }

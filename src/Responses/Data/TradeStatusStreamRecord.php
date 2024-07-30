@@ -7,7 +7,7 @@ use Timirey\XApi\Enums\RequestStatus;
 /**
  * Class representing the trade status record data in the streaming response.
  */
-class TradeStatusStreamRecord
+final readonly class TradeStatusStreamRecord
 {
     /**
      * @var RequestStatus Request status.

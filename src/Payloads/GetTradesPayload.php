@@ -2,10 +2,12 @@
 
 namespace Timirey\XApi\Payloads;
 
+use Override;
+
 /**
  * Class that contains payload for the getTrades command.
  */
-class GetTradesPayload extends AbstractPayload
+final class GetTradesPayload extends AbstractPayload
 {
     /**
      * Constructor for GetTradesPayload.
@@ -14,15 +16,14 @@ class GetTradesPayload extends AbstractPayload
      */
     public function __construct(bool $openedOnly)
     {
-        $this->parameters['openedOnly'] = $openedOnly;
+        $this->setParameter('openedOnly', $openedOnly);
     }
 
     /**
-     * Get the command.
-     *
-     * @return string Command name.
+     * @inheritdoc
      */
-    public function getCommand(): string
+    #[Override]
+    protected function getCommand(): string
     {
         return 'getTrades';
     }

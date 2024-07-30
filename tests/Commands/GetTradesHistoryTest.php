@@ -16,7 +16,7 @@ afterEach(function () {
     Mockery::close();
 });
 
-test('getTradesHistory command', function () {
+test('getTradesHistory command', function (): void {
     $start = new DateTime('-1 month');
     $end = new DateTime();
 

@@ -17,7 +17,7 @@ afterEach(function () {
     Mockery::close();
 });
 
-test('tradeTransaction command', function () {
+test('tradeTransaction command', function (): void {
     $tradeTransInfo = new TradeTransInfo(
         cmd: Cmd::BUY,
         customComment: 'Test trade',
@@ -37,7 +37,7 @@ test('tradeTransaction command', function () {
     /**
      * @var TradeTransInfo $tradeTransInfoArgument
      */
-    $tradeTransInfoArgument = $payload->parameters['tradeTransInfo'];
+    $tradeTransInfoArgument = $payload->getParameter('tradeTransInfo');
 
     expect($tradeTransInfoArgument)->toBeInstanceOf(TradeTransInfo::class)
         ->and($tradeTransInfoArgument->cmd)->toBeInstanceOf(Cmd::class)

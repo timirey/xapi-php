@@ -2,17 +2,18 @@
 
 namespace Timirey\XApi\Payloads;
 
+use Override;
+
 /**
  * Class that contains payload for the getVersion command.
  */
-class GetVersionPayload extends AbstractPayload
+final class GetVersionPayload extends AbstractPayload
 {
     /**
-     * Get the command.
-     *
-     * @return string Command name.
+     * @inheritdoc
      */
-    public function getCommand(): string
+    #[Override]
+    protected function getCommand(): string
     {
         return 'getVersion';
     }

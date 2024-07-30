@@ -18,7 +18,7 @@ afterEach(function () {
     Mockery::close();
 });
 
-test('getTradingHours command', function () {
+test('getTradingHours command', function (): void {
     $payload = new GetTradingHoursPayload(['EURPLN', 'AGO.PL']);
     $mockResponse = [
         'status' => true,

@@ -15,7 +15,7 @@ afterEach(function () {
     Mockery::close();
 });
 
-test('getProfitCalculation command', function () {
+test('getProfitCalculation command', function (): void {
     $payload = new GetProfitCalculationPayload(
         1.3000,
         Cmd::BUY,

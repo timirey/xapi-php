@@ -2,13 +2,14 @@
 
 namespace Timirey\XApi\Responses;
 
+use Override;
 use Timirey\XApi\Responses\Data\StepRecord;
 use Timirey\XApi\Responses\Data\StepRuleRecord;
 
 /**
  * Class that contains the response of the getStepRules command.
  */
-class GetStepRulesResponse extends AbstractResponse
+final readonly class GetStepRulesResponse extends AbstractResponse
 {
     /**
      * Constructor for GetStepRulesResponse.
@@ -20,14 +21,12 @@ class GetStepRulesResponse extends AbstractResponse
     }
 
     /**
-     * Create a response instance from the validated data.
-     *
-     * @param  array $response Validated response data.
-     * @return static Instance of the response.
+     * @inheritdoc
      */
-    protected static function create(array $response): static
+    #[Override]
+    protected static function create(array $response): self
     {
-        return new static(array_map(
+        return new self(array_map(
             static fn (array $stepRuleRecordData): StepRuleRecord => new StepRuleRecord(
                 $stepRuleRecordData['id'],
                 $stepRuleRecordData['name'],
@@ -36,7 +35,7 @@ class GetStepRulesResponse extends AbstractResponse
                     $stepRuleRecordData['steps']
                 )
             ),
-            $response['returnData']
+            $response
         ));
     }
 }

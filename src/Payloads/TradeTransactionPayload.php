@@ -2,12 +2,13 @@
 
 namespace Timirey\XApi\Payloads;
 
+use Override;
 use Timirey\XApi\Payloads\Data\TradeTransInfo;
 
 /**
  * Class that contains payload for the tradeTransaction command.
  */
-class TradeTransactionPayload extends AbstractPayload
+final class TradeTransactionPayload extends AbstractPayload
 {
     /**
      * Constructor for TradeTransactionPayload.
@@ -16,15 +17,14 @@ class TradeTransactionPayload extends AbstractPayload
      */
     public function __construct(TradeTransInfo $tradeTransInfo)
     {
-        $this->parameters['tradeTransInfo'] = $tradeTransInfo;
+        $this->setParameter('tradeTransInfo', $tradeTransInfo);
     }
 
     /**
-     * Get the command.
-     *
-     * @return string Command name.
+     * @inheritdoc
      */
-    public function getCommand(): string
+    #[Override]
+    protected function getCommand(): string
     {
         return 'tradeTransaction';
     }

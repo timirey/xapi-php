@@ -2,22 +2,19 @@
 
 namespace Timirey\XApi\Payloads;
 
-use Timirey\XApi\Enums\Day;
+use Override;
 
 /**
  * Class that contains payload for the getStepRules command.
  */
-class GetStepRulesPayload extends AbstractPayload
+final class GetStepRulesPayload extends AbstractPayload
 {
     /**
-     * Get the command.
-     *
-     * @return string Command name.
+     * @inheritdoc
      */
-    public function getCommand(): string
+    #[Override]
+    protected function getCommand(): string
     {
-        $a = Day::TUESDAY;
-
         return 'getStepRules';
     }
 }

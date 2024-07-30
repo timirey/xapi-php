@@ -9,7 +9,7 @@ use Timirey\XApi\Helpers\DateTimeHelper;
 /**
  * Class representing the last chart information record.
  */
-class ChartLastInfoRecord
+final class ChartLastInfoRecord
 {
     /**
      * @var integer Start of chart block (milliseconds since epoch).

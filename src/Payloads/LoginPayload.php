@@ -2,29 +2,36 @@
 
 namespace Timirey\XApi\Payloads;
 
+use Override;
+
 /**
  * Class that contains payload for the login command.
  */
-class LoginPayload extends AbstractPayload
+final class LoginPayload extends AbstractPayload
 {
     /**
      * Constructor for LoginPayload.
      *
-     * @param  string $userId   User ID.
-     * @param  string $password User password.
+     * @param integer $userId   User ID.
+     * @param string  $password User password.
      */
-    public function __construct(string $userId, string $password)
+    public function __construct(int $userId, string $password, ?string $appName = null)
     {
-        $this->parameters['userId'] = $userId;
-        $this->parameters['password'] = $password;
+        $this->setParameters([
+            'userId' => $userId,
+            'password' => $password
+        ]);
+
+        if ($appName !== null) {
+            $this->setParameter('appName', $appName);
+        }
     }
 
     /**
-     * Get the command.
-     *
-     * @return string Command name.
+     * @inheritdoc
      */
-    public function getCommand(): string
+    #[Override]
+    protected function getCommand(): string
     {
         return 'login';
     }

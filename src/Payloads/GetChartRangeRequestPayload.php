@@ -2,12 +2,13 @@
 
 namespace Timirey\XApi\Payloads;
 
+use Override;
 use Timirey\XApi\Payloads\Data\ChartRangeInfoRecord;
 
 /**
  * Class that contains payload for the getChartRangeRequest command.
  */
-class GetChartRangeRequestPayload extends AbstractPayload
+final class GetChartRangeRequestPayload extends AbstractPayload
 {
     /**
      * Constructor for GetChartRangeRequestPayload.
@@ -16,15 +17,14 @@ class GetChartRangeRequestPayload extends AbstractPayload
      */
     public function __construct(ChartRangeInfoRecord $chartRangeInfoRecord)
     {
-        $this->parameters['info'] = $chartRangeInfoRecord;
+        $this->setParameter('info', $chartRangeInfoRecord);
     }
 
     /**
-     * Get the command.
-     *
-     * @return string Command name.
+     * @inheritdoc
      */
-    public function getCommand(): string
+    #[Override]
+    protected function getCommand(): string
     {
         return 'getChartRangeRequest';
     }

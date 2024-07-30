@@ -16,7 +16,7 @@ afterEach(function () {
     Mockery::close();
 });
 
-test('getTrades command', function () {
+test('getTrades command', function (): void {
     $payload = new GetTradesPayload(true);
     $mockResponse = [
         'status' => true,

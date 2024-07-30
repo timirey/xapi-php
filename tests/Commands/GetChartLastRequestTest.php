@@ -17,7 +17,7 @@ afterEach(function () {
     Mockery::close();
 });
 
-test('getChartLastRequest command', function () {
+test('getChartLastRequest command', function (): void {
     $chartLastInfoRecord = new ChartLastInfoRecord(
         period: Period::PERIOD_M1,
         start: new DateTime(),
@@ -29,7 +29,7 @@ test('getChartLastRequest command', function () {
     /**
      * @var ChartLastInfoRecord $chartLastInfoRecordArgument
      */
-    $chartLastInfoRecordArgument = $payload->parameters['info'];
+    $chartLastInfoRecordArgument = $payload->getParameter('info');
     expect($chartLastInfoRecordArgument->period)->toBeInstanceOf(Period::class);
 
     $mockResponse = [

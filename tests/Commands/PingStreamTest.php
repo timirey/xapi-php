@@ -1,24 +1,24 @@
 <?php
 
 use Timirey\XApi\Payloads\PingStreamPayload;
-use Timirey\XApi\Tests\Commands\Traits\StreamClientMockeryTrait;
+use Timirey\XApi\Tests\Commands\Traits\ClientMockeryTrait;
 
-uses(StreamClientMockeryTrait::class);
+uses(ClientMockeryTrait::class);
 
 beforeEach(function () {
-    $this->mockStreamClient();
+    $this->mockClient();
 });
 
 afterEach(function () {
     Mockery::close();
 });
 
-test('ping stream command', function () {
+test('ping stream command', function (): void {
     $payload = new PingStreamPayload('streamSessionId');
 
-    $this->streamSocket->shouldReceive('send')
+    $this->stream->shouldReceive('send')
         ->once()
         ->with($payload->toJson());
 
-    $this->streamClient->ping();
+    $this->client->pingStream();
 });
