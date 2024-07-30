@@ -106,16 +106,6 @@ abstract class AbstractPayload
     }
 
     /**
-     * Remove all parameters.
-     *
-     * @return void
-     */
-    public function removeParameters(): void
-    {
-        $this->parameters = [];
-    }
-
-    /**
      * Get the command.
      *
      * @return string Command name.
