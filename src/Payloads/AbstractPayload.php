@@ -95,17 +95,6 @@ abstract class AbstractPayload
     }
 
     /**
-     * Remove a parameter.
-     *
-     * @param string $key Parameter key.
-     * @return void
-     */
-    public function removeParameter(string $key): void
-    {
-        unset($this->parameters[$key]);
-    }
-
-    /**
      * Get the command.
      *
      * @return string Command name.
