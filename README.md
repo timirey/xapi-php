@@ -202,7 +202,7 @@ $response = $client->logout();
 
 ## Available streaming commands
 
-### [fetchBalance](http://developers.xstore.pro/documentation/#streamgetBalance)
+### fetchBalance ([getBalance](http://developers.xstore.pro/documentation/#streamgetBalance))
 
 Allows to get actual account indicators values in real-time, as soon as they are available in the system.
 
@@ -224,7 +224,7 @@ $client->fetchBalance(
 );
 ```
 
-### [fetchCandles](http://developers.xstore.pro/documentation/#streamgetCandles)
+### fetchCandles ([getCandles](http://developers.xstore.pro/documentation/#streamgetCandles))
 
 Subscribes for and unsubscribes from API chart candles. The interval of every candle is 1 minute. A new candle arrives
 every minute.
@@ -248,7 +248,7 @@ $client->fetchCandles(
 );
 ```
 
-### [fetchKeepAlive](http://developers.xstore.pro/documentation/#streamgetKeepAlive)
+### fetchKeepAlive ([getKeepAlive](http://developers.xstore.pro/documentation/#streamgetKeepAlive))
 
 Subscribes for and unsubscribes from 'keep alive' messages. A new 'keep alive' message is sent by the API every 3
 seconds.
@@ -271,7 +271,7 @@ $client->fetchKeepAlive(
 );
 ```
 
-### [fetchNews](http://developers.xstore.pro/documentation/#streamgetNews)
+### fetchNews ([getNews](http://developers.xstore.pro/documentation/#streamgetNews))
 
 Subscribes for and unsubscribes from news.
 
@@ -293,7 +293,7 @@ $client->fetchNews(
 );
 ```
 
-### [fetchProfits](http://developers.xstore.pro/documentation/#streamgetProfits)
+### fetchProfits ([getProfits](http://developers.xstore.pro/documentation/#streamgetProfits))
 
 Subscribes for and unsubscribes from profits.
 
@@ -315,7 +315,7 @@ $client->fetchProfits(
 );
 ```
 
-### [fetchTickPrices](http://developers.xstore.pro/documentation/#streamgetTickPrices)
+### fetchTickPrices ([getTickPrices](http://developers.xstore.pro/documentation/#streamgetTickPrices))
 
 Establishes subscription for quotations and allows to obtain the relevant information in real-time, as soon as it is
 available in the system.
@@ -341,7 +341,7 @@ $client->fetchTickPrices(
 );
 ```
 
-### [fetchTrades](http://developers.xstore.pro/documentation/#streamgetTrades)
+### fetchTrades ([getTrades](http://developers.xstore.pro/documentation/#streamgetTrades))
 
 Establishes subscription for user trade status data and allows to obtain the relevant information in real-time, as soon
 as it is available in the system.
@@ -364,7 +364,7 @@ $client->fetchTrades(
 );
 ```
 
-### [fetchTradeStatus](http://developers.xstore.pro/documentation/#streamgetTradeStatus)
+### fetchTradeStatus ([getTradeStatus](http://developers.xstore.pro/documentation/#streamgetTradeStatus))
 
 Allows to get status for sent trade requests in real-time, as soon as it is available in the system.
 
@@ -386,7 +386,7 @@ $client->fetchTradeStatus(
 );
 ```
 
-### [pingStream](http://developers.xstore.pro/documentation/#streamping)
+### pingStream ([ping](http://developers.xstore.pro/documentation/#streamping))
 
 Regularly calling this function is enough to refresh the internal state of all the components in the system.
 
