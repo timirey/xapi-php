@@ -81,9 +81,6 @@ use Timirey\XApi\Client;
 use Timirey\XApi\Enums\Host;
 use Timirey\XApi\Responses\GetSymbolResponse;
 
-/**
- * @var $client Client
- */
 $client = new Client(
     userId: 12345678,
     password: 'password',
@@ -107,9 +104,6 @@ use Timirey\XApi\Enums\Host;
 use Timirey\XApi\Responses\Data\TickStreamRecord;
 use Timirey\XApi\Responses\FetchTickPricesResponse;
 
-/**
- * @var $client Client
- */
 $client = new Client(
     userId: 12345678,
     password: 'password',
