@@ -835,7 +835,7 @@ class Client
      */
     protected function ensureRequestConnection(): void
     {
-        if (!isset($this->request) || !$this->request->isConnected()) {
+        if (!isset($this->request)) {
             $this->connect();
         }
     }

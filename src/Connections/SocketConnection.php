@@ -33,6 +33,16 @@ class SocketConnection
     }
 
     /**
+     * Destructor to close the socket.
+     *
+     * @throws SocketException If socket is not initialized.
+     */
+    public function __destruct()
+    {
+        $this->close();
+    }
+
+    /**
      * Opens the socket connection.
      *
      * @return boolean True on success, false on failure.
@@ -42,7 +52,7 @@ class SocketConnection
     {
         $this->socket = stream_socket_client($this->address, $errorCode, $errorMessage);
 
-        if ($this->socket === false) {
+        if (!$this->isConnected()) {
             throw new SocketException("$errorCode: $errorMessage");
         }
 
@@ -59,8 +69,8 @@ class SocketConnection
      */
     public function send(string $payload): false|int
     {
-        if ($this->socket === false) {
-            throw new SocketException('The socket is not initialized.');
+        if (!$this->isConnected()) {
+            throw new SocketException('The socket is not accepting messages.');
         }
 
         return fwrite($this->socket, $payload);
@@ -74,8 +84,8 @@ class SocketConnection
      */
     public function receive(): string
     {
-        if ($this->socket === false) {
-            throw new SocketException('The socket is not initialized.');
+        if (!$this->isConnected()) {
+            throw new SocketException('The socket is not sending messages.');
         }
 
         $buffer = '';
@@ -101,8 +111,8 @@ class SocketConnection
      */
     public function listen(): Generator
     {
-        if ($this->socket === false) {
-            throw new SocketException('The socket is not initialized.');
+        if (!$this->isConnected()) {
+            throw new SocketException('The socket is not subscribable.');
         }
 
         while (!feof($this->socket)) {
@@ -124,8 +134,8 @@ class SocketConnection
      */
     public function close(): bool
     {
-        if ($this->socket === false) {
-            throw new SocketException('The socket is not initialized.');
+        if (!$this->isConnected()) {
+            throw new SocketException('The socket is already closed.');
         }
 
         return fclose($this->socket);
