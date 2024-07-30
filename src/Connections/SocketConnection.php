@@ -46,13 +46,13 @@ class SocketConnection
      * Opens the socket connection.
      *
      * @return boolean True on success, false on failure.
-     * @throws SocketException If socket is not initialized.
+     * @throws SocketException If socket is not created.
      */
     public function open(): bool
     {
-        $this->socket = @stream_socket_client($this->address, $errorCode, $errorMessage);
+        $this->socket = stream_socket_client($this->address, $errorCode, $errorMessage);
 
-        if (!$this->isConnected()) {
+        if ($this->socket === false) {
             throw new SocketException("$errorCode: $errorMessage");
         }
 
@@ -65,11 +65,11 @@ class SocketConnection
      * @param string $payload The data to send.
      *
      * @return false|integer The number of bytes written, or false on failure.
-     * @throws SocketException If socket is not initialized.
+     * @throws SocketException If socket is not accepting message.
      */
     public function send(string $payload): false|int
     {
-        if (!$this->isConnected()) {
+        if ($this->socket === false) {
             throw new SocketException('The socket is not accepting messages.');
         }
 
@@ -80,11 +80,11 @@ class SocketConnection
      * Receives data from the socket until the delimiter "\n\n" is encountered.
      *
      * @return string The read data, or false on failure.
-     * @throws SocketException If socket is not initialized.
+     * @throws SocketException If socket is not sending messages.
      */
     public function receive(): string
     {
-        if (!$this->isConnected()) {
+        if ($this->socket === false) {
             throw new SocketException('The socket is not sending messages.');
         }
 
@@ -107,11 +107,11 @@ class SocketConnection
      * Listen to the stream socket and yield data as it is received.
      *
      * @return Generator Yields data received from the socket.
-     * @throws SocketException If socket is empty or not initialized.
+     * @throws SocketException If socket is not able to subscribe the client.
      */
     public function listen(): Generator
     {
-        if (!$this->isConnected()) {
+        if ($this->socket === false) {
             throw new SocketException('The socket is not subscribable.');
         }
 
@@ -130,24 +130,14 @@ class SocketConnection
      * Closes the socket connection.
      *
      * @return boolean True on success, false on failure.
-     * @throws SocketException If socket is not initialized.
+     * @throws SocketException If socket is already closed.
      */
     public function close(): bool
     {
-        if (!$this->isConnected()) {
+        if ($this->socket === false) {
             throw new SocketException('The socket is already closed.');
         }
 
         return fclose($this->socket);
-    }
-
-    /**
-     * Checks if the socket is connected and running.
-     *
-     * @return boolean True if the socket is connected, false otherwise.
-     */
-    public function isConnected(): bool
-    {
-        return is_resource($this->socket) && !feof($this->socket);
     }
 }
