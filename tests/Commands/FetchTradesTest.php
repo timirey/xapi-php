@@ -17,7 +17,7 @@ afterEach(function (): void {
     Mockery::close();
 });
 
-test('getTrades stream command', function (): void {
+test('fetchTrades stream command', function (): void {
     $payload = new FetchTradesPayload('streamSessionId');
     $mockResponse = [
         'command' => 'trade',
