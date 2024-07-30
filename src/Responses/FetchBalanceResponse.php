@@ -6,12 +6,12 @@ use Override;
 use Timirey\XApi\Responses\Data\BalanceStreamRecord;
 
 /**
- * Class that contains the response of the getBalance stream command.
+ * Class that contains the response of the fetchBalance stream command.
  */
-final readonly class GetBalanceStreamResponse extends AbstractStreamResponse
+final readonly class FetchBalanceResponse extends AbstractStreamResponse
 {
     /**
-     * Constructor for the GetBalanceStreamResponse class.
+     * Constructor for the FetchBalanceResponse class.
      *
      * @param  BalanceStreamRecord $balanceStreamRecord Balance record data.
      */
@@ -20,10 +20,7 @@ final readonly class GetBalanceStreamResponse extends AbstractStreamResponse
     }
 
     /**
-     * Create an instance from the validated data.
-     *
-     * @param  array<string, mixed> $response Validated response data.
-     * @return static Instance of the response.
+     * @inheritdoc
      */
     #[Override]
     protected static function create(array $response): self

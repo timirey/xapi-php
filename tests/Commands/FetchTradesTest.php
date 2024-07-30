@@ -3,11 +3,11 @@
 use Timirey\XApi\Enums\Cmd;
 use Timirey\XApi\Enums\State;
 use Timirey\XApi\Enums\Type;
-use Timirey\XApi\Payloads\GetTradesStreamPayload;
-use Timirey\XApi\Responses\GetTradesStreamResponse;
-use Timirey\XApi\Tests\Commands\Traits\StreamClientMockeryTrait;
+use Timirey\XApi\Payloads\FetchTradesPayload;
+use Timirey\XApi\Responses\FetchTradesResponse;
+use Timirey\XApi\Tests\Commands\Traits\ClientMockeryTrait;
 
-uses(StreamClientMockeryTrait::class);
+uses(ClientMockeryTrait::class);
 
 beforeEach(function (): void {
     $this->mockClient();
@@ -18,7 +18,7 @@ afterEach(function (): void {
 });
 
 test('getTrades stream command', function (): void {
-    $payload = new GetTradesStreamPayload('streamSessionId');
+    $payload = new FetchTradesPayload('streamSessionId');
     $mockResponse = [
         'command' => 'trade',
         'data' => [
@@ -49,10 +49,10 @@ test('getTrades stream command', function (): void {
         ],
     ];
 
-    $this->mockResponse($payload, $mockResponse);
+    $this->mockStreamResponse($payload, $mockResponse);
 
-    $this->client->getTrades(static function (GetTradesStreamResponse $response): void {
-        expect($response)->toBeInstanceOf(GetTradesStreamResponse::class)
+    $this->client->fetchTrades(static function (FetchTradesResponse $response): void {
+        expect($response)->toBeInstanceOf(FetchTradesResponse::class)
             ->and($response->tradeStreamRecord->cmd)->toBeInstanceOf(Cmd::class)
             ->and($response->tradeStreamRecord->state)->toBeInstanceOf(State::class)
             ->and($response->tradeStreamRecord->type)->toBeInstanceOf(Type::class)

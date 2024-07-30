@@ -2,9 +2,9 @@
 
 use Timirey\XApi\Payloads\GetMarginLevelPayload;
 use Timirey\XApi\Responses\GetMarginLevelResponse;
-use Timirey\XApi\Tests\Commands\Traits\SocketClientMockeryTrait;
+use Timirey\XApi\Tests\Commands\Traits\ClientMockeryTrait;
 
-uses(SocketClientMockeryTrait::class);
+uses(ClientMockeryTrait::class);
 
 beforeEach(function () {
     $this->mockClient();

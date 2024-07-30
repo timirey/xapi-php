@@ -3,7 +3,6 @@
 namespace Timirey\XApi\Connections;
 
 use Generator;
-use Override;
 use Timirey\XApi\Exceptions\SocketException;
 
 /**
@@ -130,5 +129,15 @@ class SocketConnection
         }
 
         return fclose($this->socket);
+    }
+
+    /**
+     * Checks if the socket is connected and running.
+     *
+     * @return boolean True if the socket is connected, false otherwise.
+     */
+    public function isConnected(): bool
+    {
+        return is_resource($this->socket) && !feof($this->socket);
     }
 }

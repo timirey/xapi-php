@@ -3,9 +3,9 @@
 use Timirey\XApi\Enums\Cmd;
 use Timirey\XApi\Payloads\GetProfitCalculationPayload;
 use Timirey\XApi\Responses\GetProfitCalculationResponse;
-use Timirey\XApi\Tests\Commands\Traits\SocketClientMockeryTrait;
+use Timirey\XApi\Tests\Commands\Traits\ClientMockeryTrait;
 
-uses(SocketClientMockeryTrait::class);
+uses(ClientMockeryTrait::class);
 
 beforeEach(function () {
     $this->mockClient();

@@ -10,24 +10,24 @@ use Timirey\XApi\Exceptions\InvalidPayloadException;
 use Timirey\XApi\Exceptions\InvalidResponseException;
 use Timirey\XApi\Exceptions\SocketException;
 use Timirey\XApi\Payloads\AbstractStreamPayload;
-use Timirey\XApi\Payloads\GetBalanceStreamPayload;
-use Timirey\XApi\Payloads\GetCandlesStreamPayload;
-use Timirey\XApi\Payloads\GetKeepAliveStreamPayload;
-use Timirey\XApi\Payloads\GetNewsStreamPayload;
-use Timirey\XApi\Payloads\GetProfitsStreamPayload;
-use Timirey\XApi\Payloads\GetTickPricesStreamPayload;
-use Timirey\XApi\Payloads\GetTradesStreamPayload;
-use Timirey\XApi\Payloads\GetTradeStatusStreamPayload;
+use Timirey\XApi\Payloads\FetchBalancePayload;
+use Timirey\XApi\Payloads\FetchCandlesPayload;
+use Timirey\XApi\Payloads\FetchKeepAlivePayload;
+use Timirey\XApi\Payloads\FetchNewsPayload;
+use Timirey\XApi\Payloads\FetchProfitsPayload;
+use Timirey\XApi\Payloads\FetchTickPricesPayload;
+use Timirey\XApi\Payloads\FetchTradesPayload;
+use Timirey\XApi\Payloads\FetchTradeStatusPayload;
 use Timirey\XApi\Payloads\PingStreamPayload;
 use Timirey\XApi\Responses\AbstractStreamResponse;
-use Timirey\XApi\Responses\GetBalanceStreamResponse;
-use Timirey\XApi\Responses\GetCandlesStreamResponse;
-use Timirey\XApi\Responses\GetKeepAliveStreamResponse;
-use Timirey\XApi\Responses\GetNewsStreamResponse;
-use Timirey\XApi\Responses\GetProfitsStreamResponse;
-use Timirey\XApi\Responses\GetTickPricesStreamResponse;
-use Timirey\XApi\Responses\GetTradesStreamResponse;
-use Timirey\XApi\Responses\GetTradeStatusStreamResponse;
+use Timirey\XApi\Responses\FetchBalanceResponse;
+use Timirey\XApi\Responses\FetchCandlesResponse;
+use Timirey\XApi\Responses\FetchKeepAliveResponse;
+use Timirey\XApi\Responses\FetchNewsResponse;
+use Timirey\XApi\Responses\FetchProfitsResponse;
+use Timirey\XApi\Responses\FetchTickPricesResponse;
+use Timirey\XApi\Responses\FetchTradesResponse;
+use Timirey\XApi\Responses\FetchTradeStatusResponse;
 
 /**
  * Client class for handling streaming data from the xStation5 API.
@@ -65,11 +65,11 @@ class StreamClient
      * @throws InvalidResponseException If the response is invalid.
      * @throws SocketException If socket is empty or not initialized.
      */
-    final public function getBalance(callable $callback): void
+    final public function fetchBalance(callable $callback): void
     {
         $this->subscribe(
-            new GetBalanceStreamPayload($this->streamSessionId),
-            GetBalanceStreamResponse::class,
+            new FetchBalancePayload($this->streamSessionId),
+            FetchBalanceResponse::class,
             $callback
         );
     }
@@ -88,11 +88,11 @@ class StreamClient
      * @throws InvalidResponseException If the response is invalid.
      * @throws SocketException If socket is empty or not initialized.
      */
-    final public function getCandles(string $symbol, callable $callback): void
+    final public function fetchCandles(string $symbol, callable $callback): void
     {
         $this->subscribe(
-            new GetCandlesStreamPayload($this->streamSessionId, $symbol),
-            GetCandlesStreamResponse::class,
+            new FetchCandlesPayload($this->streamSessionId, $symbol),
+            FetchCandlesResponse::class,
             $callback
         );
     }
@@ -110,11 +110,11 @@ class StreamClient
      * @throws InvalidResponseException If the response is invalid.
      * @throws SocketException If socket is empty or not initialized.
      */
-    final public function getKeepAlive(callable $callback): void
+    final public function fetchKeepAlive(callable $callback): void
     {
         $this->subscribe(
-            new GetKeepAliveStreamPayload($this->streamSessionId),
-            GetKeepAliveStreamResponse::class,
+            new FetchKeepAlivePayload($this->streamSessionId),
+            FetchKeepAliveResponse::class,
             $callback
         );
     }
@@ -132,11 +132,11 @@ class StreamClient
      * @throws InvalidResponseException If the response is invalid.
      * @throws SocketException If socket is empty or not initialized.
      */
-    final public function getNews(callable $callback): void
+    final public function fetchNews(callable $callback): void
     {
         $this->subscribe(
-            new GetNewsStreamPayload($this->streamSessionId),
-            GetNewsStreamResponse::class,
+            new FetchNewsPayload($this->streamSessionId),
+            FetchNewsResponse::class,
             $callback
         );
     }
@@ -154,11 +154,11 @@ class StreamClient
      * @throws InvalidResponseException If the response is invalid.
      * @throws SocketException If socket is empty or not initialized.
      */
-    final public function getProfits(callable $callback): void
+    final public function fetchProfits(callable $callback): void
     {
         $this->subscribe(
-            new GetProfitsStreamPayload($this->streamSessionId),
-            GetProfitsStreamResponse::class,
+            new FetchProfitsPayload($this->streamSessionId),
+            FetchProfitsResponse::class,
             $callback
         );
     }
@@ -179,15 +179,15 @@ class StreamClient
      * @throws InvalidResponseException If the response is invalid.
      * @throws SocketException If socket is empty or not initialized.
      */
-    final public function getTickPrices(
+    final public function fetchTickPrices(
         string $symbol,
         callable $callback,
         ?int $minArrivalTime = null,
         ?int $maxLevel = null,
     ): void {
         $this->subscribe(
-            new GetTickPricesStreamPayload($this->streamSessionId, $symbol, $minArrivalTime, $maxLevel),
-            GetTickPricesStreamResponse::class,
+            new FetchTickPricesPayload($this->streamSessionId, $symbol, $minArrivalTime, $maxLevel),
+            FetchTickPricesResponse::class,
             $callback
         );
     }
@@ -205,11 +205,11 @@ class StreamClient
      * @throws InvalidResponseException If the response is invalid.
      * @throws SocketException If socket is empty or not initialized.
      */
-    final public function getTrades(callable $callback): void
+    final public function fetchTrades(callable $callback): void
     {
         $this->subscribe(
-            new GetTradesStreamPayload($this->streamSessionId),
-            GetTradesStreamResponse::class,
+            new FetchTradesPayload($this->streamSessionId),
+            FetchTradesResponse::class,
             $callback
         );
     }
@@ -227,11 +227,11 @@ class StreamClient
      * @throws InvalidResponseException If the response is invalid.
      * @throws SocketException If socket is empty or not initialized.
      */
-    final public function getTradeStatus(callable $callback): void
+    final public function fetchTradeStatus(callable $callback): void
     {
         $this->subscribe(
-            new GetTradeStatusStreamPayload($this->streamSessionId),
-            GetTradeStatusStreamResponse::class,
+            new FetchTradeStatusPayload($this->streamSessionId),
+            FetchTradeStatusResponse::class,
             $callback
         );
     }
@@ -242,9 +242,9 @@ class StreamClient
      * @return void
      * @throws SocketException If socket is empty or not initialized.
      */
-    final public function ping(): void
+    final public function pingStream(): void
     {
-        $this->socket->send(new PingStreamPayload($this->streamSessionId));
+        $this->stream->send(new PingStreamPayload($this->streamSessionId));
     }
 
     /**
@@ -268,9 +268,9 @@ class StreamClient
      */
     protected function subscribe(AbstractStreamPayload $payload, string $responseClass, callable $callback): void
     {
-        $this->socket->send($payload->toJson());
+        $this->stream->send($payload->toJson());
 
-        foreach ($this->socket->listen() as $message) {
+        foreach ($this->stream->listen() as $message) {
             $response = $responseClass::instantiate($message);
 
             $callback($response);
@@ -285,6 +285,6 @@ class StreamClient
      */
     protected function init(): void
     {
-        $this->socket = new SocketConnection($this->host->getStreamHost());
+        $this->stream = new SocketConnection($this->host->getStreamHost());
     }
 }

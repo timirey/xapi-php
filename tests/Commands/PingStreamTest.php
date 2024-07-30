@@ -1,9 +1,9 @@
 <?php
 
 use Timirey\XApi\Payloads\PingStreamPayload;
-use Timirey\XApi\Tests\Commands\Traits\StreamClientMockeryTrait;
+use Timirey\XApi\Tests\Commands\Traits\ClientMockeryTrait;
 
-uses(StreamClientMockeryTrait::class);
+uses(ClientMockeryTrait::class);
 
 beforeEach(function () {
     $this->mockClient();
@@ -16,9 +16,9 @@ afterEach(function () {
 test('ping stream command', function (): void {
     $payload = new PingStreamPayload('streamSessionId');
 
-    $this->socket->shouldReceive('send')
+    $this->stream->shouldReceive('send')
         ->once()
         ->with($payload->toJson());
 
-    $this->client->ping();
+    $this->client->pingStream();
 });

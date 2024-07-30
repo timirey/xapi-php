@@ -1,11 +1,11 @@
 <?php
 
 use Timirey\XApi\Enums\QuoteId;
-use Timirey\XApi\Payloads\GetCandlesStreamPayload;
-use Timirey\XApi\Responses\GetCandlesStreamResponse;
-use Timirey\XApi\Tests\Commands\Traits\StreamClientMockeryTrait;
+use Timirey\XApi\Payloads\FetchCandlesPayload;
+use Timirey\XApi\Responses\FetchCandlesResponse;
+use Timirey\XApi\Tests\Commands\Traits\ClientMockeryTrait;
 
-uses(StreamClientMockeryTrait::class);
+uses(ClientMockeryTrait::class);
 
 beforeEach(function () {
     $this->mockClient();
@@ -15,8 +15,8 @@ afterEach(function () {
     Mockery::close();
 });
 
-test('getCandles stream command', function (): void {
-    $payload = new GetCandlesStreamPayload('streamSessionId', 'EURUSD');
+test('fetchCandles stream command', function (): void {
+    $payload = new FetchCandlesPayload('streamSessionId', 'EURUSD');
     $mockResponse = [
         'command' => 'candle',
         'data' => [
@@ -32,10 +32,10 @@ test('getCandles stream command', function (): void {
         ],
     ];
 
-    $this->mockResponse($payload, $mockResponse);
+    $this->mockStreamResponse($payload, $mockResponse);
 
-    $this->client->getCandles('EURUSD', static function (GetCandlesStreamResponse $response): void {
-        expect($response)->toBeInstanceOf(GetCandlesStreamResponse::class)
+    $this->client->fetchCandles('EURUSD', static function (FetchCandlesResponse $response): void {
+        expect($response)->toBeInstanceOf(FetchCandlesResponse::class)
             ->and($response->candleStreamRecord->ctm)->toBeInstanceOf(DateTime::class)
             ->and($response->candleStreamRecord->quoteId)->toBeInstanceOf(QuoteId::class);
     });

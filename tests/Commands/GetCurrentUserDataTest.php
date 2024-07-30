@@ -2,9 +2,9 @@
 
 use Timirey\XApi\Payloads\GetCurrentUserDataPayload;
 use Timirey\XApi\Responses\GetCurrentUserDataResponse;
-use Timirey\XApi\Tests\Commands\Traits\SocketClientMockeryTrait;
+use Timirey\XApi\Tests\Commands\Traits\ClientMockeryTrait;
 
-uses(SocketClientMockeryTrait::class);
+uses(ClientMockeryTrait::class);
 
 beforeEach(function () {
     $this->mockClient();

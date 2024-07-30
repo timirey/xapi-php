@@ -6,12 +6,12 @@ use Override;
 use Timirey\XApi\Responses\Data\NewsStreamRecord;
 
 /**
- * Class that contains the response of the getNews stream command.
+ * Class that contains the response of the fetchNews stream command.
  */
-final readonly class GetNewsStreamResponse extends AbstractStreamResponse
+final readonly class FetchNewsResponse extends AbstractStreamResponse
 {
     /**
-     * Constructor for the GetNewsStreamResponse class.
+     * Constructor for the FetchNewsResponse class.
      *
      * @param  NewsStreamRecord $newsStreamRecord News record data.
      */
@@ -20,10 +20,7 @@ final readonly class GetNewsStreamResponse extends AbstractStreamResponse
     }
 
     /**
-     * Create an instance from the validated data.
-     *
-     * @param  array<string, mixed> $response Validated response data.
-     * @return static Instance of the response.
+     * @inheritdoc
      */
     #[Override]
     protected static function create(array $response): self

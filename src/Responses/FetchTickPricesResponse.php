@@ -6,12 +6,12 @@ use Override;
 use Timirey\XApi\Responses\Data\TickStreamRecord;
 
 /**
- * Class that contains the response of the getTickPrices stream command.
+ * Class that contains the response of the fetchTickPrices stream command.
  */
-final readonly class GetTickPricesStreamResponse extends AbstractStreamResponse
+final readonly class FetchTickPricesResponse extends AbstractStreamResponse
 {
     /**
-     * Constructor for the GetTickPricesStreamResponse class.
+     * Constructor for the FetchTickPricesResponse class.
      *
      * @param  TickStreamRecord $tickStreamRecord Tick record data.
      */
@@ -20,10 +20,7 @@ final readonly class GetTickPricesStreamResponse extends AbstractStreamResponse
     }
 
     /**
-     * Create an instance from the validated data.
-     *
-     * @param  array<string, mixed> $response Validated response data.
-     * @return static Instance of the response.
+     * @inheritdoc
      */
     #[Override]
     protected static function create(array $response): self

@@ -6,12 +6,12 @@ use Override;
 use Timirey\XApi\Responses\Data\TradeStreamRecord;
 
 /**
- * Class that contains the response of the getTrades stream command.
+ * Class that contains the response of the fetchTrades stream command.
  */
-final readonly class GetTradesStreamResponse extends AbstractStreamResponse
+final readonly class FetchTradesResponse extends AbstractStreamResponse
 {
     /**
-     * Constructor for the GetTradesStreamResponse class.
+     * Constructor for the FetchTradesResponse class.
      *
      * @param  TradeStreamRecord $tradeStreamRecord Trade record data.
      */
@@ -20,10 +20,7 @@ final readonly class GetTradesStreamResponse extends AbstractStreamResponse
     }
 
     /**
-     * Create an instance from the validated data.
-     *
-     * @param  array<string, mixed> $response Validated response data.
-     * @return static Instance of the response.
+     * @inheritdoc
      */
     #[Override]
     protected static function create(array $response): self

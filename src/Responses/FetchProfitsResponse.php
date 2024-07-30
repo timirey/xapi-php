@@ -6,12 +6,12 @@ use Override;
 use Timirey\XApi\Responses\Data\ProfitStreamRecord;
 
 /**
- * final readonly class that contains the response of the getProfits stream command.
+ * Class that contains the response of the fetchProfits stream command.
  */
-final readonly class GetProfitsStreamResponse extends AbstractStreamResponse
+final readonly class FetchProfitsResponse extends AbstractStreamResponse
 {
     /**
-     * Constructor for the GetProfitsStreamResponse class.
+     * Constructor for the FetchProfitsResponse class.
      *
      * @param  ProfitStreamRecord $profitStreamRecord Profit record data.
      */
@@ -20,10 +20,7 @@ final readonly class GetProfitsStreamResponse extends AbstractStreamResponse
     }
 
     /**
-     * Create an instance from the validated data.
-     *
-     * @param  array<string, mixed> $response Validated response data.
-     * @return static Instance of the response.
+     * @inheritdoc
      */
     #[Override]
     protected static function create(array $response): self

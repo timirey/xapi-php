@@ -4,9 +4,9 @@ use Timirey\XApi\Enums\Impact;
 use Timirey\XApi\Payloads\GetCalendarPayload;
 use Timirey\XApi\Responses\Data\CalendarRecord;
 use Timirey\XApi\Responses\GetCalendarResponse;
-use Timirey\XApi\Tests\Commands\Traits\SocketClientMockeryTrait;
+use Timirey\XApi\Tests\Commands\Traits\ClientMockeryTrait;
 
-uses(SocketClientMockeryTrait::class);
+uses(ClientMockeryTrait::class);
 
 beforeEach(function () {
     $this->mockClient();

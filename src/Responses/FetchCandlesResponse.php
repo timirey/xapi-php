@@ -6,12 +6,12 @@ use Override;
 use Timirey\XApi\Responses\Data\CandleStreamRecord;
 
 /**
- * Class that contains the response of the getCandles stream command.
+ * Class that contains the response of the fetchCandles stream command.
  */
-final readonly class GetCandlesStreamResponse extends AbstractStreamResponse
+final readonly class FetchCandlesResponse extends AbstractStreamResponse
 {
     /**
-     * Constructor for the GetCandlesStreamResponse class.
+     * Constructor for the FetchCandlesResponse class.
      *
      * @param  CandleStreamRecord $candleStreamRecord Candle record data.
      */
@@ -20,10 +20,7 @@ final readonly class GetCandlesStreamResponse extends AbstractStreamResponse
     }
 
     /**
-     * Create an instance from the validated data.
-     *
-     * @param  array<string, mixed> $response Validated response data.
-     * @return static Instance of the response.
+     * @inheritdoc
      */
     #[Override]
     protected static function create(array $response): self

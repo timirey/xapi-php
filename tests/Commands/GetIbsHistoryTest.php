@@ -4,9 +4,9 @@ use Timirey\XApi\Enums\Side;
 use Timirey\XApi\Payloads\GetIbsHistoryPayload;
 use Timirey\XApi\Responses\Data\IbRecord;
 use Timirey\XApi\Responses\GetIbsHistoryResponse;
-use Timirey\XApi\Tests\Commands\Traits\SocketClientMockeryTrait;
+use Timirey\XApi\Tests\Commands\Traits\ClientMockeryTrait;
 
-uses(SocketClientMockeryTrait::class);
+uses(ClientMockeryTrait::class);
 
 beforeEach(function () {
     $this->mockClient();

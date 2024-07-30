@@ -110,7 +110,7 @@ $logoutResponse = $client->logout();
 Subscribe to a stream channel.
 
 ```PHP
-use Timirey\XApi\Responses\GetTickPricesStreamResponse;
+use Timirey\XApi\Responses\FetchTickPricesResponse;
 use Timirey\XApi\Responses\Data\TickStreamRecord;
 use Timirey\XApi\Responses\LoginResponse;
 use Timirey\XApi\Enums\StreamHost;
@@ -149,7 +149,7 @@ $streamClient = new StreamClient(
 // Meant to be a daemon, run as separate process.
 $streamClient->getTickPrices(
     symbol: 'EURUSD',
-    callback: static function (GetTickPricesStreamResponse $tickPricesStreamResponse): void {
+    callback: static function (FetchTickPricesResponse $tickPricesStreamResponse): void {
         /**
          * @var TickStreamRecord $tickStreamRecord
          */
@@ -205,14 +205,14 @@ Allows to get actual account indicators values in real-time, as soon as they are
 
 ```PHP
 use Timirey\XApi\Responses\Data\BalanceStreamRecord;
-use Timirey\XApi\Responses\GetBalanceStreamResponse;
+use Timirey\XApi\Responses\FetchBalanceResponse;
 use Timirey\XApi\StreamClient;
 
 /**
  * @var StreamClient $streamClient
  */
 $streamClient->getBalance(
-    callback: static function (GetBalanceStreamResponse $response): void {
+    callback: static function (FetchBalanceResponse $response): void {
         /**
          * @var BalanceStreamRecord $record
          */
@@ -228,7 +228,7 @@ every minute.
 
 ```PHP
 use Timirey\XApi\Responses\Data\CandleStreamRecord;
-use Timirey\XApi\Responses\GetCandlesStreamResponse;
+use Timirey\XApi\Responses\FetchCandlesResponse;
 use Timirey\XApi\StreamClient;
 
 /**
@@ -236,7 +236,7 @@ use Timirey\XApi\StreamClient;
  */
 $streamClient->getCandles(
     symbol: 'EURUSD',
-    callback: static function (GetCandlesStreamResponse $response): void {
+    callback: static function (FetchCandlesResponse $response): void {
         /**
          * @var CandleStreamRecord $record
          */
@@ -252,14 +252,14 @@ seconds.
 
 ```PHP
 use Timirey\XApi\Responses\Data\KeepAliveStreamRecord;
-use Timirey\XApi\Responses\GetKeepAliveStreamResponse;
+use Timirey\XApi\Responses\FetchKeepAliveResponse;
 use Timirey\XApi\StreamClient;
 
 /**
  * @var StreamClient $streamClient
  */
 $streamClient->getKeepAlive(
-    callback: static function (GetKeepAliveStreamResponse $response): void {
+    callback: static function (FetchKeepAliveResponse $response): void {
         /**
          * @var KeepAliveStreamRecord $record
          */
@@ -274,14 +274,14 @@ Subscribes for and unsubscribes from news.
 
 ```PHP
 use Timirey\XApi\Responses\Data\NewsStreamRecord;
-use Timirey\XApi\Responses\GetNewsStreamResponse;
+use Timirey\XApi\Responses\FetchNewsResponse;
 use Timirey\XApi\StreamClient;
 
 /**
  * @var StreamClient $streamClient
  */
 $streamClient->getNews(
-    callback: static function (GetNewsStreamResponse $response): void {
+    callback: static function (FetchNewsResponse $response): void {
         /**
          * @var NewsStreamRecord $record
          */
@@ -296,14 +296,14 @@ Subscribes for and unsubscribes from profits.
 
 ```PHP
 use Timirey\XApi\Responses\Data\ProfitStreamRecord;
-use Timirey\XApi\Responses\GetProfitsStreamResponse;
+use Timirey\XApi\Responses\FetchProfitsResponse;
 use Timirey\XApi\StreamClient;
 
 /**
  * @var StreamClient $streamClient
  */
 $streamClient->getProfits(
-    callback: static function (GetProfitsStreamResponse $response): void {
+    callback: static function (FetchProfitsResponse $response): void {
         /**
          * @var ProfitStreamRecord $record
          */
@@ -319,7 +319,7 @@ available in the system.
 
 ```PHP
 use Timirey\XApi\Responses\Data\TickStreamRecord;
-use Timirey\XApi\Responses\GetTickPricesStreamResponse;
+use Timirey\XApi\Responses\FetchTickPricesResponse;
 use Timirey\XApi\StreamClient;
 
 /**
@@ -327,7 +327,7 @@ use Timirey\XApi\StreamClient;
  */
 $streamClient->getTickPrices(
     symbol: 'EURUSD',
-    callback: static function (GetTickPricesStreamResponse $response): void {
+    callback: static function (FetchTickPricesResponse $response): void {
         /**
          * @var TickStreamRecord $record
          */
@@ -345,14 +345,14 @@ as it is available in the system.
 
 ```PHP
 use Timirey\XApi\Responses\Data\TradeStreamRecord;
-use Timirey\XApi\Responses\GetTradesStreamResponse;
+use Timirey\XApi\Responses\FetchTradesResponse;
 use Timirey\XApi\StreamClient;
 
 /**
  * @var StreamClient $streamClient
  */
 $streamClient->getTrades(
-    callback: static function (GetTradesStreamResponse $response): void {
+    callback: static function (FetchTradesResponse $response): void {
         /**
          * @var TradeStreamRecord $record
          */
@@ -367,14 +367,14 @@ Allows to get status for sent trade requests in real-time, as soon as it is avai
 
 ```PHP
 use Timirey\XApi\Responses\Data\TradeStatusStreamRecord;
-use Timirey\XApi\Responses\GetTradeStatusStreamResponse;
+use Timirey\XApi\Responses\FetchTradeStatusResponse;
 use Timirey\XApi\StreamClient;
 
 /**
  * @var StreamClient $streamClient
  */
 $streamClient->getTradeStatus(
-    callback: static function (GetTradeStatusStreamResponse $response): void {
+    callback: static function (FetchTradeStatusResponse $response): void {
         /**
          * @var TradeStatusStreamRecord $record
          */

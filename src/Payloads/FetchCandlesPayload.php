@@ -5,11 +5,13 @@ namespace Timirey\XApi\Payloads;
 use Override;
 
 /**
- * Class representing the payload for the getCandles stream command.
+ * Class representing the payload for the fetchCandles stream command.
  */
-final class GetCandlesStreamPayload extends AbstractStreamPayload
+final class FetchCandlesPayload extends AbstractStreamPayload
 {
     /**
+     * Constructor for FetchCandlesPayload class.
+     *
      * @param  string $streamSessionId Stream session ID.
      * @param  string $symbol          Symbol for which to get the candles.
      */
@@ -21,9 +23,7 @@ final class GetCandlesStreamPayload extends AbstractStreamPayload
     }
 
     /**
-     * Returns the command name for the payload.
-     *
-     * @return string Command name.
+     * @inheritdoc
      */
     #[Override]
     protected function getCommand(): string
