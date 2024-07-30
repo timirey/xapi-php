@@ -1,5 +1,34 @@
 # Release Notes
 
+## [6.0.0](https://github.com/timirey/xapi-php/compare/5.0.0..6.0.0) - 2024-07-30
+
+### Added
+
+- Integrated phpstan into `composer.json` and workflows alongside Pest.
+- Updated to support PHP 8.3 as a minimum requirement.
+- Created interfaces for connection, response, and payload.
+
+### Changed
+
+- Simplified with a single function and necessary parameters.
+- Merged DEMO and REAL connections with a type string.
+- Combined client creation and authentication.
+- Updated methods (e.g., `GetTickPrices` to `SubscribeTickPrices`) and merged `Client` and `StreamClient`.
+- Removed `new static()` dependency; made methods non-dependent or final.
+- Updated, reduced size, and used `@inheritdoc`.
+- Made responses readonly.
+- Marked appropriate classes as `final`.
+- Ensured camelCase for class properties.
+- Refactored `AbstractResponse`.
+- Added where required.
+- Freed up constructors, moved logic to methods.
+- Refactored `$this->parameters` in payloads and `$response['returnData']` in responses.
+- Updated commands and error section.
+
+### Removed
+
+- Merged `Client` and `StreamClient` to avoid multiple object creations.
+
 ## [5.0.0](https://github.com/timirey/xapi-php/compare/4.0.1..5.0.0) - 2024-07-17
 
 * Changed the way client inits, `$userId` and `$password` are directly sent in the payload.
@@ -96,7 +125,7 @@
 
 ## [1.0.0-alpha](https://github.com/timirey/xapi-php/compare/0.7.2.2...1.0.0-alpha) - 2024-06-30
 
-* Add main commands for non-stream web socket. 
+* Add main commands for non-stream web socket.
 * Add test coverage (featuring mocks) for each command.
 
 ## [0.7.2.2](https://github.com/timirey/xapi-php/compare/0.7.2.1...0.7.2.2) - 2024-06-28
