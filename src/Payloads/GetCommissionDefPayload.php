@@ -2,10 +2,12 @@
 
 namespace Timirey\XApi\Payloads;
 
+use Override;
+
 /**
  * Class that contains payload for the getCommissionDef command.
  */
-class GetCommissionDefPayload extends AbstractPayload
+final class GetCommissionDefPayload extends AbstractPayload
 {
     /**
      * Constructor for GetCommissionDefPayload.
@@ -15,16 +17,17 @@ class GetCommissionDefPayload extends AbstractPayload
      */
     public function __construct(string $symbol, float $volume)
     {
-        $this->parameters['symbol'] = $symbol;
-        $this->parameters['volume'] = $volume;
+        $this->setParameters([
+            'symbol' => $symbol,
+            'volume' => $volume
+        ]);
     }
 
     /**
-     * Get the command.
-     *
-     * @return string Command name.
+     * @inheritdoc
      */
-    public function getCommand(): string
+    #[Override]
+    protected function getCommand(): string
     {
         return 'getCommissionDef';
     }

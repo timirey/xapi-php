@@ -16,7 +16,7 @@ afterEach(function () {
     Mockery::close();
 });
 
-test('getCalendar command', function () {
+test('getCalendar command', function (): void {
     $payload = new GetCalendarPayload();
     $mockResponse = [
         'status' => true,

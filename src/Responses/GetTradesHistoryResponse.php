@@ -2,12 +2,13 @@
 
 namespace Timirey\XApi\Responses;
 
+use Override;
 use Timirey\XApi\Responses\Data\TradeRecord;
 
 /**
  * Class that contains the response of the getTradesHistory command.
  */
-class GetTradesHistoryResponse extends AbstractResponse
+final readonly class GetTradesHistoryResponse extends AbstractResponse
 {
     /**
      * Constructor for GetTradesHistoryResponse.
@@ -19,16 +20,14 @@ class GetTradesHistoryResponse extends AbstractResponse
     }
 
     /**
-     * Create a response instance from the validated data.
-     *
-     * @param  array $response Validated response data.
-     * @return static Instance of the response.
+     * @inheritdoc
      */
-    protected static function create(array $response): static
+    #[Override]
+    protected static function create(array $response): self
     {
-        return new static(array_map(
-            static fn ($tradeData): TradeRecord => new TradeRecord(...$tradeData),
-            $response['returnData']
+        return new self(array_map(
+            static fn (array $tradeData): TradeRecord => new TradeRecord(...$tradeData),
+            $response
         ));
     }
 }

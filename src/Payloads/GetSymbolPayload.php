@@ -2,10 +2,12 @@
 
 namespace Timirey\XApi\Payloads;
 
+use Override;
+
 /**
  * Class that contains payload for the getSymbol command.
  */
-class GetSymbolPayload extends AbstractPayload
+final class GetSymbolPayload extends AbstractPayload
 {
     /**
      * Constructor for GetSymbolPayload.
@@ -14,15 +16,14 @@ class GetSymbolPayload extends AbstractPayload
      */
     public function __construct(string $symbol)
     {
-        $this->parameters['symbol'] = $symbol;
+        $this->setParameter('symbol', $symbol);
     }
 
     /**
-     * Get the command.
-     *
-     * @return string Command name.
+     * @inheritdoc
      */
-    public function getCommand(): string
+    #[Override]
+    protected function getCommand(): string
     {
         return 'getSymbol';
     }

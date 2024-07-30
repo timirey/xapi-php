@@ -9,7 +9,7 @@ use Timirey\XApi\Helpers\DateTimeHelper;
 /**
  * Class representing the tick record data in the streaming response.
  */
-class TickStreamRecord
+final readonly class TickStreamRecord
 {
     /**
      * @var DateTime Timestamp.

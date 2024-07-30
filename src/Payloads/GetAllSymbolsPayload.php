@@ -2,17 +2,18 @@
 
 namespace Timirey\XApi\Payloads;
 
+use Override;
+
 /**
  * Class that contains payload for the getAllSymbols command.
  */
-class GetAllSymbolsPayload extends AbstractPayload
+final class GetAllSymbolsPayload extends AbstractPayload
 {
     /**
-     * Get the command.
-     *
-     * @return string Command name.
+     * @inheritdoc
      */
-    public function getCommand(): string
+    #[Override]
+    protected function getCommand(): string
     {
         return 'getAllSymbols';
     }

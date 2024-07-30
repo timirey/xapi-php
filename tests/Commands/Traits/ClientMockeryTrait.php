@@ -2,11 +2,15 @@
 
 namespace Timirey\XApi\Tests\Commands\Traits;
 
+use Generator;
 use JsonException;
 use Mockery;
 use Mockery\MockInterface;
+use Override;
 use Timirey\XApi\Client;
-use Timirey\XApi\Connections\Socket;
+use Timirey\XApi\Exceptions\InvalidPayloadException;
+use Timirey\XApi\Payloads\AbstractStreamPayload;
+use Timirey\XApi\Connections\SocketConnection;
 use Timirey\XApi\Enums\Host;
 use Timirey\XApi\Payloads\AbstractPayload;
 
@@ -15,7 +19,8 @@ use Timirey\XApi\Payloads\AbstractPayload;
  *
  * Provides setup and utility methods for mocking the socket client and handling API responses.
  *
- * @property MockInterface $socket
+ * @property MockInterface $request
+ * @property MockInterface $stream
  * @property Client $client
  */
 trait ClientMockeryTrait
@@ -25,44 +30,58 @@ trait ClientMockeryTrait
      *
      * This method should be called in the beforeEach() block of your tests.
      *
-     * @param integer $userId   User id.
-     * @param string  $password Password.
-     * @param Host    $host     Host URI.
-     *
+     * @param integer     $userId   User id.
+     * @param string      $password Password.
+     * @param Host        $host     Host URI.
+     * @param string|null $appName  Application name.
      * @return void
      */
-    public function mockClient(int $userId = 12345, string $password = 'password', Host $host = Host::DEMO): void
-    {
-        $this->socket = Mockery::mock(Socket::class);
+    public function mockClient(
+        int $userId = 12345,
+        string $password = 'password',
+        Host $host = Host::DEMO,
+        ?string $appName = 'App name'
+    ): void {
+        $this->request = Mockery::mock(SocketConnection::class);
+        $this->stream = Mockery::mock(SocketConnection::class);
 
-        $this->client = new class ($userId, $password, $host) extends Client {
+        $this->client = new class ($userId, $password, $host, $appName) extends Client {
             /**
-             * Override the constructor to prevent creating a new Socket instance.
-             *
-             * @param integer $userId   User ID.
-             * @param string  $password User password.
-             * @param Host    $host     Socket host URL.
-             *
-             * @noinspection PhpMissingParentConstructorInspection
-             */
-            public function __construct(protected int $userId, protected string $password, protected Host $host)
-            {
-            }
-
-            /**
-             * Sets the socket client.
-             *
-             * @param Socket $socket Socket client.
+             * Establishes connection to the xStation5 API.
              *
              * @return void
              */
-            public function setSocket(Socket $socket): void
+            #[Override]
+            protected function connect(): void
             {
-                $this->socket = $socket;
+                $this->streamSessionId = 'streamSessionId';
+            }
+
+            /**
+             * Sets mocked socket connection.
+             *
+             * @param SocketConnection $request The socket connection.
+             * @return void
+             */
+            public function setRequest(SocketConnection $request): void
+            {
+                $this->request = $request;
+            }
+
+            /**
+             * Sets mocked socket connection.
+             *
+             * @param SocketConnection $stream The socket connection.
+             * @return void
+             */
+            public function setStream(SocketConnection $stream): void
+            {
+                $this->stream = $stream;
             }
         };
 
-        $this->client->setSocket($this->socket);
+        $this->client->setRequest($this->request);
+        $this->client->setStream($this->stream);
     }
 
     /**
@@ -77,14 +96,48 @@ trait ClientMockeryTrait
      */
     public function mockResponse(AbstractPayload $payload, array $response): void
     {
-        $this->socket->shouldReceive('send')
+        $this->request->shouldReceive('isConnected')
+            ->once()
+            ->andReturn(true);
+
+        $this->request->shouldReceive('send')
             ->once()
             ->with($payload->toJson());
 
-        $mockResponse = json_encode($response);
+        $mockResponse = json_encode($response, JSON_THROW_ON_ERROR);
 
-        $this->socket->shouldReceive('receive')
+        $this->request->shouldReceive('receive')
             ->once()
             ->andReturn($mockResponse);
+    }
+
+    /**
+     * Mocks the socket response for a given payload.
+     *
+     * @param AbstractStreamPayload $payload  The payload to be sent.
+     * @param array                 $response The mocked response data.
+     *
+     * @return void
+     * @throws InvalidPayloadException If payload is missing or invalid.
+     *
+     * @throws JsonException If encoding to JSON fails.
+     */
+    public function mockStreamResponse(AbstractStreamPayload $payload, array $response): void
+    {
+        $this->request->shouldReceive('isConnected')
+            ->once()
+            ->andReturn(true);
+
+        $this->stream->shouldReceive('send')
+            ->once()
+            ->with($payload->toJson());
+
+        $mockResponse = json_encode($response, JSON_THROW_ON_ERROR);
+
+        $this->stream->shouldReceive('listen')
+            ->once()
+            ->andReturn(call_user_func(static function () use ($mockResponse): Generator {
+                yield $mockResponse;
+            }));
     }
 }

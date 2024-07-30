@@ -8,7 +8,7 @@ use Timirey\XApi\Helpers\DateTimeHelper;
 /**
  * Class that contains the response of the getServerTime command.
  */
-class GetServerTimeResponse extends AbstractResponse
+final readonly class GetServerTimeResponse extends AbstractResponse
 {
     /**
      * @var DateTime Time in date time.

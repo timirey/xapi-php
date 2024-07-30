@@ -1,14 +1,29 @@
 <?xml version="1.0"?>
 <ruleset name="Custom Ruleset">
-    <description>PSR-12</description>
+    <description>PSR-12 with custom sniffs</description>
 
     <!-- Set the coding standard to PSR-12 -->
-    <rule ref="PSR12"/>
+    <rule ref="PSR12">
+        <severity>10</severity>
+    </rule>
 
     <!-- Add custom rules for PHPDoc -->
-    <rule ref="Squiz.Commenting.ClassComment"/>
-    <rule ref="Squiz.Commenting.FunctionComment"/>
-    <rule ref="Squiz.Commenting.VariableComment"/>
+    <rule ref="Squiz.Commenting.ClassComment">
+        <severity>6</severity>
+    </rule>
+    <rule ref="Squiz.Commenting.FunctionComment">
+        <severity>5</severity>
+    </rule>
+    <rule ref="Squiz.Commenting.VariableComment">
+        <severity>6</severity>
+    </rule>
+
+    <!-- Add rule to remove unused use statements -->
+    <rule ref="SlevomatCodingStandard.Namespaces.UnusedUses">
+        <properties>
+            <property name="searchAnnotations" value="true"/>
+        </properties>
+    </rule>
 
     <!-- Directories to include -->
     <file>src</file>

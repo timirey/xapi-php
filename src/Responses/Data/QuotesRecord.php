@@ -9,7 +9,7 @@ use Timirey\XApi\Helpers\DateTimeHelper;
 /**
  * Class representing a quotes record.
  */
-class QuotesRecord
+final readonly class QuotesRecord
 {
     /**
      * @var Day Day of week.

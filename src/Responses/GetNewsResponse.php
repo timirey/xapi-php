@@ -2,12 +2,13 @@
 
 namespace Timirey\XApi\Responses;
 
+use Override;
 use Timirey\XApi\Responses\Data\NewsTopicRecord;
 
 /**
  * Class that contains the response of the getNews command.
  */
-class GetNewsResponse extends AbstractResponse
+final readonly class GetNewsResponse extends AbstractResponse
 {
     /**
      * Constructor for GetNewsResponse.
@@ -19,16 +20,14 @@ class GetNewsResponse extends AbstractResponse
     }
 
     /**
-     * Create a response instance from the validated data.
-     *
-     * @param  array $response Validated response data.
-     * @return static Instance of the response.
+     * @inheritdoc
      */
-    protected static function create(array $response): static
+    #[Override]
+    protected static function create(array $response): self
     {
-        return new static(array_map(
+        return new self(array_map(
             static fn (array $newsTopicRecordData): NewsTopicRecord => new NewsTopicRecord(...$newsTopicRecordData),
-            $response['returnData']
+            $response
         ));
     }
 }

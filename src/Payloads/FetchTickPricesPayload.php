@@ -2,12 +2,16 @@
 
 namespace Timirey\XApi\Payloads;
 
+use Override;
+
 /**
- * Class representing the payload for the getTickPrices stream command.
+ * Class representing the payload for the fetchTickPrices stream command.
  */
-class GetTickPricesStreamPayload extends AbstractStreamPayload
+final class FetchTickPricesPayload extends AbstractStreamPayload
 {
     /**
+     * Constructor for FetchTickPricesPayload class.
+     *
      * @param  string       $streamSessionId Stream session ID.
      * @param  string       $symbol          Symbol for which to get the tick prices.
      * @param  integer|null $minArrivalTime  Minimal interval in milliseconds between updates (optional).
@@ -21,23 +25,22 @@ class GetTickPricesStreamPayload extends AbstractStreamPayload
     ) {
         parent::__construct($streamSessionId);
 
-        $this->parameters['symbol'] = $this->symbol;
+        $this->setParameter('symbol', $this->symbol);
 
         if ($this->minArrivalTime !== null) {
-            $this->parameters['minArrivalTime'] = $this->minArrivalTime;
+            $this->setParameter('minArrivalTime', $this->minArrivalTime);
         }
 
         if ($this->maxLevel !== null) {
-            $this->parameters['maxLevel'] = $this->maxLevel;
+            $this->setParameter('maxLevel', $this->maxLevel);
         }
     }
 
     /**
-     * Returns the command name for the payload.
-     *
-     * @return string Command name.
+     * @inheritdoc
      */
-    public function getCommand(): string
+    #[Override]
+    protected function getCommand(): string
     {
         return 'getTickPrices';
     }

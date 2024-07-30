@@ -14,7 +14,7 @@ afterEach(function () {
     Mockery::close();
 });
 
-test('logout command', function () {
+test('logout command', function (): void {
     $payload = new LogoutPayload();
     $mockResponse = ['status' => true];
 

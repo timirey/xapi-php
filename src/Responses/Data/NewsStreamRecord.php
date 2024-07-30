@@ -8,7 +8,7 @@ use Timirey\XApi\Helpers\DateTimeHelper;
 /**
  * Class representing the news record data in the streaming response.
  */
-class NewsStreamRecord
+final readonly class NewsStreamRecord
 {
     /**
      * @var DateTime Timestamp.

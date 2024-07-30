@@ -2,27 +2,28 @@
 
 namespace Timirey\XApi\Payloads;
 
+use Override;
+
 /**
  * Class that contains payload for the getTradeRecords command.
  */
-class GetTradeRecordsPayload extends AbstractPayload
+final class GetTradeRecordsPayload extends AbstractPayload
 {
     /**
      * Constructor for GetTradeRecordsPayload.
      *
-     * @param  array $orders Array of orders (position numbers).
+     * @param  array<int, int> $orders Array of orders (position numbers).
      */
     public function __construct(array $orders)
     {
-        $this->parameters['orders'] = $orders;
+        $this->setParameter('orders', $orders);
     }
 
     /**
-     * Get the command.
-     *
-     * @return string Command name.
+     * @inheritdoc
      */
-    public function getCommand(): string
+    #[Override]
+    protected function getCommand(): string
     {
         return 'getTradeRecords';
     }

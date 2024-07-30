@@ -2,12 +2,13 @@
 
 namespace Timirey\XApi\Payloads;
 
+use Override;
 use Timirey\XApi\Payloads\Data\ChartLastInfoRecord;
 
 /**
  * Class that contains payload for the getChartLastRequest command.
  */
-class GetChartLastRequestPayload extends AbstractPayload
+final class GetChartLastRequestPayload extends AbstractPayload
 {
     /**
      * Constructor for GetChartLastRequestPayload.
@@ -16,15 +17,14 @@ class GetChartLastRequestPayload extends AbstractPayload
      */
     public function __construct(ChartLastInfoRecord $chartLastInfoRecord)
     {
-        $this->parameters['info'] = $chartLastInfoRecord;
+        $this->setParameter('info', $chartLastInfoRecord);
     }
 
     /**
-     * Get the command.
-     *
-     * @return string Command name.
+     * @inheritdoc
      */
-    public function getCommand(): string
+    #[Override]
+    protected function getCommand(): string
     {
         return 'getChartLastRequest';
     }

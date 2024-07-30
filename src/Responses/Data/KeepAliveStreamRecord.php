@@ -8,7 +8,7 @@ use Timirey\XApi\Helpers\DateTimeHelper;
 /**
  * Class representing the keep alive record data in the streaming response.
  */
-class KeepAliveStreamRecord
+final readonly class KeepAliveStreamRecord
 {
     /**
      * @var DateTime Timestamp.

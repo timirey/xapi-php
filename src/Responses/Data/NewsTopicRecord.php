@@ -8,7 +8,7 @@ use Timirey\XApi\Helpers\DateTimeHelper;
 /**
  * Class representing a news topic record.
  */
-class NewsTopicRecord
+final readonly class NewsTopicRecord
 {
     /**
      * @var DateTime Time in date time.

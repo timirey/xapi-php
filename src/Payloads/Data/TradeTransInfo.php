@@ -10,7 +10,7 @@ use Timirey\XApi\Helpers\DateTimeHelper;
 /**
  * Class representing trade transaction information.
  */
-class TradeTransInfo
+final class TradeTransInfo
 {
     /**
      * @var integer Pending order expiration time (milliseconds since epoch).

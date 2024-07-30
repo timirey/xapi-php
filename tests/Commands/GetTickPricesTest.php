@@ -16,7 +16,7 @@ afterEach(function () {
     Mockery::close();
 });
 
-test('getTickPrices command', function () {
+test('getTickPrices command', function (): void {
     $timestamp = new DateTime();
 
     $payload = new GetTickPricesPayload(Level::BASE, ['EURPLN', 'AGO.PL'], $timestamp);

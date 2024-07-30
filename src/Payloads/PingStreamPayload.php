@@ -2,17 +2,18 @@
 
 namespace Timirey\XApi\Payloads;
 
+use Override;
+
 /**
  * Class representing the payload for the ping stream command.
  */
-class PingStreamPayload extends AbstractStreamPayload
+final class PingStreamPayload extends AbstractStreamPayload
 {
     /**
-     * Returns the command name for the payload.
-     *
-     * @return string Command name.
+     * @inheritdoc
      */
-    public function getCommand(): string
+    #[Override]
+    protected function getCommand(): string
     {
         return 'ping';
     }
