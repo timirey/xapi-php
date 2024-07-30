@@ -2,8 +2,6 @@
 
 namespace Timirey\XApi\Responses;
 
-use Override;
-
 /**
  * Class that contains response of the tradeTransaction command.
  */

@@ -3,7 +3,6 @@
 namespace Timirey\XApi\Payloads;
 
 use Override;
-use Timirey\XApi\Enums\Day;
 
 /**
  * Class that contains payload for the getStepRules command.

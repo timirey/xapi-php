@@ -2,10 +2,7 @@
 
 namespace Timirey\XApi\Responses;
 
-use InvalidArgumentException;
-use JsonException;
 use Override;
-use Timirey\XApi\Exceptions\ErrorResponseException;
 use Timirey\XApi\Exceptions\InvalidResponseException;
 
 /**

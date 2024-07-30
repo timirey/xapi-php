@@ -18,6 +18,14 @@
         <severity>5</severity>
     </rule>
 
+    <!-- Add rule to remove unused use statements -->
+    <rule ref="SlevomatCodingStandard.Namespaces.UnusedUses">
+        <severity>6</severity>
+        <properties>
+            <property name="searchAnnotations" value="true"/>
+        </properties>
+    </rule>
+
     <!-- Directories to include -->
     <file>src</file>
     <file>tests</file>

@@ -2,7 +2,6 @@
 
 namespace Timirey\XApi\Responses;
 
-use Override;
 use Timirey\XApi\Enums\RequestStatus;
 
 /**

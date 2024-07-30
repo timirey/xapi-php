@@ -3,7 +3,6 @@
 namespace Timirey\XApi\Responses;
 
 use DateTime;
-use Override;
 use Timirey\XApi\Helpers\DateTimeHelper;
 
 /**

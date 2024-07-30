@@ -2,8 +2,6 @@
 
 namespace Timirey\XApi\Responses;
 
-use Override;
-
 /**
  * Class that contains the response of the ping command.
  */
