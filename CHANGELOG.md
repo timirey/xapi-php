@@ -2,7 +2,7 @@
 
 ## [6.0.2](https://github.com/timirey/xapi-php/compare/6.0.1..6.0.2) - 2024-07-30
 
-- Add `bool` return types to `close()` and `open()`.
+- Catch exceptions from `stream_socket_client()`.
 
 ## [6.0.1](https://github.com/timirey/xapi-php/compare/6.0.0..6.0.1) - 2024-07-30
 
