@@ -77,86 +77,53 @@ composer require timirey/xapi-php
 Basic usage example.
 
 ```PHP
-use Timirey\XApi\Client;
-use Timirey\XApi\Enums\Host;
-use Timirey\XApi\Responses\GetCalendarResponse;
-use Timirey\XApi\Responses\LoginResponse;
-use Timirey\XApi\Responses\LogoutResponse;
-
 /**
- * @var Client
+ * @var $client Client
  */
 $client = new Client(
-    host: Host::DEMO
+    userId: 12345678,
+    password: 'password',
+    host: Host::DEMO,
+    appName: 'My Test App'
 );
 
 /**
- * @var LoginResponse $loginResponse
+ * @var $response GetSymbolResponse
  */
-$loginResponse = $client->login(
-    userId: 123456789, 
-    password: 'password'
+$response = $client->getSymbol(
+    symbol: 'EURUSD'
 );
-
-/**
- * @var GetCalendarResponse $getCalendarResponse
- */
-$getCalendarResponse = $client->getCalendar();
-
-/**
- * @var LogoutResponse $logoutResponse
- */
-$logoutResponse = $client->logout();
 ```
 
 Subscribe to a stream channel.
 
 ```PHP
-use Timirey\XApi\Responses\FetchTickPricesResponse;
-use Timirey\XApi\Responses\Data\TickStreamRecord;
-use Timirey\XApi\Responses\LoginResponse;
-use Timirey\XApi\Enums\StreamHost;
 use Timirey\XApi\Client;
 use Timirey\XApi\Enums\Host;
-use Timirey\XApi\Client;
-
-/**
- * @var Client
- */
-$client = new Client(
-    host: Host::DEMO
-);
-
-/**
- * @var LoginResponse $loginResponse
- */
-$loginResponse = $client->login(
-    userId: 123456789, 
-    password: 'password'
-);
-
-/**
- * @var string $streamSessionId
- */
-$streamSessionId = $loginResponse->streamSessionId;
+use Timirey\XApi\Responses\Data\TickStreamRecord;
+use Timirey\XApi\Responses\FetchTickPricesResponse;
 
 /**
  * @var $client Client
  */
 $client = new Client(
-    streamSessionId: $streamSessionId,
-    host: StreamHost::DEMO
+    userId: 12345678,
+    password: 'password',
+    host: Host::DEMO,
+    appName: 'My Test App'
 );
 
 // Meant to be a daemon, run as separate process.
-$client->getTickPrices(
+$client->fetchTickPrices(
     symbol: 'EURUSD',
-    callback: static function (FetchTickPricesResponse $tickPricesStreamResponse): void {
+    callback: static function (FetchTickPricesResponse $response): void {
         /**
-         * @var TickStreamRecord $tickStreamRecord
+         * @var TickStreamRecord $record
          */
-        $record = $tickPricesStreamResponse->tickStreamRecord;
-    }
+        $record = $response->tickStreamRecord;
+    },
+    minArrivalTime: 100,
+    maxLevel: 1
 );
 
 // Unreachable code.
