@@ -22,15 +22,15 @@ integrate advanced trading features and live market data into their applications
     - [login](#login)
     - [logout](#logout)
 - [Available streaming commands](#available-streaming-commands)
-    - [getBalance](#get-balance)
-    - [getCandles](#get-candles)
-    - [getKeepAlive](#get-keep-alive)
-    - [getNews](#get-news)
-    - [getProfits](#get-profits)
-    - [getTickPrices](#get-tick-prices)
-    - [getTrades](#get-trades)
-    - [getTradeStatus](#get-trade-status)
-    - [ping](#ping)
+    - [fetchBalance](#fetch-balance) (getBalance)
+    - [fetchCandles](#fetch-candles) (getCandles)
+    - [fetchKeepAlive](#fetch-keep-alive) (getKeepAlive)
+    - [fetchNews](#fetch-news) (getNews)
+    - [fetchProfits](#fetch-profits) (getProfits)
+    - [fetchTickPrices](#fetch-tick-prices) (getTickPrices)
+    - [fetchTrades](#fetch-trades) (getTrades)
+    - [fetchTradeStatus](#fetch-trade-status) (getTradeStatus)
+    - [pingStream](#ping-stream) (ping)
 - [Retrieving trading data](#retrieving-trading-data)
     - [getAllSymbols](#getallsymbols)
     - [getCalendar](#getcalendar)
@@ -58,6 +58,8 @@ integrate advanced trading features and live market data into their applications
 - [Error handling](#error-handling)
     - [ErrorResponseException](#errorresponseexception)
     - [InvalidResponseException](#invalidresponseexception)
+    - [InvalidPayloadException](#invalidpayloadexception)
+    - [SocketException](#socketexception)
 - [Testing](#testing)
 - [License](#license)
 - [Reference](#reference)
@@ -75,16 +77,16 @@ composer require timirey/xapi-php
 Basic usage example.
 
 ```PHP
-use Timirey\XApi\SocketClient;
+use Timirey\XApi\Client;
 use Timirey\XApi\Enums\Host;
 use Timirey\XApi\Responses\GetCalendarResponse;
 use Timirey\XApi\Responses\LoginResponse;
 use Timirey\XApi\Responses\LogoutResponse;
 
 /**
- * @var SocketClient
+ * @var Client
  */
-$client = new SocketClient(
+$client = new Client(
     host: Host::DEMO
 );
 
@@ -114,14 +116,14 @@ use Timirey\XApi\Responses\FetchTickPricesResponse;
 use Timirey\XApi\Responses\Data\TickStreamRecord;
 use Timirey\XApi\Responses\LoginResponse;
 use Timirey\XApi\Enums\StreamHost;
-use Timirey\XApi\StreamClient;
+use Timirey\XApi\Client;
 use Timirey\XApi\Enums\Host;
-use Timirey\XApi\SocketClient;
+use Timirey\XApi\Client;
 
 /**
- * @var SocketClient
+ * @var Client
  */
-$client = new SocketClient(
+$client = new Client(
     host: Host::DEMO
 );
 
@@ -139,15 +141,15 @@ $loginResponse = $client->login(
 $streamSessionId = $loginResponse->streamSessionId;
 
 /**
- * @var $streamClient StreamClient
+ * @var $client Client
  */
-$streamClient = new StreamClient(
+$client = new Client(
     streamSessionId: $streamSessionId,
     host: StreamHost::DEMO
 );
 
 // Meant to be a daemon, run as separate process.
-$streamClient->getTickPrices(
+$client->getTickPrices(
     symbol: 'EURUSD',
     callback: static function (FetchTickPricesResponse $tickPricesStreamResponse): void {
         /**
@@ -170,15 +172,16 @@ Logs in to the xStation5 API.
 
 ```PHP
 use Timirey\XApi\Responses\LoginResponse;
-use Timirey\XApi\SocketClient;
+use Timirey\XApi\Client;
 
 /** 
  * @var LoginResponse $response 
- * @var SocketClient $client
+ * @var Client $client
  */
 $response = $client->login(
     userId: 123456789, 
-    password: 'password'
+    password: 'password',
+    appName: 'My App'
 );
 ```
 
@@ -188,30 +191,30 @@ Logs out from the xStation5 API.
 
 ```PHP
 use Timirey\XApi\Responses\LogoutResponse;
-use Timirey\XApi\SocketClient;
+use Timirey\XApi\Client;
 
 /** 
  * @var LogoutResponse $response
- * @var SocketClient $client
+ * @var Client $client
  */
 $response = $client->logout();
 ```
 
 ## Available streaming commands
 
-### [getBalance](http://developers.xstore.pro/documentation/#streamgetBalance)
+### [fetchBalance](http://developers.xstore.pro/documentation/#streamgetBalance)
 
 Allows to get actual account indicators values in real-time, as soon as they are available in the system.
 
 ```PHP
 use Timirey\XApi\Responses\Data\BalanceStreamRecord;
 use Timirey\XApi\Responses\FetchBalanceResponse;
-use Timirey\XApi\StreamClient;
+use Timirey\XApi\Client;
 
 /**
- * @var StreamClient $streamClient
+ * @var Client $client
  */
-$streamClient->getBalance(
+$client->fetchBalance(
     callback: static function (FetchBalanceResponse $response): void {
         /**
          * @var BalanceStreamRecord $record
@@ -221,7 +224,7 @@ $streamClient->getBalance(
 );
 ```
 
-### [getCandles](http://developers.xstore.pro/documentation/#streamgetCandles)
+### [fetchCandles](http://developers.xstore.pro/documentation/#streamgetCandles)
 
 Subscribes for and unsubscribes from API chart candles. The interval of every candle is 1 minute. A new candle arrives
 every minute.
@@ -229,12 +232,12 @@ every minute.
 ```PHP
 use Timirey\XApi\Responses\Data\CandleStreamRecord;
 use Timirey\XApi\Responses\FetchCandlesResponse;
-use Timirey\XApi\StreamClient;
+use Timirey\XApi\Client;
 
 /**
- * @var StreamClient $streamClient
+ * @var Client $client
  */
-$streamClient->getCandles(
+$client->fetchCandles(
     symbol: 'EURUSD',
     callback: static function (FetchCandlesResponse $response): void {
         /**
@@ -245,7 +248,7 @@ $streamClient->getCandles(
 );
 ```
 
-### [getKeepAlive](http://developers.xstore.pro/documentation/#streamgetKeepAlive)
+### [fetchKeepAlive](http://developers.xstore.pro/documentation/#streamgetKeepAlive)
 
 Subscribes for and unsubscribes from 'keep alive' messages. A new 'keep alive' message is sent by the API every 3
 seconds.
@@ -253,12 +256,12 @@ seconds.
 ```PHP
 use Timirey\XApi\Responses\Data\KeepAliveStreamRecord;
 use Timirey\XApi\Responses\FetchKeepAliveResponse;
-use Timirey\XApi\StreamClient;
+use Timirey\XApi\Client;
 
 /**
- * @var StreamClient $streamClient
+ * @var Client $client
  */
-$streamClient->getKeepAlive(
+$client->fetchKeepAlive(
     callback: static function (FetchKeepAliveResponse $response): void {
         /**
          * @var KeepAliveStreamRecord $record
@@ -268,19 +271,19 @@ $streamClient->getKeepAlive(
 );
 ```
 
-### [getNews](http://developers.xstore.pro/documentation/#streamgetNews)
+### [fetchNews](http://developers.xstore.pro/documentation/#streamgetNews)
 
 Subscribes for and unsubscribes from news.
 
 ```PHP
 use Timirey\XApi\Responses\Data\NewsStreamRecord;
 use Timirey\XApi\Responses\FetchNewsResponse;
-use Timirey\XApi\StreamClient;
+use Timirey\XApi\Client;
 
 /**
- * @var StreamClient $streamClient
+ * @var Client $client
  */
-$streamClient->getNews(
+$client->fetchNews(
     callback: static function (FetchNewsResponse $response): void {
         /**
          * @var NewsStreamRecord $record
@@ -290,19 +293,19 @@ $streamClient->getNews(
 );
 ```
 
-### [getProfits](http://developers.xstore.pro/documentation/#streamgetProfits)
+### [fetchProfits](http://developers.xstore.pro/documentation/#streamgetProfits)
 
 Subscribes for and unsubscribes from profits.
 
 ```PHP
 use Timirey\XApi\Responses\Data\ProfitStreamRecord;
 use Timirey\XApi\Responses\FetchProfitsResponse;
-use Timirey\XApi\StreamClient;
+use Timirey\XApi\Client;
 
 /**
- * @var StreamClient $streamClient
+ * @var Client $client
  */
-$streamClient->getProfits(
+$client->fetchProfits(
     callback: static function (FetchProfitsResponse $response): void {
         /**
          * @var ProfitStreamRecord $record
@@ -312,7 +315,7 @@ $streamClient->getProfits(
 );
 ```
 
-### [getTickPrices](http://developers.xstore.pro/documentation/#streamgetTickPrices)
+### [fetchTickPrices](http://developers.xstore.pro/documentation/#streamgetTickPrices)
 
 Establishes subscription for quotations and allows to obtain the relevant information in real-time, as soon as it is
 available in the system.
@@ -320,12 +323,12 @@ available in the system.
 ```PHP
 use Timirey\XApi\Responses\Data\TickStreamRecord;
 use Timirey\XApi\Responses\FetchTickPricesResponse;
-use Timirey\XApi\StreamClient;
+use Timirey\XApi\Client;
 
 /**
- * @var StreamClient $streamClient
+ * @var Client $client
  */
-$streamClient->getTickPrices(
+$client->fetchTickPrices(
     symbol: 'EURUSD',
     callback: static function (FetchTickPricesResponse $response): void {
         /**
@@ -338,7 +341,7 @@ $streamClient->getTickPrices(
 );
 ```
 
-### [getTrades](http://developers.xstore.pro/documentation/#streamgetTrades)
+### [fetchTrades](http://developers.xstore.pro/documentation/#streamgetTrades)
 
 Establishes subscription for user trade status data and allows to obtain the relevant information in real-time, as soon
 as it is available in the system.
@@ -346,12 +349,12 @@ as it is available in the system.
 ```PHP
 use Timirey\XApi\Responses\Data\TradeStreamRecord;
 use Timirey\XApi\Responses\FetchTradesResponse;
-use Timirey\XApi\StreamClient;
+use Timirey\XApi\Client;
 
 /**
- * @var StreamClient $streamClient
+ * @var Client $client
  */
-$streamClient->getTrades(
+$client->fetchTrades(
     callback: static function (FetchTradesResponse $response): void {
         /**
          * @var TradeStreamRecord $record
@@ -361,19 +364,19 @@ $streamClient->getTrades(
 );
 ```
 
-### [getTradeStatus](http://developers.xstore.pro/documentation/#streamgetTradeStatus)
+### [fetchTradeStatus](http://developers.xstore.pro/documentation/#streamgetTradeStatus)
 
 Allows to get status for sent trade requests in real-time, as soon as it is available in the system.
 
 ```PHP
 use Timirey\XApi\Responses\Data\TradeStatusStreamRecord;
 use Timirey\XApi\Responses\FetchTradeStatusResponse;
-use Timirey\XApi\StreamClient;
+use Timirey\XApi\Client;
 
 /**
- * @var StreamClient $streamClient
+ * @var Client $client
  */
-$streamClient->getTradeStatus(
+$client->fetchTradeStatus(
     callback: static function (FetchTradeStatusResponse $response): void {
         /**
          * @var TradeStatusStreamRecord $record
@@ -383,17 +386,17 @@ $streamClient->getTradeStatus(
 );
 ```
 
-### [ping](http://developers.xstore.pro/documentation/#streamping)
+### [pingStream](http://developers.xstore.pro/documentation/#streamping)
 
 Regularly calling this function is enough to refresh the internal state of all the components in the system.
 
 ```PHP
-use Timirey\XApi\StreamClient;
+use Timirey\XApi\Client;
 
 /**
- * @var StreamClient $streamClient
+ * @var Client $client
  */
-$streamClient->ping();
+$client->pingStream();
 ```
 
 ## Retrieving trading data
@@ -404,11 +407,11 @@ Retrieves information about all symbols.
 
 ```PHP
 use Timirey\XApi\Responses\GetAllSymbolsResponse;
-use Timirey\XApi\SocketClient;
+use Timirey\XApi\Client;
 
 /** 
  * @var GetAllSymbolsResponse $response 
- * @var SocketClient $client
+ * @var Client $client
  */
 $response = $client->getAllSymbols();
 ```
@@ -419,11 +422,11 @@ Returns a calendar with market events.
 
 ```PHP
 use Timirey\XApi\Responses\GetCalendarResponse;
-use Timirey\XApi\SocketClient;
+use Timirey\XApi\Client;
 
 /** 
  * @var GetCalendarResponse $response 
- * @var SocketClient $client
+ * @var Client $client
  */
 $response = $client->getCalendar();
 ```
@@ -434,7 +437,7 @@ Returns chart info from the start date to the current time.
 
 ```PHP
 use Timirey\XApi\Responses\GetChartLastRequestResponse;
-use Timirey\XApi\SocketClient;
+use Timirey\XApi\Client;
 use Timirey\XApi\Payloads\Data\ChartLastInfoRecord;
 use Timirey\XApi\Enums\Period;
 use DateTime;
@@ -447,7 +450,7 @@ $chartLastInfoRecord = new ChartLastInfoRecord(
 
 /** 
  * @var GetChartLastRequestResponse $response 
- * @var SocketClient $client
+ * @var Client $client
  */
 $response = $client->getChartLastRequest(
     chartLastInfoRecord: $chartLastInfoRecord
@@ -460,7 +463,7 @@ Returns chart info from the start date to the current time.
 
 ```PHP
 use Timirey\XApi\Responses\GetChartRangeRequestResponse;
-use Timirey\XApi\SocketClient;
+use Timirey\XApi\Client;
 use Timirey\XApi\Payloads\Data\ChartRangeInfoRecord;
 use Timirey\XApi\Enums\Period;
 use DateTime;
@@ -475,7 +478,7 @@ $chartRangeInfoRecord = new ChartRangeInfoRecord(
 
 /** 
  * @var GetChartRangeRequestResponse $response 
- * @var SocketClient $client
+ * @var Client $client
  */
 $response = $client->getChartRangeRequest(
     chartRangeInfoRecord: $chartRangeInfoRecord
@@ -488,11 +491,11 @@ Returns the calculation of commission and rate of exchange.
 
 ```PHP
 use Timirey\XApi\Responses\GetCommissionDefResponse;
-use Timirey\XApi\SocketClient;
+use Timirey\XApi\Client;
 
 /** 
  * @var GetCommissionDefResponse $response 
- * @var SocketClient $client
+ * @var Client $client
  */
 $response = $client->getCommissionDef(
     symbol: 'EURUSD',
@@ -506,11 +509,11 @@ Returns information about account currency and leverage.
 
 ```PHP
 use Timirey\XApi\Responses\GetCurrentUserDataResponse;
-use Timirey\XApi\SocketClient;
+use Timirey\XApi\Client;
 
 /** 
  * @var GetCurrentUserDataResponse $response 
- * @var SocketClient $client
+ * @var Client $client
  */
 $response = $client->getCurrentUserData();
 ```
@@ -521,12 +524,12 @@ Returns IBs data from the given time range.
 
 ```PHP
 use Timirey\XApi\Responses\GetIbsHistoryResponse;
-use Timirey\XApi\SocketClient;
+use Timirey\XApi\Client;
 use DateTime;
 
 /** 
  * @var GetIbsHistoryResponse $response 
- * @var SocketClient $client
+ * @var Client $client
  */
 $response = $client->getIbsHistory(
     start: new DateTime('-1 month'),
@@ -540,11 +543,11 @@ Returns various account indicators.
 
 ```PHP
 use Timirey\XApi\Responses\GetMarginLevelResponse;
-use Timirey\XApi\SocketClient;
+use Timirey\XApi\Client;
 
 /** 
  * @var GetMarginLevelResponse $response 
- * @var SocketClient $client
+ * @var Client $client
  */
 $response = $client->getMarginLevel();
 ```
@@ -555,11 +558,11 @@ Returns expected margin for a given instrument and volume.
 
 ```PHP
 use Timirey\XApi\Responses\GetMarginTradeResponse;
-use Timirey\XApi\SocketClient;
+use Timirey\XApi\Client;
 
 /** 
  * @var GetMarginTradeResponse $response 
- * @var SocketClient $client
+ * @var Client $client
  */
 $response = $client->getMarginTrade(
     symbol: 'EURPLN', 
@@ -573,12 +576,12 @@ Returns news from the trading server which were sent within a specified period.
 
 ```PHP
 use Timirey\XApi\Responses\GetNewsResponse;
-use Timirey\XApi\SocketClient;
+use Timirey\XApi\Client;
 use DateTime;
 
 /** 
  * @var GetNewsResponse $response 
- * @var SocketClient $client
+ * @var Client $client
  */
 $response = $client->getNews(
     start: new DateTime('-1 month'), 
@@ -592,12 +595,12 @@ Calculates estimated profit for given deal data.
 
 ```PHP
 use Timirey\XApi\Responses\GetProfitCalculationResponse;
-use Timirey\XApi\SocketClient;
+use Timirey\XApi\Client;
 use Timirey\XApi\Enums\Cmd;
 
 /** 
  * @var GetProfitCalculationResponse $response 
- * @var SocketClient $client
+ * @var Client $client
  */
 $response = $client->getProfitCalculation(
   closePrice: 1.3000, 
@@ -614,11 +617,11 @@ Returns the current time on the trading server.
 
 ```PHP
 use Timirey\XApi\Responses\GetServerTimeResponse;
-use Timirey\XApi\SocketClient;
+use Timirey\XApi\Client;
 
 /** 
  * @var GetServerTimeResponse $response 
- * @var SocketClient $client
+ * @var Client $client
  */
 $response = $client->getServerTime();
 ```
@@ -629,11 +632,11 @@ Returns a list of step rules for DMAs.
 
 ```PHP
 use Timirey\XApi\Responses\GetStepRulesResponse;
-use Timirey\XApi\SocketClient;
+use Timirey\XApi\Client;
 
 /** 
  * @var GetStepRulesResponse $response 
- * @var SocketClient $client
+ * @var Client $client
  */
 $response = $client->getStepRules();
 ```
@@ -644,11 +647,11 @@ Retrieves information about a specific symbol.
 
 ```PHP
 use Timirey\XApi\Responses\GetSymbolResponse;
-use Timirey\XApi\SocketClient;
+use Timirey\XApi\Client;
 
 /** 
  * @var GetSymbolResponse $response 
- * @var SocketClient $client
+ * @var Client $client
  */
 $response = $client->getSymbol(
     symbol: EURUSD
@@ -662,12 +665,12 @@ Returns an array of current quotations for given symbols.
 ```PHP
 use Timirey\XApi\Responses\GetTickPricesResponse;
 use Timirey\XApi\Enums\Level;
-use Timirey\XApi\SocketClient;
+use Timirey\XApi\Client;
 use DateTime;
 
 /**
  * @var GetTickPricesResponse $response
- * @var SocketClient $client
+ * @var Client $client
  */
 $response = $client->getTickPrices(
     level: Level::BASE, 
@@ -682,11 +685,11 @@ Returns an array of trades listed in orders argument.
 
 ```PHP
 use Timirey\XApi\Responses\GetTradeRecordsResponse;
-use Timirey\XApi\SocketClient;
+use Timirey\XApi\Client;
 
 /** 
  * @var GetTradeRecordsResponse $response 
- * @var SocketClient $client
+ * @var Client $client
  */
 $response = $client->getTradeRecords(
     orders: [7489839, 7489841]
@@ -699,11 +702,11 @@ Returns an array of user's trades.
 
 ```PHP
 use Timirey\XApi\Responses\GetTradesResponse;
-use Timirey\XApi\SocketClient;
+use Timirey\XApi\Client;
 
 /** 
  * @var GetTradesResponse $response 
- * @var SocketClient $client
+ * @var Client $client
  */
 $response = $client->getTrades(
     openedOnly: true
@@ -716,12 +719,12 @@ Returns an array of user's trades which were closed within a specified period.
 
 ```PHP
 use Timirey\XApi\Responses\GetTradesHistoryResponse;
-use Timirey\XApi\SocketClient;
+use Timirey\XApi\Client;
 use DateTime;
 
 /** 
  * @var GetTradesHistoryResponse $response 
- * @var SocketClient $client
+ * @var Client $client
  */
 $response = $client->getTradesHistory(
     start: new DateTime('last month'), 
@@ -735,11 +738,11 @@ Returns quotes and trading times.
 
 ```PHP
 use Timirey\XApi\Responses\GetTradingHoursResponse;
-use Timirey\XApi\SocketClient;
+use Timirey\XApi\Client;
 
 /** 
  * @var GetTradingHoursResponse $response 
- * @var SocketClient $client
+ * @var Client $client
  */
 $response = $client->getTradingHours(
     symbols: ['EURPLN', 'AGO.PL']
@@ -752,11 +755,11 @@ Returns the current API version.
 
 ```PHP
 use Timirey\XApi\Responses\GetVersionResponse;
-use Timirey\XApi\SocketClient;
+use Timirey\XApi\Client;
 
 /** 
  * @var GetVersionResponse $response 
- * @var SocketClient $client
+ * @var Client $client
  */
 $response = $client->getVersion();
 ```
@@ -767,11 +770,11 @@ Regularly calling this function is enough to refresh the internal state of all t
 
 ```PHP
 use Timirey\XApi\Responses\PingResponse;
-use Timirey\XApi\SocketClient;
+use Timirey\XApi\Client;
 
 /** 
  * @var PingResponse $response 
- * @var SocketClient $client
+ * @var Client $client
  */
 $response = $client->ping();
 ```
@@ -783,7 +786,7 @@ Starts a trade transaction.
 ```PHP
 use Timirey\XApi\Responses\TradeTransactionResponse;
 use Timirey\XApi\Payloads\Data\TradeTransInfo;
-use Timirey\XApi\SocketClient;
+use Timirey\XApi\Client;
 
 $tradeTransInfo = new TradeTransInfo(
     cmd: Cmd::BUY,
@@ -801,7 +804,7 @@ $tradeTransInfo = new TradeTransInfo(
 
 /** 
  * @var TradeTransactionResponse $response 
- * @var SocketClient $client
+ * @var Client $client
  */
 $response = $client->tradeTransaction(
     tradeTransInfo: $tradeTransInfo
@@ -814,11 +817,11 @@ Returns the current transaction status.
 
 ```PHP
 use Timirey\XApi\Responses\TradeTransactionStatusResponse;
-use Timirey\XApi\SocketClient;
+use Timirey\XApi\Client;
 
 /** 
  * @var TradeTransactionStatusResponse $response 
- * @var SocketClient $client
+ * @var Client $client
  */
 $response = $client->tradeTransactionStatus(
     order: 123456
@@ -836,19 +839,19 @@ Thrown when the API returns an error (e.g., invalid password). Provides error co
 ```PHP
 use Timirey\XApi\Exceptions\ResponseException;
 use Timirey\XApi\Enums\Host;
-use Timirey\XApi\SocketClient;
+use Timirey\XApi\Client;
 
 /** 
- * @var SocketClient $client 
+ * @var Client $client 
  */
-$client = new SocketClient(
+$client = new Client(
     userId: 123456789, 
     password: 'invalidPassword', 
     host: Host::DEMO
 );
 
 try {
-    $client->login();
+    $client->getVersion();
 } catch (ErrorResponseException $e) {
     echo ($e->getErrorCode()); // 'BE005'
     echo ($e->getErrorDescr()); // 'userPasswordCheck: Invalid login or password.'
@@ -862,26 +865,13 @@ the [official documentation](http://developers.xstore.pro/documentation#error-me
 
 Thrown when a request fails and the API does not return a proper error response (e.g., invalid or incomplete response).
 
-```PHP
-use \Timirey\XApi\Exceptions\InvalidResponseException;
-use Timirey\XApi\Enums\Host;
-use Timirey\XApi\SocketClient;
+### InvalidPayloadException
 
-/** 
- * @var SocketClient $client 
- */
-$client = new SocketClient(
-    userId: 123456789, 
-    password: 'password', 
-    host: Host::DEMO
-);
+Thrown when for some reason the payload is invalid (usually invalid response from the xApi).
 
-try {
-    $client->login();
-} catch (InvalidResponseException $e) {
-    echo ($e->getMessage()); // 'The response did not include a status.'
-}
-```
+### SocketException
+
+Thrown when socket fails to connect/read/write for some reason.
 
 ## Testing
 
@@ -893,7 +883,8 @@ This package uses the PestPHP framework for testing.
 
 ## License
 
-This library is open-sourced software licensed under the [MIT license](https://github.com/timirey/xapi-php/blob/main/LICENSE.md).
+This library is open-sourced software licensed under
+the [MIT license](https://github.com/timirey/xapi-php/blob/main/LICENSE.md).
 
 ## Reference
 
