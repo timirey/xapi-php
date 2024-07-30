@@ -77,6 +77,10 @@ composer require timirey/xapi-php
 Basic usage example.
 
 ```PHP
+use Timirey\XApi\Client;
+use Timirey\XApi\Enums\Host;
+use Timirey\XApi\Responses\GetSymbolResponse;
+
 /**
  * @var $client Client
  */
