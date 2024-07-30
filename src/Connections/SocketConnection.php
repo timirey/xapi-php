@@ -50,7 +50,7 @@ class SocketConnection
      */
     public function open(): bool
     {
-        $this->socket = stream_socket_client($this->address, $errorCode, $errorMessage);
+        $this->socket = @stream_socket_client($this->address, $errorCode, $errorMessage);
 
         if (!$this->isConnected()) {
             throw new SocketException("$errorCode: $errorMessage");
