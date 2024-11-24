@@ -1,5 +1,9 @@
 # Release Notes
 
+## [6.0.4](https://github.com/timirey/xapi-php/compare/6.0.3..6.0.4) - 2024-11-24
+
+- Update `.gitattributes`.
+
 ## [6.0.3](https://github.com/timirey/xapi-php/compare/6.0.2..6.0.3) - 2024-07-30
 
 - Remove `isConnected()` from `SocketConnection::class`.
