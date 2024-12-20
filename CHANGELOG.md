@@ -1,5 +1,9 @@
 # Release Notes
 
+## [6.0.5](https://github.com/timirey/xapi-php/compare/6.0.4..6.0.5) - 2024-12-21
+
+- Remove git workflow for pull requests.
+
 ## [6.0.4](https://github.com/timirey/xapi-php/compare/6.0.3..6.0.4) - 2024-11-24
 
 - Update `.gitattributes`.
