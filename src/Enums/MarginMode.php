@@ -21,4 +21,9 @@ enum MarginMode: int
      * CFD.
      */
     case CFD = 103;
+
+    /**
+     * Unknown, not documented.
+     */
+    case UNKNOWN = 104;
 }

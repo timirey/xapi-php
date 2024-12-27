@@ -31,4 +31,9 @@ enum QuoteId: int
      * Unknown, not documented.
      */
     case FIVE = 5;
+
+    /**
+     * Unknown, not documented.
+     */
+    case SIX = 6;
 }
