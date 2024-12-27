@@ -56,6 +56,8 @@ class SocketConnection
             throw new SocketException("$errorCode: $errorMessage");
         }
 
+        stream_set_timeout($this->socket, 0);
+
         return true;
     }
 
