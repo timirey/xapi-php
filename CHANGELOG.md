@@ -1,5 +1,9 @@
 # Release Notes
 
+## [6.2.0](https://github.com/timirey/xapi-php/compare/6.0.4..6.0.5) - 2024-12-27
+
+- Add new `QuoteId` and `MarginMode`.
+
 ## [6.1.0](https://github.com/timirey/xapi-php/compare/6.0.4..6.0.5) - 2024-12-27
 
 - Remove timeout for stream connection.
