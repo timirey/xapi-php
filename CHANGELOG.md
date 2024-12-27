@@ -1,5 +1,9 @@
 # Release Notes
 
+## [6.1.0](https://github.com/timirey/xapi-php/compare/6.0.4..6.0.5) - 2024-12-27
+
+- Remove timeout for stream connection.
+
 ## [6.0.5](https://github.com/timirey/xapi-php/compare/6.0.4..6.0.5) - 2024-12-21
 
 - Remove git workflow for pull requests.
