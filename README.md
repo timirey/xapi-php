@@ -213,6 +213,46 @@ $client->fetchCandles(
 );
 ```
 
+The **getCandles** API operation often fails to subscribe directly to the desired symbol. To reliably listen for candle data, the price history must be requested first.
+
+Before subscribing to candle updates, initiate a request for the symbol's historical price data using **getChartLastRequest**. 
+
+```PHP
+use DateTime;
+use Timirey\XApi\Client;
+use Timirey\XApi\Enums\Period;
+use Timirey\XApi\Payloads\Data\ChartLastInfoRecord;
+use Timirey\XApi\Responses\Data\CandleStreamRecord;
+use Timirey\XApi\Responses\FetchCandlesResponse;
+use Timirey\XApi\Responses\GetChartLastRequestResponse;
+
+$chartLastInfoRecord = new ChartLastInfoRecord(
+    period: Period::PERIOD_M1,
+    start: new DateTime(),
+    symbol: $symbol
+);
+
+/**
+ * @var GetChartLastRequestResponse $response
+ * 
+ * The $response is not used anywhere.
+ */
+$response = $this->getChartLastRequest($chartLastInfoRecord);
+
+/**
+ * @var Client $client
+ */
+$client->fetchCandles(
+    symbol: 'EURUSD',
+    callback: static function (FetchCandlesResponse $response): void {
+        /**
+         * @var CandleStreamRecord $record
+         */
+        $record = $response->candleStreamRecord;
+    }
+);
+```
+
 ### fetchKeepAlive ([getKeepAlive](http://developers.xstore.pro/documentation/#streamgetKeepAlive))
 
 Subscribes for and unsubscribes from 'keep alive' messages. A new 'keep alive' message is sent by the API every 3
