@@ -234,10 +234,11 @@ $chartLastInfoRecord = new ChartLastInfoRecord(
 
 /**
  * @var GetChartLastRequestResponse $response
+ * @var Client $client
  * 
  * The $response is not used anywhere.
  */
-$response = $this->getChartLastRequest($chartLastInfoRecord);
+$response = $client->getChartLastRequest($chartLastInfoRecord);
 
 /**
  * @var Client $client
