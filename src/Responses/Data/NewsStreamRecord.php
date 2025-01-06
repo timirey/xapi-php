@@ -18,11 +18,11 @@ final readonly class NewsStreamRecord
     /**
      * Constructor for the NewsStreamRecord class.
      *
-     * @param string  $body   Body of the news.
-     * @param string  $key    News key.
-     * @param integer $time   Time of the news.
-     * @param string  $title  Title of the news.
-     * @param array   $topics Unknown, not documented.
+     * @param string             $body   Body of the news.
+     * @param string             $key    News key.
+     * @param integer            $time   Time of the news.
+     * @param string             $title  Title of the news.
+     * @param array<int, string> $topics Unknown, not documented.
      */
     public function __construct(
         public string $body,
