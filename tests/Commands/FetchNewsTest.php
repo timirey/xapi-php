@@ -21,6 +21,10 @@ test('fetchNews stream command', function (): void {
         'data' => [
             'body' => '<html>...</html>',
             'key' => '1f6da766abd29927aa854823f0105c23',
+            'topics' => [
+                'BZEN_REGULAR',
+                'BZEN_IRREGULAR'
+            ],
             'time' => 1262944112000,
             'title' => 'Breaking trend',
         ],

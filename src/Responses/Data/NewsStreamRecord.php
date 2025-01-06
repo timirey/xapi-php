@@ -18,16 +18,18 @@ final readonly class NewsStreamRecord
     /**
      * Constructor for the NewsStreamRecord class.
      *
-     * @param  string  $body  Body of the news.
-     * @param  string  $key   News key.
-     * @param  integer $time  Time of the news.
-     * @param  string  $title Title of the news.
+     * @param string  $body   Body of the news.
+     * @param string  $key    News key.
+     * @param integer $time   Time of the news.
+     * @param string  $title  Title of the news.
+     * @param array   $topics Unknown, not documented.
      */
     public function __construct(
         public string $body,
         public string $key,
         int $time,
-        public string $title
+        public string $title,
+        public array $topics
     ) {
         $this->time = DateTimeHelper::fromMilliseconds($time);
     }

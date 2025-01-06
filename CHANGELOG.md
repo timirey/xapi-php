@@ -1,10 +1,14 @@
 # Release Notes
 
-## [6.2.0](https://github.com/timirey/xapi-php/compare/6.0.4..6.0.5) - 2024-12-27
+## [6.3.0](https://github.com/timirey/xapi-php/compare/6.3.0..6.2.0) - 2025-01-06
+
+- Add new `topics` param to `NewsStreamRecord`.
+
+## [6.2.0](https://github.com/timirey/xapi-php/compare/6.2.0..6.1.0) - 2024-12-27
 
 - Add new `QuoteId` and `MarginMode`.
 
-## [6.1.0](https://github.com/timirey/xapi-php/compare/6.0.4..6.0.5) - 2024-12-27
+## [6.1.0](https://github.com/timirey/xapi-php/compare/6.1.0..6.0.5) - 2024-12-27
 
 - Remove timeout for stream connection.
 
