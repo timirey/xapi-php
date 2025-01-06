@@ -117,11 +117,15 @@ class SocketConnection
             throw new SocketException('The socket is not subscribable.');
         }
 
-        while (!feof($this->socket)) {
-            $response = $this->receive();
+        $previous = null;
 
-            if ($response) {
-                yield $response;
+        while (!feof($this->socket)) {
+            $current = $this->receive();
+
+            if ($current && $current !== $previous) {
+                $previous = $current;
+
+                yield $current;
             }
         }
 

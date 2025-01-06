@@ -1,5 +1,9 @@
 # Release Notes
 
+## [6.3.2](https://github.com/timirey/xapi-php/compare/6.3.1..6.3.2) - 2025-01-06
+
+- Prevent duplicated response on streaming session.
+
 ## [6.3.1](https://github.com/timirey/xapi-php/compare/6.3.0..6.3.1) - 2025-01-06
 
 - Update PHP Doc for PHP Stan compliance.
