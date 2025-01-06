@@ -1,5 +1,9 @@
 # Release Notes
 
+## [6.3.1](https://github.com/timirey/xapi-php/compare/6.3.0..6.3.1) - 2025-01-06
+
+- Update PHP Doc for PHP Stan compliance.
+
 ## [6.3.0](https://github.com/timirey/xapi-php/compare/6.3.0..6.2.0) - 2025-01-06
 
 - Add new `topics` param to `NewsStreamRecord`.
