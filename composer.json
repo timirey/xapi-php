@@ -1,5 +1,6 @@
 {
     "name": "timirey/xapi-php",
+    "abandoned": true,
     "description": "A PHP wrapper for the X-Trade Brokers (XTB) xStation5 Trading API, supporting real-time streaming and simple commands via socket connection.",
     "keywords": [
         "php",
