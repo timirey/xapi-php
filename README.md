@@ -3,6 +3,7 @@
 </p>
 
 <p align="center">
+<img src="https://img.shields.io/badge/maintenance-deprecated-red.svg">
 <a href="https://github.com/timirey/xapi-php/actions"><img src="https://github.com/timirey/xapi-php/actions/workflows/tests.yml/badge.svg" alt="Tests"></a>
 <a href="https://packagist.org/packages/timirey/xapi-php"><img src="https://img.shields.io/packagist/v/timirey/xapi-php" alt="Latest Stable Version"></a>
 <a href="https://packagist.org/packages/timirey/xapi-php"><img src="https://img.shields.io/packagist/dt/timirey/xapi-php" alt="Total Downloads"></a>
@@ -13,6 +14,10 @@ This PHP library provides a comprehensive and user-friendly interface for intera
 xStation5 Trading API. It supports a wide range of functionalities, including account management, trade execution,
 market data retrieval, and real-time streaming commands via socket, making it an ideal tool for developers looking to
 integrate advanced trading features and live market data into their applications.
+
+<h1>DEPRECATED</h1>
+
+As of **March 14, 2025**, access to XTB API via `xapi.xtb.com` and `ws.xtb.com` will be disabled.
 
 ## Table of contents
 
